@@ -1,0 +1,94 @@
+<section id="addr_form" class="new-addr <%='hide' unless display==true%>">
+  <div class="container">
+    <div class="box last">
+      <div class="row">
+        <div class="col-sm-12">
+          <%=form_for :addr, :url=>@method == :put ? @action_url : member_addrs_path, :remote=>true,:method=>@method||:post,:html=>{ :class=> " form-horizontal" } do |f|%>    
+            <div class="new-addr" id="addr_form">
+              <div class="row">
+                <div class="col-sm-3 form-group area">
+                    <%=f.select :province,Ecstore::Region.provinces.collect{|p| [p.local_name,p.region_id] },{:include_blank=>"请选择省" },{ :onchange=>"selectProvince(this,'#city','#district');",:id=>"province",:class=>"form-control" }%>
+                </div>
+                <div class="col-sm-3 form-group area">
+                    <%if @addr&&@addr.city%>
+                        <%=f.select :city,Ecstore::Region.cities_of(@addr.province).collect{|p| [p.local_name,p.region_id] },{:include_blank=>"请选择市"},{ :onchange=>"selectCity(this,'#district');",:id=>"city",:class=>"form-control" }%>
+                    <%else%>
+                        <%=f.select :city, {}, { :include_blank=>"请选择市" }, { :onchange=>"selectCity(this,'#district');",:id=>"city",:class=>"form-control" }%>
+                    <%end%>
+                </div>
+                <div class="col-sm-3 form-group area">
+                    <%unless @addr&&@addr.new_record?%>
+                        <%=f.select :district,Ecstore::Region.districts_of(@addr&&@addr.city).collect{|p| [p.local_name,p.region_id] },{:include_blank=>"请选择区/县" },{ :onchange=>"selectDistrict(this);",:id=>"district",:class=>"form-control",:style=>"#{'display:none;' if @addr.district.blank? }" } %>
+                    <%else%>
+                        <%=f.select :district, {}, { :include_blank=>"请选择区/县" }, { :onchange=>"selectDistrict(this);",:id=>"district",:class=>"form-control" }%>
+                    <%end%>
+                </div>
+            </div>
+             <div class="row">
+                <div class="col-sm-12 form-group area">
+                    <span class="help-inline error"></span>
+                </div>
+            </div>
+                        <div class="row">
+                             <div class="col-sm-12">
+                                <div class="form-group addr">
+                                    <%=f.text_field :addr, :placeholder=>"收货地址",:class=>"form-control",:required=>"required",:id=>"addr"%>
+                                    <span class="help-inline error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">                               
+                            <div class="col-sm-12">
+                                <div class="form-group name">
+                                    <%=f.text_field :name,:placeholder=>"收货人姓名",:class=>"form-control",:required=>"required"%>
+                                    <span class="help-inline error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                             <div class="col-sm-12">
+                                <div class="form-group mobile">
+                                    <%=f.text_field :mobile, :placeholder=>"手机",:class=>"form-control",:required=>"required"%>
+                                    <span class="help-inline error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                             <div class="col-sm-12">
+                                <div class="form-group tel">
+                                    <%=f.text_field :tel, :placeholder=>"固定电话",:class=>"form-control"%>
+                                    <span class="help-inline error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                             <div class="col-sm-12">
+                                <div class="form-group zip">
+                                    <%=f.text_field :zip, :placeholder=>"邮编",:class=>"form-control"%>
+                                    <span class="help-inline error"></span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                             <div class="col-sm-12">
+                                <div class="form-group">
+                                     <label class="control-label" for="addr_def_addr">设置为默认地址:</label>
+                                    <%#=f.label :def_addr, "设置默认："%>
+                                    <%=f.check_box :def_addr, {}, 1, 0 %><span><%=I18n.t "default"%></span>
+                                </div>
+                            </div>
+                        </div>
+
+                         <div class="row">
+                            <div class="col-sm-12">                                    
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-success btn-lg">确定</button>
+                                </div>
+                            </div>
+                        </div>
+                    <%end%>             
+                </div><!--/.col-sm-12-->
+            </div><!--/.row-->
+        </div><!--/.box-->
+    </div><!--/.container-->
+</section><!--/#contact-->

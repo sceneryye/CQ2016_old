@@ -1,0 +1,45 @@
+<DIV class="container_box cell_layout">
+    <DIV class="step_panel">
+      <DIV class="app_create_box app">
+        <%=form_for :supplier,:url=>@action,:method=>'put', :remote=>true do |f|%>
+            <DIV class="frm_control_group">
+              <%= f.label :tel, '公司电话', :class => "frm_label" %>
+              <DIV class="frm_controls">
+              <SPAN class="frm_input_box">
+              <%= f.text_field :tel ,:class=>'frm_input',:maxlenth=>'40'%>
+              </SPAN>
+              </DIV>
+            </DIV>
+            <DIV class="frm_control_group textarea">
+              <%= f.label :desc, '微店简介', :class => "frm_label" %>
+              <DIV class="frm_controls">
+              <SPAN class="frm_textarea_box">
+               <%= f.text_field :desc ,:class=>'frm_input',:maxlenth=>'80'%>
+              </SPAN>
+                <P class="frm_tips">最多80字</P></DIV>
+            </DIV>
+            <DIV class="frm_control_group" style="height:210px">
+              <%= f.label :qrcode, '微信二维码', :class => "frm_label" %>
+              <DIV class="frm_controls">
+              <img  src="/images/a0<%=@supplier.id%>/homepage/getqrcode.jpg" style="height:200px;">
+              </DIV>
+            </DIV>
+            <DIV class="frm_control_group" style="height:210px" >
+              <%= f.label :logo, 'logo', :class => "frm_label" %>
+              <DIV class="frm_controls">
+              <img  src="/images/a0<%=@supplier.id%>/homepage/logo.jpg" style="height:200px;">
+              </DIV>
+            </DIV>
+            <DIV class="frm_control_group" style="height:210px">
+              <%= f.label :post, '店招', :class => "frm_label" %>
+              <DIV class="frm_controls">
+              <img  src="/images/a0<%=@supplier.id%>/homepage/post.jpg" style="height:200px;">
+              </DIV>
+            </DIV>
+            <DIV class="tool_bar border with_form">
+              <%=f.submit '确定', :class=>"btn btn_primary",:id=>"nextBt" %>
+            </DIV>
+        <%end%>
+      </DIV>
+    </DIV>
+  </div>

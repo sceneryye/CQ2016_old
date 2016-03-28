@@ -1,0 +1,78 @@
+<script>
+
+function isWeixinBrowser(){
+    var ua = navigator.userAgent.toLowerCase();
+    return (/micromessenger/.test(ua)) ? true : false ;
+}
+<% return_url={:return_url => request.url.force_encoding('UTF-8')}.to_query%>
+var iswxb= isWeixinBrowser();
+
+ if ('<%=@user.nil?%>'==='true' && iswxb){
+        location.href = "/auto_login?id=1&<%=return_url%>";
+ }
+</script>
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>昌麒投资</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="/img/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/ico/apple-touch-icon-57-precomposed.png">  
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+  <header id="header" role="banner">
+        <div class="container">
+            <div id="navbar" class="navbar navbar-default">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">导航切换</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="/coupon_goods?coupon_id=<%=@coupon_id%>"></a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li style="display:none"><a href="#"><i class="icon-home"></i></a></li>
+                    <%if @user%>
+                        <li class="outlink"><a href="/member/orders?coupon_id=<%=@coupon_id%>">我的订单</a></li>
+                        <li class="outlink"><a href="/cart?coupon_id=<%=@coupon_id%>">我的购物车</a></li> 
+                        <li class="outlink"><a href="/coupon_goods?coupon_id=<%=@coupon_id%>">提货专区</a></li>
+                        <li class="outlink"><a href="/logout">退出登录</a></li>
+                    <%else%>
+                        <li   class="outlink active"><a href="/login">登录/注册</a></li>
+                    <%end%>    
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </header><!--/#header-->  
+    <br>
+    <br>
+    <br>
+    <br>
+
+          <%= yield%>
+  
+  <%=render "/shared/footer"%>
+  <%= javascript_include_tag "jquery", "jquery_ujs" %>
+  <%=javascript_include_tag "patch/#{controller_name}"%>
+</body>
+</html>

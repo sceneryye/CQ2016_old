@@ -1,0 +1,34 @@
+<br/><br/><br/><br/>
+    <div class='sel_banner'>
+      <p class="total_member hidden"><%=@total_member%></p>
+    </div>
+    <table class="table table-bordered table-hover">
+      <tr>
+        <td>会员ID</td>
+        <td>用户名</td>
+        <td>姓名</td>
+        <td>邮箱</td>
+        <td>手机</td>
+        <td>注册时间</td>
+        <th colspan="3">操作</th>
+      </tr>
+
+      <% @accounts.each do |account| %>
+          <tr>
+            <td><%=account.account_id %></td>
+            <td><%=account.login_name%></td>
+            <td><%=account.member.name %></td>
+            <td><%=account.member.email%></td>
+            <td><%=account.member.mobile%></td>
+            <td><%=Time.at(account.createtime).strftime('%Y-%m-%d %H:%M') %></td>
+
+                <td><%=link_to "查看",info_admin_member_path(account)%></td>
+                <td><%=link_to "编辑",edit_admin_member_path(account)%></td>
+          </tr>
+      <% end %>
+    </table>
+
+    <div class="pagination">
+      <%= will_paginate @accounts, :container => false %>
+    </div>
+

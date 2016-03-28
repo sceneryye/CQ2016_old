@@ -1,0 +1,18 @@
+<% provide :title, '昌麒生态园-基地详情' %>
+<%=render "shared/metable", :resource=>@brand%>
+<div class="row columns">
+<nav aria-label="You are here:" role="navigation">
+<ul class="breadcrumbs">
+<li><a href="/">首页</a></li>
+<li><%=link_to '基地风光', brands_path%></li>
+<li>
+<span class="show-for-sr">品名: </span> <%= @brand.brand_name%>
+</li>
+</ul>
+</nav>
+</div>
+<div class="row columns">
+		<%=render "new_body"%>
+		<%=render "old_brand_content"%>
+	</div>
+

@@ -1,0 +1,92 @@
+<style type="text/css">
+    input[type="radio"]{
+        margin-left: 100px;
+
+    }
+    .change_lange{
+        display: none;
+    }
+
+</style>
+<div class="am-panel am-panel-warning" style="text-align: center">
+  <div class="am-panel-hd"><%= I18n.t "commission_account"%></div>
+
+</div>
+
+<%=form_for @user,:url=>profile_path,:method=>:put,:html=>{:id=>"basic_form",:class=>"am-form",:supplier=>"#{@supplier.id}"} do |f|%>
+
+
+    <div class="am-input-group">
+      <span class="am-input-group-label"><%= I18n.t "name"%>:</span>
+      <input class="am-form-field" id="ecstore_user_name" name="ecstore_user[name]" placeholder="<%=I18n.t "name"%>" size="30" type="text">
+      <%#=f.text_field :name,  :class=>"am-form-field" ,:placeholder=>"真实姓名"%>
+    </div>
+    <br/>
+
+
+
+    <div class="am-input-group">
+      <span class="am-input-group-label"><%= I18n.t "gender"%>:</span>
+      <select name="ecstore_user[sex] " class="am-form-field" style="height: 40px" >
+
+        <option name="1" value="1"><%= I18n.t "male"%></option> <option name="2" value="2"><%=I18n.t "female"%></option>
+      </select>
+
+    </div>
+    <br/>
+
+    <div class="am-panel am-panel-default">
+      <div class="am-panel-hd"><%=I18n.t "bank—information"%></div>
+      <div class="am-panel-bd">
+        <div class="am-input-group">
+          <span class="am-input-group-label"><%= I18n.t "bank_name"%>:</span>
+          <input name="bank_info[bank]" class="am-form-field" value=""><br/>
+        </div>
+        <br/>
+
+        <div class="am-input-group">
+          <span class="am-input-group-label"><%= I18n.t "branch_name"%>:</span>
+          <input name="bank_info[branch]" class="am-form-field" value=""><br/>
+        </div>
+        <br/>
+
+        <div class="am-input-group">
+          <span class="am-input-group-label"><%= I18n.t "bank_account"%>:</span>
+          <input name="bank_info[account]" class="am-form-field" value=""><br/>
+        </div>
+
+        <span class="tip"> </span>
+
+      </div>
+    </div>
+
+    <div class="am-panel am-panel-default">
+      <div class="am-panel-hd"><%= I18n.t "notification"%></div>
+      <div class="am-panel-bd">
+        <div class="am-input-group">
+          <span class="am-input-group-label"><%= I18n.t "email"%>:</span>
+          <%=f.text_field :email ,:class=>"am-form-field"%>
+          <%if @user.email_validate=='true'%>
+              <span class="help-block"></span>
+              <span class="tip">邮箱已认证</span>
+          <%end%>
+        </div>
+        <br/>
+        <div class="am-input-group">
+          <span class="am-input-group-label"><%= I18n.t "m_phone"%>:</span>
+          <%=f.text_field :mobile ,:class=>"am-form-field"%>
+          <%if @user.sms_validate=='true'%>
+              <span class="help-block"></span>
+              <span class="tip">手机已认证</span>
+          <%end%>
+        </div>
+
+
+      </div>
+    </div>
+
+    <div class="actions">
+      <input type="submit" class="am-btn am-btn-warning am-btn-block" value="<%=I18n.t "save" %>">
+      <%#=f.submit I18n.t 'save',:class=>"am-btn am-btn-warning am-btn-block"%>
+    </div>
+<%end%>

@@ -1,0 +1,21 @@
+<% provide :title, '昌麒生态园-基地风光' %>
+
+<div class="row small-up-1 large-up-2">
+    <%@menu_brands.each do |brand|%>
+    <div class="column">
+    
+        <%=link_to brand_path(brand) do %>
+            <%=image_tag brand.brand_page.logo_url,:alt=>brand.brand_name, class: "thumbnail" if brand.brand_page%>
+        <%end%>
+        <!-- <h6><%=link_to brand.brand_name, brand_path(brand)%></h6> -->
+    </div>
+    <%end if @menu_brands%>
+</div>
+<hr>
+
+<%=render "shared/metable", :resource=>nil%>
+
+<%=content_for :cover do%>
+	<%=raw Ecstore::Config.get(:brand_cover) %>
+<%end%>
+

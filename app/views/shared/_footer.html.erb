@@ -1,0 +1,55 @@
+ <footer id="footer">
+ <hr>
+ <small>
+   &copy; 2014 - <span id='copyright_year'></span>, 昌麒投资有限公司<br>                    
+     技术支持: <a target="_blank" href="http://www.trade-v.com/" title="上海普慧信息科技有限公司">上海普慧信息科技有限公司</a><br>
+     浙ICP备14024074号-1
+</small>
+</footer><!--/#footer-->
+<script>
+    var myDate = new Date();
+    var currentYear = myDate.getFullYear(); 
+    document.getElementById('copyright_year').innerText=currentYear;
+</script> 
+
+  <div class="row columns">
+      <%
+  case controller_name
+    when 'home'
+      @home_active = 'active'
+    when 'users'
+      @users_active = 'active'
+    when 'groupbuys'
+      @groupbuys_active = 'active'
+    when 'events'
+      @events_active = 'active'  
+    when 'searchs'
+      @searchs_active = 'active'
+    else
+      @forums_active = 'active'
+  end
+%>
+<div class="expanded button-group show-for-small-only " id="bottomNav">
+  <%=link_to root_path,class: "item #{@home_active} button" do%>
+    <i class="fa fa-home"></i>
+  <%end%>
+  <%=link_to cart_index_path,class: "item #{@groupbuys_active}  button" do%>
+    <i class="fa fa-cart-plus"></i>
+  <%end%>
+  <%=link_to cat_path(5),class: "item #{@events_active}  button" do%>
+    <i class="fa fa-search"></i>
+  <%end%>
+  <%=link_to card_path,class: "item #{@forums_active}  button" do%>
+    <i class="fa fa-credit-card"></i>
+  <%end%>
+  <%if signed_in?
+      @user_url = member_path
+    else
+      @user_url= login_path
+    end%>
+  <%=link_to @user_url,class: "item #{@users_active}  button" do%>
+    <i class="fa fa-user"></i>
+  <%end%>
+ 
+</div>
+</div>

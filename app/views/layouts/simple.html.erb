@@ -1,0 +1,50 @@
+<script>
+
+function isWeixinBrowser(){
+    var ua = navigator.userAgent.toLowerCase();
+    return (/micromessenger/.test(ua)) ? true : false ;
+}
+<% return_url={:return_url => request.url.force_encoding('UTF-8')}.to_query%>
+var iswxb= isWeixinBrowser();
+
+ if ('<%=@user.nil?%>'==='true' && iswxb ){
+        location.href = "/auto_login?id=1&<%=return_url%>";
+ }
+</script>
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <title>昌麒投资</title>
+    <link href="/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/css/font-awesome.min.css" rel="stylesheet">
+    <link href="/css/prettyPhoto.css" rel="stylesheet">
+    <link href="/css/main.css" rel="stylesheet">
+    <!--[if lt IE 9]>
+    <script src="js/html5shiv.js"></script>
+    <script src="js/respond.min.js"></script>
+    <![endif]-->
+    <link rel="shortcut icon" href="/img/ico/favicon.ico">
+    <link rel="apple-touch-icon-precomposed" sizes="144x144" href="/img/ico/apple-touch-icon-144-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="114x114" href="/img/ico/apple-touch-icon-114-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" sizes="72x72" href="/img/ico/apple-touch-icon-72-precomposed.png">
+    <link rel="apple-touch-icon-precomposed" href="/img/ico/apple-touch-icon-57-precomposed.png">
+</head><!--/head-->
+
+<body>
+  <%= render "/shared/header" %>
+  <section id="contact">
+  <div class="container">
+          <%= yield%>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>  
+  
+  <%=render "/shared/footer"%>
+</body>
+</html>

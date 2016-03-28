@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
+  <title>昌麒投资</title>
+  <meta name="description" content="昌麒投资">
+  <%= stylesheet_link_tag    "survey", :media => "screen" %>
+  <%= stylesheet_link_tag    "supersized", :media => "screen" %>
+  <%= javascript_include_tag "survey" %>
+  <%=render "shared/baidu"%>
+  <%= csrf_meta_tags %>
+</head>
+
+<body>
+  <div id="container">
+    <div id="home_box">
+      <%= yield %>
+    </div>
+  </div>
+<%= javascript_include_tag "google-analytics" %>
+</body>
+</html>

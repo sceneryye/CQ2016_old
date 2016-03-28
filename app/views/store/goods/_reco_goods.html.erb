@@ -1,0 +1,36 @@
+<%if @recommend_goods.size > 0%>
+<div id="reco_goods">
+        <h3>推荐商品</h3>
+
+        <ul class="portfolio-items" style="width:98%">
+          <%@recommend_goods.each do |good|%>
+          <li class="item-inner" style="margin-left:20px;">
+            <div class="product-pic">
+                <%=link_to good_path(good.bn,:tag=>@tag&&@tag.tag_name) do %>
+                    <%=image_tag good.rec_image,:style=>"width:98%",:alt=>good.name%>
+                <%end%>
+            </div>
+            <div class="good-info">
+              <div class="name">
+                  <a href="/products/<%=good.bn%>" target="_blank"><%=good.name%></a>
+              </div>
+              <div class="prices">
+                <span>
+                  会员价: 
+                  <%if signed_in?%>
+                    &yen;<%=(good.price*0.75).round%>
+                  <%else%>
+                    <a href="javascript:void(0)" class="login">[会员专享]</a>
+                  <%end%>
+                </span>
+              </div>
+              <div class="prices">
+                <span class="mtkprice">市场价: &yen;<%=good.price%></span>
+              </div>
+
+            </div>
+          </li>
+          <%end%>
+        </ul>
+</div>
+<%end%>

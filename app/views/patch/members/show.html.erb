@@ -1,0 +1,17 @@
+<% provide :title, '昌麒生态园-个人中心' %>
+<ul class="vertical menu" data-accordion-menu>
+	<li><%=@user.name%></b> &nbsp;欢迎您！</li>
+  <li>
+    <a href="#">我的订单</a>
+    <ul class="menu vertical nested">
+      <li><%=link_to  "待付款订单(#{@unpay_count})",orders_member_path(:pay_status=>'0',:status=>'active')%></li>
+      <li><a href="#">已付款</a></li>
+      <li><%=link_to "历史订单",orders_member_path,:class=>"all-orders"%></li>
+    </ul>
+  </li>
+  <li><a href="#">我的购物车</a></li>
+  <!-- <li><a href="#">我的收藏</a></li> -->
+  <li><a href="#">收货地址管理</a></li>
+  <li><a href="#">我的会员卡</a></li>
+</ul>
+

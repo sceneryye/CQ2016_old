@@ -1,0 +1,66 @@
+ 
+		
+		<span class="secondary label">排序:</span>
+			<%
+				query_hash = {}
+				# query_hash[:color] = params[:color] if params[:color]
+				# query_hash[:brand] = params[:brand] if params[:brand]
+				# query_hash[:cat_id] = params[:cat_id] if params[:cat_id]
+				params_hash = params.dup
+
+				params_hash.delete(:controller)
+				params_hash.delete(:action)
+				params_hash.delete(:order)
+
+				query = params_hash.to_query
+			%>
+			<span class="alert label">
+				<%if params[:order].blank?%>
+					<%=link_to "价格&uarr;".html_safe,"?order=price-asc&#{query}",:title=>"价格从低往高",:class=>"btn btn-primary"%>
+				<%elsif  params[:order] == "price-asc"%>
+					<%=link_to "价格&uarr;".html_safe,"?order=price-desc&#{query}",:title=>"价格从低往高",:class=>"btn btn-primary"%>
+				<%else params[:order] =='price-desc'%>
+					<%=link_to "价格&darr;".html_safe,"?order=price-asc&#{query}",:title=>"价格从高往低",:class=>"btn btn-primary"%>
+				<%end%>
+			</span>
+			<span class="secondary label">
+				<%=link_to "销量&darr;".html_safe,"?order=buy_count-desc&#{query}",:title=>"价格从高往低",:class=>"btn btn-primary"%>
+			</span>
+			<span class="secondary label">
+				<%=link_to "人气&darr;".html_safe,"?order=view_count-asc&#{query}",:title=>"人气从高往低" ,:class=>"btn btn-primary"%>
+			</span>
+		</ul>
+		<div class="row columns">
+			<%=will_paginate @goods,:container=>false if @goods%>
+		</div>
+                    
+
+<div class="row small-up-2 large-up-4">
+
+    <%@goods.each do |goods|%>
+    <div class="column">
+        <%=link_to good_path(goods.bn), :target=>"_blank" do %>
+            <%=image_tag goods.list_default_pic,:alt=>goods.name, class: "thumbnail"%>
+        <%end%>
+        <h6>
+        <%=link_to good_path(goods.bn), :target=>"_blank" do %>
+            <%=goods.name%>
+        <%end%>        
+        </h6>
+        <p>
+            <span style="color:red;font-size:1.5em;">&yen;<%=(goods.price*0.75).round if goods.price%></span>
+            <span style="margin-left:1em;text-decoration:line-through;">&yen;<%=(goods.price*0.75).round if goods.price%> </span>
+        </p>
+        <a href="#" class="button expanded" style="display:none">Buy</a>
+    </div>
+    <%end if @goods%>
+</div>
+<div class="row columns">
+			<%=will_paginate @goods,:container=>false if @goods%>
+		</div>
+            
+                
+   
+
+
+

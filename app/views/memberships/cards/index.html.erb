@@ -1,0 +1,137 @@
+
+<div class="cards">
+	<div class="title">您选择了优摩卡,价值&yen;10000</div>
+	<%=form_for :user, :url=>"" do |f|%>
+		
+	<%end%>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <button class="btn btn-success active-card">激活卡片</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <button class="btn btn-success topup-card">单卡充值</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <button class="btn btn-success pay-with-password">密码支付</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <button class="btn btn-success freeze-card">卡冻结</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <button class="btn btn-success unfreeze-card">卡解冻</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <button class="btn btn-success report-loss-card">卡挂失</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <button class="btn btn-success cancel-loss-card">卡解挂</button>
+    </div>
+  </div>
+</div>
+
+
+
+<style>
+  button {
+    width: 100%;
+  }
+  .row {
+    margin-top: 20px;
+  }
+</style>
+
+<script>
+$(document).ready(function(){
+  var order_id = '999990053990001_' + "<%= Time.now.to_i %>" + "<%= rand(100).to_s %>";
+  // 激活卡片
+  $('.active-card').on('click', function(){
+    var card_id = '8668083660000059727';
+    var type = '1'
+    var url = "<%= active_card_path %>";
+    $.post(url, {order_id: order_id, card_id: card_id, type: type}, function(e){console.log(e.data)});
+  });
+
+  // 单卡充值
+  $('.topup-card').on('click', function(){
+    var card_id = '8668083660000001017';
+    var prdt_no = "0001";
+    var amount = '10000';
+    var top_up_way = '1';
+    var opr_id = '0229000040';
+    var url = "<%= topup_card_path %>";
+    $.post(url, {order_id: order_id, card_id: card_id, prdt_no: prdt_no, amount: amount, top_up_way: top_up_way, opr_id: opr_id}, function(e){console.log(e.data.error_response)});
+  });
+
+  // 密码支付
+  $('.pay-with-password').on('click', function(){
+    var card_id = '8668083660000001017';
+    var mer_order_id = order_id;
+    var payment_id = "<%= rand(100_000_000_0).to_s.ljust(10, '1') %>";
+    var amount = '100';
+    var password = '111111';
+    var url = "<%= pay_with_pwd_path %>";
+    $.post(url, {order_id: order_id, card_id: card_id, mer_order_id: mer_order_id, amount: amount, payment_id: payment_id, password: password}, function(e){console.log(e.data.error_response)});
+  });
+
+  // 卡冻结
+  $('.freeze-card').on('click', function(){
+    var card_id = '8668083660000001017';
+    var prdt_id = "0001";
+    var reason = 'lost my card';
+    var url = "<%= freeze_card_path %>";
+    $.post(url, {order_id: order_id, card_id: card_id, prdt_id: prdt_id, reason: reason}, function(e){console.log(e.data.error_response)});
+  });
+
+  // 卡冻结
+  $('.unfreeze-card').on('click', function(){
+    var card_id = '8668083660000001017';
+    var prdt_id = "0001";
+    var reason = 'find my card';
+    var url = "<%= unfreeze_card_path %>";
+    $.post(url, {order_id: order_id, card_id: card_id, prdt_id: prdt_id, reason: reason}, function(e){console.log(e.data.error_response)});
+  });
+
+  // 卡挂失
+  $('.report-loss-card').on('click', function(){
+    var card_id = '8668083660000001017';
+    var id_type = '1';
+    var id_no = '330724198611118011'
+    var reason = 'lost my card';
+    var url = "<%= report_loss_of_card_path %>";
+    $.post(url, {order_id: order_id, card_id: card_id, id_type: id_type, id_no: id_no, reason: reason}, function(e){console.log(e.data.error_response)});
+  });
+
+  // 卡解挂
+  $('.cancel-loss-card').on('click', function(){
+    var card_id = '8668083660000001017';
+    var id_type = '1';
+    var id_no = '330724198611118011'
+    var reason = 'lost my card';
+    var url = "<%= cancel_loss_of_card_path %>";
+    $.post(url, {order_id: order_id, card_id: card_id, id_type: id_type, id_no: id_no, reason: reason}, function(e){console.log(e.data.error_response)});
+  });
+
+
+});
+</script>
