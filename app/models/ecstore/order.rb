@@ -16,10 +16,7 @@ class Ecstore::Order < Ecstore::Base
 
   belongs_to :dicount_code, :foreign_key=>"discount_code"
 
-  # self.accessor_all_columns
-
-  # attr_accessor :order_id,:ship_day, :ship_special,:from_addr, :ship_time2, :coupon, :coupon_no,:province,:city,:district,:weight,:recommend_user
-
+  attr_accessor :ship_day,:ship_special,:ship_time2
   include Ecstore::AddressFields
 
   has_many :bills,-> {where(pay_object:"order") }, :foreign_key=>"rel_id"

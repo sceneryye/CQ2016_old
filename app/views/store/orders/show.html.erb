@@ -17,11 +17,11 @@
       </div>
 
       <div class="payment">
-        <span class="title"><%=payments[@order.payment][:name]%></span>
+        <span class="title"><%=payments[@order.payment][:name] if @order.payment%></span>
         <%if @order.status == 'active' && @order.pay_status == '0'%>
             <a href="#" class="change" id="change_payment">更改支付方式>> </a>
         <%end%>
-        <div><%=payments[@order.payment][:extra].html_safe%></div>
+        <div><%=payments[@order.payment][:extra].html_safe  if @order.payment%></div>
       </div>
 
       <div class="payments" id="payment_choices">
@@ -33,11 +33,11 @@
               余额(<span>￥<%=@order.part_pay.to_i%></span>)
             </label>
         <%end%>        
-        <%if @user.advance >= @order.final_amount%>
+        <%#if @user.advance >= @order.final_amount%>
             <label class="radio">
               <%=f.radio_button :pay_app_id, "deposit", { :checked=>(@order.payment == 'deposit') } %> <b>预存款</b>
             </label>
-        <%end%>
+        <%#end%>
 
         <label class="radio">
           <%=f.radio_button :pay_app_id, "wxpay", { :checked=>(@order.payment == 'wxpay') }%> <b>微信支付</b>

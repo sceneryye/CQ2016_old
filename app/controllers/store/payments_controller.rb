@@ -8,10 +8,10 @@ class Store::PaymentsController < ApplicationController
 	def create
 		rel_id = params[:order_id]
 		@order  = Ecstore::Order.find_by_order_id(rel_id)
-		installment = params[:payment].delete(:installment) || 1
-		part_pay = params[:payment].delete(:part_pay) || 0
+		installment = payment_params.delete(:installment) || 1
+		part_pay = payment_params.delete(:part_pay) || 0
 
-		pay_app_id = params[:payment][:pay_app_id]
+		pay_app_id = payment_params[:pay_app_id]
 
 		if part_pay == 0 && @order.part_pay?
 			@user.update_column :advance, @order.part_pay
@@ -21,9 +21,9 @@ class Store::PaymentsController < ApplicationController
 		#  update order payment
 		@order.update_attributes :payment=>pay_app_id,:last_modified=>Time.now.to_i,:installment=>installment,:part_pay=>part_pay if pay_app_id.to_s != @order.payment.to_s
 
-		params[:payment].merge! Ecstore::Payment::PAYMENTS[pay_app_id.to_sym]
+		payment_params.merge! Ecstore::Payment::PAYMENTS[pay_app_id.to_sym]
 
-		@payment = Ecstore::Payment.new params[:payment]  do |payment|
+		@payment = Ecstore::Payment.new payment_params  do |payment|
 			payment.payment_id = Ecstore::Payment.generate_payment_id
 
 			payment.status = 'ready'
@@ -322,6 +322,11 @@ class Store::PaymentsController < ApplicationController
 		else
 			render :text=>"alreay paid"
 		end
+	end
+
+	private
+	def payment_params
+		params.require(:payment).permit(:part_pay,:pay_app_id)
 	end
 
 end
