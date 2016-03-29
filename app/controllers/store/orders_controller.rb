@@ -4,22 +4,25 @@ class Store::OrdersController < ApplicationController
   layout 'application'
 
   def create
+
     addr = Ecstore::MemberAddr.find_by_addr_id(params[:member_addr])
+
+     
+     @order = Ecstore::Order.new order_params 
     if addr
       ["name","area","addr","zip","tel","mobile"].each do |key,val|
-          order_params.merge!("ship_#{key}"=>addr.attributes[key])
+          @order.send("ship_#{key}=" , addr.attributes[key])
       end
-     end
+    end
 
+   
     return_url=params[:return_url]
     platform=params["platform"];
+   
+    @order.ip = request.remote_ip
+    @order.member_id = @user.member_id
 
-    order_params.merge!(:ip=>request.remote_ip)
-    order_params.merge!(:member_id=>@user.member_id)
-
-    @order = Ecstore::Order.new order_params   
-
-
+   
     @line_items.each do |line_item|
       product = line_item.product
       good = line_item.good
@@ -467,7 +470,7 @@ class Store::OrdersController < ApplicationController
   private
   def order_params
    params.require(:order).permit(:order_id,:ship_day, :ship_special,:from_addr, :ship_time2, 
-      :coupon, :coupon_no,:province,:city,:district,:weight,:recommend_user)
+      :coupon, :coupon_no,:province,:city,:district,:weight,:recommend_user,:member_id,:payment,:ip)
 
   end
 

@@ -12,8 +12,8 @@
         <%end%>        
         </h6>
         <p>
-            <span style="color:red;font-size:1.5em;">&yen;<%=(goods.price*0.75).round if goods.price%></span>
-            <span style="margin-left:1em;text-decoration:line-through;">&yen;<%=(goods.price*0.75).round if goods.price%> </span>
+            <span style="color:red;font-size:1.5em;">&yen;<%=goods.price%></span>
+            <span style="margin-left:1em;text-decoration:line-through;">&yen;<%=goods.mktprice%> </span>
         </p>
         <a href="#" class="button expanded" style="display:none">Buy</a>
     </div>

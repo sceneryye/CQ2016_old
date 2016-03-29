@@ -104,11 +104,11 @@
 							</td>
 							<td>
 			                 
-			                      <%=number_to_currency line_item.product.price*@discount,:unit=>"&yen;",:precision=>0%>
+			                      <%=number_to_currency line_item.product.price,:unit=>"&yen;",:precision=>0%>
 			                </td>
 							<td><%=line_item.quantity%></td>
 							<td>
-			                      <%=number_to_currency line_item.line_total*@discount,:unit=>"&yen;",:precision=>0%>
+			                      <%=number_to_currency line_item.line_total,:unit=>"&yen;",:precision=>0%>
 							</td>
 							</tr>
 						<%end%>
@@ -125,10 +125,6 @@
 					<%=render "coupons"%>
 				</div>
 				<%end%>
-			        <!-- <div class="section promotions">
-			          <h5>特惠码: </h5>
-			          <%=f.text_field :discount_code,:value=>@user.discount_code%>
-			        </div> -->
 				<div class="section checkout clearfix">
 					<h5>结算信息</h5>
 					<div class="left">
