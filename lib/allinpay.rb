@@ -28,15 +28,15 @@ module Allinpay
     end
 
     def des_encrypt message, timestamp
-      # str = timestamp + 'aop' + message
-      str = "20160325161914aop8668083660000001017"
+      str = timestamp + 'aop' + message
+      # str = "20160325161914aop8668083660000001017"
       des = OpenSSL::Cipher.new(ALG)
       des.encrypt
       des.key = KEY
       des.iv = IV
       cipher = des.update(str)
       cipher << des.final
-      Rails.logger.info "------------------en_pwd = #{CGI.escape Base64.encode64(cipher)}"
+      Rails.logger.info "------------------en_pwd = #{Base64.encode64(cipher)}"
       Base64.encode64(cipher)
     end
 
@@ -63,8 +63,8 @@ module Allinpay
     end
 
     def pay_with_password order_id,  mer_order_id, payment_id, amount, card_id, password, pay_cur = PAY_CUR, type = '01', options = {}
-      # mer_tm = Time.now.strftime('%Y%m%d%H%M%S')
-      mer_tm = '20160325161914'
+      mer_tm = Time.now.strftime('%Y%m%d%H%M%S')
+      # mer_tm = '20160325161914'
       data_hash = (public_params 'allinpay.card.paywithpassword.add').merge({pay_cur: pay_cur, type: type, mer_id: MER_ID, mer_tm: mer_tm, order_id: order_id, mer_order_id: mer_order_id, payment_id: payment_id, amount: amount}).merge options
       encrypt_card_id = des_encrypt card_id, mer_tm
       encrypt_password = des_encrypt password, mer_tm
@@ -75,9 +75,10 @@ module Allinpay
       res_data_json = RestClient.get URL, {params: send_data}
     end
 
-    def reset_card_password order_id, card_id, password, options
+    def card_reset_password order_id, card_id, password, options = {}
+      mer_tm = Time.now.strftime('%Y%m%d%H%M%S')
       data_hash = (public_params 'allinpay.ppcs.cardpassword.rest').merge({order_id: order_id, card_id: card_id}).merge options
-      encrypt_password = des_encrypt password
+      encrypt_password = des_encrypt password, mer_tm
       data_hash.merge!({password: encrypt_password})
       sign = create_sign_for_allin data_hash, APPSECRET
       send_data = data_hash.merge({sign: sign})
