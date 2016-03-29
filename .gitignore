@@ -2,6 +2,10 @@
 Thumbs.db
 ehthumbs.db
 
+# database
+conifg/database.yml
+config/ecstore.yml
+
 # Folder config file
 Desktop.ini
 

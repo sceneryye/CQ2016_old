@@ -46,7 +46,6 @@ gem 'whenever', :require=>false
 
 gem 'turbolinks'
 gem 'jbuilder', '~> 1.2'
-gem 'unicorn'
 
 
 # gem 'rack-mini-profiler' 

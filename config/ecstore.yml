@@ -7,7 +7,7 @@ development:
   host: localhost
   pool: 5
   username: root
-  password: iotp$2016
+  password: pwfcompany
 
 test:
   adapter: mysql2
@@ -17,7 +17,7 @@ test:
   host: localhost
   pool: 5
   username: root
-  password: iotp$2016
+  password: pwfcompany
 
 production:
   adapter: mysql2
@@ -27,4 +27,4 @@ production:
   pool: 5
   host: localhost
   username: root
-  password: iotp$2016
+  password: pwfcompany
