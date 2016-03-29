@@ -13,6 +13,7 @@ module Allinpay
   IV = 'abcdefgh'
   PSD = '111111'
   CARD_ID = '8668083660000001017'
+  PAY_URL = 'https://113.108.182.3/aipg/ProcessServlet'
 
 
   def public_params method
@@ -111,6 +112,24 @@ module Allinpay
       sign = create_sign_for_allin data_hash, APPSECRET
       send_data = data_hash.merge({sign: sign})
       res_data_json = RestClient.get URL, {params: send_data}
+    end
+
+    def pay_for_another options
+
+      sn = MER_ID + timestamps + rand(1000).to_s.ljust(4, '0')
+      data_hash = {TRX_CODE: '100014', VERSION: '03', DATA_TYPE: 2, LEVEL: 9, USER_NAME: '20060400000044502', USER_PASS: '111111', REQ_SN: sn}.merge! options
+      data_xml = data_hash.to_xml.sub('UTF-8', 'GBK')
+      sign = create_sign_for_another data_xml
+      data_hash.merge! sign: sign
+      data_xml = data_hash.to_xml.sub('UTF-8', 'GBK')
+      data_xml = RestClient.post PAY_URL, 
+    end
+
+    def create_sign_for_another xml
+      p12 = OpenSSL::PKCS12.new(File.read(File.expand_path('../20060400000044502.p12', __FILE__)), '111111')
+      key = p12.key
+      pri = OpenSSL::PKey::RSA.new key.to_s
+      sign = pri.sign("sha1", xml)
     end
   end
 
