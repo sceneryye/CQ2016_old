@@ -5093,3 +5093,2766 @@ Processing by Memberships::CardsController#topup as */*
 ----------------unencrypt_str = testamount10000app_keytestcard_id8668083660000001017formatjsonmethodallinpay.ppcs.cardsingletopup.addopr_id0229000040order_id999990053990001_145922512651prdt_no0001sign_v1timestamp20160329121849top_up_way1v1.0test
 {"ppcs_cardsingletopup_add_response"=>{"res_timestamp"=>20160329121705, "res_sign"=>"02515995D8D5176D7C89E23DF96E856E", "trans_no"=>"0003945400", "result_info"=>{"amount"=>10000, "prdt_no"=>"0001", "validity_date"=>20170210, "top_up_way"=>1, "valid_balance"=>415555, "card_id"=>8668083660000001017, "account_balance"=>425555, "desn"=>""}, "order_id"=>"999990053990001_145922512651"}}
 Completed 200 OK in 231ms (Views: 0.6ms | ActiveRecord: 0.5ms)
+DEPRECATION WARNING: You didn't set `secret_key_base`. Read the upgrade documentation to learn more about this new config option. (called from call at /Users/killernova/.rvm/gems/ruby-2.3.0@global/gems/rack-1.6.4/lib/rack/lock.rb:17)
+
+
+Started GET "/card" for ::1 at 2016-03-29 13:49:12 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[36m (0.7ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` IS NULL[0m
+  [1m[35mEcstore::MetaSeo Load (0.9ms)[0m  SELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'
+  Rendered memberships/cards/show.html.erb within layouts/application (3.8ms)
+  [1m[36mEcstore::Category Load (1.4ms)[0m  [1mSELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5[0m
+  [1m[35mEcstore::Brand Load (3.2ms)[0m  SELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'
+  Rendered shared/_footer.html.erb (2.6ms)
+Completed 200 OK in 2089ms (Views: 1849.6ms | ActiveRecord: 126.2ms)
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-29 13:49:14 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-29 13:49:14 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-29 13:49:15 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 13:49:22 +0800
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 13:49:27 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+  [1m[35mEcstore::Cart Load (0.5ms)[0m  SELECT `sdb_b2c_cart_objects`.* FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+  [1m[36mEcstore::Brand Load (6.6ms)[0m  [1mSELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'[0m
+  [1m[35mEcstore::Category Load (0.4ms)[0m  SELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5
+Completed 500 Internal Server Error in 63ms (ActiveRecord: 0.4ms)
+
+NameError (undefined local variable or method `passowrd' for #<Memberships::CardsController:0x007fd2635523b8>
+Did you mean?  password):
+  app/controllers/memberships/cards_controller.rb:100:in `get_info'
+
+
+  Rendered /Users/killernova/.rvm/gems/ruby-2.3.0@rails4252/gems/actionpack-4.2.5.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (3.2ms)
+  Rendered /Users/killernova/.rvm/gems/ruby-2.3.0@rails4252/gems/actionpack-4.2.5.2/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (0.7ms)
+  Rendered /Users/killernova/.rvm/gems/ruby-2.3.0@rails4252/gems/actionpack-4.2.5.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (2.1ms)
+  Rendered /Users/killernova/.rvm/gems/ruby-2.3.0@rails4252/gems/actionpack-4.2.5.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (68.2ms)
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 13:49:51 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+  [1m[35mEcstore::Cart Load (0.7ms)[0m  SELECT `sdb_b2c_cart_objects`.* FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+  [1m[36mEcstore::Brand Load (1.7ms)[0m  [1mSELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'[0m
+  [1m[35mEcstore::Category Load (0.3ms)[0m  SELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5
+Completed 500 Internal Server Error in 118ms (ActiveRecord: 56.9ms)
+
+NameError (undefined local variable or method `sign' for #<Memberships::CardsController:0x007fd264a5e518>
+Did you mean?  sign_in):
+  lib/allinpay.rb:121:in `card_get_info'
+  app/controllers/memberships/cards_controller.rb:100:in `get_info'
+
+
+  Rendered /Users/killernova/.rvm/gems/ruby-2.3.0@rails4252/gems/actionpack-4.2.5.2/lib/action_dispatch/middleware/templates/rescues/_source.erb (2.0ms)
+  Rendered /Users/killernova/.rvm/gems/ruby-2.3.0@rails4252/gems/actionpack-4.2.5.2/lib/action_dispatch/middleware/templates/rescues/_trace.text.erb (1.0ms)
+  Rendered /Users/killernova/.rvm/gems/ruby-2.3.0@rails4252/gems/actionpack-4.2.5.2/lib/action_dispatch/middleware/templates/rescues/_request_and_response.text.erb (0.9ms)
+  Rendered /Users/killernova/.rvm/gems/ruby-2.3.0@rails4252/gems/actionpack-4.2.5.2/lib/action_dispatch/middleware/templates/rescues/diagnostics.text.erb (62.1ms)
+DEPRECATION WARNING: You didn't set `secret_key_base`. Read the upgrade documentation to learn more about this new config option. (called from call at /Users/killernova/.rvm/gems/ruby-2.3.0@global/gems/rack-1.6.4/lib/rack/lock.rb:17)
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 13:50:59 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.card.cardinfo.getpassowrd20160329135059aop222222sign_v1timestamp20160329135059v1.0test
+{"error_response"=>{"sub_msg"=>"缺少必要的参数:密码", "args"=>{"arg"=>[{"value"=>20160329135059, "key"=>"timestamp"}, {"value"=>"6274074E78A3C8D5E7C63DC107AB60B0", "key"=>"sign"}, {"value"=>1.0, "key"=>"v"}, {"value"=>"20160329135059aop222222", "key"=>"passowrd"}, {"value"=>"test", "key"=>"app_key"}, {"value"=>"allinpay.card.cardinfo.get", "key"=>"method"}, {"value"=>1, "key"=>"sign_v"}, {"value"=>"json", "key"=>"format"}, {"value"=>8668083660000001017, "key"=>"card_id"}]}, "res_timestamp"=>20160329134915, "code"=>50, "sub_code"=>"missing-parameter:password", "msg"=>"缺少必选参数  ", "res_sign"=>"16BDAC3CC48BD9E7D480681A4FFB983B"}}
+Completed 200 OK in 209ms (Views: 0.8ms | ActiveRecord: 58.9ms)
+DEPRECATION WARNING: You didn't set `secret_key_base`. Read the upgrade documentation to learn more about this new config option. (called from call at /Users/killernova/.rvm/gems/ruby-2.3.0@global/gems/rack-1.6.4/lib/rack/lock.rb:17)
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 13:52:12 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.card.cardinfo.getpassword20160329135212aop222222sign_v1timestamp20160329135212v1.0test
+{"error_response"=>{"sub_msg"=>"参数无效:密码,加密数据格式错误", "args"=>{"arg"=>[{"value"=>20160329135212, "key"=>"timestamp"}, {"value"=>"0A3B69B66E21B36C38C9748B2A536D7F", "key"=>"sign"}, {"value"=>1.0, "key"=>"v"}, {"value"=>"test", "key"=>"app_key"}, {"value"=>"allinpay.card.cardinfo.get", "key"=>"method"}, {"value"=>1, "key"=>"sign_v"}, {"value"=>"json", "key"=>"format"}, {"value"=>8668083660000001017, "key"=>"card_id"}, {"value"=>"20160329135212aop222222", "key"=>"password"}]}, "res_timestamp"=>20160329135028, "code"=>51, "sub_code"=>"invalid-paramete:password", "msg"=>"非法的参数", "res_sign"=>"CACA12875B187EA257FF3E525FF913FE"}}
+Completed 200 OK in 144ms (Views: 0.9ms | ActiveRecord: 14.7ms)
+DEPRECATION WARNING: You didn't set `secret_key_base`. Read the upgrade documentation to learn more about this new config option. (called from call at /Users/killernova/.rvm/gems/ruby-2.3.0@global/gems/rack-1.6.4/lib/rack/lock.rb:17)
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 13:53:25 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+------------------en_pwd = xWf64ij3M1hFTLDIcOMGFtjSn2rcEpWZ
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.card.cardinfo.getpasswordxWf64ij3M1hFTLDIcOMGFtjSn2rcEpWZ
+sign_v1timestamp20160329135325v1.0test
+{"error_response"=>{"sub_msg"=>"业务逻辑错误:密码错误,请重新输入", "args"=>{"arg"=>[{"value"=>20160329135325, "key"=>"timestamp"}, {"value"=>"CB11C4D0400B6E3C844950DA7A4A5E43", "key"=>"sign"}, {"value"=>1.0, "key"=>"v"}, {"value"=>"test", "key"=>"app_key"}, {"value"=>"allinpay.card.cardinfo.get", "key"=>"method"}, {"value"=>1, "key"=>"sign_v"}, {"value"=>"json", "key"=>"format"}, {"value"=>8668083660000001017, "key"=>"card_id"}, {"value"=>"xWf64ij3M1hFTLDIcOMGFtjSn2rcEpWZ\n", "key"=>"password"}]}, "res_timestamp"=>20160329135142, "code"=>53, "sub_code"=>"business-error:1041", "msg"=>"远程服务业务错误", "res_sign"=>"78D109361C40D2231348A338803D81B3"}}
+Completed 200 OK in 550ms (Views: 0.8ms | ActiveRecord: 56.6ms)
+
+
+Started POST "/card/reset_password" for ::1 at 2016-03-29 13:54:12 +0800
+Processing by Memberships::CardsController#reset_password as */*
+  Parameters: {"order_id"=>"999990053990001_145923055220", "card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+------------------en_pwd = xWf64ij3M1hPHnvy0t//tgiLVvl5JGfT
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.ppcs.cardpassword.restorder_id999990053990001_145923055220passwordxWf64ij3M1hPHnvy0t//tgiLVvl5JGfT
+sign_v1timestamp20160329135412v1.0test
+{"ppcs_cardpassword_rest_response"=>{"res_timestamp"=>20160329135229, "res_sign"=>"BBA65529C8DCB15369AF88458EC0BE61", "trans_no"=>"0004080994", "order_id"=>"999990053990001_145923055220"}}
+Completed 200 OK in 230ms (Views: 0.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/card" for ::1 at 2016-03-29 13:54:16 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+  [1m[35mEcstore::MetaSeo Load (0.6ms)[0m  SELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'
+  Rendered memberships/cards/show.html.erb within layouts/application (3.5ms)
+  [1m[36mEcstore::Category Load (0.3ms)[0m  [1mSELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5[0m
+  [1m[35mEcstore::Brand Load (2.9ms)[0m  SELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'
+  Rendered shared/_footer.html.erb (4.2ms)
+Completed 200 OK in 2077ms (Views: 2024.7ms | ActiveRecord: 35.5ms)
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-29 13:54:18 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-29 13:54:19 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-29 13:54:19 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-29 13:54:19 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-29 13:54:19 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-29 13:54:19 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-29 13:54:19 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-29 13:54:19 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-29 13:54:19 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-29 13:54:19 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-29 13:54:19 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-29 13:54:19 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-29 13:54:19 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-29 13:54:19 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 13:54:19 +0800
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 13:54:20 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+------------------en_pwd = xWf64ij3M1iAiEj/AQB5PQrdn7KVDAqU
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.card.cardinfo.getpasswordxWf64ij3M1iAiEj/AQB5PQrdn7KVDAqU
+sign_v1timestamp20160329135420v1.0test
+{"error_response"=>{"sub_msg"=>"业务逻辑错误:密码错误,请重新输入", "args"=>{"arg"=>[{"value"=>20160329135420, "key"=>"timestamp"}, {"value"=>"4F262936E66EF465F5EDC2D332D0CED4", "key"=>"sign"}, {"value"=>1.0, "key"=>"v"}, {"value"=>"test", "key"=>"app_key"}, {"value"=>"allinpay.card.cardinfo.get", "key"=>"method"}, {"value"=>1, "key"=>"sign_v"}, {"value"=>"json", "key"=>"format"}, {"value"=>8668083660000001017, "key"=>"card_id"}, {"value"=>"xWf64ij3M1iAiEj/AQB5PQrdn7KVDAqU\n", "key"=>"password"}]}, "res_timestamp"=>20160329135237, "code"=>53, "sub_code"=>"business-error:1041", "msg"=>"远程服务业务错误", "res_sign"=>"F944EB80D34A9A75E914DA2C95AFC51F"}}
+Completed 200 OK in 227ms (Views: 0.5ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/card" for ::1 at 2016-03-29 13:57:29 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[35m (0.5ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+  [1m[36mEcstore::MetaSeo Load (1.2ms)[0m  [1mSELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'[0m
+  Rendered memberships/cards/show.html.erb within layouts/application (4.1ms)
+  [1m[35mEcstore::Category Load (0.4ms)[0m  SELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5
+  [1m[36mEcstore::Brand Load (6.8ms)[0m  [1mSELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'[0m
+  Rendered shared/_footer.html.erb (0.4ms)
+Completed 200 OK in 201ms (Views: 187.3ms | ActiveRecord: 8.8ms)
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-29 13:57:29 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-29 13:57:30 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 13:57:31 +0800
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 13:57:31 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+------------------en_pwd = xWf64ij3M1hQHdjdFJ9C/uSbfS8rH8BZ
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.card.cardinfo.getpasswordxWf64ij3M1hQHdjdFJ9C/uSbfS8rH8BZ
+sign_v1timestamp20160329135731v1.0test
+{"error_response"=>{"sub_msg"=>"业务逻辑错误:密码错误,请重新输入", "args"=>{"arg"=>[{"value"=>20160329135731, "key"=>"timestamp"}, {"value"=>"AFB62BFF792DB86F3686F5F5140032E2", "key"=>"sign"}, {"value"=>1.0, "key"=>"v"}, {"value"=>"test", "key"=>"app_key"}, {"value"=>"allinpay.card.cardinfo.get", "key"=>"method"}, {"value"=>1, "key"=>"sign_v"}, {"value"=>"json", "key"=>"format"}, {"value"=>8668083660000001017, "key"=>"card_id"}, {"value"=>"xWf64ij3M1hQHdjdFJ9C/uSbfS8rH8BZ\n", "key"=>"password"}]}, "res_timestamp"=>20160329135548, "code"=>53, "sub_code"=>"business-error:1041", "msg"=>"远程服务业务错误", "res_sign"=>"63A4F8D583B02F1C859271DF4592A64C"}}
+Completed 200 OK in 263ms (Views: 0.8ms | ActiveRecord: 0.4ms)
+DEPRECATION WARNING: You didn't set `secret_key_base`. Read the upgrade documentation to learn more about this new config option. (called from call at /Users/killernova/.rvm/gems/ruby-2.3.0@global/gems/rack-1.6.4/lib/rack/lock.rb:17)
+
+
+Started GET "/card" for ::1 at 2016-03-29 13:58:34 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[36m (0.9ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+  [1m[35mEcstore::MetaSeo Load (0.6ms)[0m  SELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'
+  Rendered memberships/cards/show.html.erb within layouts/application (5.3ms)
+  [1m[36mEcstore::Category Load (0.5ms)[0m  [1mSELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5[0m
+  [1m[35mEcstore::Brand Load (0.7ms)[0m  SELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'
+  Rendered shared/_footer.html.erb (3.4ms)
+Completed 200 OK in 2200ms (Views: 1992.2ms | ActiveRecord: 71.3ms)
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-29 13:58:37 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 13:58:38 +0800
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 13:58:39 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+------------------en_pwd = xWf64ij3M1gnHI6ehZ9S56ukPfc3USHs
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.card.cardinfo.getpassword20160329135839aop111111sign_v1timestamp20160329135839v1.0test
+{"error_response"=>{"sub_msg"=>"参数无效:密码,加密数据格式错误", "args"=>{"arg"=>[{"value"=>20160329135839, "key"=>"timestamp"}, {"value"=>"CEFED55321E706C8E8B3244F4D24E109", "key"=>"sign"}, {"value"=>1.0, "key"=>"v"}, {"value"=>"test", "key"=>"app_key"}, {"value"=>"allinpay.card.cardinfo.get", "key"=>"method"}, {"value"=>1, "key"=>"sign_v"}, {"value"=>"json", "key"=>"format"}, {"value"=>8668083660000001017, "key"=>"card_id"}, {"value"=>"20160329135839aop111111", "key"=>"password"}]}, "res_timestamp"=>20160329135655, "code"=>51, "sub_code"=>"invalid-paramete:password", "msg"=>"非法的参数", "res_sign"=>"6F6B2FDF438D385257909E223312E1D8"}}
+Completed 200 OK in 200ms (Views: 0.9ms | ActiveRecord: 0.4ms)
+DEPRECATION WARNING: You didn't set `secret_key_base`. Read the upgrade documentation to learn more about this new config option. (called from call at /Users/killernova/.rvm/gems/ruby-2.3.0@global/gems/rack-1.6.4/lib/rack/lock.rb:17)
+
+
+Started GET "/card" for ::1 at 2016-03-29 14:00:55 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[36m (0.9ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+  [1m[35mEcstore::MetaSeo Load (0.9ms)[0m  SELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'
+  Rendered memberships/cards/show.html.erb within layouts/application (3.4ms)
+  [1m[36mEcstore::Category Load (0.3ms)[0m  [1mSELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5[0m
+  [1m[35mEcstore::Brand Load (3.0ms)[0m  SELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'
+  Rendered shared/_footer.html.erb (4.3ms)
+Completed 200 OK in 2130ms (Views: 1944.1ms | ActiveRecord: 82.3ms)
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-29 14:00:58 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-29 14:00:59 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-29 14:00:59 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:00:59 +0800
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 14:01:00 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[36m (0.7ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+------------------en_pwd = xWf64ij3M1j1AFzBoz/74ahzu83srD05
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.card.cardinfo.getpasswordxWf64ij3M1j1AFzBoz/74ahzu83srD05
+sign_v1timestamp20160329140100v1.0test
+{"error_response"=>{"sub_msg"=>"业务逻辑错误:今日密码错误输入次数超限", "args"=>{"arg"=>[{"value"=>20160329140100, "key"=>"timestamp"}, {"value"=>"F0961D48B9202981FE0B5FD9A3663861", "key"=>"sign"}, {"value"=>1.0, "key"=>"v"}, {"value"=>"test", "key"=>"app_key"}, {"value"=>"allinpay.card.cardinfo.get", "key"=>"method"}, {"value"=>1, "key"=>"sign_v"}, {"value"=>"json", "key"=>"format"}, {"value"=>8668083660000001017, "key"=>"card_id"}, {"value"=>"xWf64ij3M1j1AFzBoz/74ahzu83srD05\n", "key"=>"password"}]}, "res_timestamp"=>20160329135916, "code"=>53, "sub_code"=>"business-error:1039", "msg"=>"远程服务业务错误", "res_sign"=>"E1ECB6D98668EABDAF12501A5561C9D6"}}
+Completed 200 OK in 212ms (Views: 0.9ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/card/report_loss" for ::1 at 2016-03-29 14:01:14 +0800
+Processing by Memberships::CardsController#report_loss as */*
+  Parameters: {"order_id"=>"999990053990001_145923125696", "card_id"=>"8668083660000001017", "id_type"=>"1", "id_no"=>"330724198611118011", "reason"=>"lost my card"}
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonid_no1id_type330724198611118011methodallinpay.ppcs.cardreportloss.addorder_id999990053990001_145923125696reasonlost my cardsign_v1timestamp20160329140114v1.0test
+{"ppcs_cardreportloss_add_response"=>{"res_timestamp"=>20160329135930, "res_sign"=>"83FF5E190D050F7859F87B0D0920303B", "trans_no"=>"0004081014", "order_id"=>"999990053990001_145923125696", "card_id"=>8668083660000001017}}
+Completed 200 OK in 217ms (Views: 0.4ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/card/cancel_loss" for ::1 at 2016-03-29 14:01:16 +0800
+Processing by Memberships::CardsController#cancel_loss as */*
+  Parameters: {"order_id"=>"999990053990001_145923125696", "card_id"=>"8668083660000001017", "id_type"=>"1", "id_no"=>"330724198611118011", "reason"=>"lost my card"}
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonid_no1id_type330724198611118011methodallinpay.ppcs.cardcancelloss.addorder_id999990053990001_145923125696reasonlost my cardsign_v1timestamp20160329140116v1.0test
+{"ppcs_cardcancelloss_add_response"=>{"res_timestamp"=>20160329135932, "res_sign"=>"A0C591735876FCDFEBD947F305929E8B", "trans_no"=>"0004081015", "order_id"=>"999990053990001_145923125696", "card_id"=>8668083660000001017}}
+Completed 200 OK in 200ms (Views: 0.4ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 14:01:18 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+------------------en_pwd = xWf64ij3M1jML6WNbpMaACds/cJZvV8r
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.card.cardinfo.getpasswordxWf64ij3M1jML6WNbpMaACds/cJZvV8r
+sign_v1timestamp20160329140118v1.0test
+{"error_response"=>{"sub_msg"=>"业务逻辑错误:今日密码错误输入次数超限", "args"=>{"arg"=>[{"value"=>20160329140118, "key"=>"timestamp"}, {"value"=>"92ED2A7975F026D7025D30AF4FC02FAA", "key"=>"sign"}, {"value"=>1.0, "key"=>"v"}, {"value"=>"test", "key"=>"app_key"}, {"value"=>"allinpay.card.cardinfo.get", "key"=>"method"}, {"value"=>1, "key"=>"sign_v"}, {"value"=>"json", "key"=>"format"}, {"value"=>8668083660000001017, "key"=>"card_id"}, {"value"=>"xWf64ij3M1jML6WNbpMaACds/cJZvV8r\n", "key"=>"password"}]}, "res_timestamp"=>20160329135934, "code"=>53, "sub_code"=>"business-error:1039", "msg"=>"远程服务业务错误", "res_sign"=>"0E32049B58C80B19EBD6E9EB6F741AD7"}}
+Completed 200 OK in 191ms (Views: 0.7ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/card" for ::1 at 2016-03-29 14:02:31 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+  [1m[35mEcstore::MetaSeo Load (0.6ms)[0m  SELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'
+  Rendered memberships/cards/show.html.erb within layouts/application (2.0ms)
+  [1m[36mEcstore::Category Load (0.8ms)[0m  [1mSELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5[0m
+  [1m[35mEcstore::Brand Load (9.1ms)[0m  SELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'
+  Rendered shared/_footer.html.erb (0.5ms)
+Completed 200 OK in 181ms (Views: 167.5ms | ActiveRecord: 11.0ms)
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-29 14:02:31 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:02:32 +0800
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 14:02:33 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+------------------en_pwd = xWf64ij3M1hUEcGKNYc1GbA3kKsREquF
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.card.cardinfo.getpasswordxWf64ij3M1hUEcGKNYc1GbA3kKsREquF
+sign_v1timestamp20160329140233v1.0test
+{"error_response"=>{"sub_msg"=>"业务逻辑错误:今日密码错误输入次数超限", "args"=>{"arg"=>[{"value"=>20160329140233, "key"=>"timestamp"}, {"value"=>"55CBE01577BE6D8EB682BFBC8341C0B0", "key"=>"sign"}, {"value"=>1.0, "key"=>"v"}, {"value"=>"test", "key"=>"app_key"}, {"value"=>"allinpay.card.cardinfo.get", "key"=>"method"}, {"value"=>1, "key"=>"sign_v"}, {"value"=>"json", "key"=>"format"}, {"value"=>8668083660000001017, "key"=>"card_id"}, {"value"=>"xWf64ij3M1hUEcGKNYc1GbA3kKsREquF\n", "key"=>"password"}]}, "res_timestamp"=>20160329140049, "code"=>53, "sub_code"=>"business-error:1039", "msg"=>"远程服务业务错误", "res_sign"=>"97208E7510B8F98C286ED636424ABF72"}}
+Completed 200 OK in 202ms (Views: 0.7ms | ActiveRecord: 0.5ms)
+
+
+Started GET "/card" for ::1 at 2016-03-29 14:04:08 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[35m (0.5ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+  [1m[36mEcstore::MetaSeo Load (0.6ms)[0m  [1mSELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'[0m
+  Rendered memberships/cards/show.html.erb within layouts/application (1.6ms)
+  [1m[35mEcstore::Category Load (0.3ms)[0m  SELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5
+  [1m[36mEcstore::Brand Load (4.1ms)[0m  [1mSELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'[0m
+  Rendered shared/_footer.html.erb (0.4ms)
+Completed 200 OK in 194ms (Views: 184.7ms | ActiveRecord: 5.4ms)
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-29 14:04:09 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:04:10 +0800
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 14:04:11 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000059727", "password"=>"[FILTERED]"}
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+------------------en_pwd = xWf64ij3M1jg6tVspjLYs7vJx6YOvc7n
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000059727formatjsonmethodallinpay.card.cardinfo.getpasswordxWf64ij3M1jg6tVspjLYs7vJx6YOvc7n
+sign_v1timestamp20160329140411v1.0test
+{"error_response"=>{"sub_msg"=>"业务逻辑错误:密码错误,请重新输入", "args"=>{"arg"=>[{"value"=>20160329140411, "key"=>"timestamp"}, {"value"=>"16F94829C6FC5C403B20F5C09C313025", "key"=>"sign"}, {"value"=>1.0, "key"=>"v"}, {"value"=>"test", "key"=>"app_key"}, {"value"=>"allinpay.card.cardinfo.get", "key"=>"method"}, {"value"=>1, "key"=>"sign_v"}, {"value"=>"json", "key"=>"format"}, {"value"=>8668083660000059727, "key"=>"card_id"}, {"value"=>"xWf64ij3M1jg6tVspjLYs7vJx6YOvc7n\n", "key"=>"password"}]}, "res_timestamp"=>20160329140227, "code"=>53, "sub_code"=>"business-error:1041", "msg"=>"远程服务业务错误", "res_sign"=>"568BD4C5E6755851B1F6EA462EF018F8"}}
+Completed 200 OK in 210ms (Views: 0.8ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/card" for ::1 at 2016-03-29 14:07:05 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+  [1m[35mEcstore::MetaSeo Load (1.3ms)[0m  SELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'
+  Rendered memberships/cards/show.html.erb within layouts/application (1.4ms)
+  [1m[36mEcstore::Category Load (1.0ms)[0m  [1mSELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5[0m
+  [1m[35mEcstore::Brand Load (2.8ms)[0m  SELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'
+  Rendered shared/_footer.html.erb (0.6ms)
+Completed 200 OK in 215ms (Views: 204.9ms | ActiveRecord: 5.5ms)
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-29 14:07:05 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-29 14:07:05 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-29 14:07:05 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-29 14:07:06 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:07:07 +0800
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 14:07:09 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000059727", "password"=>"[FILTERED]"}
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+------------------en_pwd = xWf64ij3M1istZtI/lnon/sGZsyaTRuq
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000059727formatjsonmethodallinpay.card.cardinfo.getpasswordxWf64ij3M1istZtI/lnon/sGZsyaTRuq
+sign_v1timestamp20160329140709v1.0test
+{"error_response"=>{"sub_msg"=>"业务逻辑错误:密码错误,请重新输入", "args"=>{"arg"=>[{"value"=>20160329140709, "key"=>"timestamp"}, {"value"=>"CBE4E8A6EDEFAB987DFE260741D7D9FD", "key"=>"sign"}, {"value"=>1.0, "key"=>"v"}, {"value"=>"test", "key"=>"app_key"}, {"value"=>"allinpay.card.cardinfo.get", "key"=>"method"}, {"value"=>1, "key"=>"sign_v"}, {"value"=>"json", "key"=>"format"}, {"value"=>8668083660000059727, "key"=>"card_id"}, {"value"=>"xWf64ij3M1istZtI/lnon/sGZsyaTRuq\n", "key"=>"password"}]}, "res_timestamp"=>20160329140525, "code"=>53, "sub_code"=>"business-error:1041", "msg"=>"远程服务业务错误", "res_sign"=>"09135CC42A66D83BD3A3C307D1DD00D9"}}
+Completed 200 OK in 221ms (Views: 0.9ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/card/reset_password" for ::1 at 2016-03-29 14:07:25 +0800
+Processing by Memberships::CardsController#reset_password as */*
+  Parameters: {"order_id"=>"999990053990001_145923162528", "card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[35m (0.6ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+------------------en_pwd = xWf64ij3M1hrZ1L6qmjEZzhdnoHG6x8i
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.ppcs.cardpassword.restorder_id999990053990001_145923162528passwordxWf64ij3M1hrZ1L6qmjEZzhdnoHG6x8i
+sign_v1timestamp20160329140725v1.0test
+{"ppcs_cardpassword_rest_response"=>{"res_timestamp"=>20160329140541, "res_sign"=>"0F6DE525B46F8FD6B3008D82528B5642", "trans_no"=>"0004081022", "order_id"=>"999990053990001_145923162528"}}
+Completed 200 OK in 214ms (Views: 0.3ms | ActiveRecord: 0.6ms)
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 14:07:28 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000059727", "password"=>"[FILTERED]"}
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+------------------en_pwd = xWf64ij3M1hzjqvasJEl9BM0nL0RChXi
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000059727formatjsonmethodallinpay.card.cardinfo.getpasswordxWf64ij3M1hzjqvasJEl9BM0nL0RChXi
+sign_v1timestamp20160329140728v1.0test
+{"error_response"=>{"sub_msg"=>"业务逻辑错误:今日密码错误输入次数超限", "args"=>{"arg"=>[{"value"=>20160329140728, "key"=>"timestamp"}, {"value"=>"E75E1C8218DFBED259A789A243AC306D", "key"=>"sign"}, {"value"=>1.0, "key"=>"v"}, {"value"=>"test", "key"=>"app_key"}, {"value"=>"allinpay.card.cardinfo.get", "key"=>"method"}, {"value"=>1, "key"=>"sign_v"}, {"value"=>"json", "key"=>"format"}, {"value"=>8668083660000059727, "key"=>"card_id"}, {"value"=>"xWf64ij3M1hzjqvasJEl9BM0nL0RChXi\n", "key"=>"password"}]}, "res_timestamp"=>20160329140544, "code"=>53, "sub_code"=>"business-error:1039", "msg"=>"远程服务业务错误", "res_sign"=>"110A64BEAC406065F885EE78CE9DD89E"}}
+Completed 200 OK in 205ms (Views: 0.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/card" for ::1 at 2016-03-29 14:07:52 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[35m (0.6ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+  [1m[36mEcstore::MetaSeo Load (0.8ms)[0m  [1mSELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'[0m
+  Rendered memberships/cards/show.html.erb within layouts/application (1.2ms)
+  [1m[35mEcstore::Category Load (0.3ms)[0m  SELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5
+  [1m[36mEcstore::Brand Load (7.3ms)[0m  [1mSELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'[0m
+  Rendered shared/_footer.html.erb (1.0ms)
+Completed 200 OK in 207ms (Views: 194.4ms | ActiveRecord: 9.1ms)
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-29 14:07:52 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:07:52 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-29 14:07:52 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-29 14:07:52 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-29 14:07:52 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-29 14:07:52 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-29 14:07:52 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-29 14:07:52 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-29 14:07:52 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-29 14:07:52 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-29 14:07:52 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:07:53 +0800
+
+
+Started POST "/card/reset_password" for ::1 at 2016-03-29 14:07:55 +0800
+Processing by Memberships::CardsController#reset_password as */*
+  Parameters: {"order_id"=>"999990053990001_14592316725", "card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+------------------en_pwd = xWf64ij3M1gDQeSjd2wkYwryK95CAci3
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.ppcs.cardpassword.restorder_id999990053990001_14592316725passwordxWf64ij3M1gDQeSjd2wkYwryK95CAci3
+sign_v1timestamp20160329140755v1.0test
+{"ppcs_cardpassword_rest_response"=>{"res_timestamp"=>20160329140611, "res_sign"=>"53E7A379ADAF17A09EAF114A5A7F0341", "trans_no"=>"0004081024", "order_id"=>"999990053990001_14592316725"}}
+Completed 200 OK in 201ms (Views: 0.3ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 14:07:58 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000059793", "password"=>"[FILTERED]"}
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+------------------en_pwd = xWf64ij3M1hnHEoKaruxpLMGMjvhAcQy
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000059793formatjsonmethodallinpay.card.cardinfo.getpasswordxWf64ij3M1hnHEoKaruxpLMGMjvhAcQy
+sign_v1timestamp20160329140758v1.0test
+{"error_response"=>{"sub_msg"=>"业务逻辑错误:密码错误,请重新输入", "args"=>{"arg"=>[{"value"=>20160329140758, "key"=>"timestamp"}, {"value"=>"215850FE82FE09942B6F28C9804BEB6A", "key"=>"sign"}, {"value"=>1.0, "key"=>"v"}, {"value"=>"test", "key"=>"app_key"}, {"value"=>"allinpay.card.cardinfo.get", "key"=>"method"}, {"value"=>1, "key"=>"sign_v"}, {"value"=>"json", "key"=>"format"}, {"value"=>8668083660000059793, "key"=>"card_id"}, {"value"=>"xWf64ij3M1hnHEoKaruxpLMGMjvhAcQy\n", "key"=>"password"}]}, "res_timestamp"=>20160329140614, "code"=>53, "sub_code"=>"business-error:1041", "msg"=>"远程服务业务错误", "res_sign"=>"775E3A227CF6B74917DA3E30656BD4BE"}}
+Completed 200 OK in 185ms (Views: 0.7ms | ActiveRecord: 0.4ms)
+DEPRECATION WARNING: You didn't set `secret_key_base`. Read the upgrade documentation to learn more about this new config option. (called from call at /Users/killernova/.rvm/gems/ruby-2.3.0@global/gems/rack-1.6.4/lib/rack/lock.rb:17)
+
+
+Started GET "/card" for ::1 at 2016-03-29 14:16:15 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+  [1m[35mEcstore::MetaSeo Load (0.7ms)[0m  SELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'
+  Rendered memberships/cards/show.html.erb within layouts/application (3.8ms)
+  [1m[36mEcstore::Category Load (0.6ms)[0m  [1mSELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5[0m
+  [1m[35mEcstore::Brand Load (3.3ms)[0m  SELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'
+  Rendered shared/_footer.html.erb (1.9ms)
+Completed 200 OK in 2068ms (Views: 1826.9ms | ActiveRecord: 131.4ms)
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-29 14:16:17 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-29 14:16:17 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-29 14:16:17 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-29 14:16:17 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-29 14:16:17 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-29 14:16:17 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:16:17 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-29 14:16:17 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-29 14:16:17 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-29 14:16:17 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-29 14:16:17 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-29 14:16:17 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-29 14:16:17 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-29 14:16:17 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-29 14:16:17 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-29 14:16:17 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-29 14:16:17 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-29 14:16:17 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-29 14:16:17 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-29 14:16:18 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-29 14:16:18 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-29 14:16:18 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-29 14:16:18 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-29 14:16:18 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-29 14:16:18 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-29 14:16:18 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-29 14:16:18 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-29 14:16:18 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-29 14:16:18 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-29 14:16:18 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-29 14:16:18 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-29 14:16:18 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-29 14:16:18 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-29 14:16:18 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-29 14:16:18 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:16:18 +0800
+
+
+Started POST "/card/reset_password" for ::1 at 2016-03-29 14:16:21 +0800
+Processing by Memberships::CardsController#reset_password as */*
+  Parameters: {"order_id"=>"999990053990001_145923217543", "card_id"=>"88668083660000059793", "password"=>"[FILTERED]"}
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+------------------en_pwd = xWf64ij3M1gDuZYNfOdUzr1+iqpG5+1s
+
+----------------unencrypt_str = testapp_keytestcard_id88668083660000059793formatjsonmethodallinpay.ppcs.cardpassword.restorder_id999990053990001_145923217543passwordxWf64ij3M1gDuZYNfOdUzr1+iqpG5+1s
+sign_v1timestamp20160329141621v1.0test
+{"error_response"=>{"sub_msg"=>"业务逻辑错误:卡号不存在：88668083660000059793", "args"=>{"arg"=>[{"value"=>20160329141621, "key"=>"timestamp"}, {"value"=>"A343B56F59091239CF451B4851FF7319", "key"=>"sign"}, {"value"=>1.0, "key"=>"v"}, {"value"=>"test", "key"=>"app_key"}, {"value"=>"allinpay.ppcs.cardpassword.rest", "key"=>"method"}, {"value"=>1, "key"=>"sign_v"}, {"value"=>"json", "key"=>"format"}, {"value"=>"999990053990001_145923217543", "key"=>"order_id"}, {"value"=>"88668083660000059793", "key"=>"card_id"}, {"value"=>"xWf64ij3M1gDuZYNfOdUzr1+iqpG5+1s\n", "key"=>"password"}]}, "res_timestamp"=>20160329141437, "code"=>53, "sub_code"=>"business-error:10001", "msg"=>"远程服务业务错误", "res_sign"=>"F5222B814B8175195B8218A91124B7E6"}}
+Completed 200 OK in 157ms (Views: 0.9ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/card" for ::1 at 2016-03-29 14:17:10 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+  [1m[36mEcstore::MetaSeo Load (0.5ms)[0m  [1mSELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'[0m
+  Rendered memberships/cards/show.html.erb within layouts/application (3.0ms)
+  [1m[35mEcstore::Category Load (0.9ms)[0m  SELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5
+  [1m[36mEcstore::Brand Load (1.0ms)[0m  [1mSELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'[0m
+  Rendered shared/_footer.html.erb (0.4ms)
+Completed 200 OK in 139ms (Views: 133.2ms | ActiveRecord: 2.8ms)
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-29 14:17:10 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:17:11 +0800
+
+
+Started POST "/card/reset_password" for ::1 at 2016-03-29 14:17:27 +0800
+Processing by Memberships::CardsController#reset_password as */*
+  Parameters: {"order_id"=>"999990053990001_145923223096", "card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[35m (0.3ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+------------------en_pwd = xWf64ij3M1i6sFwpdiPmpUnBB0K+iypa
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.ppcs.cardpassword.restorder_id999990053990001_145923223096passwordxWf64ij3M1i6sFwpdiPmpUnBB0K+iypa
+sign_v1timestamp20160329141727v1.0test
+{"ppcs_cardpassword_rest_response"=>{"res_timestamp"=>20160329141544, "res_sign"=>"EB80FC237FA3305A062E977A0AD5FBB4", "trans_no"=>"0004081026", "order_id"=>"999990053990001_145923223096"}}
+Completed 200 OK in 1059ms (Views: 0.3ms | ActiveRecord: 0.3ms)
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 14:17:31 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[36m (0.3ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+------------------en_pwd = xWf64ij3M1hHBqP8YNQ6asjdrEau6RF6
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.card.cardinfo.getpasswordxWf64ij3M1hHBqP8YNQ6asjdrEau6RF6
+sign_v1timestamp20160329141731v1.0test
+{"card_cardinfo_get_response"=>{"res_timestamp"=>20160329141547, "res_sign"=>"78F40739D6AEE62C483AC86EA49B9898", "card_info"=>{"card_stat"=>0, "brh_id"=>"0229000040", "brand_id"=>"0001", "validity_date"=>20170210, "card_id"=>8668083660000001017, "card_product_info_arrays"=>{"card_product_info"=>[{"product_stat"=>0, "product_id"=>"0001", "product_name"=>"通用金额", "validity_date"=>20170210, "valid_balance"=>415555, "card_id"=>8668083660000001017, "account_balance"=>425555}, {"product_stat"=>0, "product_id"=>"0282", "product_name"=>"200元现金券", "validity_date"=>20991231, "valid_balance"=>553619, "card_id"=>8668083660000001017, "account_balance"=>553619}, {"product_stat"=>0, "product_id"=>1000, "product_name"=>"积分", "validity_date"=>20160210, "valid_balance"=>1745700, "card_id"=>8668083660000001017, "account_balance"=>1745700}]}}}}
+Completed 200 OK in 423ms (Views: 0.7ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/card" for ::1 at 2016-03-29 14:30:40 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[35m (0.6ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+  [1m[36mEcstore::MetaSeo Load (0.6ms)[0m  [1mSELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'[0m
+  Rendered memberships/cards/show.html.erb within layouts/application (1.5ms)
+  [1m[35mEcstore::Category Load (0.4ms)[0m  SELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5
+  [1m[36mEcstore::Brand Load (3.0ms)[0m  [1mSELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'[0m
+  Rendered shared/_footer.html.erb (0.4ms)
+Completed 200 OK in 190ms (Views: 182.6ms | ActiveRecord: 4.5ms)
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-29 14:30:40 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-29 14:30:41 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:30:42 +0800
+
+
+Started GET "/card" for ::1 at 2016-03-29 14:30:55 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[35m (0.6ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+  [1m[36mEcstore::MetaSeo Load (0.9ms)[0m  [1mSELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'[0m
+  Rendered memberships/cards/show.html.erb within layouts/application (1.6ms)
+  [1m[35mEcstore::Category Load (0.4ms)[0m  SELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5
+  [1m[36mEcstore::Brand Load (2.0ms)[0m  [1mSELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'[0m
+  Rendered shared/_footer.html.erb (0.8ms)
+Completed 200 OK in 189ms (Views: 181.8ms | ActiveRecord: 3.9ms)
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-29 14:30:55 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:30:56 +0800
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 14:30:57 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[35m (0.7ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+------------------en_pwd = xWf64ij3M1gNPQwsyJepWy1nBggb64M4
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.card.cardinfo.getpasswordxWf64ij3M1gNPQwsyJepWy1nBggb64M4
+sign_v1timestamp20160329143057v1.0test
+{"card_cardinfo_get_response"=>{"res_timestamp"=>20160329142914, "res_sign"=>"827373DB2C0DAF08545FDB47884B89E4", "card_info"=>{"card_stat"=>0, "brh_id"=>"0229000040", "brand_id"=>"0001", "validity_date"=>20170210, "card_id"=>8668083660000001017, "card_product_info_arrays"=>{"card_product_info"=>[{"product_stat"=>0, "product_id"=>"0001", "product_name"=>"通用金额", "validity_date"=>20170210, "valid_balance"=>415555, "card_id"=>8668083660000001017, "account_balance"=>425555}, {"product_stat"=>0, "product_id"=>"0282", "product_name"=>"200元现金券", "validity_date"=>20991231, "valid_balance"=>553619, "card_id"=>8668083660000001017, "account_balance"=>553619}, {"product_stat"=>0, "product_id"=>1000, "product_name"=>"积分", "validity_date"=>20160210, "valid_balance"=>1745700, "card_id"=>8668083660000001017, "account_balance"=>1745700}]}}}}
+Completed 200 OK in 452ms (Views: 1.0ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/card" for ::1 at 2016-03-29 14:32:51 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+  [1m[35mEcstore::MetaSeo Load (0.6ms)[0m  SELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'
+  Rendered memberships/cards/show.html.erb within layouts/application (1.5ms)
+  [1m[36mEcstore::Category Load (0.4ms)[0m  [1mSELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5[0m
+  [1m[35mEcstore::Brand Load (3.1ms)[0m  SELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'
+  Rendered shared/_footer.html.erb (0.8ms)
+Completed 200 OK in 218ms (Views: 209.6ms | ActiveRecord: 4.5ms)
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-29 14:32:51 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-29 14:32:52 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-29 14:32:52 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-29 14:32:52 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-29 14:32:52 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-29 14:32:52 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-29 14:32:52 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-29 14:32:52 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-29 14:32:52 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-29 14:32:52 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-29 14:32:52 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-29 14:32:52 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:32:53 +0800
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 14:32:54 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+------------------en_pwd = xWf64ij3M1ilxsUypM2zoOR02uOD9G5s
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.card.cardinfo.getpasswordxWf64ij3M1ilxsUypM2zoOR02uOD9G5s
+sign_v1timestamp20160329143254v1.0test
+{"card_cardinfo_get_response"=>{"res_timestamp"=>20160329143110, "res_sign"=>"AA19573AD6EB0F8A028688EB754E1E78", "card_info"=>{"card_stat"=>0, "brh_id"=>"0229000040", "brand_id"=>"0001", "validity_date"=>20170210, "card_id"=>8668083660000001017, "card_product_info_arrays"=>{"card_product_info"=>[{"product_stat"=>0, "product_id"=>"0001", "product_name"=>"通用金额", "validity_date"=>20170210, "valid_balance"=>415555, "card_id"=>8668083660000001017, "account_balance"=>425555}, {"product_stat"=>0, "product_id"=>"0282", "product_name"=>"200元现金券", "validity_date"=>20991231, "valid_balance"=>553619, "card_id"=>8668083660000001017, "account_balance"=>553619}, {"product_stat"=>0, "product_id"=>1000, "product_name"=>"积分", "validity_date"=>20160210, "valid_balance"=>1745700, "card_id"=>8668083660000001017, "account_balance"=>1745700}]}}}}
+Completed 200 OK in 420ms (Views: 0.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/card" for ::1 at 2016-03-29 14:35:05 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[35m (0.6ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+  [1m[36mEcstore::MetaSeo Load (0.6ms)[0m  [1mSELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'[0m
+  Rendered memberships/cards/show.html.erb within layouts/application (2.9ms)
+  [1m[35mEcstore::Category Load (0.4ms)[0m  SELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5
+  [1m[36mEcstore::Brand Load (2.4ms)[0m  [1mSELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'[0m
+  Rendered shared/_footer.html.erb (0.7ms)
+Completed 200 OK in 158ms (Views: 150.5ms | ActiveRecord: 4.1ms)
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-29 14:35:05 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:35:05 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-29 14:35:05 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-29 14:35:05 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-29 14:35:05 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-29 14:35:05 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-29 14:35:05 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-29 14:35:06 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:35:07 +0800
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 14:35:08 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+------------------en_pwd = xWf64ij3M1jogtQHoZ383wdtxLA9y5dj
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.card.cardinfo.getpasswordxWf64ij3M1jogtQHoZ383wdtxLA9y5dj
+sign_v1timestamp20160329143508v1.0test
+{"card_cardinfo_get_response"=>{"res_timestamp"=>20160329143324, "res_sign"=>"5F03D7BCCF0ED21047CB8C09D57778F9", "card_info"=>{"card_stat"=>0, "brh_id"=>"0229000040", "brand_id"=>"0001", "validity_date"=>20170210, "card_id"=>8668083660000001017, "card_product_info_arrays"=>{"card_product_info"=>[{"product_stat"=>0, "product_id"=>"0001", "product_name"=>"通用金额", "validity_date"=>20170210, "valid_balance"=>415555, "card_id"=>8668083660000001017, "account_balance"=>425555}, {"product_stat"=>0, "product_id"=>"0282", "product_name"=>"200元现金券", "validity_date"=>20991231, "valid_balance"=>553619, "card_id"=>8668083660000001017, "account_balance"=>553619}, {"product_stat"=>0, "product_id"=>1000, "product_name"=>"积分", "validity_date"=>20160210, "valid_balance"=>1745700, "card_id"=>8668083660000001017, "account_balance"=>1745700}]}}}}
+Completed 200 OK in 421ms (Views: 0.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/card" for ::1 at 2016-03-29 14:36:42 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[36m (0.9ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+  [1m[35mEcstore::MetaSeo Load (1.1ms)[0m  SELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'
+  Rendered memberships/cards/show.html.erb within layouts/application (2.1ms)
+  [1m[36mEcstore::Category Load (0.4ms)[0m  [1mSELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5[0m
+  [1m[35mEcstore::Brand Load (3.6ms)[0m  SELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'
+  Rendered shared/_footer.html.erb (0.8ms)
+Completed 200 OK in 217ms (Views: 204.2ms | ActiveRecord: 6.0ms)
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-29 14:36:42 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-29 14:36:43 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-29 14:36:43 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-29 14:36:43 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-29 14:36:43 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-29 14:36:43 +0800
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 14:36:44 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[36m (0.6ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+------------------en_pwd = xWf64ij3M1i77foDyESumoZVhoxk2NKm
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.card.cardinfo.getpasswordxWf64ij3M1i77foDyESumoZVhoxk2NKm
+sign_v1timestamp20160329143644v1.0test
+{"card_cardinfo_get_response"=>{"res_timestamp"=>20160329143500, "res_sign"=>"919E3BDB91429554F912738C91FCD5E2", "card_info"=>{"card_stat"=>0, "brh_id"=>"0229000040", "brand_id"=>"0001", "validity_date"=>20170210, "card_id"=>8668083660000001017, "card_product_info_arrays"=>{"card_product_info"=>[{"product_stat"=>0, "product_id"=>"0001", "product_name"=>"通用金额", "validity_date"=>20170210, "valid_balance"=>415555, "card_id"=>8668083660000001017, "account_balance"=>425555}, {"product_stat"=>0, "product_id"=>"0282", "product_name"=>"200元现金券", "validity_date"=>20991231, "valid_balance"=>553619, "card_id"=>8668083660000001017, "account_balance"=>553619}, {"product_stat"=>0, "product_id"=>1000, "product_name"=>"积分", "validity_date"=>20160210, "valid_balance"=>1745700, "card_id"=>8668083660000001017, "account_balance"=>1745700}]}}}}
+Completed 200 OK in 523ms (Views: 0.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:36:45 +0800
+
+
+Started GET "/card" for ::1 at 2016-03-29 14:37:24 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+  [1m[36mEcstore::MetaSeo Load (0.7ms)[0m  [1mSELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'[0m
+  Rendered memberships/cards/show.html.erb within layouts/application (3.6ms)
+  [1m[35mEcstore::Category Load (0.4ms)[0m  SELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5
+  [1m[36mEcstore::Brand Load (0.6ms)[0m  [1mSELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'[0m
+  Rendered shared/_footer.html.erb (0.4ms)
+Completed 200 OK in 149ms (Views: 143.5ms | ActiveRecord: 2.1ms)
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-29 14:37:25 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:37:26 +0800
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 14:37:27 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+------------------en_pwd = xWf64ij3M1ihyOETmG0q/nT4+oGrmTb7
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.card.cardinfo.getpasswordxWf64ij3M1ihyOETmG0q/nT4+oGrmTb7
+sign_v1timestamp20160329143727v1.0test
+{"card_cardinfo_get_response"=>{"res_timestamp"=>20160329143544, "res_sign"=>"CBEF68625A2E879757B7BA22D7F77B23", "card_info"=>{"card_stat"=>0, "brh_id"=>"0229000040", "brand_id"=>"0001", "validity_date"=>20170210, "card_id"=>8668083660000001017, "card_product_info_arrays"=>{"card_product_info"=>[{"product_stat"=>0, "product_id"=>"0001", "product_name"=>"通用金额", "validity_date"=>20170210, "valid_balance"=>415555, "card_id"=>8668083660000001017, "account_balance"=>425555}, {"product_stat"=>0, "product_id"=>"0282", "product_name"=>"200元现金券", "validity_date"=>20991231, "valid_balance"=>553619, "card_id"=>8668083660000001017, "account_balance"=>553619}, {"product_stat"=>0, "product_id"=>1000, "product_name"=>"积分", "validity_date"=>20160210, "valid_balance"=>1745700, "card_id"=>8668083660000001017, "account_balance"=>1745700}]}}}}
+Completed 200 OK in 421ms (Views: 0.6ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/card" for ::1 at 2016-03-29 14:42:53 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[36m (0.5ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+  [1m[35mEcstore::MetaSeo Load (0.5ms)[0m  SELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'
+  Rendered memberships/cards/show.html.erb within layouts/application (1.5ms)
+  [1m[36mEcstore::Category Load (0.3ms)[0m  [1mSELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5[0m
+  [1m[35mEcstore::Brand Load (2.9ms)[0m  SELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'
+  Rendered shared/_footer.html.erb (0.7ms)
+Completed 200 OK in 193ms (Views: 184.9ms | ActiveRecord: 4.3ms)
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-29 14:42:54 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:42:55 +0800
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 14:43:01 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[36m (0.6ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+------------------en_pwd = xWf64ij3M1jVqCoRPSjQ2bjyHO464USI
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.card.cardinfo.getpasswordxWf64ij3M1jVqCoRPSjQ2bjyHO464USI
+sign_v1timestamp20160329144301v1.0test
+{"card_cardinfo_get_response"=>{"res_timestamp"=>20160329144118, "res_sign"=>"9093459ED843A0BF940FA4F0CFBAA383", "card_info"=>{"card_stat"=>0, "brh_id"=>"0229000040", "brand_id"=>"0001", "validity_date"=>20170210, "card_id"=>8668083660000001017, "card_product_info_arrays"=>{"card_product_info"=>[{"product_stat"=>0, "product_id"=>"0001", "product_name"=>"通用金额", "validity_date"=>20170210, "valid_balance"=>415555, "card_id"=>8668083660000001017, "account_balance"=>425555}, {"product_stat"=>0, "product_id"=>"0282", "product_name"=>"200元现金券", "validity_date"=>20991231, "valid_balance"=>553619, "card_id"=>8668083660000001017, "account_balance"=>553619}, {"product_stat"=>0, "product_id"=>1000, "product_name"=>"积分", "validity_date"=>20160210, "valid_balance"=>1745700, "card_id"=>8668083660000001017, "account_balance"=>1745700}]}}}}
+Completed 200 OK in 515ms (Views: 0.6ms | ActiveRecord: 0.6ms)
+
+
+Started GET "/card" for ::1 at 2016-03-29 14:43:36 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+  [1m[36mEcstore::MetaSeo Load (0.6ms)[0m  [1mSELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'[0m
+  Rendered memberships/cards/show.html.erb within layouts/application (1.3ms)
+  [1m[35mEcstore::Category Load (0.3ms)[0m  SELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5
+  [1m[36mEcstore::Brand Load (0.5ms)[0m  [1mSELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'[0m
+  Rendered shared/_footer.html.erb (0.4ms)
+Completed 200 OK in 143ms (Views: 138.7ms | ActiveRecord: 1.8ms)
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-29 14:43:37 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:43:39 +0800
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 14:43:39 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[35m (0.4ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'
+------------------en_pwd = xWf64ij3M1gd1Eo/UPBHm9892OpH3aHw
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.card.cardinfo.getpasswordxWf64ij3M1gd1Eo/UPBHm9892OpH3aHw
+sign_v1timestamp20160329144339v1.0test
+{"card_cardinfo_get_response"=>{"res_timestamp"=>20160329144156, "res_sign"=>"6288709A07BE57089FFDE66B22AC51F1", "card_info"=>{"card_stat"=>0, "brh_id"=>"0229000040", "brand_id"=>"0001", "validity_date"=>20170210, "card_id"=>8668083660000001017, "card_product_info_arrays"=>{"card_product_info"=>[{"product_stat"=>0, "product_id"=>"0001", "product_name"=>"通用金额", "validity_date"=>20170210, "valid_balance"=>415555, "card_id"=>8668083660000001017, "account_balance"=>425555}, {"product_stat"=>0, "product_id"=>"0282", "product_name"=>"200元现金券", "validity_date"=>20991231, "valid_balance"=>553619, "card_id"=>8668083660000001017, "account_balance"=>553619}, {"product_stat"=>0, "product_id"=>1000, "product_name"=>"积分", "validity_date"=>20160210, "valid_balance"=>1745700, "card_id"=>8668083660000001017, "account_balance"=>1745700}]}}}}
+Completed 200 OK in 443ms (Views: 0.5ms | ActiveRecord: 0.4ms)
+
+
+Started GET "/card" for ::1 at 2016-03-29 14:46:01 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[36m (0.7ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+  [1m[35mEcstore::MetaSeo Load (2.1ms)[0m  SELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'
+  Rendered memberships/cards/show.html.erb within layouts/application (1.5ms)
+  [1m[36mEcstore::Category Load (1.0ms)[0m  [1mSELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5[0m
+  [1m[35mEcstore::Brand Load (3.5ms)[0m  SELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'
+  Rendered shared/_footer.html.erb (0.6ms)
+Completed 200 OK in 228ms (Views: 215.7ms | ActiveRecord: 7.4ms)
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-29 14:46:01 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-29 14:46:01 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-29 14:46:01 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-29 14:46:01 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-29 14:46:01 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:46:01 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-29 14:46:01 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-29 14:46:01 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-29 14:46:01 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-29 14:46:01 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-29 14:46:01 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-29 14:46:01 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-29 14:46:01 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-29 14:46:01 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-29 14:46:01 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-29 14:46:02 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-29 14:46:02 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-29 14:46:02 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-29 14:46:02 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-29 14:46:02 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-29 14:46:02 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-29 14:46:02 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-29 14:46:02 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-29 14:46:02 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-29 14:46:02 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-29 14:46:02 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-29 14:46:02 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-29 14:46:02 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-29 14:46:02 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-29 14:46:02 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-29 14:46:02 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-29 14:46:02 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-29 14:46:02 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-29 14:46:02 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-29 14:46:02 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-56b7c27d9a2a520259d1be10dc12aec411aeec180287bf8260f8c42f0de9c2ea.css?body=1" for ::1 at 2016-03-29 14:46:03 +0800
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-29 14:46:05 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'bca64190205966fcb1f23133e4f0964e'[0m
+------------------en_pwd = xWf64ij3M1iQMWFFFHxhQ9sLl4lgL5/o
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.card.cardinfo.getpasswordxWf64ij3M1iQMWFFFHxhQ9sLl4lgL5/o
+sign_v1timestamp20160329144605v1.0test
+{"card_cardinfo_get_response"=>{"res_timestamp"=>20160329144421, "res_sign"=>"7D9D2C6E5D87EE04E1911C7261B9BB50", "card_info"=>{"card_stat"=>0, "brh_id"=>"0229000040", "brand_id"=>"0001", "validity_date"=>20170210, "card_id"=>8668083660000001017, "card_product_info_arrays"=>{"card_product_info"=>[{"product_stat"=>0, "product_id"=>"0001", "product_name"=>"通用金额", "validity_date"=>20170210, "valid_balance"=>415555, "card_id"=>8668083660000001017, "account_balance"=>425555}, {"product_stat"=>0, "product_id"=>"0282", "product_name"=>"200元现金券", "validity_date"=>20991231, "valid_balance"=>553619, "card_id"=>8668083660000001017, "account_balance"=>553619}, {"product_stat"=>0, "product_id"=>1000, "product_name"=>"积分", "validity_date"=>20160210, "valid_balance"=>1745700, "card_id"=>8668083660000001017, "account_balance"=>1745700}]}}}}
+Completed 200 OK in 471ms (Views: 0.8ms | ActiveRecord: 0.4ms)

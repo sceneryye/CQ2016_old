@@ -14,9 +14,12 @@ module Allinpay
   PSD = '111111'
   CARD_ID = '8668083660000001017'
 
+  def timestamps
+    Time.now.strftime('%Y%m%d%H%M%S')
+  end
 
-  def public_params method
-    data = {app_key: APP_KEY, method: method, timestamp: Time.now.strftime('%Y%m%d%H%M%S'), v: '1.0', sign_v: '1',
+  def public_params method, timestamp
+    data = {app_key: APP_KEY, method: method, timestamp: timestamp, v: '1.0', sign_v: '1',
       format: 'json'}
     end
 
@@ -41,7 +44,7 @@ module Allinpay
     end
 
     def card_active order_id, card_id, type, desc = 'active card'
-      data_hash = (public_params 'allinpay.ppcs.cardsingleactive.add').merge({order_id: order_id, card_id: card_id, type: type, desc: desc})
+      data_hash = (public_params 'allinpay.ppcs.cardsingleactive.add', timestamps).merge({order_id: order_id, card_id: card_id, type: type, desc: desc})
       sign = create_sign_for_allin data_hash, APPSECRET
       send_data = data_hash.merge({sign: sign})
       # url = URL + '?' + send_data.to_param
@@ -50,22 +53,22 @@ module Allinpay
         # :ssl_client_cert => p12.certificate,
         # ssl_ca_file: p12.key.to_s,
         # :verify_ssl => OpenSSL::SSL::VERIFY_NONE)
-      res_data_json = RestClient.get URL, {params: send_data}
-    end
+        res_data_json = RestClient.get URL, {params: send_data}
+      end
 
-    def topup_single_card order_id, card_id, prdt_no, amount, top_up_way, opr_id, desn = 'topup card'
-      data_hash = (public_params 'allinpay.ppcs.cardsingletopup.add').merge({order_id: order_id, card_id: card_id,
-        prdt_no: prdt_no, amount: amount, top_up_way: top_up_way, opr_id: opr_id, desn: desn})
-      Rails.logger.info "--------desn = #{desn}"
-      sign = create_sign_for_allin data_hash, APPSECRET
-      send_data = data_hash.merge({sign: sign})
-      res_data_json = RestClient.get URL, {params: send_data}
-    end
+      def topup_single_card order_id, card_id, prdt_no, amount, top_up_way, opr_id, desn = 'topup card'
+        data_hash = (public_params 'allinpay.ppcs.cardsingletopup.add', timestamps).merge({order_id: order_id, card_id: card_id,
+          prdt_no: prdt_no, amount: amount, top_up_way: top_up_way, opr_id: opr_id, desn: desn})
+        Rails.logger.info "--------desn = #{desn}"
+        sign = create_sign_for_allin data_hash, APPSECRET
+        send_data = data_hash.merge({sign: sign})
+        res_data_json = RestClient.get URL, {params: send_data}
+      end
 
-    def pay_with_password order_id,  mer_order_id, payment_id, amount, card_id, password, pay_cur = PAY_CUR, type = '01', options = {}
-      mer_tm = Time.now.strftime('%Y%m%d%H%M%S')
+      def pay_with_password order_id,  mer_order_id, payment_id, amount, card_id, password, pay_cur = PAY_CUR, type = '01', options = {}
+        mer_tm = timestamps
       # mer_tm = '20160325161914'
-      data_hash = (public_params 'allinpay.card.paywithpassword.add').merge({pay_cur: pay_cur, type: type, mer_id: MER_ID, mer_tm: mer_tm, order_id: order_id, mer_order_id: mer_order_id, payment_id: payment_id, amount: amount}).merge options
+      data_hash = (public_params 'allinpay.card.paywithpassword.add', mer_tm).merge({pay_cur: pay_cur, type: type, mer_id: MER_ID, mer_tm: mer_tm, order_id: order_id, mer_order_id: mer_order_id, payment_id: payment_id, amount: amount}).merge options
       encrypt_card_id = des_encrypt card_id, mer_tm
       encrypt_password = des_encrypt password, mer_tm
       Rails.logger.info encrypt_card_id
@@ -76,8 +79,8 @@ module Allinpay
     end
 
     def card_reset_password order_id, card_id, password, options = {}
-      mer_tm = Time.now.strftime('%Y%m%d%H%M%S')
-      data_hash = (public_params 'allinpay.ppcs.cardpassword.rest').merge({order_id: order_id, card_id: card_id}).merge options
+      mer_tm = timestamps
+      data_hash = (public_params 'allinpay.ppcs.cardpassword.rest', mer_tm).merge({order_id: order_id, card_id: card_id}).merge options
       encrypt_password = des_encrypt password, mer_tm
       data_hash.merge!({password: encrypt_password})
       sign = create_sign_for_allin data_hash, APPSECRET
@@ -86,14 +89,14 @@ module Allinpay
     end
 
     def card_freeze order_id, card_id, prdt_id, reason
-      data_hash = (public_params 'allinpay.ppcs.cardproductfreeze.add').merge({order_id: order_id, card_id: card_id, prdt_id: prdt_id, reason: reason})
+      data_hash = (public_params 'allinpay.ppcs.cardproductfreeze.add', timestamps).merge({order_id: order_id, card_id: card_id, prdt_id: prdt_id, reason: reason})
       sign = create_sign_for_allin data_hash, APPSECRET
       send_data = data_hash.merge({sign: sign})
       res_data_json = RestClient.get URL, {params: send_data}
     end
 
     def card_unfreeze order_id, card_id, prdt_id, reason
-      data_hash = (public_params 'allinpay.ppcs.cardproductunfreeze.add').merge({order_id: order_id, card_id: card_id, prdt_id: prdt_id, reason: reason})
+      data_hash = (public_params 'allinpay.ppcs.cardproductunfreeze.add', timestamps).merge({order_id: order_id, card_id: card_id, prdt_id: prdt_id, reason: reason})
       sign = create_sign_for_allin data_hash, APPSECRET
       send_data = data_hash.merge({sign: sign})
       res_data_json = RestClient.get URL, {params: send_data}
@@ -101,14 +104,24 @@ module Allinpay
 
 
     def card_report_loss order_id, card_id, id_type, id_no, reason
-      data_hash = (public_params 'allinpay.ppcs.cardreportloss.add').merge({order_id: order_id, card_id: card_id, id_type: id_type, id_no: id_no, reason: reason})
+      data_hash = (public_params 'allinpay.ppcs.cardreportloss.add', timestamps).merge({order_id: order_id, card_id: card_id, id_type: id_type, id_no: id_no, reason: reason})
       sign = create_sign_for_allin data_hash, APPSECRET
       send_data = data_hash.merge({sign: sign})
       res_data_json = RestClient.get URL, {params: send_data}
     end
 
     def card_cancel_loss order_id, card_id, id_type, id_no, reason
-      data_hash = (public_params 'allinpay.ppcs.cardcancelloss.add').merge({order_id: order_id, card_id: card_id, id_type: id_type, id_no: id_no, reason: reason})
+      data_hash = (public_params 'allinpay.ppcs.cardcancelloss.add', timestamps).merge({order_id: order_id, card_id: card_id, id_type: id_type, id_no: id_no, reason: reason})
+      sign = create_sign_for_allin data_hash, APPSECRET
+      send_data = data_hash.merge({sign: sign})
+      res_data_json = RestClient.get URL, {params: send_data}
+    end
+
+    def card_get_info card_id, password
+      mer_tm = timestamps
+      data_hash = (public_params 'allinpay.card.cardinfo.get', mer_tm).merge(card_id: card_id)
+      encrypt_password = des_encrypt password, mer_tm
+      data_hash.merge!(password: encrypt_password)
       sign = create_sign_for_allin data_hash, APPSECRET
       send_data = data_hash.merge({sign: sign})
       res_data_json = RestClient.get URL, {params: send_data}

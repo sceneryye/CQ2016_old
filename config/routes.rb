@@ -128,6 +128,7 @@ end
         post 'unfreeze'
         post 'report_loss'
         post 'cancel_loss'
+        post 'get_info'
 
         get 'search'
 

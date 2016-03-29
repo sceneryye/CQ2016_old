@@ -46,6 +46,12 @@
       <button class="btn btn-success cancel-loss-card">卡解挂</button>
     </div>
   </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
+      <button class="btn btn-success get-card-info">查询卡片信息</button>
+    </div>
+  </div>
 </div>
 
 
@@ -74,7 +80,7 @@
       }
       else {
         console.log(e.data.error_response)
-        alert('交易失败！');
+        alert('操作失败！' + e.data.error_response.sub_msg);
       }
     });
   });
@@ -94,7 +100,7 @@
       }
       else {
         console.log(e.data.error_response)
-        alert('交易失败！');
+        alert('操作失败！' + e.data.error_response.sub_msg);
       }
     });
   });
@@ -105,7 +111,7 @@
     var mer_order_id = order_id;
     var payment_id = "0000000001";
     var amount = '100';
-    var password = '333333';
+    var password = '222222';
     var url = "<%= pay_with_pwd_card_path %>";
     $.post(url, {order_id: order_id, card_id: card_id, mer_order_id: mer_order_id, amount: amount, payment_id: payment_id, password: password}, function(e){
       if(e.data.card_paywithpassword_add_response) {
@@ -114,7 +120,7 @@
       }
       else {
         console.log(e.data.error_response)
-        alert('交易失败！');
+        alert('操作失败！' + e.data.error_response.sub_msg);
       }
     });
   });
@@ -122,7 +128,7 @@
   // 更改密码
   $('.card-reset-password').on('click', function(){
     var card_id = '8668083660000001017';
-    var password = '333333';
+    var password = '222222';
     var url = "<%= reset_password_card_path %>";
     $.post(url, {order_id: order_id, card_id: card_id, password: password}, function(e){
       if(e.data.ppcs_cardpassword_rest_response) {
@@ -131,7 +137,7 @@
       }
       else {
         console.log(e.data.error_response)
-        alert('交易失败！');
+        alert('操作失败！' + e.data.error_response.sub_msg);
       }
     });
   });
@@ -149,7 +155,7 @@
       }
       else {
         console.log(e.data.error_response)
-        alert('交易失败！');
+        alert('操作失败！' + e.data.error_response.sub_msg);
       }
     });
   });
@@ -167,7 +173,7 @@
       }
       else {
         console.log(e.data.error_response)
-        alert('交易失败！');
+        alert('操作失败！' + e.data.error_response.sub_msg);
       }
     });
   });
@@ -186,7 +192,7 @@
       }
       else {
         console.log(e.data.error_response)
-        alert('交易失败！');
+        alert('操作失败！' + e.data.error_response.sub_msg);
       }
     });
   });
@@ -205,7 +211,44 @@
       }
       else {
         console.log(e.data.error_response)
-        alert('交易失败！');
+        alert('操作失败！' + e.data.error_response.sub_msg);
+      }
+    });
+  });
+
+  // 查询卡片信息
+  $('.get-card-info').on('click', function(){
+    var card_id = '8668083660000001017';
+    var password = '222222'
+    var url = "<%= get_info_card_path %>";
+    $.post(url, {card_id: card_id, password: password}, function(e){
+      if(e.data.card_cardinfo_get_response) {
+        console.log(e.data.card_cardinfo_get_response);
+        var msg = e.data.card_cardinfo_get_response.card_info.card_product_info_arrays.card_product_info[0]
+        var state = '';
+        switch(msg.product_stat) {
+          case 0:
+          state = '正常';
+          break;
+          case 1:
+          state = '挂失';
+          break;
+          case 2:
+          state = '冻结';
+          break;
+          case 3:
+          state = '作废';
+          break;
+          default:
+          state = '未知';
+          break;
+        }
+        message = '卡号：' + card_id + ';  认证日期：' + e.data.card_cardinfo_get_response.card_info.validity_date +';  余额：' + parseFloat(msg.account_balance / 100) + '元' + ';  产品名称：' + msg.product_name + ';  可用余额：' + parseFloat(msg.valid_balance / 100) + '元' + ';  产品有效期：' + msg.validity_date + ';  产品状态：' + state;
+        alert(message);
+      }
+      else {
+        console.log(e.data.error_response)
+        alert('操作失败！' + e.data.error_response.sub_msg);
       }
     });
   });

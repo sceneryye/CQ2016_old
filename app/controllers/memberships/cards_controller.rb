@@ -94,6 +94,14 @@ class Memberships::CardsController < ApplicationController
     render json: {data: res_data}
   end
 
+  def get_info
+    card_id = params[:card_id]
+    password = params[:password]
+    res_data = ActiveSupport::JSON.decode card_get_info(card_id, password)
+    Rails.logger.info res_data
+    render json: {data: res_data}
+  end
+
 
 
 
