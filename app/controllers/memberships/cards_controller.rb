@@ -102,6 +102,12 @@ class Memberships::CardsController < ApplicationController
     render json: {data: res_data}
   end
 
+  def pay_to_client
+    data = params[:pay_to_client]
+    res_data = Hash.from_xml pay_for_another data
+    render json: {data: res_data}
+  end
+
 
 
 

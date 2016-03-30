@@ -129,14 +129,16 @@ module Allinpay
     end
 
     def pay_for_another options
-
-      sn = MER_ID + timestamps + rand(1000).to_s.ljust(4, '0')
-      data_hash = {TRX_CODE: '100014', VERSION: '03', DATA_TYPE: 2, LEVEL: 9, USER_NAME: '20060400000044502', USER_PASS: '111111', REQ_SN: sn}.merge! options
+      mer_tm = timestamps
+      sn = MER_ID + mer_tm + rand(1000).to_s.ljust(4, '0')
+      data_hash = {TRX_CODE: '100014', VERSION: '03', DATA_TYPE: 2, LEVEL: 9, USER_NAME: '20060400000044502', USER_PASS: '111111', REQ_SN: sn, BUSINESS_CODE: '10800', MERCHANT_ID: '200604000000445', SUBMIT_TIME: mer_tm}.merge! options
       data_xml = data_hash.to_xml.sub('UTF-8', 'GBK')
       sign = create_sign_for_another data_xml
       data_hash.merge! sign: sign
       data_xml = data_hash.to_xml.sub('UTF-8', 'GBK')
-      data_xml = RestClient.post PAY_URL, 
+      Rails.logger.info data_xml
+      res_data_xml = RestClient.post PAY_URL, data_xml, content_type: :xml
+      # res_data_xml = RestClient::Request.execute(method: post, ) PAY_URL, data_xml, content_type: :xml
     end
 
     def create_sign_for_another xml

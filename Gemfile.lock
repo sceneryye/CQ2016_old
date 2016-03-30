@@ -52,6 +52,7 @@ GEM
       activesupport (>= 3.2.0)
       json (>= 1.7)
       mime-types (>= 1.16)
+    certified (1.0.0)
     chronic (0.10.2)
     ckeditor (4.1.6)
       cocaine
@@ -236,6 +237,7 @@ PLATFORMS
 DEPENDENCIES
   axlsx
   babosa
+  certified
   ckeditor
   coffee-rails
   execjs

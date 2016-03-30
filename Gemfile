@@ -19,6 +19,9 @@ gem 'faraday'
 gem "geocoder"
 gem 'spreadsheet'
 
+# open-ssl
+gem 'certified'
+
 #gem 'weibo_2' #,:git=>"https://github.com/simsicon/weibo_2.git"
 # Gems used only for assets and not required
 # in production environments by default.
