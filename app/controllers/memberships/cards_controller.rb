@@ -94,7 +94,6 @@ class Memberships::CardsController < ApplicationController
     render json: {data: res_data}
   end
 
-<<<<<<< HEAD
   def get_info
     card_id = params[:card_id]
     password = params[:password]
@@ -109,8 +108,6 @@ class Memberships::CardsController < ApplicationController
     render json: {data: res_data}
   end
 
-=======
->>>>>>> origin/master
 
 
 
