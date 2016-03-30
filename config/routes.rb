@@ -128,8 +128,11 @@ end
         post 'unfreeze'
         post 'report_loss'
         post 'cancel_loss'
+<<<<<<< HEAD
         post 'get_info'
         post 'pay_to_client'
+=======
+>>>>>>> origin/master
 
         get 'search'
 

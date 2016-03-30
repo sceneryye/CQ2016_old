@@ -1,8 +1,7 @@
 #encoding:utf-8
 class Ecstore::Payment < Ecstore::Base
 	self.table_name = 'sdb_ectools_payments'
-	self.accessor_all_columns
-
+	
 	#has_one :pay_bill,->{where(:pay_object=>"order",:bill_type=>"payments")},:foreign_key=>"bill_id",:class_name=>"Bill"
 	has_one :pay_bill,:foreign_key=>"bill_id",:class_name=>"Bill"
 

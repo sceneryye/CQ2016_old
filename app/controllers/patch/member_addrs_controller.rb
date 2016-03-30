@@ -1,12 +1,7 @@
 #encoding:utf-8
 class Patch::MemberAddrsController < ApplicationController
-  # layout 'standard'
-  layout "application"
 
-  before_filter do
-    clear_breadcrumbs
-    add_breadcrumb("我的贸威",:member_path)
-  end
+  layout "application"
 
   def new
     @addr = Ecstore::MemberAddr.new
@@ -30,12 +25,7 @@ class Patch::MemberAddrsController < ApplicationController
     end
 
   end
-def mobile
-  @supplier = Ecstore::Supplier.find(params[:supplier_id])
-  @addrs = @user.member_addrs.paginate(:per_page=>10,:page=>params[:page])
-  @newurl = "new_memberaddr_add?supplier_id=#{@supplier.id}"
 
-end
 
 
   def edit
@@ -45,7 +35,7 @@ end
   end
 
   def create
-    @addr = Ecstore::MemberAddr.new params[:addr].merge!(:member_id=>@user.member_id)
+    @addr = Ecstore::MemberAddr.new addr_params.merge!(:member_id=>@user.member_id)
 
     return_url= params[:return_url]
 
@@ -70,7 +60,7 @@ end
 
   def update
     @addr = Ecstore::MemberAddr.find(params[:id])
-    if @addr.update_attributes(params[:addr])
+    if @addr.update_attributes(addr_params)
       respond_to do |format|
         format.js
         format.html { redirect_to "/member_addrs?platform=#{params[:platform]}" }
@@ -91,7 +81,12 @@ end
 
       redirect_to "/member_addrs?platform=#{params[:platform]}"
     end
-
+   
   end
+
+   private 
+    def addr_params
+      params.require(:addr).permit(:province, :city, :district, :addr, :zip, :name, :mobile, :tel, :def_addr, :member_id ,:addr_type)
+    end
   
 end

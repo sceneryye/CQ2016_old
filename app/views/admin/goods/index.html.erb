@@ -49,7 +49,7 @@
 		&nbsp;
 		<%=link_to "取消选择","#",:id=>"cancel_all"%>
         &nbsp;&nbsp;&nbsp;&nbsp;
-      <%if current_admin.has_right_of("goods","export") %>
+      <!-- <%if current_admin.has_right_of("goods","export") %>
         <%= f.submit '导出商品', :class => "btn btn-primary" %>
       <div style="float:right;">
         <ul class="clearfix unstyled">
@@ -61,7 +61,7 @@
           <li class="checkbox-verticle"><%= check_box_tag "fields[]","市场价",true%>市场价</li>
         </ul>
       </div>
-          <%end%>
+          <%end%> -->
 	</div>
 	<table class="table table-bordered table-striped" id="goods" data-url="<%=request.fullpath.html_safe%>" count="<%=@count%>" goods_ids="<%=@goods_ids%>" >
 		<%=render "index_goods"%>

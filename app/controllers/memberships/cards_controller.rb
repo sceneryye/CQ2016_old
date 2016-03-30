@@ -43,7 +43,7 @@ class Memberships::CardsController < ApplicationController
     render json: {data: res_data}
   end
 
-  def reset_password
+  def reset_card_password
     order_id = params[:order_id]
     card_id = params[:card_id]
     password = params[:password]
@@ -72,7 +72,7 @@ class Memberships::CardsController < ApplicationController
     render json: {data: res_data}
   end
 
-  def report_loss
+  def report_loss_of
     order_id = params[:order_id]
     card_id = params[:card_id]
     id_type = params[:id_type]
@@ -83,7 +83,7 @@ class Memberships::CardsController < ApplicationController
     render json: {data: res_data}
   end
 
-  def cancel_loss
+  def cancel_loss_of
     order_id = params[:order_id]
     card_id = params[:card_id]
     id_type = params[:id_type]
@@ -94,6 +94,7 @@ class Memberships::CardsController < ApplicationController
     render json: {data: res_data}
   end
 
+<<<<<<< HEAD
   def get_info
     card_id = params[:card_id]
     password = params[:password]
@@ -108,6 +109,8 @@ class Memberships::CardsController < ApplicationController
     render json: {data: res_data}
   end
 
+=======
+>>>>>>> origin/master
 
 
 

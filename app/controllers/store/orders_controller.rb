@@ -1,31 +1,28 @@
 #encoding:utf-8
 class Store::OrdersController < ApplicationController
   before_filter :authorize_user!
-  layout 'order'
+  layout 'application'
 
   def create
+
     addr = Ecstore::MemberAddr.find_by_addr_id(params[:member_addr])
+
+     
+     @order = Ecstore::Order.new order_params 
     if addr
       ["name","area","addr","zip","tel","mobile"].each do |key,val|
-          params[:order].merge!("ship_#{key}"=>addr.attributes[key])
+          @order.send("ship_#{key}=" , addr.attributes[key])
       end
-     end
-
-    return_url=params[:return_url]
-    platform=params["platform"];
-
-    params[:order].merge!(:ip=>request.remote_ip)
-    params[:order].merge!(:member_id=>@user.member_id)
-
-    @order = Ecstore::Order.new params[:order]   
-
-
-    #
-    discount = 1
-    if params[:coupon].nil?
-      discount =  @order.user.member_lv.dis_count 
     end
 
+   
+    return_url=params[:return_url]
+    platform=params["platform"];
+   
+    @order.ip = request.remote_ip
+    @order.member_id = @user.member_id
+
+   
     @line_items.each do |line_item|
       product = line_item.product
       good = line_item.good
@@ -36,7 +33,7 @@ class Store::OrdersController < ApplicationController
         order_item.name = product.name
         
         #会员优惠价格四舍五入
-        order_item.price = (product.price * discount).round
+        order_item.price = product.price
         order_item.goods_id = good.goods_id
         order_item.type_id = good.type_id
         order_item.nums = line_item.quantity.to_i
@@ -272,14 +269,7 @@ class Store::OrdersController < ApplicationController
 
     @coupon_id = params[:coupon_id]
 
-    @discount = 1
-
-    if @coupon_id.nil? ||@coupon_id.empty?
-        @discount = @user.member_lv.dis_count
-    else
-      render :layout=>'coupons'
-    end
-
+   
   end
 
   def new_mobile_addr
@@ -392,7 +382,7 @@ class Store::OrdersController < ApplicationController
   def pay
     @order  = Ecstore::Order.find_by_order_id(params[:id])
     if @order &&@order.status == 'active' && @order.pay_status == '0'
-      @order.update_attribute :payment, params[:order][:payment]
+      @order.update_attribute :payment, order_params[:payment]
     else
       render :text=>"不存在的订单不能支付!"
     end
@@ -474,6 +464,13 @@ class Store::OrdersController < ApplicationController
     @supplier  =  Ecstore::Supplier.find(supplier_id)
     render :layout=>@supplier.layout
 
+
+  end
+
+  private
+  def order_params
+   params.require(:order).permit(:order_id,:ship_day, :ship_special,:from_addr, :ship_time2, 
+      :coupon, :coupon_no,:province,:city,:district,:weight,:recommend_user,:member_id,:payment,:ip)
 
   end
 

@@ -241,63 +241,61 @@ module Admin
             @order = "goods_id desc" if @order.blank?
            
             @goods = Ecstore::Good.order(@order)
-		#	@goods = @goods.includes(:cat,:brand,:good_type,:tegs,:supplier)
+		    #	@goods = @goods.includes(:cat,:brand,:good_type,:tegs,:supplier)
 
-            if marketable.present?
-                @goods =  @goods.where(:marketable=>marketable)
+        if marketable.present?
+            @goods =  @goods.where(:marketable=>marketable)
+        end
+
+        # simple search
+        if params[:s].present? && params[:s][:q].present?
+             q =  params[:s][:q]
+             @goods = @goods.where("bn like ? or name like ?","%#{q}%","%#{q}%")
+        end
+
+        # advanced search
+        if params[:ad].present?
+
+            brand_id = params[:ad][:brand]
+            cat_id = params[:ad][:cat]
+            bn = params[:ad][:bn]
+            price_op = params[:ad][:price_op]
+            price = params[:ad][:price]
+            marketable =  params[:ad][:marketable]
+
+            # brand filter
+            @goods = @goods.where(:brand_id=>brand_id) if brand_id.present?
+
+            # cat filter
+            if cat_id.present?
+                cat = Ecstore::Category.find_by_cat_id(cat_id)
+                cat_ids = cat.categories.collect { |cat| cat.cat_id } << cat.cat_id
+                @goods = @goods.where(:cat_id=>cat_ids) if cat_ids.present?
             end
 
-            # simple search
-            if params[:s].present? && params[:s][:q].present?
-                 q =  params[:s][:q]
-                 @goods = @goods.where("bn like ? or name like ?","%#{q}%","%#{q}%")
+            @goods = @goods.where(:bn=>bn) if bn.present?
+
+            # price filter
+            comparison_op = case price_op
+              when "gt" then ">"
+              when "eq" then "="
+              when "lt" then "<"
+              when "ge" then ">="
+              when "le" then "<="
+              else "="
             end
+            @goods = @goods.where("price #{comparison_op} ?", price) if price.present?
 
-            # advanced search
-            if params[:ad].present?
+            @goods = @goods.where(:marketable=>marketable.to_s) if marketable.present?
+        end
+        @count = @goods.count
+        @goods_ids = @goods.pluck(:goods_id).join(",")
+        @goods = @goods.paginate(:page=>params[:page],:per_page=>20)
 
-                brand_id = params[:ad][:brand]
-                cat_id = params[:ad][:cat]
-                bn = params[:ad][:bn]
-                price_op = params[:ad][:price_op]
-                price = params[:ad][:price]
-                marketable =  params[:ad][:marketable]
-
-                # brand filter
-                @goods = @goods.where(:brand_id=>brand_id) if brand_id.present?
-
-                # cat filter
-                if cat_id.present?
-                    cat = Ecstore::Category.find_by_cat_id(cat_id)
-                    cat_ids = cat.categories.collect { |cat| cat.cat_id } << cat.cat_id
-                    @goods = @goods.where(:cat_id=>cat_ids) if cat_ids.present?
-                end
-
-                @goods = @goods.where(:bn=>bn) if bn.present?
-
-                # price filter
-                comparison_op = case price_op
-                  when "gt" then ">"
-                  when "eq" then "="
-                  when "lt" then "<"
-                  when "ge" then ">="
-                  when "le" then "<="
-                  else "="
-                end
-                @goods = @goods.where("price #{comparison_op} ?", price) if price.present?
-
-                @goods = @goods.where(:marketable=>marketable.to_s) if marketable.present?
-            end
-            @count = @goods.count
-            @goods_ids = @goods.pluck(:goods_id).join(",")
-            @goods = @goods.paginate(:page=>params[:page],:per_page=>20)
-
-
-
-            respond_to do |format|
-                format.html { render @view,:layout=> @layout }
-                format.js
-            end
+        respond_to do |format|
+            format.html { render @view,:layout=> @layout }
+            format.js
+        end
       end
 
 
@@ -367,7 +365,7 @@ module Admin
       end
 
       def create
-        @good  =  Ecstore::Good.new(params[:good])
+        @good  =  Ecstore::Good.new(goods_params)
         if @good.save
           redirect_to admin_goods_url
         else
@@ -379,7 +377,8 @@ module Admin
       def update
             @good  =  Ecstore::Good.find(params[:id])
             @action_url = admin_good_path(@good)
-            @good.update_attributes(params[:good])
+            @good.update_attributes(goods_params)
+            @good.save!
             redirect_to admin_goods_url
       end
 
@@ -404,7 +403,7 @@ module Admin
       end
 
       def import(options={:encoding=>"GB18030:UTF-8"})
-        file = params[:good][:file].tempfile
+        file = goods_params[:file].tempfile
         book = Spreadsheet.open(file)
         pp "starting import ..."
         sheet = book.worksheet(0)
@@ -573,6 +572,13 @@ module Admin
                 render :js=>"alert('保存失败')"
             end
       end
+
+       private 
+       def goods_params
+        params.require(:good).permit(:desc, :price,:mktprice,:store,:name,
+                            :cat_id,:brand_id,:supplier_id,:products_attributes,:member_id,:up_or_down)
+      end
+
 
   end
 
