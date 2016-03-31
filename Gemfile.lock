@@ -248,7 +248,7 @@ DEPENDENCIES
   hashie
   httpclient
   iconv
-  jbuilder (~> 1.2)
+  jbuilder
   jquery-rails
   jquery-ui-rails
   mysql2

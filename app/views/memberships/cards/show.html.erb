@@ -55,10 +55,17 @@
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
+      <button class="btn btn-success get-card-trade-log">查询交易记录</button>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
       <button class="btn btn-success pay-for-another">代付</button>
     </div>
   </div>
 </div>
+
 
 
 
@@ -251,6 +258,27 @@
         }
         message = '卡号：' + card_id + ';  认证日期：' + e.data.card_cardinfo_get_response.card_info.validity_date +';  余额：' + parseFloat(msg.account_balance / 100) + '元' + ';  产品名称：' + msg.product_name + ';  可用余额：' + parseFloat(msg.valid_balance / 100) + '元' + ';  产品有效期：' + msg.validity_date + ';  产品状态：' + state;
         alert(message);
+      }
+      else {
+        console.log(e.data.error_response)
+        alert('操作失败！' + e.data.error_response.sub_msg);
+      }
+    });
+  });
+
+  // 交易记录查询
+  $('.get-card-trade-log').on('click', function(){
+    var card_id = '8668083660000001017';
+    var password = '222222';
+    var begin_date = "<%= (Time.now - 3600 * 24 * 10).strftime('%Y%m%d') %>";
+    var end_date = "<%= Time.now.strftime('%Y%m%d') %>";
+    var page_no = '0';
+    var page_size = '20';
+    var url = "<%= get_trade_log_card_path %>";
+    $.post(url, {order_id: order_id, card_id: card_id, password: password, begin_date: begin_date, end_date: end_date, page_no: page_no, page_size: page_size}, function(e){
+      if(e.data.ppcs_txnlog_search_response) {
+        console.log(e.data.ppcs_txnlog_search_response);
+        alert('交易记录查询成功！');
       }
       else {
         console.log(e.data.error_response)

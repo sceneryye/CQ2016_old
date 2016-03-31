@@ -102,6 +102,19 @@ class Memberships::CardsController < ApplicationController
     render json: {data: res_data}
   end
 
+  def get_trade_log
+    begin_date = params[:begin_date]
+    end_date = params[:end_date]
+    card_id = params[:card_id]
+    password = params[:password]
+    page_no = params[:page_no]
+    page_size = params[:page_size]
+    return render json: {data: {error_message: '不能查询90天之前的记录！'}} if Time.parse(begin_date) < (Time.now - 3600 * 24 * 90)
+    res_data = ActiveSupport::JSON.decode card_get_trade_log(begin_date, end_date, card_id, password, page_no, page_size)
+    Rails.logger.info res_data
+    render json: {data: res_data}
+  end
+
   def pay_to_client
     data = params[:pay_to_client]
     res_data = Hash.from_xml pay_for_another data

@@ -128,6 +128,16 @@ module Allinpay
       res_data_json = RestClient.get URL, {params: send_data}
     end
 
+    def card_get_trade_log begin_date, end_date, card_id, password, page_no, page_size
+      mer_tm = timestamps
+      data_hash = (public_params 'allinpay.card.txnlogByCardId.search', mer_tm).merge(begin_date: begin_date, end_date: end_date, card_id: card_id, page_no: page_no, page_size: page_size)
+      encrypt_password = des_encrypt password, mer_tm
+      data_hash.merge!(password: encrypt_password)
+      sign = create_sign_for_allin data_hash, APPSECRET
+      send_data = data_hash.merge({sign: sign})
+      res_data_json = RestClient.post URL, send_data
+    end
+
     def pay_for_another options
       mer_tm = timestamps
       sn = MER_ID + mer_tm + rand(1000).to_s.ljust(4, '0')
