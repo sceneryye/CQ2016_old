@@ -24,6 +24,19 @@
   </head>
 
   <body>
+
+
+ <%
+  case controller_name
+    when 'cats','goods','home'
+      @product_active = 'active'
+    when 'brands'
+      @brand_active = 'active'
+    else
+      @member_active = 'active'
+  end
+%>
+
     <!--Navigation -->
     <div class="top-bar">
       <div class="row nav">
@@ -31,7 +44,7 @@
           <ul class="dropdown menu" data-dropdown-menu>
             <li class="menu-text"><a href='/'><img src="/img/logo.png"></a></li>
             <li class="has-submenu">
-              <a href="/gallery/5" class='menu-link active'>产品中心</a>
+              <%=link_to '产品中心', cat_path(5), class:"menu-link #{@product_active}"%>
               <ul class="submenu menu vertical" data-submenu>
                <%@menu_categories.each do |category|%>
                 <li><%=link_to category.cat_name, cat_path(category)%></li> 
@@ -39,7 +52,7 @@
               </ul>
             </li>
             <li class="has-submenu">
-              <a href="/brands"  class='menu-link'>基地风光</a>
+              <%=link_to '基地风光', brands_path, class:"menu-link #{@brand_active}"%>
               <ul class="submenu menu vertical" data-submenu>
               <%@menu_brands.each do |brand|%>
                 <li><%=link_to brand.brand_name, brand_path(brand)%></li> 
@@ -47,7 +60,7 @@
               </ul>
             </li>
             <li class="has-submenu">
-              <a href="/member"  class='menu-link'>会员中心</a>       
+               <%=link_to '会员中心', member_path, class:"menu-link #{@member_active}"%>
               <ul class="submenu menu vertical" data-submenu>
                 <%if signed_in?%>
                 <li class="outlink"><a href="/member/orders">我的订单</a></li>
