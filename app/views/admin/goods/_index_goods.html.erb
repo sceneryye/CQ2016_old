@@ -11,18 +11,9 @@
 		<th width="50px" align="center">缩略图</th>
       <%if current_admin.has_right_of("goods","edit")%>
           <th class="order" data-field="cost" data-sorter="asc">进货价</th>
-      <%end%>
-      <%if current_admin.has_right_of("orders","delivery")%>
-          <th class="order" data-field="bulk" data-sorter="asc">渠道价</th>
-          <th class="order" data-field="promotion" data-sorter="asc">渠道零售价</th>
-      <%end%>
-        <th class="order" data-field="wholesale" data-sorter="asc">批发价</th>
+      <%end%>             
 		<th class="order" data-field="price" data-sorter="asc">会员价</th>
         <th class="order" data-field="mktprice" data-sorter="asc">市场价</th>
-      <%if current_admin.has_right_of("members","index")%>
-        <th class="order" data-field="price" data-sorter="asc">佣金</th>
-      <%end%>
-
 		<th class="order" data-field="store" data-sorter="asc">库存</th>
 		<th class="order" data-field="marketable" data-sorter="asc">上架</th>
 		<th class="order" data-field="uptime" data-sorter="asc"  style="display:none">上架时间</th>
@@ -59,18 +50,9 @@
 			</td>
           <%if current_admin.has_right_of("goods","edit")%>
               <td>&yen;<%=format("%.2f",good.cost)%></td>
-          <%end%>
-          <%if current_admin.has_right_of("orders","delivery")%>
-              <td>&yen;<%=format("%.2f",good.bulk) if good.bulk%></td>
-              <td>&yen;<%=format("%.2f",good.promotion) if good.promotion%></td>
-          <%end%>
-            <td>&yen;<%=format("%.2f",good.wholesale) if good.wholesale%></td>
+          <%end%>    
 			<td>&yen;<%=format("%.2f",good.price) if good.price%></td>
             <td>&yen;<%=format("%.2f",good.mktprice) if good.mktprice%></td>
-          <%if current_admin.has_right_of("members","index")%>
-            <td>&yen;<%=format("%.2f",good.price*good.share)%></td>
-          <%end%>
-
 			<td><%=good.store.to_i%></td>
 			<td><%=good.marketable == 'true' ? '是' : '否'%></td>
 			<td style="display:none"><%=Time.at(good.uptime).strftime("%Y-%m-%d %H:%M:%S") if good.uptime.present?%></td>

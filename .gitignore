@@ -54,3 +54,6 @@ config/*.yml
 /tmp
 /log
 Gemfile.lock
+/log/*
+/temp/*
+Gemfile.lock

@@ -48,7 +48,7 @@ gem 'ya2yaml'
 gem 'whenever', :require=>false
 
 gem 'turbolinks'
-gem 'jbuilder', '~> 1.2'
+gem 'jbuilder'
 
 
 # gem 'rack-mini-profiler' 

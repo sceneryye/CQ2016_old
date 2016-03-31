@@ -128,8 +128,10 @@ end
         post 'unfreeze'
         post 'report_loss'
         post 'cancel_loss'
+
         post 'get_info'
         post 'pay_to_client'
+
 
         get 'search'
 

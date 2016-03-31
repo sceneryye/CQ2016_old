@@ -10,6 +10,8 @@ class Ecstore::Good < Ecstore::Base
 
   self.table_name = "sdb_b2c_goods"
 
+  attr_accessor :up_or_down
+
   scope :selling, ->{where(marketable: 'true')}
 
  

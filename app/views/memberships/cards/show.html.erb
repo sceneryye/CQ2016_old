@@ -19,12 +19,6 @@
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <button class="btn btn-success card-reset-password">更改密码</button>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
       <button class="btn btn-success freeze-card">卡冻结</button>
     </div>
   </div>
@@ -47,6 +41,7 @@
     </div>
   </div>
 
+
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
       <button class="btn btn-success get-card-info">查询卡片信息</button>
@@ -58,6 +53,7 @@
       <button class="btn btn-success pay-for-another">代付</button>
     </div>
   </div>
+
 </div>
 
 
@@ -72,23 +68,14 @@
 </style>
 
 <script>
-  $(document).ready(function(){
-    var order_id = '999990053990001_' + "<%= Time.now.to_i %>" + "<%= rand(100).to_s %>";
+$(document).ready(function(){
+  var order_id = '999990053990001_' + "<%= Time.now.to_i %>" + "<%= rand(100).to_s %>";
   // 激活卡片
   $('.active-card').on('click', function(){
     var card_id = '8668083660000059727';
     var type = '1'
     var url = "<%= active_card_path %>";
-    $.post(url, {order_id: order_id, card_id: card_id, type: type}, function(e){
-      if(e.data.ppcs_cardsingleactive_add_response) {
-        console.log(e.data.ppcs_cardsingleactive_add_response);
-        alert('卡片激活成功！');
-      }
-      else {
-        console.log(e.data.error_response)
-        alert('操作失败！' + e.data.error_response.sub_msg);
-      }
-    });
+    $.post(url, {order_id: order_id, card_id: card_id, type: type}, function(e){console.log(e.data)});
   });
 
   // 单卡充值
@@ -99,53 +86,18 @@
     var top_up_way = '1';
     var opr_id = '0229000040';
     var url = "<%= topup_card_path %>";
-    $.post(url, {order_id: order_id, card_id: card_id, prdt_no: prdt_no, amount: amount, top_up_way: top_up_way, opr_id: opr_id}, function(e){
-      if(e.data.ppcs_cardsingletopup_add_response) {
-        console.log(e.data.ppcs_cardsingletopup_add_response);
-        alert('成功充值' + parseFloat(amount/100) + '元！');
-      }
-      else {
-        console.log(e.data.error_response)
-        alert('操作失败！' + e.data.error_response.sub_msg);
-      }
-    });
+    $.post(url, {order_id: order_id, card_id: card_id, prdt_no: prdt_no, amount: amount, top_up_way: top_up_way, opr_id: opr_id}, function(e){console.log(e.data.error_response)});
   });
 
   // 密码支付
   $('.pay-with-password').on('click', function(){
     var card_id = '8668083660000001017';
     var mer_order_id = order_id;
-    var payment_id = "0000000001";
+    var payment_id = "<%= rand(100_000_000_0).to_s.ljust(10, '1') %>";
     var amount = '100';
-    var password = '222222';
+    var password = '111111';
     var url = "<%= pay_with_pwd_card_path %>";
-    $.post(url, {order_id: order_id, card_id: card_id, mer_order_id: mer_order_id, amount: amount, payment_id: payment_id, password: password}, function(e){
-      if(e.data.card_paywithpassword_add_response) {
-        console.log(e.data.card_paywithpassword_add_response);
-        alert('成功支付' + parseFloat(amount/100) + '元！');
-      }
-      else {
-        console.log(e.data.error_response)
-        alert('操作失败！' + e.data.error_response.sub_msg);
-      }
-    });
-  });
-
-  // 更改密码
-  $('.card-reset-password').on('click', function(){
-    var card_id = '8668083660000001017';
-    var password = '222222';
-    var url = "<%= reset_password_card_path %>";
-    $.post(url, {order_id: order_id, card_id: card_id, password: password}, function(e){
-      if(e.data.ppcs_cardpassword_rest_response) {
-        console.log(e.data.ppcs_cardpassword_rest_response);
-        alert('密码修改成功！');
-      }
-      else {
-        console.log(e.data.error_response)
-        alert('操作失败！' + e.data.error_response.sub_msg);
-      }
-    });
+    $.post(url, {order_id: order_id, card_id: card_id, mer_order_id: mer_order_id, amount: amount, payment_id: payment_id, password: password}, function(e){console.log(e.data.error_response)});
   });
 
   // 卡冻结
@@ -154,34 +106,16 @@
     var prdt_id = "0001";
     var reason = 'lost my card';
     var url = "<%= freeze_card_path %>";
-    $.post(url, {order_id: order_id, card_id: card_id, prdt_id: prdt_id, reason: reason}, function(e){
-      if(e.data.ppcs_cardproductfreeze_add_response) {
-        console.log(e.data.ppcs_cardproductfreeze_add_response);
-        alert('该卡已成功冻结！');
-      }
-      else {
-        console.log(e.data.error_response)
-        alert('操作失败！' + e.data.error_response.sub_msg);
-      }
-    });
+    $.post(url, {order_id: order_id, card_id: card_id, prdt_id: prdt_id, reason: reason}, function(e){console.log(e.data.error_response)});
   });
 
-  // 取消卡冻结
+  // 卡冻结
   $('.unfreeze-card').on('click', function(){
     var card_id = '8668083660000001017';
     var prdt_id = "0001";
     var reason = 'find my card';
     var url = "<%= unfreeze_card_path %>";
-    $.post(url, {order_id: order_id, card_id: card_id, prdt_id: prdt_id, reason: reason}, function(e){
-      if(e.data.ppcs_cardproductunfreeze_add_response) {
-        console.log(e.data.ppcs_cardproductunfreeze_add_response);
-        alert('该卡已成功解冻！');
-      }
-      else {
-        console.log(e.data.error_response)
-        alert('操作失败！' + e.data.error_response.sub_msg);
-      }
-    });
+    $.post(url, {order_id: order_id, card_id: card_id, prdt_id: prdt_id, reason: reason}, function(e){console.log(e.data.error_response)});
   });
 
   // 卡挂失
@@ -191,16 +125,7 @@
     var id_no = '330724198611118011'
     var reason = 'lost my card';
     var url = "<%= report_loss_card_path %>";
-    $.post(url, {order_id: order_id, card_id: card_id, id_type: id_type, id_no: id_no, reason: reason}, function(e){
-      if(e.data.ppcs_cardreportloss_add_response) {
-        console.log(e.data.ppcs_cardreportloss_add_response);
-        alert('该卡已成功挂失！');
-      }
-      else {
-        console.log(e.data.error_response)
-        alert('操作失败！' + e.data.error_response.sub_msg);
-      }
-    });
+    $.post(url, {order_id: order_id, card_id: card_id, id_type: id_type, id_no: id_no, reason: reason}, function(e){console.log(e.data.error_response)});
   });
 
   // 卡解挂
@@ -210,53 +135,7 @@
     var id_no = '330724198611118011'
     var reason = 'lost my card';
     var url = "<%= cancel_loss_card_path %>";
-    $.post(url, {order_id: order_id, card_id: card_id, id_type: id_type, id_no: id_no, reason: reason}, function(e){
-      if(e.data.ppcs_cardcancelloss_add_response) {
-        console.log(e.data.ppcs_cardcancelloss_add_response);
-        alert('该卡已成功解挂！');
-      }
-      else {
-        console.log(e.data.error_response)
-        alert('操作失败！' + e.data.error_response.sub_msg);
-      }
-    });
-  });
-
-  // 查询卡片信息
-  $('.get-card-info').on('click', function(){
-    var card_id = '8668083660000001017';
-    var password = '222222'
-    var url = "<%= get_info_card_path %>";
-    $.post(url, {card_id: card_id, password: password}, function(e){
-      if(e.data.card_cardinfo_get_response) {
-        console.log(e.data.card_cardinfo_get_response);
-        var msg = e.data.card_cardinfo_get_response.card_info.card_product_info_arrays.card_product_info[0]
-        var state = '';
-        switch(msg.product_stat) {
-          case 0:
-          state = '正常';
-          break;
-          case 1:
-          state = '挂失';
-          break;
-          case 2:
-          state = '冻结';
-          break;
-          case 3:
-          state = '作废';
-          break;
-          default:
-          state = '未知';
-          break;
-        }
-        message = '卡号：' + card_id + ';  认证日期：' + e.data.card_cardinfo_get_response.card_info.validity_date +';  余额：' + parseFloat(msg.account_balance / 100) + '元' + ';  产品名称：' + msg.product_name + ';  可用余额：' + parseFloat(msg.valid_balance / 100) + '元' + ';  产品有效期：' + msg.validity_date + ';  产品状态：' + state;
-        alert(message);
-      }
-      else {
-        console.log(e.data.error_response)
-        alert('操作失败！' + e.data.error_response.sub_msg);
-      }
-    });
+    $.post(url, {order_id: order_id, card_id: card_id, id_type: id_type, id_no: id_no, reason: reason}, function(e){console.log(e.data.error_response)});
   });
 
   // 代付
