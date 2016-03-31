@@ -7856,3 +7856,162 @@ Processing by Memberships::CardsController#get_info as */*
 sign_v1timestamp20160329144605v1.0test
 {"card_cardinfo_get_response"=>{"res_timestamp"=>20160329144421, "res_sign"=>"7D9D2C6E5D87EE04E1911C7261B9BB50", "card_info"=>{"card_stat"=>0, "brh_id"=>"0229000040", "brand_id"=>"0001", "validity_date"=>20170210, "card_id"=>8668083660000001017, "card_product_info_arrays"=>{"card_product_info"=>[{"product_stat"=>0, "product_id"=>"0001", "product_name"=>"通用金额", "validity_date"=>20170210, "valid_balance"=>415555, "card_id"=>8668083660000001017, "account_balance"=>425555}, {"product_stat"=>0, "product_id"=>"0282", "product_name"=>"200元现金券", "validity_date"=>20991231, "valid_balance"=>553619, "card_id"=>8668083660000001017, "account_balance"=>553619}, {"product_stat"=>0, "product_id"=>1000, "product_name"=>"积分", "validity_date"=>20160210, "valid_balance"=>1745700, "card_id"=>8668083660000001017, "account_balance"=>1745700}]}}}}
 Completed 200 OK in 471ms (Views: 0.8ms | ActiveRecord: 0.4ms)
+DEPRECATION WARNING: You didn't set `secret_key_base`. Read the upgrade documentation to learn more about this new config option. (called from service at /Users/killernova/.rvm/rubies/ruby-2.3.0/lib/ruby/2.3.0/webrick/httpserver.rb:140)
+
+
+Started GET "/card" for ::1 at 2016-03-31 14:22:57 +0800
+Processing by Memberships::CardsController#show as HTML
+  [1m[36m (1.8ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'e98fb315da087cb8deb26babcafd1d26'[0m
+  [1m[35mEcstore::MetaSeo Load (7.0ms)[0m  SELECT `sdb_imodec_seo`.* FROM `sdb_imodec_seo` WHERE `sdb_imodec_seo`.`metable_type` = 'path' AND `sdb_imodec_seo`.`path` = '/card'
+  Rendered memberships/cards/show.html.erb within layouts/application (3.7ms)
+WARNING: Rename $grid-column-responsive-gutter to $grid-column-gutter to remove this warning.
+         on line 41 of /Users/killernova/.rvm/gems/ruby-2.3.0/gems/foundation-rails-6.2.0.1/vendor/assets/scss/grid/_grid.scss
+         from line 15 of /Users/killernova/.rvm/gems/ruby-2.3.0/gems/foundation-rails-6.2.0.1/vendor/assets/scss/foundation.scss
+         from line 4 of /Users/killernova/code/CQ2016/app/assets/stylesheets/foundation_and_overrides.scss
+
+
+  [1m[36mEcstore::Category Load (1.5ms)[0m  [1mSELECT `sdb_b2c_goods_cat`.* FROM `sdb_b2c_goods_cat` WHERE `sdb_b2c_goods_cat`.`parent_id` = 5[0m
+  [1m[35mEcstore::Brand Load (2.3ms)[0m  SELECT `sdb_b2c_brand`.* FROM `sdb_b2c_brand` WHERE `sdb_b2c_brand`.`disabled` = 'false'
+  Rendered shared/_footer.html.erb (1.4ms)
+Completed 200 OK in 3768ms (Views: 3538.5ms | ActiveRecord: 125.4ms)
+
+
+Started GET "/assets/application.self-9bb4ae0d31a33c2c117eac207de5825386e8a09c0b9c4c7a8fa922f978b5a69d.css?body=1" for ::1 at 2016-03-31 14:23:01 +0800
+
+
+Started GET "/assets/jquery_ujs.self-e87806d0cf4489aeb1bb7288016024e8de67fd18db693fe026fe3907581e53cd.js?body=1" for ::1 at 2016-03-31 14:23:01 +0800
+
+
+Started GET "/assets/foundation_and_overrides.self-e6e98ea4b21e14433a367f649e03bfe9f1155e9d24cb70b5adb5f793a789e61d.css?body=1" for ::1 at 2016-03-31 14:23:01 +0800
+
+
+Started GET "/assets/jquery.self-660adc51e0224b731d29f575a6f1ec167ba08ad06ed5deca4f1e8654c135bf4c.js?body=1" for ::1 at 2016-03-31 14:23:01 +0800
+
+
+Started GET "/assets/foundation.core.self-de98a54fcab8f5f1162fb0e49a463534368b0a68ce39e90ce8e976abb4671c99.js?body=1" for ::1 at 2016-03-31 14:23:01 +0800
+
+
+Started GET "/assets/_settings.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2016-03-31 14:23:01 +0800
+
+
+Started GET "/assets/foundation.abide.self-1e670aa4726c15995d399ad70b3143cc72f72a47cfa48f9c0d7ae18eeefae5d5.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.accordion.self-d81bde3768234088729bf3e753507a4f3eb58b38b2f90ad5839f862d78453a41.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.accordionMenu.self-dfd5db50287057a7925cce1c4ac249247165b40106c43635ea9923040646c1bf.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.drilldown.self-50a5ea2e9b6b02e8c5cec39d81b595fb428886657eaa5adefa6ca0246bca77d4.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.dropdown.self-b9edb543a57c862eba21061f7dd2b89c885dce24a8a675caeb0624b069e5cfc0.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.dropdownMenu.self-5c92959c35f59aaf4fc863189875eb2fdc0167b03968bdd835105fca52d226bb.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.equalizer.self-fedeaad77eadd0e0f46b52a05532b0c66fbc7026378ce2ba5037e1a1e140f612.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.interchange.self-bf36c88763e7fdee85a9ed9904ca5a3c6a041f7dd56b97a450abb0b6e6c4ee03.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.offcanvas.self-43878eed51fe559619ff3c62e266b58335e0cd40bc765ede9bb5c61a5e25625d.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.magellan.self-185cddbb3ea900a8b64ad9482999414820039c72b88ac73ce4062e26c2fcb51f.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.orbit.self-049484f44f1b72794c25b19f54015c919aae81a7d83495e5c4aa179ed25a96c3.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.responsiveMenu.self-2f53b31ac38a47da54ad27e3d9f9b0243313fa30b81a2ddd9839b8cbf47e5877.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.responsiveToggle.self-2b01f8c5e2bfe4eeaf7b15dd94962ef957112c455f4dc3abcf5e41e4c98b5b91.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.reveal.self-1d9aa915ea291686bcba2cece2d332c698426bba336be901caf67378e84d844a.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.slider.self-d5475aae2f1110b283866d07e4a6805ea4af07a60c57523b9b865e7bc1e40ae1.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.tabs.self-891f2cfe78a15ab6d129ae1bdcd83bb8c344b5677446700c8329442081eddddf.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.sticky.self-8e0aa578f0015adbf99c14d1bb8464da751951e2c6e2923c2395ceba99c28bac.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.toggler.self-4494df679f84ef27409dbd4eb8d241adc1cb8d945ff99144bf53ee1a769a44be.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.tooltip.self-4cf167bdbe826668ee0d73e6e30da8aaba252c73084db7b005923d5cd102d11e.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.util.box.self-aff154f992ce4c4cc7032e08bdba9b45749cfc87bddf128ba924da96a6c54ba8.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.util.keyboard.self-cf209dc0383f29cb576393bbdee52dbbd819837d6430a35afb4a4703770972f9.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.util.mediaQuery.self-53d64030e881f2123c4c8e75e57593be7a3fb0b3d228cdd9700a644315d43f0d.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.util.motion.self-13d4248460aba53c0fd52e1ec0d5cb41c317b1c4d974bc5d905c9976dc9ef218.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.util.nest.self-c9876586f80b068aea0d01390583424a28fa305c450e12a49bb301dcc686d1a0.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.util.timerAndImageLoader.self-68c67c1b0b4f2e2cb7f2af57124f38f54b749efed9f1bebc44677dc27abf7864.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.util.touch.self-e26387c8ba249a8e90745647603562023cd1932c720ddf72407dc7a489ecb893.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.util.triggers.self-71a2360cfe56c89eb46e0776c3d04601a8cce01d9e1098b808375eecc4b2418c.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/foundation.self-5ecf2f4d83e6260dabd6ec48e76d8ddebccf956563f34072221bf960d3b8c255.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started GET "/assets/application.self-1d17427f391f3f9c3f8f10cb9b557aed09630f90b00c33edd190a6dc32bc9eb6.js?body=1" for ::1 at 2016-03-31 14:23:02 +0800
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-31 14:23:05 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'e98fb315da087cb8deb26babcafd1d26'[0m
+------------------en_pwd = Fxbk1tEXn/vl4+0pYeq0uPLOCSs4I7uj
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.card.cardinfo.getpasswordFxbk1tEXn/vl4+0pYeq0uPLOCSs4I7uj
+sign_v1timestamp20160331142305v1.0test
+{"error_response"=>{"sub_msg"=>"业务逻辑错误:密码错误,请重新输入", "args"=>{"arg"=>[{"value"=>20160331142305, "key"=>"timestamp"}, {"value"=>"1110F9ADA0C12BF0EB01FB26DF7228E5", "key"=>"sign"}, {"value"=>1.0, "key"=>"v"}, {"value"=>"test", "key"=>"app_key"}, {"value"=>"allinpay.card.cardinfo.get", "key"=>"method"}, {"value"=>1, "key"=>"sign_v"}, {"value"=>"json", "key"=>"format"}, {"value"=>8668083660000001017, "key"=>"card_id"}, {"value"=>"Fxbk1tEXn/vl4+0pYeq0uPLOCSs4I7uj\n", "key"=>"password"}]}, "res_timestamp"=>20160331142122, "code"=>53, "sub_code"=>"business-error:1041", "msg"=>"远程服务业务错误", "res_sign"=>"3436B17A9B51FAEF5CD9ED3793204A22"}}
+Completed 200 OK in 870ms (Views: 2.1ms | ActiveRecord: 0.4ms)
+
+
+Started POST "/card/reset_password" for ::1 at 2016-03-31 14:23:11 +0800
+Processing by Memberships::CardsController#reset_password as */*
+  Parameters: {"order_id"=>"999990053990001_145940537832", "card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[35m (0.7ms)[0m  SELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'e98fb315da087cb8deb26babcafd1d26'
+------------------en_pwd = Fxbk1tEXn/sqNfs2O/Ha1rlvuNgOdfKb
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.ppcs.cardpassword.restorder_id999990053990001_145940537832passwordFxbk1tEXn/sqNfs2O/Ha1rlvuNgOdfKb
+sign_v1timestamp20160331142311v1.0test
+{"ppcs_cardpassword_rest_response"=>{"res_timestamp"=>20160331142128, "res_sign"=>"CA03F402C83357C345422D183ACE94D0", "trans_no"=>"0004081734", "order_id"=>"999990053990001_145940537832"}}
+Completed 200 OK in 709ms (Views: 0.4ms | ActiveRecord: 0.7ms)
+
+
+Started POST "/card/get_info" for ::1 at 2016-03-31 14:23:14 +0800
+Processing by Memberships::CardsController#get_info as */*
+  Parameters: {"card_id"=>"8668083660000001017", "password"=>"[FILTERED]"}
+  [1m[36m (0.4ms)[0m  [1mSELECT COUNT(*) FROM `sdb_b2c_cart_objects` WHERE `sdb_b2c_cart_objects`.`obj_type` = 'goods' AND `sdb_b2c_cart_objects`.`member_ident` = 'e98fb315da087cb8deb26babcafd1d26'[0m
+------------------en_pwd = Fxbk1tEXn/tfC2ohIZ11ka90O1523E6o
+
+----------------unencrypt_str = testapp_keytestcard_id8668083660000001017formatjsonmethodallinpay.card.cardinfo.getpasswordFxbk1tEXn/tfC2ohIZ11ka90O1523E6o
+sign_v1timestamp20160331142314v1.0test
+{"card_cardinfo_get_response"=>{"res_timestamp"=>20160331142131, "res_sign"=>"10B52A6A151F7AAFF93E7BA07A1F34B6", "card_info"=>{"card_stat"=>0, "brh_id"=>"0229000040", "brand_id"=>"0001", "validity_date"=>20170210, "card_id"=>8668083660000001017, "card_product_info_arrays"=>{"card_product_info"=>[{"product_stat"=>0, "product_id"=>"0001", "product_name"=>"通用金额", "validity_date"=>20170210, "valid_balance"=>457555, "card_id"=>8668083660000001017, "account_balance"=>467555}, {"product_stat"=>0, "product_id"=>"0282", "product_name"=>"200元现金券", "validity_date"=>20991231, "valid_balance"=>553619, "card_id"=>8668083660000001017, "account_balance"=>553619}, {"product_stat"=>0, "product_id"=>1000, "product_name"=>"积分", "validity_date"=>20160210, "valid_balance"=>1745700, "card_id"=>8668083660000001017, "account_balance"=>1745700}]}}}}
+Completed 200 OK in 826ms (Views: 0.7ms | ActiveRecord: 0.4ms)
