@@ -124,7 +124,7 @@
     var mer_order_id = order_id;
     var payment_id = "0000000001";
     var amount = '100';
-    var password = '222222';
+    var password = '111111';
     var url = "<%= pay_with_pwd_card_path %>";
     $.post(url, {order_id: order_id, card_id: card_id, mer_order_id: mer_order_id, amount: amount, payment_id: payment_id, password: password}, function(e){
       if(e.data.card_paywithpassword_add_response) {
@@ -141,7 +141,7 @@
   // 更改密码
   $('.card-reset-password').on('click', function(){
     var card_id = '8668083660000001017';
-    var password = '222222';
+    var password = '111111';
     var url = "<%= reset_password_card_path %>";
     $.post(url, {order_id: order_id, card_id: card_id, password: password}, function(e){
       if(e.data.ppcs_cardpassword_rest_response) {
@@ -232,7 +232,7 @@
   // 查询卡片信息
   $('.get-card-info').on('click', function(){
     var card_id = '8668083660000001017';
-    var password = '222222'
+    var password = '111111'
     var url = "<%= get_info_card_path %>";
     $.post(url, {card_id: card_id, password: password}, function(e){
       if(e.data.card_cardinfo_get_response) {
@@ -269,10 +269,12 @@
   // 交易记录查询
   $('.get-card-trade-log').on('click', function(){
     var card_id = '8668083660000001017';
-    var password = '222222';
-    var begin_date = "<%= (Time.now - 3600 * 24 * 10).strftime('%Y%m%d') %>";
-    var end_date = "<%= Time.now.strftime('%Y%m%d') %>";
-    var page_no = '0';
+    var password = '111111';
+    // var begin_date = "<%= (Time.now - 3600 * 24 * 89).strftime('%Y%m%d') %>";
+    var begin_date = "20160103";
+    // var end_date = "<%= (Time.now - 3600 * 24 * 88).strftime('%Y%m%d') %>";
+    var end_date = "20160112";
+    var page_no = '1';
     var page_size = '20';
     var url = "<%= get_trade_log_card_path %>";
     $.post(url, {order_id: order_id, card_id: card_id, password: password, begin_date: begin_date, end_date: end_date, page_no: page_no, page_size: page_size}, function(e){
@@ -282,7 +284,7 @@
       }
       else {
         console.log(e.data.error_response)
-        alert('操作失败！' + e.data.error_response.sub_msg);
+        alert('操作失败！' + e.data.error_response);
       }
     });
   });
