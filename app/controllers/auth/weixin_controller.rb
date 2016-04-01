@@ -89,10 +89,11 @@ class Auth::WeixinController < ApplicationController
 	      	else
 		      redirect = after_user_sign_in_path
 		    end
-
-	    	if @user.card_validate=='false'
-		    	redirect_to activation_card_path
-		    end	
+		   	if @user
+		    	if @user.card_validate=='false'
+			    	redirect_to activation_card_path
+			    end	
+			end
 		    redirect_to redirect
 		end
 	#rescue
