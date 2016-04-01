@@ -18,7 +18,7 @@
                 <span>
                   会员价: 
                   <%if signed_in?%>
-                    &yen;<%=(good.price*0.75).round%>
+                    &yen;<%=(good.price).round%>
                   <%else%>
                     <a href="javascript:void(0)" class="login">[会员专享]</a>
                   <%end%>

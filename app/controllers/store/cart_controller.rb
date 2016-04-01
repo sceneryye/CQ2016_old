@@ -6,11 +6,7 @@ class Store::CartController < ApplicationController
   def index
 
   		@coupon_id = params[:coupon_id]
-
-  		@discount = 1
-
   		if @coupon_id.nil? ||@coupon_id.empty?
-  			@discount = 0.75
   			@shoping_url = '/#pricing'
 			#render :layout=>"cart"
 		else
