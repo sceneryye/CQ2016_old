@@ -18,13 +18,18 @@
     <%=link_to '账户管理', '#',class:"accordion-title"%>
     <div class="accordion-content" data-tab-content>
       <ul class="menu vertical">
+      <%if @user.card_validate=='true'%>
         <li><%=link_to "去充值",'#',class:@class%></li>
         <li><%=link_to "更改密码",'#',class:@class%></li>
         <li><%=link_to "余额查询",'#',class:@class%></li>
         <li><%=link_to "交易记录",'#',class:@class%></li>
+      <%else%>
+        <li><%=link_to "激活会员卡", activation_card_path ,class:@class%></li>
+      <%end%>
       </ul>
     </div>
   </li>
+  <%if @user.card_validate=='true'%>
   <li class="accordion-item" data-accordion-item>
      <%=link_to '提现管理', '#',class:"accordion-title"%>
     <div class="accordion-content" data-tab-content>
@@ -39,6 +44,7 @@
       </ul>
     </div>
   </li>
+  <%end%>
   <li class="accordion-item" data-accordion-item>
      <%=link_to '收货地址管理', '#',class:"accordion-title"%>
     <div class="accordion-content" data-tab-content>
