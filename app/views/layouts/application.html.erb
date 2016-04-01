@@ -63,12 +63,12 @@
                <%=link_to '会员中心', member_path, class:"menu-link #{@member_active}"%>
               <ul class="submenu menu vertical" data-submenu>
                 <%if signed_in?%>
-                <li class="outlink"><a href="/member/orders">我的订单</a></li>
-                <li class="outlink"><a href="/cart">我的购物车</a></li>                        
-                <li class="outlink"><a href="/member/favorites">我的收藏</a></li>
-                <li class="outlink"><a href="/card">我的会员卡</a></li>
-                <li class="outlink"><a href="/member_addrs">收货地址</a></li>
-                <li class="outlink"><a href="/logout">退出登录</a></li>
+                <li><a href="/member/orders">我的订单</a></li>
+                <li><%=link_to "我的购物车", cart_index_path%></li>                        
+                <li><a href="/member/favorites">我的收藏</a></li>
+                <li><a href="/card">我的会员卡</a></li>
+                <li><a href="/member_addrs">收货地址</a></li>
+                <li><a href="/logout">退出登录</a></li>
                 <%else%>
                 <li><a href="/login">注册/登录</a></li>
                 <%end%>

@@ -395,7 +395,6 @@ end
 
     resources :cart do
       post 'add',:on=>:collection
-      get 'mobile', :on=>:collection
     end
     resources :brands,:only=>[:index,:show]
     resources :users

@@ -1,17 +1,103 @@
 <% provide :title, '昌麒生态园-个人中心' %>
-<ul class="vertical menu" data-accordion-menu>
-	<li><%=@user.name%></b> &nbsp;欢迎您！</li>
+<%@class="button hollow alert member_menu expanded"%>
+<style>
+  .member_menu{line-height: 1.8rem;text-align:left;}
+  </style>
+<ul class="accordion" data-accordion >
+  <li class="accordion-item" data-accordion-item>
+    <%=link_to '我的订单', '#',class:"accordion-title"%>
+    <div class="accordion-content" data-tab-content>
+      <ul class="menu vertical">
+        <li><%=link_to "待付款订单(#{@unpay_count})",orders_member_path(:pay_status=>'0',:status=>'active'),class:@class%></li>
+        <li><%=link_to "已付款(#{@paid_count})",orders_member_path(:pay_status=>'0',:status=>'paid'),class:@class%></li>
+        <li><%=link_to "历史订单",orders_member_path,class:@class%></li>
+      </ul>
+    </div>
+  </li>
+  <li class="accordion-item" data-accordion-item>
+    <%=link_to '账户管理', '#',class:"accordion-title"%>
+    <div class="accordion-content" data-tab-content>
+      <ul class="menu vertical">
+        <li><%=link_to "去充值",'#',class:@class%></li>
+        <li><%=link_to "更改密码",'#',class:@class%></li>
+        <li><%=link_to "余额查询",'#',class:@class%></li>
+        <li><%=link_to "交易记录",'#',class:@class%></li>
+      </ul>
+    </div>
+  </li>
+  <li class="accordion-item" data-accordion-item>
+     <%=link_to '提现管理', '#',class:"accordion-title"%>
+    <div class="accordion-content" data-tab-content>
+      <ul class="menu vertical">
+        <% if @user.member_lv_id==2%>
+          <li><%=link_to "申请提现",'#',class:@class%></li>   
+        <%eles%>   
+          <li><%=link_to "我的子卡",'#',class:@class%></li>
+        <%end%>
+        <li><%=link_to "待提现",'#',class:@class%></li>
+        <li><%=link_to "提现记录",'#',class:@class%></li>
+      </ul>
+    </div>
+  </li>
+  <li class="accordion-item" data-accordion-item>
+     <%=link_to '收货地址管理', '#',class:"accordion-title"%>
+    <div class="accordion-content" data-tab-content>
+      <ul class="menu vertical">
+        <%@user.member_addrs.each do |addr|%>
+        <li>
+          <%=link_to edit_member_addr_path(addr),class:@class do%>
+            <i class="fa  fa-edit"></i>&nbsp;<%="#{addr.name}|#{addr.addr}"%>
+          <%end%>
+        </li>
+        <%end%>
+        <li>
+          <%=link_to new_member_addr_path,class:@class do%>
+            <i class="fa fa-plus"></i>&nbsp;添加地址
+          <%end%>
+        </li>
+      </ul>
+    </div>
+  </li>
+</ul>
+<!-- <div class="button-group vertical"> -->
+<!--   <%=link_to "我的购物车",'/cart',class:@class%>
+  <li><a href="#">我的收藏</a></li>
+-->
+ 
+</div>
+
+<ul class="vertical menu" data-accordion-menu style='display:none'>
+  <li><%=@user.name%></b> &nbsp;欢迎您！</li>
   <li>
-    <a href="#">我的订单</a>
+    <%=link_to '我的订单', '#',class:@class%>
     <ul class="menu vertical nested">
-      <li><%=link_to  "待付款订单(#{@unpay_count})",orders_member_path(:pay_status=>'0',:status=>'active')%></li>
-      <li><a href="#">已付款</a></li>
-      <li><%=link_to "历史订单",orders_member_path,:class=>"all-orders"%></li>
+      <li><%=link_to "待付款订单(#{@unpay_count})",orders_member_path(:pay_status=>'0',:status=>'active'),class:@class%></li>
+      <li><%=link_to "已付款(#{@paid_count})",orders_member_path(:pay_status=>'0',:status=>'paid'),class:@class%></li>
+      <li><%=link_to "历史订单",orders_member_path,class:@class%></li>
     </ul>
   </li>
-  <li><a href="#">我的购物车</a></li>
+   <li><%=link_to "我的购物车",'/cart',class:@class%></li>
   <!-- <li><a href="#">我的收藏</a></li> -->
-  <li><a href="#">收货地址管理</a></li>
-  <li><a href="#">我的会员卡</a></li>
+  <li><%=link_to '收货地址管理', member_addrs_path,class:@class%></li>
+  <li><%=link_to '账户管理', card_path,class:@class%>
+   <ul class="menu vertical nested">
+      <li><%=link_to "去充值",'#',class:@class%></li>
+      <li><%=link_to "更改密码",'#',class:@class%></li>
+      <li><%=link_to "余额查询",'#',class:@class%></li>
+      <li><%=link_to "交易记录",'#',class:@class%></li>
+    </ul>
+  </li>
+  <li><%=link_to '提现管理', card_path,class:@class%>
+    <ul class="menu vertical nested">
+    <% if @user.member_lv_id==2%>
+      <li><%=link_to "申请提现",'#',class:@class%></li>   
+    <%eles%>   
+      <li><%=link_to "我的子卡",'#',class:@class%></li>
+    <%end%>
+      <li><%=link_to "待提现",'#',class:@class%></li>
+      <li><%=link_to "提现记录",'#',class:@class%></li>
+    </ul>
+  </li>
 </ul>
+
 

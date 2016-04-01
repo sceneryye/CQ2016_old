@@ -1,116 +1,70 @@
-<div class="table-scroll">
- <table class="cart_table">
-          <tr>
-            <th style="text-align: left; padding-left: 16px;">商品名称</th>
-            <th>单价</th>
-            <th>数量</th>
-            <th>金额小计</th>
-            <!-- <th>积分</th> -->
-            <!-- <th>剩余时间</th> -->
-            <th style="width: 100px;">操作</th>
-          </tr>
-          <%@line_items.select{ |x| x.good.present? && x.product.present? }.each do |line_item|%>
-          <tr id='line_<%=line_item.obj_ident%>'>
-            <td>
-              <div class="product_img">
-                <%#if line_item.good.default_image&&line_item.product.list_pictures.first.blank?%>
-                    <%=link_to good_path(line_item.good.bn),:target=>"_blank" do%>
-                        <%=image_tag line_item.good.medium_pic,:size=>"50x50"%>
-                    <%end%>
-                <%#else%>
-<!--                     <%=link_to good_path(line_item.good.bn),:target=>"_blank" do%>
-                      <%=image_tag line_item.product.list_pictures.first,:size=>"50x50"%>
-                    <%end%> -->
-                <%#end%>
-              </div>
-              <div class="goodinfo">
-                <h3>
-                  <%if line_item.good.default_image&&line_item.product.list_pictures.first.blank?%>
-                    <%=link_to line_item.product.name,"/product-"+line_item.good.goods_id.to_s+".html",:target=>"_blank"%>
-                  <%else%>
-                    <%=link_to line_item.product.name,good_path(line_item.good.bn),:target=>"_blank"%>
-                  <%end%>
-                </h3>
-                <span><%=line_item.product.spec_info%></span>
-                <div class="cus-text">
-                    <%line_item.product.custom_spec_values_of(@user).each_with_index do |cus,idx|%>
-                      <%=idx+1%> : <%=cus%> <br />
-                    <%end%>
-                </div>
-              </div>
-            </td>
-            <td class="price">
-              <% if cookies[:MLV] == "10" %>
-                  ￥<%= format('%.2f',line_item.product.bulk)%>
+<table class="hover">
+  <%@line_items.select{ |x| x.good.present? && x.product.present? }.each do |line_item|%>
+  <tr><td colspan='3' id='line_<%=line_item.obj_ident%>'>
+    <div class="row" >
+      <div class="columns small-4">
+        <%=link_to good_path(line_item.good.bn),:target=>"_blank" do%>
+          <%=image_tag line_item.good.medium_pic, class:"thumbnail"%>
+        <%end%>
+      </div>
+      <div class="columns small-8">
+        <div class="row">
+          <div class="columns small-12">
+            <h4>
+              <%if line_item.good.default_image&&line_item.product.list_pictures.first.blank?%>
+                <%=link_to line_item.product.name,"/product-"+line_item.good.goods_id.to_s+".html",:target=>"_blank"%>
               <%else%>
-                  ￥<%= format('%.2f',line_item.product.price)%>
+                <%=link_to line_item.product.name,good_path(line_item.good.bn),:target=>"_blank"%>
               <%end%>
-              <%#if line_item.product.full_custom?%>
-                <!-- (<span class="red">定金</span>) -->
-              <%#end%>
-            </td>
-            <td>
-              <%#if line_item.product.semi_custom?%>
-                <%#=text_field_tag :quantity,line_item.quantity.to_i,:class=>"textcenter quantity",:readonly=>true,:title=>"半定制不可直接修改数量"%>
-              <%#else%>
-                <%=number_field_tag :quantity,line_item.quantity.to_i,:class=>"textcenter quantity bn-#{line_item.product.good.bn}",:size=>3,:min=>1,:'data-url'=>cart_path(line_item.obj_ident)%>
-              <%#end%>
-            </td>
-            <td class="line-total">
-              <% if cookies[:MLV] == "10" %>
-                  ￥<%=(line_item.product.bulk*line_item.quantity)%>
-              <%else%>
-                  ￥<%=(line_item.product.price*line_item.quantity)%>
-              <%end%>
-            </td>
+            </h4>
+            <span><%=line_item.product.spec_info%></span>
+            <div class="cus-text">
+                <%line_item.product.custom_spec_values_of(@user).each_with_index do |cus,idx|%>
+                  <%=idx+1%> : <%=cus%> <br />
+                <%end%>
+            </div>
+          </div>
+          <div class="columns small-3">
+            ￥<%= format('%.2f',line_item.product.price)%>&nbsp;X
+          </div>
+          <div class="columns small-4">
+              <%=number_field_tag :quantity,line_item.quantity.to_i,:class=>"textcenter quantity bn-#{line_item.product.good.bn}",:size=>3,:min=>1,:'data-url'=>cart_path(line_item.obj_ident)%>
+          </div>
+          <div class="columns small-3 line-total"%>
+             ￥<%=line_item.product.price*line_item.quantity%>
+          </div>
+          <div class="columns small-12">
+            <!--
+            <%=link_to "取消收藏",unfav_good_path(line_item.good,:rel=>"line_#{line_item.obj_ident}"),:class=>"favorite",:remote=>true,:method=>:put if line_item.good.favorited_by?(@user)%>
+            <%=link_to "收藏",fav_good_path(line_item.good,:rel=>"line_#{line_item.obj_ident}"),:class=>"favorite",:remote=>true,:method=>:put unless line_item.good.favorited_by?(@user)%>
+            -->
             
-            <!-- <td><span class="left_time">1天5小时30分</span></td> -->
-            <td>
-              <%=link_to "取消收藏",unfav_good_path(line_item.good,:rel=>"line_#{line_item.obj_ident}"),:class=>"favorite",:remote=>true,:method=>:put if line_item.good.favorited_by?(@user)%>
-              <%=link_to "收藏",fav_good_path(line_item.good,:rel=>"line_#{line_item.obj_ident}"),:class=>"favorite",:remote=>true,:method=>:put unless line_item.good.favorited_by?(@user)%>
-              <br />
-              <%=link_to "删除",cart_path(line_item.obj_ident),:class=>"delete",:remote=>true,:method=>:delete%>
-            </td>
-          </tr>
-          <%end if @line_items%>
-        </table>
+            <%=link_to "删除",cart_path(line_item.obj_ident),:class=>"button alert hollow float-right tiny",:remote=>true,:method=>:delete%>
+          </div>
+        </div>
       </div>
-      <div class="modal-footer clearfix">
-        <span>总金额 : </span>
-        <span class="total">￥<%= format('%.2f',@cart_total)%></span>
-        <a href="/orders/new" class="black_btn" target="_top">安全结算</a>
+    </div>
+  </td></tr>
+  <%end if @line_items%>
+  <tr>
+    <th>
+      <%=link_to '继续购物', root_path, :class=>"button small alert hollow float-left"%>
+    </th>
+    <th>
+      <span class="total">￥<%=@cart_total%></span>
+    </th>
+    <th>
+      <%=link_to '安全结算', new_order_path, :class=>"button small alert hollow float-right"%>
+    </th>
+  <tr>
+</table>
 
-        <a href="/" class="continue" data-dismiss="modal" aria-hidden="true">继续购物</a>
-      </div>
-</div>
+
+
 
 <script type="text/javascript">
       $(window.parent.document).find(".cart-number").text("(<%=@cart_total_quantity%>)");
 </script>
-
-</div>
-<div class="row">
-              <div class="col-sm-8">                                    
-                  <div class="form-group">
-                       <span>总金额 : </span><span class="total">￥<%=@cart_total%></span>
-
-                  </div>
-              </div>
-            </div>
-            <div class="row">
-              <div class="col-sm-6 col-xs-6">                                    
-                  <div class="form-group">
-                  
-                  <a href="<%=@shoping_url%>" class="btn btn-info" data-dismiss="modal" aria-hidden="true" >&lt;继续购物</a>
-                  </div>
-              </div>
-              <div class="col-sm-6 col-xs-6 right">                                    
-                  <div class="form-group">
-                  <a href="/orders/new?coupon_id=<%=@coupon_id%>" class="btn btn-success pull-right">安全结算&gt;</a>
-                  </div>
-              </div>
-          </div>     
-
 
 <script type="text/javascript">
       $(window.document).find(".cart-number").text("(<%=@cart_total_quantity%>)");
