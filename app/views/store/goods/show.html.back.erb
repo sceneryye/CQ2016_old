@@ -17,7 +17,7 @@
                     <%=f.hidden_field :coupon_id,:value=>@coupon_id%>                
                     <div class="col-sm-4">
                         <ul class="plan featured">
-                            <li class="plan-price1 <%=@current_lv_3%>"> 会员价：￥<span id="product_price"><%=(@good.price*0.75).round if (@good.price).round%></span></li>
+                            <li class="plan-price1 <%=@current_lv_3%>"> 会员价：￥<span id="product_price"><%=(@good.price).round if (@good.price).round%></span></li>
                             <li class="<%=@current_lv_1%>">市场价：￥<%=@good.default_product.price if @good.default_product%></span></li>                                          
                             
                             <li><%=render :partial=>"store/goods/product/new_spec",:locals=>{ :good=>@good }%></li>

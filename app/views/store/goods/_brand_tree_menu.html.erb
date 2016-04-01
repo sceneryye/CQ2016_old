@@ -1,4 +1,4 @@
-<div class="tree-menu" id="cats_tree">
+<div class='callout'>
 	<% 
 		conditions = {}
 		conditions = { :brand_id=> @brand.brand_id  } if @brand 
@@ -8,11 +8,11 @@
 		<div class="title-level1">
 			<%=link_to top_cat.cat_name, brand_path(:cat_id=>top_cat.cat_id)%>
 		</div>
-		<ul class="items-level1 ">
+		<ul class="menu">
 			<%top_cat.categories.order("p_order asc").each do |scat|%>
 				<%if scat.all_goods(conditions).size > 0%>
-					<li class="item-level1">
-						<div class="title-level2"><%=link_to scat.cat_name,brand_path(:cat_id=>scat.cat_id)%></div>
+					<li>
+						<%=link_to scat.cat_name,brand_path(:cat_id=>scat.cat_id)%>
 						<%if scat.categories.present?%>
 							<ul class="items-level2">
 							<%scat.categories.each do |tcat|%>

@@ -1,6 +1,6 @@
  
 		
-		<span class="secondary label">排序:</span>
+		<!-- <span class="secondary label">排序:</span> -->
 			<%
 				query_hash = {}
 				# query_hash[:color] = params[:color] if params[:color]
@@ -14,28 +14,24 @@
 
 				query = params_hash.to_query
 			%>
-			<span class="alert label">
 				<%if params[:order].blank?%>
-					<%=link_to "价格&uarr;".html_safe,"?order=price-asc&#{query}",:title=>"价格从低往高",:class=>"btn btn-primary"%>
+					<%=link_to "价格&uarr;".html_safe,"?order=price-asc&#{query}",:title=>"价格从低往高",:class=>"alert hollow button"%>	
 				<%elsif  params[:order] == "price-asc"%>
-					<%=link_to "价格&uarr;".html_safe,"?order=price-desc&#{query}",:title=>"价格从低往高",:class=>"btn btn-primary"%>
+					<%=link_to "价格&uarr;".html_safe,"?order=price-desc&#{query}",:title=>"价格从低往高",:class=>"alert hollow button"%>
 				<%else params[:order] =='price-desc'%>
-					<%=link_to "价格&darr;".html_safe,"?order=price-asc&#{query}",:title=>"价格从高往低",:class=>"btn btn-primary"%>
+					<%=link_to "价格&darr;".html_safe,"?order=price-asc&#{query}",:title=>"价格从高往低",:class=>"alert hollow button"%>
 				<%end%>
-			</span>
-			<span class="secondary label">
-				<%=link_to "销量&darr;".html_safe,"?order=buy_count-desc&#{query}",:title=>"价格从高往低",:class=>"btn btn-primary"%>
-			</span>
-			<span class="secondary label">
-				<%=link_to "人气&darr;".html_safe,"?order=view_count-asc&#{query}",:title=>"人气从高往低" ,:class=>"btn btn-primary"%>
-			</span>
+				<%=link_to "销量&darr;".html_safe,"?order=buy_count-desc&#{query}",:title=>"价格从高往低",:class=>"alert hollow button"%>
+			
+				<%=link_to "人气&darr;".html_safe,"?order=view_count-asc&#{query}",:title=>"人气从高往低" ,:class=>"alert hollow button"%>
+			
 		</ul>
 		<div class="row columns">
 			<%=will_paginate @goods,:container=>false if @goods%>
 		</div>
                     
 
-<div class="row small-up-2 large-up-4">
+<div class="row small-up-2 medium-up-3 large-up-5">
 
     <%@goods.each do |goods|%>
     <div class="column">
@@ -44,12 +40,12 @@
         <%end%>
         <h6>
         <%=link_to good_path(goods.bn), :target=>"_blank" do %>
-            <%=goods.name%>
+            <%=goods.name%>&nbsp;<%=goods.spec_info%>
         <%end%>        
         </h6>
-        <p>
-            <span style="color:red;font-size:1.5em;">&yen;<%=(goods.price*0.75).round if goods.price%></span>
-            <span style="margin-left:1em;text-decoration:line-through;">&yen;<%=(goods.price*0.75).round if goods.price%> </span>
+        <p class='text-center'>
+            <span style="color:red;font-size:1.5em;">&yen;<%=(goods.price).round if goods.price%></span>
+            <span style="margin-left:1em;text-decoration:line-through;">&yen;<%=(goods.price).round if goods.price%> </span>
         </p>
         <a href="#" class="button expanded" style="display:none">Buy</a>
     </div>
@@ -57,7 +53,7 @@
 </div>
 <div class="row columns">
 			<%=will_paginate @goods,:container=>false if @goods%>
-		</div>
+</div>
             
                 
    
