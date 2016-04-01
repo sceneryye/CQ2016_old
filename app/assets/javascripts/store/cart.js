@@ -15,6 +15,7 @@ $(document).ready(function(){
 		});
 	});
 
+
 	// hide cart
 	$("#cart .close,#cart .continue").bind("click",function(){
 		$(pDoc).find("#iframe_cart").animate({ marginTop: '-1000px' },'fast',function(){

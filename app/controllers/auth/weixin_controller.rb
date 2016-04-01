@@ -77,7 +77,7 @@ class Auth::WeixinController < ApplicationController
 			  		end
 		  			@user.save!(:validate=>false)
 		  			sign_in(@account,'1')
-		  			return redirect_to "/vip"
+		  			return redirect_to activation_card_path
 		  		end
 	  		end
 
@@ -89,11 +89,10 @@ class Auth::WeixinController < ApplicationController
 	      	else
 		      redirect = after_user_sign_in_path
 		    end
-		    if @user
-		    	if @user.member_lv_id<2
-			    	redirect_to "/vip"
-			    end		    	
-		    end
+
+	    	if @user.card_validate=='false'
+		    	redirect_to activation_card_path
+		    end	
 		    redirect_to redirect
 		end
 	#rescue

@@ -78,10 +78,8 @@ end
   end
 
   get 'auto_login'=>"sessions#auto_login"
- # get 'login'=>"sessions#new"
- get 'login'=>"sessions#login"
+  get 'login'=>"sessions#login"
   post 'login'=>"sessions#create"
-  post 'mlogin'=>"sessions#create"
   get 'logout'=>"sessions#destroy"
   get 'topmenu'=>"home#topmenu"
 
