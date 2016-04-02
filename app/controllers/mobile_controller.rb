@@ -6,7 +6,7 @@ class MobileController < ApplicationController
   def show
     redirect_to '/vshop/78'
 
-    @title = "贸威移动版"
+    @title = "昌麒移动版"
     #@home = Ecstore::Home.last
     #if signed_in?
     #  redirect_to params[:return_url] if params[:return_url].present?

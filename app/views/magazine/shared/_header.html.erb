@@ -1,7 +1,7 @@
 <div id="header">
   <div class="container">
     <div id="imodec_logo">
-      <a href="http://www.TRADE-V.com"><img alt="贸威" src="/assets/store/logo_big.png"></a>
+      <a href="http://www.TRADE-V.com"><img alt="昌麒" src="/assets/store/logo_big.png"></a>
     </div>
     <div id="imodec_slogan">
       <img alt="摩登生活，个性衣橱" src="/assets/store/slogan.png">
@@ -28,7 +28,7 @@
 
         <li>
             <a id="cart_link" href="#" class="cart-link <%='login' unless signed_in?%>">
-              购物袋
+              购物车
               <span class="cart-number">(<%=@cart_total_quantity%>)</span></a>
         </li>
 
@@ -38,7 +38,7 @@
             <span class="login_name" id="uname_253">
               <%=truncate2(@user.account.login_name,:length=>5)%>
             </span>
-            <a class="loggedin" href="http://www.TRADE-V.com/member.html">我的贸威</a>
+            <a class="loggedin" href="http://www.TRADE-V.com/member.html">我的昌麒</a>
             <a class="loggedin" href="/logout">退出</a>
           </div>
         </li>

@@ -108,7 +108,7 @@ class VshopController < ApplicationController
 
       @goods = Ecstore::Good.includes(:cat).includes(:brand)
       @supplier =Ecstore::Supplier.find_by_member_id(@user.id)
-      if @user.id!= 2495 #贸威
+      if @user.id!= 2495 #昌麒
         @supplier =Ecstore::Supplier.find_by_member_id(@user.id)
         @goods = @goods.where(:supplier_id=>@supplier.id)
       end
@@ -238,7 +238,7 @@ end
         pay.pay_id = @payment.payment_id
         pay.pay_amount = @payment.cur_money.to_f
         pay.pay_time = Time.now
-        pay.subject = "贸威订单(#{order_id})"
+        pay.subject = "昌麒订单(#{order_id})"
         pay.installment = @payment.pay_bill.order.installment if @payment.pay_bill.order
         pay.openid = @user.account.login_name
         pay.spbill_create_ip = request.remote_ip

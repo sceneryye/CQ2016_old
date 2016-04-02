@@ -39,9 +39,9 @@
   <%=link_to cat_path(5),class: "item #{@events_active}  button" do%>
     <i class="fa fa-search"></i>
   <%end%>
-  <%=link_to card_path,class: "item #{@forums_active}  button" do%>
+  <!-- <%=link_to card_path,class: "item #{@forums_active}  button" do%>
     <i class="fa fa-credit-card"></i>
-  <%end%>
+  <%end%> -->
   <%if signed_in?
       @user_url = member_path
     else

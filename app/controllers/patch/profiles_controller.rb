@@ -7,7 +7,7 @@ class Patch::ProfilesController < ApplicationController
 
   before_filter do
     clear_breadcrumbs
-    add_breadcrumb("我的贸威",:member_path)
+    add_breadcrumb("我的昌麒",:member_path)
   end
   
   def show

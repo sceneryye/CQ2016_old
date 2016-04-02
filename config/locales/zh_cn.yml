@@ -1,12 +1,6 @@
 zh_cn:
-  title: "贸威微信互助O2O直销平台"
+  title: "昌麒微信互助O2O直销平台"
   ###佣金信息
-
-  h4_1: "亲! 现在我们只供应上海地区哦～"
-  h4_2: "而且满380包邮！！"
-  h4_3: "由于新疆湖面温度已到达零下六度,今年暂停供应天山大闸蟹,同时非常感谢今年亲们的大力支持,明年会推出更多更棒的活动,敬请期待,明年再见！"
-
-
 
   shopping-basket: "我的购物车"
   commission: "推广佣金"
@@ -63,11 +57,7 @@ zh_cn:
   login: "登陆"
   signup: "注册"
   personal_center: "个人中心"
-  sausages : "香肠"
-  hams : "火腿"
-  bacons : "培根"
-  others : "其他"
-  crab : "天山大闸蟹"
+
   preferential-price: "优惠价"
   original-price : "原价"
   introduction : "商品介绍"
@@ -94,10 +84,6 @@ zh_cn:
   invoice : "发票信息"
 
   details_invoice : "请输入发票抬头"
-  order_notice : "注意哦！"
-  order_notice_one : "本店购物满380以上是包邮的哦！"
-  order_notice_two : "而且为保证商品新鲜，我们是全程冷藏运输的"
-  order_notice_three : "您已经购物满380了免运费"
   order_notice_four : "您还没有选择商品。"
 
   order_details_price : "订单金额"
