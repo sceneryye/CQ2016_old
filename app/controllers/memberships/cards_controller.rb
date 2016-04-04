@@ -422,7 +422,7 @@ class Memberships::CardsController < ApplicationController
 
 	def activate
 		@user.update_attributes(ecstore_user_params.merge!(:apply_time=>Time.now))
-    	return redirect_to '/card/activation?@notic=卡号不正确或者已经被使用'
+    	return redirect_to '/card/activation?notic=卡号不正确或者已经被使用'
    
       
     # if @user.update_attributes(ecstore_user_params.merge!(:apply_time=>Time.now))
