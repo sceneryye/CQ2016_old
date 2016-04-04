@@ -421,6 +421,18 @@ class Memberships::CardsController < ApplicationController
 	end
 
 	def activate
+		@user.update_attributes(ecstore_user_params.merge!(:apply_time=>Time.now))
+    	return redirect_to '/card/activation?@notic=卡号不正确或者已经被使用'
+   
+      
+    # if @user.update_attributes(ecstore_user_params.merge!(:apply_time=>Time.now))
+    #   redirect_to advance_member_path
+    # else
+    #   @notic = '卡号不正确或者已经被使用'
+   
+    #   render "new"
+    # end
+
 		@card = Ecstore::Card.find_by_no(params[:card][:no])
 
 		if @card.can_use? && !@card.used?
@@ -499,5 +511,8 @@ class Memberships::CardsController < ApplicationController
 		render :json=>{ :code=>'f',:msg=>e }.to_json
 	end
 
-
+	private
+	  def ecstore_user_params
+	    params.require(:ecstore_user).permit(:name,:card_num,:id_card_number,:area,:mobile,:addr,:sex)
+	  end
 end

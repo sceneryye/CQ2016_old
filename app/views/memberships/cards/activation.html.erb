@@ -1,12 +1,14 @@
 
 	<h4>还没有激活您的会员卡，请按以下提示操作，激活您的VIP卡 </h4>
-	<%=link_to '暂不激活', root_path, class:'button hollow alert float-center'%>
-	<!-- <%=link_to '继续激活会员卡', '#', class:'button alert '%> -->
+	
 
 
-<div class="row">                    
+<div class="row">       
+    <div class="columns small-12 medium-6">     
+      <%=link_to '暂不激活', root_path, class:'button hollow alert float-center'%>
+    </div>     
     <div class="columns small-12 medium-6">
-        <p><%=@notice%>
+        <p><%=params[:notice]%>
         <% if @user.errors.any? %> 
         <div id="error_explanation" style="color:red">
             <ul> 
@@ -18,7 +20,7 @@
         <% end %>
 
         </p>                    
-        <%=form_for @user, :url=>member_path,:method=>:put,:html=>{ :role=>"form",:id=>"register_form",data: {type: "script"}} do |f|%>    
+        <%=form_for @user, :url=>activate_card_path,:method=>:put,:html=>{ :role=>"form",:id=>"register_form",data: {type: "script"}} do |f|%>    
             <div class="row">
                 <div class="columns small-12">
                     <div class="form-group">

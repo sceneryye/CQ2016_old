@@ -26,9 +26,8 @@ class Patch::MembersController < ApplicationController
 
   def update
     @user.update_attributes(ecstore_user_params.merge!(:apply_time=>Time.now))
-    @notic = '卡号不正确或者已经被使用'
+    redirect_to '/card/activation?@notic=卡号不正确或者已经被使用'
    
-     render "new"
       
     # if @user.update_attributes(ecstore_user_params.merge!(:apply_time=>Time.now))
     #   redirect_to advance_member_path
@@ -178,9 +177,8 @@ class Patch::MembersController < ApplicationController
   end
   private
   def ecstore_user_params
-    params.require(:ecstore_user).permit(:name,:card_num,:id_card_number,:area:mobile,:addr,:sex)
+    params.require(:ecstore_user).permit(:name,:card_num,:id_card_number,:area,:mobile,:addr,:sex)
   end
-
 
 	
 end
