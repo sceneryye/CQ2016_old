@@ -6,7 +6,80 @@ class Memberships::CardsController < ApplicationController
 	before_filter :find_user
 	layout 'application'
 
-  include Allinpay
+  	include Allinpay
+
+
+  	def activate
+
+		if @user.update_attributes(ecstore_user_params.merge!(:apply_time=>Time.now))
+    	return redirect_to '/card/activation?notice=卡号不正确或者已经被使用'
+   
+      
+    	# if @user.update_attributes(ecstore_user_params.merge!(:apply_time=>Time.now))
+	    #   redirect_to advance_member_path
+	    # else
+	    #   @notic = '卡号不正确或者已经被使用'
+	   
+	    #   render "new"
+	    # end
+
+		@card = Ecstore::Card.find_by_no(pecstore_user_params[:card_num])
+
+		if @card.can_use? && !@card.used?
+			
+			
+			advance = @user.member_advances.order("log_id asc").last
+			shop_advance = 0
+			 if advance
+				shop_advance = advance.shop_advance
+			else
+				shop_advance = @user.advance
+			end
+			shop_advance += @card.value
+			Ecstore::MemberAdvance.create(:member_id=>@user.member_id,
+											  :money=>@card.value,
+											  :message=>"会员卡激活,卡号:#{@card.no}",
+											  :mtime=>Time.now.to_i,
+											  :memo=>"用户本人操作",
+											  :import_money=>@card.value,
+											  :explode_money=>0,
+											  :member_advance=>(@user.advance + @card.value),
+											  :shop_advance=>shop_advance,
+											  :disabled=>'false')
+			@user.update_attribute :advance, (@card.value + @user.advance)
+			@card.update_attribute :use_status,true
+			@card.update_attribute :used_at,Time.now
+			@card.member_card.update_attribute :user_id,@user.member_id
+
+			
+			begin
+				@sms_log ||= Logger.new('log/sms.log')
+				text = "您购买的昌麒会员卡#{@card.no}已被#{mask @card.member_card.user_tel}激活,如有疑问请致电18917937822[I-Modec昌麒]"
+				if Sms.send(@card.member_card.buyer_tel,text)
+					tel = @card.member_card.buyer_tel
+					@sms_log.info("[#{@user.login_name}][#{Time.now}][#{tel}]#{text}")
+				end
+
+				text = "您的昌麒会员卡#{@card.no}已激活,如有疑问请致电客服18917937822[I-Modec昌麒]"
+				if Sms.send(@card.member_card.user_tel,text)
+					tel = @card.member_card.user_tel
+					@sms_log.info("[#{@user.login_name}][#{Time.now}][#{tel}]#{text}")
+				end
+
+			rescue
+				@sms_log.info("[#{@user.login_name}][#{Time.now}]激活VIP卡,发送短信失败")
+			end
+
+			Ecstore::CardLog.create(:member_id=>@user.member_id,
+                                                :card_id=>@card.id,
+                                                :message=>"会员卡激活,用户本人操作")
+
+
+			render "memberships/cards/activation/complete"
+		else
+			render "memberships/cards/activation/error"
+		end
+	end
 
   def active
     order_id = params[:order_id]
@@ -420,76 +493,7 @@ class Memberships::CardsController < ApplicationController
 		render "memberships/cards/activation/confirm"
 	end
 
-	def activate
-		@user.update_attributes(ecstore_user_params.merge!(:apply_time=>Time.now))
-    	return redirect_to '/card/activation?notic=卡号不正确或者已经被使用'
-   
-      
-    # if @user.update_attributes(ecstore_user_params.merge!(:apply_time=>Time.now))
-    #   redirect_to advance_member_path
-    # else
-    #   @notic = '卡号不正确或者已经被使用'
-   
-    #   render "new"
-    # end
-
-		@card = Ecstore::Card.find_by_no(params[:card][:no])
-
-		if @card.can_use? && !@card.used?
-			
-			
-			advance = @user.member_advances.order("log_id asc").last
-			shop_advance = 0
-			 if advance
-				shop_advance = advance.shop_advance
-			else
-				shop_advance = @user.advance
-			end
-			shop_advance += @card.value
-			Ecstore::MemberAdvance.create(:member_id=>@user.member_id,
-											  :money=>@card.value,
-											  :message=>"会员卡激活,卡号:#{@card.no}",
-											  :mtime=>Time.now.to_i,
-											  :memo=>"用户本人操作",
-											  :import_money=>@card.value,
-											  :explode_money=>0,
-											  :member_advance=>(@user.advance + @card.value),
-											  :shop_advance=>shop_advance,
-											  :disabled=>'false')
-			@user.update_attribute :advance, (@card.value + @user.advance)
-			@card.update_attribute :use_status,true
-			@card.update_attribute :used_at,Time.now
-			@card.member_card.update_attribute :user_id,@user.member_id
-
-			
-			begin
-				@sms_log ||= Logger.new('log/sms.log')
-				text = "您购买的昌麒会员卡#{@card.no}已被#{mask @card.member_card.user_tel}激活,如有疑问请致电18917937822[I-Modec昌麒]"
-				if Sms.send(@card.member_card.buyer_tel,text)
-					tel = @card.member_card.buyer_tel
-					@sms_log.info("[#{@user.login_name}][#{Time.now}][#{tel}]#{text}")
-				end
-
-				text = "您的昌麒会员卡#{@card.no}已激活,如有疑问请致电客服18917937822[I-Modec昌麒]"
-				if Sms.send(@card.member_card.user_tel,text)
-					tel = @card.member_card.user_tel
-					@sms_log.info("[#{@user.login_name}][#{Time.now}][#{tel}]#{text}")
-				end
-
-			rescue
-				@sms_log.info("[#{@user.login_name}][#{Time.now}]激活VIP卡,发送短信失败")
-			end
-
-			Ecstore::CardLog.create(:member_id=>@user.member_id,
-                                                :card_id=>@card.id,
-                                                :message=>"会员卡激活,用户本人操作")
-
-
-			render "memberships/cards/activation/complete"
-		else
-			render "memberships/cards/activation/error"
-		end
-	end
+	
 
 	def send_sms_code
 		sms_code = rand(1000000).to_s(16)
