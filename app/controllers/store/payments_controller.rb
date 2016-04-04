@@ -309,7 +309,7 @@ class Store::PaymentsController < ApplicationController
 					pay.fields["is_total_fee_adjust"] = "N"
 					pay.fields["total_fee"] = @payment.cur_money.round(2)
 					pay.fields["gmt_payment"] = (time - 30.seconds).strftime("%Y-%m-%d %H:%M:%S")
-					pay.fields["seller_email"] = "eileen.gu@i-modec.com"
+					pay.fields["seller_email"] = "eileen.gu@CQ.com"
 					pay.fields["price"] = @payment.cur_money.round(2)
 					pay.fields["buyer_id"] = "2088102350773884"
 					pay.fields["notify_id"] = "1b2658003817950ee56fb6785ce505086w"

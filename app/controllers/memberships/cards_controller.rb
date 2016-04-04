@@ -11,7 +11,7 @@ class Memberships::CardsController < ApplicationController
 
   	def activate
 
-		if @user.update_attributes(ecstore_user_params.merge!(:apply_time=>Time.now))
+		@user.update_attributes(ecstore_user_params.merge!(:apply_time=>Time.now))
     	return redirect_to '/card/activation?notice=卡号不正确或者已经被使用'
    
       
@@ -26,7 +26,17 @@ class Memberships::CardsController < ApplicationController
 		@card = Ecstore::Card.find_by_no(pecstore_user_params[:card_num])
 
 		if @card.can_use? && !@card.used?
-			
+			#激活接口
+			order_id = "999990053990001_#{Time.now.to_i}#{rand(100).to_s}"
+  			card_id = '8668083660000059727';
+    		type = '1'      
+			order_id = params[:order_id]
+		    card_id = params[:card_id]
+		    type = params[:type]
+		    res_data = ActiveSupport::JSON.decode card_active(order_id, card_id, type)
+		    Rails.logger.info res_data
+		    return render json: {data: res_data}
+			###########e.data.ppcs_cardsingleactive_add_response# e.data.error_response.sub_msg
 			
 			advance = @user.member_advances.order("log_id asc").last
 			shop_advance = 0
@@ -54,13 +64,13 @@ class Memberships::CardsController < ApplicationController
 			
 			begin
 				@sms_log ||= Logger.new('log/sms.log')
-				text = "您购买的昌麒会员卡#{@card.no}已被#{mask @card.member_card.user_tel}激活,如有疑问请致电18917937822[I-Modec昌麒]"
+				text = "您购买的昌麒会员卡#{@card.no}已被#{mask @card.member_card.user_tel}激活,如有疑问请致电400-826-4568[CQ昌麒]"
 				if Sms.send(@card.member_card.buyer_tel,text)
 					tel = @card.member_card.buyer_tel
 					@sms_log.info("[#{@user.login_name}][#{Time.now}][#{tel}]#{text}")
 				end
 
-				text = "您的昌麒会员卡#{@card.no}已激活,如有疑问请致电客服18917937822[I-Modec昌麒]"
+				text = "您的昌麒会员卡#{@card.no}已激活,如有疑问请致电客服400-826-4568[CQ昌麒]"
 				if Sms.send(@card.member_card.user_tel,text)
 					tel = @card.member_card.user_tel
 					@sms_log.info("[#{@user.login_name}][#{Time.now}][#{tel}]#{text}")
@@ -314,7 +324,7 @@ class Memberships::CardsController < ApplicationController
 
 			# begin
 			# 	@sms_log ||= Logger.new('log/sms.log')
-			# 	text = "您已成功购买昌麒会员卡,感谢您对我们的支持，如需帮助可致电客服18917937822[I-Modec昌麒]"
+			# 	text = "您已成功购买昌麒会员卡,感谢您对我们的支持，如需帮助可致电客服400-826-4568[CQ昌麒]"
 			# 	tel = @card.member_card.buyer_tel
 			# 	if Sms.send(@card.member_card.buyer_tel,text)
 			# 		@sms_log.info("[#{@user.login_name}][#{Time.now}][#{tel}]#{text}")
@@ -330,7 +340,7 @@ class Memberships::CardsController < ApplicationController
 
 			redirect_to "/cart.html"
 		else
-			@error_msg = "提交订单失败，请联系客服:18917937822"
+			@error_msg = "提交订单失败，请联系客服:400-826-4568"
 			render "memberships/cards/purchase/error"
 		end
 	end
@@ -462,7 +472,7 @@ class Memberships::CardsController < ApplicationController
 		if @card.can_use?
 			tel = @card.member_card.buyer_tel
 			sms_code = rand(1000000).to_s(16)
-			text = "您的VIP卡验证码是：#{sms_code}，如此条验证码非您本人申请，请立即致电客服18917937822核实[I-Modec昌麒]"
+			text = "您的VIP卡验证码是：#{sms_code}，如此条验证码非您本人申请，请立即致电客服400-826-4568核实[CQ昌麒]"
 			@sms_log ||= Logger.new('log/sms.log')
 			begin
 				if Sms.send(tel,text)
@@ -498,7 +508,7 @@ class Memberships::CardsController < ApplicationController
 	def send_sms_code
 		sms_code = rand(1000000).to_s(16)
 		tel = params[:tel]
-		text = "您的VIP卡验证码是：#{sms_code}，如此条验证码非您本人申请，请立即致电客服18917937822核实[I-Modec昌麒]"
+		text = "您的VIP卡验证码是：#{sms_code}，如此条验证码非您本人申请，请立即致电客服400-826-4568核实[CQ昌麒]"
 
 		
 		@sms_log ||= Logger.new('log/sms.log')

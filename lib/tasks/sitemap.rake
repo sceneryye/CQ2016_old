@@ -6,7 +6,7 @@ namespace :imodec do
 	desc "generate site map"
 
 	task :sitemap=>:environment do
-		SitemapGenerator::Sitemap.default_host = 'http://www.i-modec.com'
+		SitemapGenerator::Sitemap.default_host = 'http://www.CQ2016.com'
 		SitemapGenerator::Sitemap.public_path = '/data/httpd/mdk/public'
 		SitemapGenerator::Sitemap.create_index = false
 		SitemapGenerator::Sitemap.create do
@@ -29,12 +29,12 @@ namespace :imodec do
 		  	add "/gallery/#{cat.cat_id}"
 		  end
 
-		  add "/topics", :host=>"http://blog.i-modec.com"
+		  add "/topics", :host=>"http://blog.CQ2016.com"
 		  Imodec::Topic.where(:published=>true).each do |topic|
 		  	if topic.slug
-		  		add "/topic/#{topic.slug}", :host=>"http://blog.i-modec.com"
+		  		add "/topic/#{topic.slug}", :host=>"http://blog.CQ2016.com"
 		  	else
-		  		add "/topic/#{topic.id}", :host=>"http://blog.i-modec.com"
+		  		add "/topic/#{topic.id}", :host=>"http://blog.CQ2016.com"
 		  	end
 		  end
 

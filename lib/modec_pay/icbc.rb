@@ -56,7 +56,7 @@ module ModecPay
 			@message['creditType'] = '2'
 			@message['notifyType'] = 'HS'
 			@message['resultType'] = '0'
-			@message['merReference'] = '*.i-modec.com'
+			@message['merReference'] = '*.CQ2016.com'
 			@message['merCustomIp'] = ''
 			@message['goodsType'] = '1'
 			@message['merCustomID'] = ''

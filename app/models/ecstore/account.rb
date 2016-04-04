@@ -278,7 +278,7 @@ class Ecstore::Account < Ecstore::Base
 				false
 		end
 	rescue Exception=>e
-		logger.error "check whether '#{self.login_name}' is following 'I-Modec'. because #{e}"
+		logger.error "check whether '#{self.login_name}' is following 'CQ'. because #{e}"
 	end
 
 	def follow_imodec=(val)

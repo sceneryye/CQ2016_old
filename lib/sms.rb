@@ -17,7 +17,7 @@ module Sms
 	}
 	
 	def self.send(mobile,text,options={})
-		account = options.delete(:account) || 'i-modec'
+		account = options.delete(:account) || 'CQ'
 		password = options.delete(:password) || '888333'
 
 		@conn ||= Faraday.new(:url => 'http://114.80.208.222:8080/NOSmsPlatform/server/SMServer.htm') do |faraday|

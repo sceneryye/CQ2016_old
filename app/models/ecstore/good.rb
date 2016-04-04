@@ -385,7 +385,7 @@ class Ecstore::Good < Ecstore::Base
     #   list_pictures[0]
     # else
     #   pic = Ecstore::Image.find_by_image_id(self.image_default_id)
-    #   return "http://www.i-modec.com/#{pic.s_url}" if pic
+    #   return "http://www.CQ2016.com/#{pic.s_url}" if pic
     #   nil
     # end
   end
@@ -398,7 +398,7 @@ class Ecstore::Good < Ecstore::Base
       pic = self.images.order("attach_id desc").first unless pic
       pic = self.images.order("attach_id desc").last if  pic == Ecstore::Image.find_by_image_id(self.image_default_id)
 
-      return "http://www.i-modec.com/#{pic.s_url}" if pic
+      return "http://www.CQ2016.com/#{pic.s_url}" if pic
       nil
     end
   end

@@ -107,6 +107,6 @@ class Ecstore::Product < Ecstore::Base
 
   	def gift_image_url
 	    img = Ecstore::Image.find_by_image_id self.good.image_default_id
-	    "http://www.i-modec.com/#{img.s_url}"
+	    "http://www.CQ2016.com/#{img.s_url}"
 	end
 end

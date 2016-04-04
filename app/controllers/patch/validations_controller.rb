@@ -29,7 +29,7 @@ class Patch::ValidationsController < ApplicationController
 			mobile =  params[:validation]&&params[:validation][:mobile]
 			return render :js=>"alert('请输入手机号码')" if mobile.blank?
 			sms_code = (0..5).collect { rand(10) }.join("")
-			text = "手机验证码:#{sms_code},如非本人操作请忽略。[I-Modec昌麒]"
+			text = "手机验证码:#{sms_code},如非本人操作请忽略。[CQ昌麒]"
 			if Sms.send(mobile,text)
 				@user.update_attribute(:mobile, mobile)
 				@user.update_attribute(:sms_code, sms_code)
