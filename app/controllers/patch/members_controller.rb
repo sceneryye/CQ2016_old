@@ -175,7 +175,8 @@ class Patch::MembersController < ApplicationController
 
     send_data package.to_stream.read,:filename=>"inventory_#{Time.now.strftime('%Y%m%d%H%M%S')}.xlsx"
   end
-
+  private
+  def 
 
 	
 end

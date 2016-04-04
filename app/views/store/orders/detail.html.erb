@@ -113,16 +113,8 @@
 				<span class="val"><%=@order.ship_addr%></span>
 			</li>
 			<li>
-				<span class="name">邮编 : </span>
-				<span class="val"><%=@order.ship_zip%></span>
-			</li>
-			<li>
 				<span class="name">手机号码 : </span>
 				<span class="val"><%=@order.ship_mobile%></span>
-			</li>
-			<li>
-				<span class="name">固定电话 : </span>
-				<span class="val"><%=@order.ship_tel%></span>
 			</li>
 			<li>
 				<span class="name">电子邮件 : </span>
@@ -181,22 +173,15 @@
 				<span class="name">+运费 : </span>
 				<span class="val"> &yen;<%=@order.cost_freight.to_i%></span>
 			</li>
-			<li>
+<!-- 			<li>
 				<span class="name">-优惠 : </span>
 				<span class="val"> &yen;<%=@order.pmts_total%></span>
 			</li>
 			<li>
 				<span class="name">-余额 : </span>
 				<span class="val"> &yen;<%=@order.part_pay.to_i%></span>
-			</li>
+			</li> -->
 			
-			<%if @order.payment == 'bcom'%>
-			<li>
-				<span class="name">-支付优惠 : </span>
-				<span class="val"> &yen;<%=@order.bcom_discount%></span>
-			</li>
-			<%end%>
-
 			<li class="pay-amount">
 				<span class="name">应付金额 : </span>
 				<span class="val"> &yen;<%=@order.final_pay%></span>
