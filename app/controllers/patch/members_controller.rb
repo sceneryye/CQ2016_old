@@ -25,17 +25,18 @@ class Patch::MembersController < ApplicationController
 
 
   def update
+    @user.update_attributes(ecstore_user_params.merge!(:apply_time=>Time.now))
+    @notic = '卡号不正确或者已经被使用'
+   
+     render "new"
       
-    if @user.update_attributes(params[:ecstore_user].merge!(:apply_time=>Time.now))
-      redirect_to advance_member_path
-    else
-      if @user.apply_type==2
-      @checked2='checked'
-    else
-      @checked3='checked'
-    end
-      render "new"
-    end
+    # if @user.update_attributes(ecstore_user_params.merge!(:apply_time=>Time.now))
+    #   redirect_to advance_member_path
+    # else
+    #   @notic = '卡号不正确或者已经被使用'
+   
+    #   render "new"
+    # end
   end
 
   def advance
@@ -176,7 +177,10 @@ class Patch::MembersController < ApplicationController
     send_data package.to_stream.read,:filename=>"inventory_#{Time.now.strftime('%Y%m%d%H%M%S')}.xlsx"
   end
   private
-  def 
+  def ecstore_user_params
+    params.require(:ecstore_user).permit(:name,:card_num,:id_card_number,:area:mobile,:addr,:sex)
+  end
+
 
 	
 end
