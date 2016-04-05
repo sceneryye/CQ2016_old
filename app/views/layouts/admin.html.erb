@@ -12,15 +12,18 @@
   </head>
 
   <body>
-  <div class="text-center"><h4><a class="brand" href="#">
-          昌麒投资网站管理系统
+  <div class="text-center"><h4>
+        <a class="brand" href="/">
+          后台管理
         </a>
       </h4></div>
     <div class="expanded row">
-      <div class="columns small-2">
-        <%=render "admin/shared/top_menu"%>
+      <div class="columns small-1 left" data-sticky-container>
+        <div class="sticky" data-sticky data-margin-top="0">
+          <%=render "admin/shared/top_menu"%>
+        </div>
       </div>
-      <div class="columns small-10 container admin <%=controller_name%> <%=action_name%>">
+      <div class="columns small-11 container admin <%=controller_name%> <%=action_name%>">
         <%= yield %>
       </div>
     </div>

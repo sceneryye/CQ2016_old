@@ -575,8 +575,9 @@ module Admin
 
        private 
        def goods_params
-        params.require(:good).permit(:desc, :price,:mktprice,:store,:name,
-                            :cat_id,:brand_id,:supplier_id,:products_attributes,:member_id,:up_or_down)
+        params.require(:good).permit(:desc, :price,:mktprice,:store,:name,:freight,:p_order,:intro,
+                            :cat_id,:brand_id,:supplier_id,:bn,:up_or_down,:spec_info,
+                            :small_pic,:medium_pic,:big_pic,:place,:place_info,:marketable,:uptime)
       end
 
 

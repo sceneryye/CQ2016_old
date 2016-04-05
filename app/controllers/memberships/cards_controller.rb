@@ -35,9 +35,12 @@ class Memberships::CardsController < ApplicationController
 		    type = params[:type]
 		    res_data = ActiveSupport::JSON.decode card_active(order_id, card_id, type)
 		    Rails.logger.info res_data
-		    return render json: {data: res_data}
-			###########e.data.ppcs_cardsingleactive_add_response# e.data.error_response.sub_msg
-			
+		    
+		    if res_data[:error_response]
+		    	return render json: {data: res_data}
+				###########e.data.ppcs_cardsingleactive_add_response# e.data.error_response.sub_msg
+			end
+
 			advance = @user.member_advances.order("log_id asc").last
 			shop_advance = 0
 			 if advance

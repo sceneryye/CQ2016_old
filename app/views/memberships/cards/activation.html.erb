@@ -18,7 +18,8 @@
             </ul> 
         </div> 
         <% end %>
-    </div>                 
+    </div>   
+</div>              
         <%=form_for @user, :url=>activate_card_path,:method=>:post,:html=>{:role=>"form",data: {type: "script"}} do |f|%>    
             <div class="row">
                 <div class="columns small-12">
@@ -31,7 +32,7 @@
             <div class="row">
                 <div class="columns small-12">
                     <div class="form-group">
-                        < <%=f.password_field :card_pwd,:value=>"",:class=>"form-control",:placeholder=>"*卡密码*",:required=>"required"%>
+                        <%=f.password_field :card_pwd,:value=>"",:class=>"form-control",:placeholder=>"*卡密码*",:required=>"required"%>
                     </div>
                     <div class="help-block" rel="user_name"></div>
                 </div>                           
