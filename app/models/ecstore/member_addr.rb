@@ -4,8 +4,6 @@ class Ecstore::MemberAddr < Ecstore::Base
 
 	belongs_to :user, :foreign_key=>"member_id"
 
-	#attr_accessor :province, :city, :district, :addr, :zip, :name, :mobile, :tel, :def_addr, :member_id ,:addr_type
-
 	def addr_line
 		result = ""
 		result += self.area.to_s.split(":")[1].gsub("/","-") if self.area.present?

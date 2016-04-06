@@ -1,5 +1,5 @@
 class Imodec::Resource < ActiveRecord::Base
-  attr_accessor :name, :description,:parent_id
+  
   
   has_many :actions, :class_name=>"Imodec::Resource",:foreign_key=>"parent_id"
 

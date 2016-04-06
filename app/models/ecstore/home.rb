@@ -1,8 +1,7 @@
 #encoding:utf-8
 class Ecstore::Home < Ecstore::Base
   self.table_name  = 'sdb_imodec_homes'
-  attr_accessor :body,:note,:sliders,:keywords,:pops,:clothing,:bags,:suits,:hots,:supplier_id
-
+  
   belongs_to :supplier,	:foreign_key=>"supplier_id"
 
   include Ecstore::Metable

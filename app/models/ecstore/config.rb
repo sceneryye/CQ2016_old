@@ -1,7 +1,7 @@
 #encoding:utf-8
 class Ecstore::Config < Ecstore::Base
       self.table_name = "sdb_imodec_configs"
-      attr_accessor :name,:key,:value
+      #attr_accessor :name,:key,:value
 
       validates :key, :presence=>{ :presence=>true, :message=>"key不能为空"},
                               :format=> { :with=>/[\w_]+/i, :message=>"key格式不正确", :if=>"key.present?" },

@@ -4,8 +4,6 @@ class Ecstore::User < Ecstore::Base
   self.primary_key = 'member_id'
 
 
-  attr_accessor :card_pwd
-
   belongs_to :account,:foreign_key=>"member_id"
 
   has_one :discount_code, :foreign_key=>"member_id"

@@ -1,7 +1,6 @@
 #encoding:utf-8
 class Ecstore::Footer < Ecstore::AbstractPage
 
-	attr_accessor :title, :body
 	validates_presence_of :title, message: "标题不能为空"
 	validates_presence_of :body, message: "内容不能为空"
 

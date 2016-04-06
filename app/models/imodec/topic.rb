@@ -14,7 +14,7 @@ class Imodec::Topic < ActiveRecord::Base
   # require "babosa"
 
   # validates_presence_of :title, :slug, :body
-  attr_accessor :body, :published, :title, :summary, :cover, :remove_cover, :cover_size,:require_login,:pages,:category_id,:slug,:page_keywords,:page_description,:commentable
+  
   has_attached_file :cover,
         :styles => { :small => "230x112#", :normal => "230x230#", :big => "465x230#" },
         :default_url => "/assets/blog/default_cover1.gif"

@@ -3,7 +3,6 @@ class Ecstore::Promotion < Ecstore::Base
   self.table_name = 'sdb_imodec_promotions'
   self.accessor_all_columns
   
-  attr_accessor :cat_ids, :brand_ids, :bns
 
   serialize :goods,  Array
   serialize :field_vals,  Array
