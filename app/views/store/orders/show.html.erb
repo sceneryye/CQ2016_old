@@ -38,11 +38,11 @@
               <%=f.radio_button :pay_app_id, "deposit", { :checked=>(@order.payment == 'deposit') } %> <b>会员卡积分</b>
             </label>
         <%#end%>
-
+<!-- 
         <label class="radio">
           <%=f.radio_button :pay_app_id, "wxpay", { :checked=>(@order.payment == 'wxpay') }%> <b>微信支付</b>
         </label>
-
+ -->
       <div class="actions">
         <div>支付成功后，可以在<%=link_to "订单详情",detail_order_path(@order),:target=>"_blank"%>处查看订单和追踪订单状态</div>
         <br>

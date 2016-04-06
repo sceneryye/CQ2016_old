@@ -32,15 +32,15 @@
 </div>
 <div class="medium-6 large-5 columns">
 <%=form_for :product,:url=>add_cart_index_path do |f|%>
-				    <%=f.hidden_field :goods_id,:value=>@good.goods_id%>
-				    <%=f.hidden_field :type_id,:value=>@good.type_id%>   
-                    <%=f.hidden_field :coupon_id,:value=>@coupon_id%>  
+    <%=f.hidden_field :goods_id,:value=>@good.goods_id%>
+    <%=f.hidden_field :type_id,:value=>@good.type_id%>   
+    <%=f.hidden_field :coupon_id,:value=>@coupon_id%>  
 	<h3><%=@good.name%></h3>
 	<p><%=render :partial=>"store/goods/product/new_spec",:locals=>{ :good=>@good }%></p>
     <p><%=raw @good.desc%></p> 
     <p>
         <span class='price'><%=number_to_currency @good.price,:unit=>"¥",:precision=>2%></span>
-        <span style="margin-left:1em;text-decoration:line-through;"><%=number_to_currency @good.mktprice,:unit=>"¥",:precision=>2%></span>
+        <span class='mktprice'><%=number_to_currency @good.mktprice,:unit=>"¥",:precision=>2%></span>
 	</p>
  	
 	<!-- <label>规格

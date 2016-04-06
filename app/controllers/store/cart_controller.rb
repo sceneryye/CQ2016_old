@@ -11,19 +11,19 @@ class Store::CartController < ApplicationController
 	def add
 
 		specs = params[:product].delete(:specs)
-		customs = params[:product].delete(:customs)
-		quantity = params[:product].delete(:quantity).to_i
-		goods_id = params[:product][:goods_id]
-	    if quantity.blank? || quantity ==0
-	       quantity=1
-	    end
+		# customs = params[:product].delete(:customs)
+		quantity = cart_params[:quantity]
+		goods_id = cart_params[:goods_id]
+	 #    if quantity.blank? || quantity ==0
+	 #       quantity=1
+	 #    end
+	   
     
-    	#return render :text=> "specs:#{specs[0].length},customs:#{customs},quantity:#{quantity},goods_id:#{goods_id}"
-		# product_id = specs.collect do |spec_value_id|
+    # product_id = specs.collect do |spec_value_id|
 		# 	Ecstore::GoodSpec.where(params[:product].merge(:spec_value_id=>spec_value_id)).pluck(:product_id)
 		# end.inject(:&).first
 
-		@good = Ecstore::Good.find(goods_id)
+		@good = Ecstore::Good.find_by_goods_id(goods_id)
 		# @product  =  @good.products.select do |p|
 		# 	p.spec_desc["spec_value_id"].values.map{ |x| x.to_s }.sort == specs.sort
 		# end.first
@@ -85,6 +85,6 @@ class Store::CartController < ApplicationController
 
 	private
 	def cart_params
-    	params.require(:cart).permit(:obj_ident,:member_ident,:member_id,:obj_type,:params,:quantity,:time)
+    	params.require(:product).permit(:quantity,:goods_id,:type_id)
   	end
 end

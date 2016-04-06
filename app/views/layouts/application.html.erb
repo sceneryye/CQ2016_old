@@ -32,6 +32,8 @@
       @product_active = 'active'
     when 'brands'
       @brand_active = 'active'
+    when 'pages'
+      @page_active = 'active'
     else
       @member_active = 'active'
   end
@@ -72,7 +74,7 @@
                 <li><a href="/login">注册/登录</a></li>
                 <%end%>
               </ul>
-            <li class='hide-for-small-only'><a href="/pages/aboutus"  class='menu-link'>关于我们</a></li>                      
+              <li><%=link_to '关于我们', page_path('aboutus'), class:"menu-link #{@page_active}"%></li>
             <li class='hide-for-small-only'><a href="/home#contact"  class='menu-link'>联系我们</a></li>  
             </ul>
             </div>

@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
     end
 
      def menu_categories
-      @menu_categories = Ecstore::Category.where(parent_id:5)
+      @menu_categories = Ecstore::Category.where(disabled:'false').order('p_order DESC')
     end
 
 
@@ -39,7 +39,6 @@ class ApplicationController < ActionController::Base
 
     def find_cart!
         
-        discount = 1
         if signed_in?
           @line_items = Ecstore::Cart.where(:member_id=>current_account.account_id)
 
