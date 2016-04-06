@@ -1,12 +1,12 @@
 <%@recommend_goods.each do |goods|%>
 <div class="row col">
 
-  <div class="columns small-3">
+  <div class="columns small-4">
     <%=link_to good_path(goods.bn), :target=>"_blank" do %>
         <%=image_tag goods.list_default_pic,:alt=>goods.name, class: "thumbnail"%>
     <%end%>
   </div>
-  <div class="columns small-9">
+  <div class="columns small-8">
       <h5>
           <%=link_to good_path(goods.bn), :target=>"_blank" do %>
               <%=goods.name%>[<%=goods.spec_info%>]

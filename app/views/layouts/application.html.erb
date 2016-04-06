@@ -59,7 +59,7 @@
               <%end if @menu_brands%>
               </ul>
             </li>
-            <li class="has-submenu">
+            <li class="has-submenu hide-for-small-only">
                <%=link_to '会员中心', member_path, class:"menu-link #{@member_active}"%>
               <ul class="submenu menu vertical" data-submenu>
                 <%if signed_in?%>
