@@ -153,9 +153,9 @@ class Ecstore::Order < Ecstore::Base
         advance = _user.advance
         advance_freeze = _user.advance_freeze
 
-        if %w(0 1 2).include?(self.ship_status)  # 发货时更新冻结预存款
+        if %w(0 1 2).include?(self.ship_status)  # 发货时更新冻结会员卡
           Ecstore::User.where(:member_id=>_user.member_id).update_all({ :advance_freeze=> advance_freeze - self.part_pay })
-        else # 退货时更新冻结预存款和预存款
+        else # 退货时更新冻结会员卡和会员卡
           Ecstore::User.where(:member_id=>_user.member_id).update_all({ :advance_freeze=> advance_freeze - self.part_pay,:advance=>advance + self.part_pay })
         end
       end
@@ -173,7 +173,7 @@ class Ecstore::Order < Ecstore::Base
           end
         end
       end
-      # 已付款或部分付款恢复预存款
+      # 已付款或部分付款恢复会员卡
       if %w(1 3).include?(self.pay_status) && self.part_pay?
         advance = self.user.advance
         advance_freeze =  self.user.advance_freeze
@@ -233,7 +233,7 @@ class Ecstore::Order < Ecstore::Base
     return "环迅人民币支付" if payment == "ips"
     return "交通银行网上支付" if payment == "bcom"
     return "工商银行网上支付" if payment == "icbc"
-    return "预存款在线支付" if payment == "deposit"
+    return "会员卡在线支付" if payment == "deposit"
     return "货到付款" if payment == "offline"
     return "快钱在线支付" if payment == "99bill"
     return "支付宝在线支付" if payment == "alipay"

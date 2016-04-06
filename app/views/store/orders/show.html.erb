@@ -35,7 +35,7 @@
         <%end%>        
         <%#if @user.advance >= @order.final_amount%>
             <label class="radio">
-              <%=f.radio_button :pay_app_id, "deposit", { :checked=>(@order.payment == 'deposit') } %> <b>预存款</b>
+              <%=f.radio_button :pay_app_id, "deposit", { :checked=>(@order.payment == 'deposit') } %> <b>会员卡</b>
             </label>
         <%#end%>
 

@@ -58,11 +58,11 @@
 				<div class="section payment" id="payments">
 					<h5>支付方式</h5>   
 
-					<%=f.radio_button :payment, "deposit", :checked=>true%> <b>预存款</b>
+					<%=f.radio_button :payment, "deposit", :checked=>true%> <b>会员卡</b>
 				
 					<!-- <%if @user.advance>0 && @user.advance < @cart_total%>
 				 	<label class="checkbox">
-						<%=f.check_box :part_pay, { :checked=>true, :'data-amount'=>@user.advance, :id=>"advance" }, @user.advance, 0%> <b>预存款先支付</b>
+						<%=f.check_box :part_pay, { :checked=>true, :'data-amount'=>@user.advance, :id=>"advance" }, @user.advance, 0%> <b>会员卡先支付</b>
 						余额(<span>￥<%=@user.advance%></span>)
 					</label>
 					<%end%>     
@@ -73,7 +73,7 @@
 
 					<%if @user.advance >= @cart_total%>
 				 	<label class="radio" >
-						<%=f.radio_button :payment, "deposit", :checked=>true%> <b>预存款</b>
+						<%=f.radio_button :payment, "deposit", :checked=>true%> <b>会员卡</b>
 					</label>
 					<%end%> -->
 				</div>

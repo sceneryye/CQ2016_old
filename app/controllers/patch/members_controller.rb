@@ -53,7 +53,7 @@ class Patch::MembersController < ApplicationController
   
 
     @advances = @user.member_advances.paginate(:page=>params[:page],:per_page=>10)
-    add_breadcrumb("我的预存款")
+    add_breadcrumb("我的会员卡")
   end
   
   def favorites

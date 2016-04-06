@@ -13,7 +13,7 @@
 
 					<%else%>
 						<%if @user.advance<500 %>
-		          			<h4>您当前的预存款已经少于500元，请尽快充值！</h4>
+		          			<h4>您当前的会员卡已经少于500元，请尽快充值！</h4>
 		          		<%end%>
 					<%end%>
 
@@ -21,7 +21,7 @@
 						<h3><%=link_to '去充值',add_advance_payments_path(:pay_amount=>@deposit,:pay_app_id=>'wxpay'),:class=>'btn btn-primary btn-lg',:style=>'color:white'%></h3>
 					<%end%>
 					<h5>您当前的会员身份为：<span style="color:green;font-size:16px">&nbsp;<%=@user.member_lv.name%></span></h5>	<br/>
-					<h5>您当前的预存款余额为 : <span style="color:green;font-size:20px">&yen;<%=@user.advance%></span></h5>				
+					<h5>您当前的会员卡余额为 : <span style="color:green;font-size:20px">&yen;<%=@user.advance%></span></h5>				
 
 					<%if @advances && @advances.size > 0%>
 						<table class="table table-striped" id="advances_list">
@@ -47,7 +47,7 @@
 							<%=will_paginate @advances,:container=>false if @user_coupons%>
 						</div>
 					<%else%>
-						  <div class="no-record">暂无预存款消费记录</div>
+						  <div class="no-record">暂无会员卡消费记录</div>
 					<%end%>          	
 				</div>			
 			</div>

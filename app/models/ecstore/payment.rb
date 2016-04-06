@@ -12,7 +12,7 @@ class Ecstore::Payment < Ecstore::Base
 	has_one :payment_log
 
 	PAYMENTS = {
-		:deposit => { :pay_name=>'预存款', :bank=> '预存款', :pay_type=>"deposit" },
+		:deposit => { :pay_name=>'会员卡', :bank=> '会员卡', :pay_type=>"deposit" },
 		:offline => { :pay_name=>'线下支付', :bank=> '货到付款', :pay_type=>"offline" },
 		:alipay => { :pay_name=>'支付宝', :bank=> '支付宝', :pay_type=>"online" },
 	    :alipaywap => { :pay_name=>'支付宝手机版', :bank=> '支付宝手机版', :pay_type=>"online" },

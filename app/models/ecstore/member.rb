@@ -166,7 +166,7 @@ class Ecstore::Member < Ecstore::Base
 	      			content.push member.user.id_card_number
 	      		end
 	      	end
-	      	if(fields.include?("25-advance-预存款"))
+	      	if(fields.include?("25-advance-会员卡"))
 	      		if member.user.advance.nil?
 	      			content.push "" 
 	      		else

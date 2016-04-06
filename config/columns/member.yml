@@ -63,8 +63,8 @@
   - 身份证
   - user.id_card_number
   - "true"
-25-advance-预存款: 
-  - 预存款
+25-advance-会员卡: 
+  - 会员卡
   - user.advance
   - "true"
 26-interests-兴趣爱好: 
