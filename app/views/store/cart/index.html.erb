@@ -24,14 +24,15 @@
                 <%end%>
             </div>
           </div>
-          <div class="columns small-3">
-            ￥<%= format('%.2f',line_item.product.price)%>&nbsp;X
+          <div class="small-3 columns">
+            <label for="middle-label" class="text-left middle">&<%= format('%.2f',line_item.product.price)%>&nbsp;X</label>
           </div>
           <div class="columns small-4">
               <%=number_field_tag :quantity,line_item.quantity.to_i,:class=>"textcenter quantity bn-#{line_item.product.good.bn}",:size=>3,:min=>1,:'data-url'=>cart_path(line_item.obj_ident)%>
           </div>
-          <div class="columns small-3 line-total"%>
-             ￥<%=line_item.product.price*line_item.quantity%>
+          <div class="columns small-3"%>
+            <label for="middle-label" class="text-right middle  line-total">¥<%=line_item.product.price*line_item.quantity%></label>
+             
           </div>
           <div class="columns small-12">
             <!--
@@ -51,7 +52,7 @@
       <%=link_to '继续购物', root_path, :class=>"button small alert hollow float-left"%>
     </th>
     <th>
-      <span class="total">￥<%=@cart_total%></span>
+      <span class="total">¥<%=@cart_total%></span>
     </th>
     <th>
       <%=link_to '安全结算', new_order_path, :class=>"button small alert hollow float-right"%>

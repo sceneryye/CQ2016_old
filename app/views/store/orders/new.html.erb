@@ -41,7 +41,7 @@
 			      </label>
 					<label class="radio">
 						<%=f.radio_button :shipping_id, 1, :checked=>true%> 快递
-						<span class="extra-info">+ ￥0</span>
+						<span class="extra-info">+ ¥0</span>
 					</label>
 					<div class="control-group">
 					    <h5>
@@ -63,7 +63,7 @@
 					<!-- <%if @user.advance>0 && @user.advance < @cart_total%>
 				 	<label class="checkbox">
 						<%=f.check_box :part_pay, { :checked=>true, :'data-amount'=>@user.advance, :id=>"advance" }, @user.advance, 0%> <b>会员卡积分先支付</b>
-						余额(<span>￥<%=@user.advance%></span>)
+						余额(<span>¥<%=@user.advance%></span>)
 					</label>
 					<%end%>     
 			      <label class="radio">
@@ -152,7 +152,7 @@
 						<div class="cost" id="order_cost">
 							<div class="item">
 								<span class="text">商品总额：</span>
-								<span class="rmb-symbol">￥</span>
+								<span class="rmb-symbol">¥</span>
 								<span class="money" data-amount="<%=@cart_total%>" id="cart_amount">
 									<%=@cart_total.round%> 
 								</span>
@@ -161,7 +161,7 @@
 							<%if @order_promotions.present? || @goods_promotions.present? %>
 							<div class="item">
 								<span class="text">优惠：</span>
-								<span class="rmb-symbol">￥</span>
+								<span class="rmb-symbol">¥</span>
 								<span class="money" data-amount="0" id="pmt_amount"></span>
 							</div>
 							<%end%>
@@ -169,7 +169,7 @@
 
 							<div class="item">
 								<span class="text">优惠卡券：</span>
-								<span class="rmb-symbol">-￥</span>
+								<span class="rmb-symbol">-¥</span>
 								<span class="money" data-amount="0" id="coupon_amount">
 									 0
 								</span>
@@ -177,7 +177,7 @@
 							
 							<div class="item">
 								<span class="text">订单总金额：</span>
-								<span class="rmb-symbol">￥</span>
+								<span class="rmb-symbol">¥</span>
 									<span class="money" data-amount="<%=@cart_total%>" id="order_amount">
 									<%=@cart_total.round%> 
 								</span>
@@ -190,7 +190,7 @@
 							<%unless @user.advance == 0%>
 							<div class="item">
 								<span class="text">预付款金额：</span>
-								<span class="rmb-symbol">￥</span>
+								<span class="rmb-symbol">¥</span>
 								<!--<span class="money part" id="part_amount">
 									 -<%=@user.advance < @cart_total && @user.advance>0 ? @user.advance : 0%>
 								</span>-->
@@ -201,7 +201,7 @@
 							
 							<div class="item">
 								<span class="text">支付金额：</span>
-								<span class="rmb-symbol">￥</span>
+								<span class="rmb-symbol">¥</span>
 								<span class="money final" id="pay_amount"></span>
 							</div>
 

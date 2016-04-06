@@ -24,7 +24,7 @@
 				<%end%>
 			</td>
 			<td>
-				<span style="color:red;">￥<%=@useable[coupon.current_code] ? coupon.pmt_amount(@line_items) : 0%></span>
+				<span style="color:red;">¥<%=@useable[coupon.current_code] ? coupon.pmt_amount(@line_items) : 0%></span>
 			</td>
 			<td><%=link_to "&times;".html_safe,check_coupon_orders_path,:class=>"close"%></td>
 		</tr>
