@@ -105,6 +105,10 @@ resources :cases
   end
 
   scope :module => "memberships" do
+    resources :member_addrs do
+         get "mobile"  ,:on=>:collection
+        get 'new_memberaddr_add' ,:on=>:collection
+    end
     match '/vip' => 'vip#index', :via => [:get]
     resource  :card do
       collection do
@@ -494,10 +498,7 @@ resources :cases
 
     end
 
-    resources :member_addrs do
-         get "mobile"  ,:on=>:collection
-        get 'new_memberaddr_add' ,:on=>:collection
-    end
+    
     resources :aftersales do
       get 'instruction', :on=>:collection
     end
