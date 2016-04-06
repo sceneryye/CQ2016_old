@@ -9,7 +9,7 @@
     </div>  
     
 </div>              
-        <%=form_for @user, :url=>activate_card_path,:method=>:post,:html=>{:role=>"form",data: {type: "script"}} do |f|%>    
+        <%=form_for :card, :url=>activate_card_path,:method=>:post,:html=>{:role=>"form",data: {type: "script"}} do |f|%>    
             <div class="row">
                 <div class="columns small-12">
                     <div class="form-group">

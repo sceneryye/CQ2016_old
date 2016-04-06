@@ -10,58 +10,46 @@ class Memberships::CardsController < ApplicationController
 
 
   	def activate
-		   
+  		
 		@card = Ecstore::Card.find_by_no(card_params[:card_num])
-		if @card.can_use? && !@card.used?
+		if @card.can_use?# && !@card.used?
+
 			@cards_log ||= Logger.new('log/cards.log')
-			// 查询卡片信息
+
   			card_id = card_params[:card_num] #'8668083660000059727'
-				password = card_params[:card_pwd] #'111111'
+			password = card_params[:card_pwd] #'111111'
+
 		    res_data = ActiveSupport::JSON.decode card_get_info(card_id, password)
-		    Rails.logger.info res_data
-		    return render json: {data: res_data}    
+		    Rails.logger.info res_data 
 
 		    @cards_log.info("[#{@user.login_name}][#{Time.now}]#{res_data}")
 		    if res_data[:error_response]
-		 		@cards_log.info("[#{@user.login_name}][#{Time.now}]查询会员卡信息失败:#{res_data[:error_response]}")
+		 		@cards_log.info("[#{@user.login_name}][#{Time.now}]查询会员卡信息失败")
 		    	return render json: {data: res_data}
 				###########e.data.ppcs_cardsingleactive_add_response# e.data.error_response.sub_msg					
 			end
+			
+			#{"data":{"card_cardinfo_get_response":{"res_timestamp":20160406213434,"res_sign":"77AFA3C325F8E63404A573B3C306E468","card_info":{"card_stat":0,"brh_id":"0229000040","brand_id":"0001","validity_date":20170210,"card_id":8668083660000001017,"card_product_info_arrays":{"card_product_info":[{"product_stat":0,"product_id":"0001","product_name":"通用金额","validity_date":20170210,"valid_balance":476631,"card_id":8668083660000001017,"account_balance":486631},{"product_stat":0,"product_id":"0282","product_name":"200元现金券","validity_date":20991231,"valid_balance":553619,"card_id":8668083660000001017,"account_balance":553619},{"product_stat":0,"product_id":1000,"product_name":"积分","validity_date":20160210,"valid_balance":1745700,"card_id":8668083660000001017,"account_balance":1745700}]}}}}}
 
+	      	#   console.log(e.data.card_cardinfo_get_response);
+	      	#   var msg = e.data.card_cardinfo_get_response.card_info.card_product_info_arrays.card_product_info[0]
+     
+	        status = case res_data["card_cardinfo_get_response"]["card_info"]["card_product_info_arrays"]["card_product_info"][0]["product_stat"]
+	          		when 0
+	          			 '正常'
+	          		when 1
+	          			'挂失'          
+	          		when 2
+	          			'冻结'          
+	          		when 3
+	         			'作废'          
+	          		else 
+	          			'未知'          
+	        end
 
-      #   console.log(e.data.card_cardinfo_get_response);
-      #   var msg = e.data.card_cardinfo_get_response.card_info.card_product_info_arrays.card_product_info[0]
-      #   var state = '';
-      #   switch(msg.product_stat) {
-      #     case 0:
-      #     state = '正常';
-      #     break;
-      #     case 1:
-      #     state = '挂失';
-      #     break;
-      #     case 2:
-      #     state = '冻结';
-      #     break;
-      #     case 3:
-      #     state = '作废';
-      #     break;
-      #     default:
-      #     state = '未知';
-      #     break;
-      #   }
-      #   message = '卡号：' + card_id + ';  认证日期：' + e.data.card_cardinfo_get_response.card_info.validity_date +';  余额：' + parseFloat(msg.account_balance / 100) + '元' + ';  产品名称：' + msg.product_name + ';  可用余额：' + parseFloat(msg.valid_balance / 100) + '元' + ';  产品有效期：' + msg.validity_date + ';  产品状态：' + state;
-      #   alert(message);
-      # }
-      # else {
-      #   console.log(e.data.error_response)
-      #   alert('操作失败！' + e.data.error_response.sub_msg)
-
-
-
-
-
-
-				advance = @user.member_advances.order("log_id asc").last
+		      #   message = '卡号：' + card_id + ';  认证日期：' + e.data.card_cardinfo_get_response.card_info.validity_date +';  余额：' + parseFloat(msg.account_balance / 100) + '元' + ';  产品名称：' + msg.product_name + ';  可用余额：' + parseFloat(msg.valid_balance / 100) + '元' + ';  产品有效期：' + msg.validity_date + ';  产品状态：' + state;
+		     
+		     	advance = @user.member_advances.order("log_id asc").last
 				shop_advance = 0
 				if advance
 					shop_advance = advance.shop_advance
@@ -69,6 +57,10 @@ class Memberships::CardsController < ApplicationController
 					shop_advance = @user.advance
 				end
 				shop_advance += @card.value
+				@card_log = Ecstore::CardLog.create(:member_id=>@user.member_id,
+										:card_id=>@card.id,
+										:message=>"添加: #{res_data.to_json}")
+
 				Ecstore::MemberAdvance.create(:member_id=>@user.member_id,
 												  :money=>@card.value,
 												  :message=>"会员卡激活,卡号:#{@card.no}",
@@ -554,6 +546,6 @@ class Memberships::CardsController < ApplicationController
 
 	private
 	  def card_params
-	    params.require(:ecstore_user).permit(:card_num,:card_pwd)
+	    params.require(:card).permit(:card_num,:card_pwd)
 	  end
 end
