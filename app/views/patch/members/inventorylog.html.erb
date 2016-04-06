@@ -41,7 +41,7 @@
             </td>
 
             <td><%=inventorylog.quantity%></td>
-            <td>&yen;<%=inventorylog.quantity*inventorylog.price%></td>
+            <td>¥<%=inventorylog.quantity*inventorylog.price%></td>
             <td><%=inventorylog.in_or_out== "\1"  ? '入库' : '出库'%></td>
             <td><%=Time.at(inventorylog.createtime)%></td>
 

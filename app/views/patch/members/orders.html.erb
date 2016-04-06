@@ -33,7 +33,7 @@
 				</div>
 				
 				
-				<div class="col-sm-2" style="font-weight:normal;font-size:18px">金额：<span style="color:red;font-weight:bolder;font-size:18px">&yen;<%=order.final_amount.round%></span></div>
+				<div class="col-sm-2" style="font-weight:normal;font-size:18px">金额：<span style="color:red;font-weight:bolder;font-size:18px">¥<%=order.final_amount.round%></span></div>
 				<div class="col-sm-1">订单状态：&nbsp;<%=order.status_text%></div>
 				<div class="col-sm-2">
 					<span><%=link_to "查看",detail_order_path(order),:target=>"_blank",:style=>'color:green;font-weight:bold;font-size:18px'%></span>&nbsp;&nbsp;&nbsp;&nbsp;

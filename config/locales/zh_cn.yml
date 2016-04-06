@@ -3,16 +3,6 @@ zh_cn:
   ###佣金信息
 
   shopping-basket: "我的购物车"
-  commission: "推广佣金"
-  mycommission : "我的佣金"
-  commission_account: "佣金账号"
-  total_commission : "总收益佣金"
-  withdrawn_commission : "已领取的佣金"
-  pending_commission : "待领取的佣金"
-  latest_commission : "最新的佣金"
-  what_commission : "什么是佣金"
-  earn_commission : "怎么赚佣金"
-  get_commission : "怎么领取佣金"
   name : "真实姓名"
   gender: "性别"
   bank—information : "银行信息"

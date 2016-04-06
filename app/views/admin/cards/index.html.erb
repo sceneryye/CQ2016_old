@@ -100,7 +100,7 @@
     </td> -->
 
     <td><%=link_to  card.no,admin_card_path(card) %></td>
-    <td>&yen;<%= card.value %><%="[#{level(card.value)}]" if level(card.value)%></td>
+    <td>¥<%= card.value %><%="[#{level(card.value)}]" if level(card.value)%></td>
     <td><%= card.card_type %></td>
     <td><%= card.sale_status ? "已出售" : "未出售" %></td>
     <td><%= card.member_card.created_at.strftime("%Y-%m-%d %H:%S:%M") if card.member_card %></td>

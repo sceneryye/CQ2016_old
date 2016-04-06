@@ -107,7 +107,6 @@ en:
   invoice : "Details of Invoice"
   details_invoice : "please enter the invoice title"
   order_notice : "Dear！"
-  order_notice_one : "! Up to ¥380"
   order_notice_two : "The delivery fee will be free. And cooled delivery to your door.."
   order_notice_three : "A free delivery service  for your order!"
   order_notice_four : "You have not selected merchandise。"

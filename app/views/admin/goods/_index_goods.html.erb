@@ -49,10 +49,10 @@
 				<%end%>
 			</td>
           <%if current_admin.has_right_of("goods","edit")%>
-              <td>&yen;<%=format("%.2f",good.cost)%></td>
+              <td>¥<%=format("%.2f",good.cost)%></td>
           <%end%>    
-			<td>&yen;<%=format("%.2f",good.price) if good.price%></td>
-            <td>&yen;<%=format("%.2f",good.mktprice) if good.mktprice%></td>
+			<td>¥<%=format("%.2f",good.price) if good.price%></td>
+            <td>¥<%=format("%.2f",good.mktprice) if good.mktprice%></td>
 			<td><%=good.store.to_i%></td>
 			<td><%=good.marketable == 'true' ? '是' : '否'%></td>
 			<td style="display:none"><%=Time.at(good.uptime).strftime("%Y-%m-%d %H:%M:%S") if good.uptime.present?%></td>

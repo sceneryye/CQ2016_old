@@ -20,7 +20,7 @@
 							<%=radio_button_tag :card,card.no if card.pay_status&&!card.used?&&card.normal?%>
 						</td>
 						<td><%=card.no%></td>
-						<td><%=number_to_currency card.value,:unit=>"&yen;",:precision=>0%></td>
+						<td><%=number_to_currency card.value,:unit=>"¥",:precision=>0%></td>
 						<td>
 							<%if card.pay_status%>
 								<%=card.used? ? "已激活" :  card.status %>

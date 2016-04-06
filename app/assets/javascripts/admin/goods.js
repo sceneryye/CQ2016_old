@@ -149,7 +149,7 @@ $(document).ready(function(){
 	            <div> \
 	              <img src="'+image+'"> \
 	            </div> \
-	            <div class="name">'+name+'&yen;'+price+'</div> \
+	            <div class="name">'+name+'¥'+price+'</div> \
 	            <input type="hidden" name="collocation[collocations][]" value="'+goods_id+'"> \
 	            <a href="#" class="close">×</a> \
           	</li>';

@@ -104,11 +104,11 @@
 							</td>
 							<td>
 			                 
-			                      <%=number_to_currency line_item.product.price,:unit=>"&yen;",:precision=>0%>
+			                      <%=number_to_currency line_item.product.price,:unit=>"¥",:precision=>0%>
 			                </td>
 							<td><%=line_item.quantity%></td>
 							<td>
-			                      <%=number_to_currency line_item.line_total,:unit=>"&yen;",:precision=>0%>
+			                      <%=number_to_currency line_item.line_total,:unit=>"¥",:precision=>0%>
 							</td>
 							</tr>
 						<%end%>

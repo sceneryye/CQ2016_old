@@ -24,11 +24,11 @@
 				</td>				
 				<td><%=order.user.name%>
 				<td><%=order.created_at%></td>
-				<td>&yen;<%=order.final_amount.to_i%></td>
+				<td>¥<%=order.final_amount.to_i%></td>
 				<td><%=order.status_text%></td>
 				<td>
 					<div><%=link_to "查看",detail_order_path(order),:target=>"_blank"%></div>
-					<div>&yen;<%=(order.final_amount*0.16).to_i if order.pay_status=='1'%></div>
+					<div>¥<%=(order.final_amount*0.16).to_i if order.pay_status=='1'%></div>
 				</td>
 			</tr>
 			<%end%>

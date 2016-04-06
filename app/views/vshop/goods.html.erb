@@ -44,7 +44,7 @@
 
                 <td ><%=good.ship_id%></td>
 
-            <td>&yen;<%=format("%.2f",good.price) if good.price%></td>
+            <td>¥<%=format("%.2f",good.price) if good.price%></td>
 
                 <td ><%=good.status%></td>
 
@@ -110,10 +110,10 @@
             <%end%>
           </td>
               <%end %>
-              <td>&yen;<%=format("%.2f",good.cost) if good.cost%></td>
-          <td>&yen;<%=format("%.2f",good.price) if good.price%></td>
-          <td>&yen;<%=format("%.2f",good.mktprice) if good.mktprice%></td>
-              <td>&yen;<%=format("%.2f",good.price*0.1) if good.price%></td>
+              <td>¥<%=format("%.2f",good.cost) if good.cost%></td>
+          <td>¥<%=format("%.2f",good.price) if good.price%></td>
+          <td>¥<%=format("%.2f",good.mktprice) if good.mktprice%></td>
+              <td>¥<%=format("%.2f",good.price*0.1) if good.price%></td>
           <% if (Ecstore::Account.find(@user.member_id).supplier_id)!=(Ecstore::Supplier.find_by_name("万家物流").id)%>
           <td><%=good.store.to_i%></td>
               <%end%>

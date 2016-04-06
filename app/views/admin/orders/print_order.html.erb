@@ -56,27 +56,27 @@
 		<td><%=index+1%></td>
 		<td><%=order_item.bn%></td>
 		<td><%=order_item.name%>(<%=order_item.product.spec_info%>)</td>
-		<td>&yen;<%=order_item.price%></td>
+		<td>¥<%=order_item.price%></td>
 		<td><%=order_item.nums.to_i%></td>
-		<td>&yen;<%=order_item.amount.to_i%></td>
+		<td>¥<%=order_item.amount.to_i%></td>
 	</tr>
 	<%end%>
 
 	<tr>
 		<td colspan="5" class="colspan">合计金额</td>
-		<td>&yen;<%=@order.products_total.to_i%></td>
+		<td>¥<%=@order.products_total.to_i%></td>
 	</tr>
 	<tr>
 		<td colspan="5" class="colspan">运费</td>
-		<td>&yen;<%=@order.cost_freight.to_i%></td>
+		<td>¥<%=@order.cost_freight.to_i%></td>
 	</tr>
 	<tr>
 		<td colspan="5" class="colspan">优惠金额</td>
-		<td>&yen;<%=@order.pmts_total.to_i%></td>
+		<td>¥<%=@order.pmts_total.to_i%></td>
 	</tr>
 	<tr>
 		<td colspan="5" class="colspan">支付金额</td>
-		<td>&yen;<%=@order.final_pay.to_i%></td>
+		<td>¥<%=@order.final_pay.to_i%></td>
 	</tr>
 
 </table>

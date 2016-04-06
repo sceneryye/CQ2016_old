@@ -92,7 +92,7 @@
 
 		<ul>
 			<li>订单编号 : <strong><%=@order.order_id%></strong></li>
-			<li>订单金额 : &yen;<%=@order.final_amount.to_i%></li>
+			<li>订单金额 : ¥<%=@order.final_amount.to_i%></li>
 			<li>订单状态 : <%=@order.status_text%></li>
 			<li>付款状态 : <%=@order.pay_status_text%></li>
 			<li>发货状态 : <%=@order.ship_status_text%></li>
@@ -171,10 +171,10 @@
 					<div class="spec-info"><%=order_item.product.spec_info%></div>
 				</td>
 				
-				<td>&yen;<%=order_item.price%></td>
+				<td>¥<%=order_item.price%></td>
 				<td><%=order_item.nums.to_i%></td>
 				<td>
-						&yen;<%=(order_item.price * order_item.nums).to_i if order_item.item_type == 'product'%><%= 0 if order_item.item_type == 'gift'%>
+						¥<%=(order_item.price * order_item.nums).to_i if order_item.item_type == 'product'%><%= 0 if order_item.item_type == 'gift'%>
 				</td>
 			</tr>
 			<%end%>
@@ -194,7 +194,7 @@
 			<tr>
 				<td><%=pmt.pmt_name%><%="(券)" if pmt.pmt_type=="coupon"%></td>
 				<td><%=pmt.pmt_desc%></td>
-				<td>&yen;<%=pmt.pmt_amount.to_i%></td>
+				<td>¥<%=pmt.pmt_amount.to_i%></td>
 			</tr>
 			<%end if @order.order_pmts%>
 		</table>
@@ -321,7 +321,7 @@
 					<td><%=payment.paid_at%></td>
 					<td><%=payment.operator.login_name%></td>
 					<td><%=payment.pay_name%></td>
-					<td>&yen;<%=payment.money%></td>
+					<td>¥<%=payment.money%></td>
 					<td><%=payment.pay_type_text%></td>
 					<td><%=payment.status_text%></td>
 					
@@ -358,7 +358,7 @@
 					<td><%=refund.paid_at%></td>
 					<td><%=refund.operator.login_name%></td>
 					<td><%=refund.pay_name%></td>
-					<td>&yen;<%=refund.money%></td>
+					<td>¥<%=refund.money%></td>
 					<td><%=refund.pay_account%></td>
 					<td><%=refund.status_text%></td>
 				</tr>
@@ -457,32 +457,32 @@
 		<ul>
 			<li>
 				<span class="name">商品总额 : </span>
-				<span class="val"> &yen;<%=@order.products_total.to_f%></span>
+				<span class="val"> ¥<%=@order.products_total.to_f%></span>
 			</li>
 
 			<li>
 				<span class="name">+运费 : </span>
-				<span class="val"> &yen;<%=@order.cost_freight.to_f%></span>
+				<span class="val"> ¥<%=@order.cost_freight.to_f%></span>
 			</li>
 			<li>
 				<span class="name">-优惠 : </span>
-				<span class="val"> &yen;<%=@order.pmts_total.to_f%></span>
+				<span class="val"> ¥<%=@order.pmts_total.to_f%></span>
 			</li>
 			<li>
 				<span class="name">-余额 : </span>
-				<span class="val"> &yen;<%=@order.part_pay.to_f%></span>
+				<span class="val"> ¥<%=@order.part_pay.to_f%></span>
 			</li>
 			
 			<%if @order.payment == 'bcom'%>
 			<li>
 				<span class="name">-支付优惠 : </span>
-				<span class="val"> &yen;<%=@order.bcom_discount%></span>
+				<span class="val"> ¥<%=@order.bcom_discount%></span>
 			</li>
 			<%end%>
 
 			<li class="pay-amount">
 				<span class="name">应付金额 : </span>
-				<span class="val"> &yen;<%=@order.final_pay%></span>
+				<span class="val"> ¥<%=@order.final_pay%></span>
 			</li>
 		</ul>
 	</div>

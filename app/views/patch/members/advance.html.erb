@@ -21,7 +21,7 @@
 						<h3><%=link_to '去充值',add_advance_payments_path(:pay_amount=>@deposit,:pay_app_id=>'wxpay'),:class=>'button button-lg',:style=>'color:white'%></h3>
 					<%end%>
 					<h5>您当前的会员身份为：<span style="color:green;font-size:16px">&nbsp;<%=@user.member_lv.name%></span></h5>	<br/>
-					<h5>您当前的会员卡积分为 : <span style="color:green;font-size:20px">&yen;<%=@user.advance%></span></h5>				
+					<h5>您当前的会员卡积分为 : <span style="color:green;font-size:20px">¥<%=@user.advance%></span></h5>				
 
 					<%if @advances && @advances.size > 0%>
 						<table class="table table-striped" id="advances_list">
@@ -37,9 +37,9 @@
 							<tr>
 								<td><%=advance.logged_at%></td>
 								<td><%=advance.message%></td>
-								<td>&yen;<%=advance.import_money.to_i%></td>
-								<td>&yen;<%=advance.explode_money.to_i%></td>
-								<td><b>&yen;<%=advance.member_advance.to_i%></b></td>
+								<td>¥<%=advance.import_money.to_i%></td>
+								<td>¥<%=advance.explode_money.to_i%></td>
+								<td><b>¥<%=advance.member_advance.to_i%></b></td>
 							</tr>
 							<%end%>
 						</table>

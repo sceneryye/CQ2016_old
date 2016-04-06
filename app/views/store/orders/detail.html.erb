@@ -69,10 +69,10 @@
 					</div>
 					<div class="spec-info"><%=order_item.product.spec_info%></div>
 				</td>
-				<td>&yen;<%=order_item.price%></td>
+				<td>¥<%=order_item.price%></td>
 				<td><%=order_item.nums.to_i%></td>
 				<td>
-						&yen;<%=(order_item.price * order_item.nums).to_i if order_item.item_type == 'product'%><%= 0 if order_item.item_type == 'gift'%>
+						¥<%=(order_item.price * order_item.nums).to_i if order_item.item_type == 'product'%><%= 0 if order_item.item_type == 'gift'%>
 				</td>
 			</tr>
 			<%end%>
@@ -166,25 +166,25 @@
 		<ul>
 			<li>
 				<span class="name">商品总额 : </span>
-				<span class="val"> &yen;<%=@order.products_total%></span>
+				<span class="val"> ¥<%=@order.products_total%></span>
 			</li>
 
 			<li>
 				<span class="name">+运费 : </span>
-				<span class="val"> &yen;<%=@order.cost_freight.to_i%></span>
+				<span class="val"> ¥<%=@order.cost_freight.to_i%></span>
 			</li>
 <!-- 			<li>
 				<span class="name">-优惠 : </span>
-				<span class="val"> &yen;<%=@order.pmts_total%></span>
+				<span class="val"> ¥<%=@order.pmts_total%></span>
 			</li>
 			<li>
 				<span class="name">-余额 : </span>
-				<span class="val"> &yen;<%=@order.part_pay.to_i%></span>
+				<span class="val"> ¥<%=@order.part_pay.to_i%></span>
 			</li> -->
 			
 			<li class="pay-amount">
 				<span class="name">应付金额 : </span>
-				<span class="val"> &yen;<%=@order.final_pay%></span>
+				<span class="val"> ¥<%=@order.final_pay%></span>
 			</li>
 
 		</ul>

@@ -39,8 +39,8 @@
 	<p><%=render :partial=>"store/goods/product/new_spec",:locals=>{ :good=>@good }%></p>
     <p><%=raw @good.desc%></p> 
     <p>
-        <span style="color:red;font-size:1.5em;">&yen;<%=(@good.price).round if @good.price%></span>
-        <span style="margin-left:1em;text-decoration:line-through;">&yen;<%=(@good.price).round if @good.price%> </span>
+        <span style="color:red;font-size:1.5em;">¥<%=(@good.price).round if @good.price%></span>
+        <span style="margin-left:1em;text-decoration:line-through;">¥<%=(@good.price).round if @good.price%> </span>
 	</p>
  	
 	<!-- <label>规格

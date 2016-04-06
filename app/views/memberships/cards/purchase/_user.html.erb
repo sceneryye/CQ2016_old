@@ -1,6 +1,6 @@
 <div class="cards">
 	<div class="form-block">
-		<h4>您选择了<%=level_hash(params[:level])[:name]%>, 价值&yen;<%=level_hash(params[:level])[:value]%>元 </h4>
+		<h4>您选择了<%=level_hash(params[:level])[:name]%>, 价值¥<%=level_hash(params[:level])[:value]%>元 </h4>
 		<p>请填写用卡人信息 : </p>
 		<%=form_for :member_card, :url=>confirm_user_card_path,:html=>{:class=>"confirm-form"} do |f|%>
 			<%=hidden_field_tag :level,params[:level]%>
