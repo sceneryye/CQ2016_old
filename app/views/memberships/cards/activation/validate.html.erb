@@ -1,13 +1,13 @@
 <div class="cards">
 	<div class="form-block">
-		<h4>VIP卡激活确认 </h4>
+		<h4>会员卡激活确认 </h4>
 
 		<p>请验证您的手机号码</p>
 
 		<%=form_for :card, :url=>confirm_activation_card_path do |f|%>
 			<%=f.hidden_field :no,:value=>@card.no%>
 			<div class="field">
-				<label class="field-label">VIP卡号 : </label>
+				<label class="field-label">会员卡号 : </label>
 				<span class="field-plain"><%=@card.no%></span>
 			</div>
 
@@ -55,7 +55,7 @@
 		<ul>
 			<li>
 				<strong>什么是验证码？去哪里查我的验证码？</strong>
-				<div>答：为了确保您的VIP卡安全，需要在确认激活前正确输入验证码，验证码为系统随机生成，会自动发送至左侧显示的手机号码中，请注意查收。</div>
+				<div>答：为了确保您的会员卡安全，需要在确认激活前正确输入验证码，验证码为系统随机生成，会自动发送至左侧显示的手机号码中，请注意查收。</div>
 			</li>
 			<li>
 				<strong>我没有收到验证码怎么办？</strong>

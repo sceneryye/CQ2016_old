@@ -11,87 +11,81 @@ class Memberships::CardsController < ApplicationController
 
   	def activate
 
-		@user.update_attributes(ecstore_user_params.merge!(:apply_time=>Time.now))
-    	return redirect_to '/card/activation?notice=卡号不正确或者已经被使用'
-   
-      
-    	# if @user.update_attributes(ecstore_user_params.merge!(:apply_time=>Time.now))
-	    #   redirect_to advance_member_path
-	    # else
-	    #   @notic = '卡号不正确或者已经被使用'
-	   
-	    #   render "new"
-	    # end
+		if @user.update_attributes(ecstore_user_params.merge!(:apply_time=>Time.now))
+	    		   
+			@card = Ecstore::Card.find_by_no(ecstore_user_params[:card_num])
+			if @card.can_use? && !@card.used?
+				@cards_log ||= Logger.new('log/cards.log')
+				order_id = "999990053990001_#{Time.now.to_i}#{rand(100).to_s}"
+	  			card_id = ecstore_user_params[:card_num] #'8668083660000059727'
+	    		type = '1'     
 
-		@card = Ecstore::Card.find_by_no(pecstore_user_params[:card_num])
 
-		if @card.can_use? && !@card.used?
-			#激活接口
-			order_id = "999990053990001_#{Time.now.to_i}#{rand(100).to_s}"
-  			card_id = '8668083660000059727';
-    		type = '1'      
-			order_id = params[:order_id]
-		    card_id = params[:card_id]
-		    type = params[:type]
-		    res_data = ActiveSupport::JSON.decode card_active(order_id, card_id, type)
-		    Rails.logger.info res_data
-		    
-		    if res_data[:error_response]
-		    	return render json: {data: res_data}
-				###########e.data.ppcs_cardsingleactive_add_response# e.data.error_response.sub_msg
-			end
+			    res_data = ActiveSupport::JSON.decode card_active(order_id, card_id, type)
+			    @cards_log.info("[#{@user.login_name}][#{Time.now}]#{res_data}")
+			    if res_data[:error_response]
+			 		@cards_log.info("[#{@user.login_name}][#{Time.now}]激活会员卡失败")
+			    	return render json: {data: res_data}
+					###########e.data.ppcs_cardsingleactive_add_response# e.data.error_response.sub_msg
+				end
 
-			advance = @user.member_advances.order("log_id asc").last
-			shop_advance = 0
-			 if advance
-				shop_advance = advance.shop_advance
+				advance = @user.member_advances.order("log_id asc").last
+				shop_advance = 0
+				if advance
+					shop_advance = advance.shop_advance
+				else
+					shop_advance = @user.advance
+				end
+				shop_advance += @card.value
+				Ecstore::MemberAdvance.create(:member_id=>@user.member_id,
+												  :money=>@card.value,
+												  :message=>"会员卡激活,卡号:#{@card.no}",
+												  :mtime=>Time.now.to_i,
+												  :memo=>"用户本人操作",
+												  :import_money=>@card.value,
+												  :explode_money=>0,
+												  :member_advance=>(@user.advance + @card.value),
+												  :shop_advance=>shop_advance,
+												  :disabled=>'false')
+
+				@user.update_attribute :advance, (@card.value + @user.advance)
+				@user.update_attribute :card_validate,'true'
+				@card.update_attribute :use_status,true
+				@card.update_attribute :used_at,Time.now
+				@card.member_card.update_attribute :user_id,@user.member_id
+				
+
+				#发微信
+				# begin
+				# 	@sms_log ||= Logger.new('log/sms.log')
+				# 	text = "您购买的昌麒会员卡#{@card.no}已被#{mask @card.member_card.user_tel}激活,如有疑问请致电400-826-4568[CQ昌麒]"
+				# 	if Sms.send(@card.member_card.buyer_tel,text)
+				# 		tel = @card.member_card.buyer_tel
+				# 		@sms_log.info("[#{@user.login_name}][#{Time.now}][#{tel}]#{text}")
+				# 	end
+
+				# 	text = "您的昌麒会员卡#{@card.no}已激活,如有疑问请致电客服400-826-4568[CQ昌麒]"
+				# 	if Sms.send(@card.member_card.user_tel,text)
+				# 		tel = @card.member_card.user_tel
+				# 		@sms_log.info("[#{@user.login_name}][#{Time.now}][#{tel}]#{text}")
+				# 	end
+
+				# rescue
+				# 	@sms_log.info("[#{@user.login_name}][#{Time.now}]激活会员卡,发送短信失败")
+				# end
+
+				Ecstore::CardLog.create(:member_id=>@user.member_id,
+	                                                :card_id=>@card.id,
+	                                                :message=>"会员卡激活,用户本人操作")
+
+
+				render "memberships/cards/activation/complete"
 			else
-				shop_advance = @user.advance
+				render "memberships/cards/activation/error"
 			end
-			shop_advance += @card.value
-			Ecstore::MemberAdvance.create(:member_id=>@user.member_id,
-											  :money=>@card.value,
-											  :message=>"会员卡激活,卡号:#{@card.no}",
-											  :mtime=>Time.now.to_i,
-											  :memo=>"用户本人操作",
-											  :import_money=>@card.value,
-											  :explode_money=>0,
-											  :member_advance=>(@user.advance + @card.value),
-											  :shop_advance=>shop_advance,
-											  :disabled=>'false')
-			@user.update_attribute :advance, (@card.value + @user.advance)
-			@card.update_attribute :use_status,true
-			@card.update_attribute :used_at,Time.now
-			@card.member_card.update_attribute :user_id,@user.member_id
-
-			
-			begin
-				@sms_log ||= Logger.new('log/sms.log')
-				text = "您购买的昌麒会员卡#{@card.no}已被#{mask @card.member_card.user_tel}激活,如有疑问请致电400-826-4568[CQ昌麒]"
-				if Sms.send(@card.member_card.buyer_tel,text)
-					tel = @card.member_card.buyer_tel
-					@sms_log.info("[#{@user.login_name}][#{Time.now}][#{tel}]#{text}")
-				end
-
-				text = "您的昌麒会员卡#{@card.no}已激活,如有疑问请致电客服400-826-4568[CQ昌麒]"
-				if Sms.send(@card.member_card.user_tel,text)
-					tel = @card.member_card.user_tel
-					@sms_log.info("[#{@user.login_name}][#{Time.now}][#{tel}]#{text}")
-				end
-
-			rescue
-				@sms_log.info("[#{@user.login_name}][#{Time.now}]激活VIP卡,发送短信失败")
-			end
-
-			Ecstore::CardLog.create(:member_id=>@user.member_id,
-                                                :card_id=>@card.id,
-                                                :message=>"会员卡激活,用户本人操作")
-
-
-			render "memberships/cards/activation/complete"
-		else
-			render "memberships/cards/activation/error"
-		end
+	    else	   
+	        render 'activation'
+	    end
 	end
 
   def active
@@ -236,19 +230,19 @@ class Memberships::CardsController < ApplicationController
 			@card = Ecstore::Card.find_by_no(card_no)
 
 			unless @card
-			      flash[:error] = '您输入的VIP卡号不存在'
+			      flash[:error] = '您输入的会员卡号不存在'
 				render "memberships/cards/activation"
 				return
 			end
 
 			unless @card.can_use?
-				flash[:error] = '您输入的VIP卡号不能激活,请检查卡状态'
+				flash[:error] = '您输入的会员卡号不能激活,请检查卡状态'
 				render "memberships/cards/activation"
 				return
 			end
 
 			if @card.used?
-				flash[:error] = '您输入的VIP卡号已被激活，请核实'
+				flash[:error] = '您输入的会员卡号已被激活，请核实'
 				render "memberships/cards/activation"
 				return
 			end
@@ -333,7 +327,7 @@ class Memberships::CardsController < ApplicationController
 			# 		@sms_log.info("[#{@user.login_name}][#{Time.now}][#{tel}]#{text}")
 			# 	end
 			# rescue
-			# 	@sms_log.info("[#{@user.login_name}][#{Time.now}]购买VIP卡,发送短信失败")
+			# 	@sms_log.info("[#{@user.login_name}][#{Time.now}]购买会员卡,发送短信失败")
 			# end
 			
 
@@ -453,7 +447,7 @@ class Memberships::CardsController < ApplicationController
 
 	def validate_activation
 		if params[:card][:no].blank?
-			@error = "请输入VIP卡号"
+			@error = "请输入会员卡号"
 			render "memberships/cards/activation"
 			return
 		end
@@ -461,7 +455,7 @@ class Memberships::CardsController < ApplicationController
 		@card = Ecstore::Card.find_by_no(params[:card][:no])
 
 		if @card.nil?
-			@error = "VIP卡号不存在"
+			@error = "会员卡号不存在"
 			render "memberships/cards/activation"
 			return
 		end
@@ -475,7 +469,7 @@ class Memberships::CardsController < ApplicationController
 		if @card.can_use?
 			tel = @card.member_card.buyer_tel
 			sms_code = rand(1000000).to_s(16)
-			text = "您的VIP卡验证码是：#{sms_code}，如此条验证码非您本人申请，请立即致电客服400-826-4568核实[CQ昌麒]"
+			text = "您的会员卡验证码是：#{sms_code}，如此条验证码非您本人申请，请立即致电客服400-826-4568核实[CQ昌麒]"
 			@sms_log ||= Logger.new('log/sms.log')
 			begin
 				if Sms.send(tel,text)
@@ -511,7 +505,7 @@ class Memberships::CardsController < ApplicationController
 	def send_sms_code
 		sms_code = rand(1000000).to_s(16)
 		tel = params[:tel]
-		text = "您的VIP卡验证码是：#{sms_code}，如此条验证码非您本人申请，请立即致电客服400-826-4568核实[CQ昌麒]"
+		text = "您的会员卡验证码是：#{sms_code}，如此条验证码非您本人申请，请立即致电客服400-826-4568核实[CQ昌麒]"
 
 		
 		@sms_log ||= Logger.new('log/sms.log')
@@ -530,6 +524,6 @@ class Memberships::CardsController < ApplicationController
 
 	private
 	  def ecstore_user_params
-	    params.require(:ecstore_user).permit(:name,:card_num,:id_card_number,:area,:mobile,:addr,:sex)
+	    params.require(:ecstore_user).permit(:name,:card_num,:card_pwd,:id_card_number,:area,:mobile,:addr,:sex)
 	  end
 end

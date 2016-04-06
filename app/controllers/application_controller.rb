@@ -80,7 +80,7 @@ class ApplicationController < ActionController::Base
 
     # find categories
     def require_top_cats
-      @top_cats = Ecstore::Category.where(:parent_id=>0).where('sell=true or future=true or agent=true').where("cat_name not in (?)",['时装周预售','VIP卡']).order("p_order asc")
+      @top_cats = Ecstore::Category.where(:parent_id=>0).where('sell=true or future=true or agent=true').where("cat_name not in (?)",['时装周预售','会员卡']).order("p_order asc")
     end
 
     def find_path_seo

@@ -62,7 +62,7 @@ $(document).ready(function(){
 			var mobile = $("#member_card_user_tel").val();
 			var user_tel = $("#user_tel").val();
 			if(mobile!=user_tel){
-				alert("用卡人手机号码和搜索到的用户手机号码不一致，不能使用此VIP卡 !");
+				alert("用卡人手机号码和搜索到的用户手机号码不一致，不能使用此会员卡 !");
 				return false;
 			}
 		}else{
@@ -74,7 +74,7 @@ $(document).ready(function(){
 		}
 		
 
-		return confirm("确定使用此VIP卡吗？");
+		return confirm("确定使用此会员卡吗？");
 	});
 
 

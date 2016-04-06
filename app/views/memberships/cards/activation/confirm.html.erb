@@ -1,6 +1,6 @@
 <div class="cards">
 	<div class="form-block">
-		<h4>VIP卡激活确认 </h4>
+		<h4>会员卡激活确认 </h4>
 
 		<p>请再次核对以下信息是否正确</p>
 
@@ -8,7 +8,7 @@
 			<%=f.hidden_field :no,:value=>@card.no%>
 
 			<div class="field">
-				<label class="field-label field-label-long">待激活VIP卡号 : </label>
+				<label class="field-label field-label-long">待激活会员卡号 : </label>
 				<span class="field-plain"><%=@card.no%></span>
 			</div>
 
@@ -25,7 +25,7 @@
 			</div>
 
 			<div class="field">
-				<label class="field-label field-label-long">VIP卡持有人手机号码 : </label>
+				<label class="field-label field-label-long">会员卡持有人手机号码 : </label>
 				<span class="field-plain"><%=mask(@card.member_card.buyer_tel)%></span>
 			</div>
 
@@ -42,16 +42,16 @@
 		<ul>
 			<li>
 				<strong> 预存款账号有什么用？</strong>
-				<div>答：当点击“确认激活”后，您的VIP卡余额将会被存入当前显示的预存款账号中，此操作一经确认不可修改。</div>
+				<div>答：当点击“确认激活”后，您的会员卡余额将会被存入当前显示的预存款账号中，此操作一经确认不可修改。</div>
 			</li>
 			<li>
 				<strong> 我不想在这个账号里充值可以吗？</strong>
-				<div>答：当然可以，请退出网站并使用您想要充值的账户重新登录，并在VIP卡专区重新选择激活即可。</div>
+				<div>答：当然可以，请退出网站并使用您想要充值的账户重新登录，并在会员卡专区重新选择激活即可。</div>
 			</li>
 
 			<li>
-				<strong> VIP卡持有人手机号码有什么用？</strong>
-				<div>答：此号码将作为将来为您提供VIP卡增值服务的联系方式，一经确认后如需修改请与客服联系。</div>
+				<strong> 会员卡持有人手机号码有什么用？</strong>
+				<div>答：此号码将作为将来为您提供会员卡增值服务的联系方式，一经确认后如需修改请与客服联系。</div>
 			</li>
 		</ul>
 	</div>

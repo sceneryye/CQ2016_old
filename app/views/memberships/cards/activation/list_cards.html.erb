@@ -1,11 +1,11 @@
 <div class="cards">
 	<div class="form-block">
-		<h4>请按以下提示操作，请选择您要激活的VIP卡 </h4>
+		<h4>请按以下提示操作，请选择您要激活的会员卡 </h4>
 
 		
 
 		<%if @cards.size > 0%>
-			<p>以下为您所有可以激活的VIP卡，请选择</p>
+			<p>以下为您所有可以激活的会员卡，请选择</p>
 			<%=form_for :card,:url=>select_card_path,:html=>{:id=>"select_card"} do  |f|%>
 				<table class="list-cards">
 					<tr>
@@ -36,13 +36,13 @@
 						<%=f.submit "确认选择",:class=>"btn submit"%>
 						<span class="error"></span>
 					<%else%>
-						<div>没有可激活的VIP卡  <%=link_to "返回",activation_card_path,:class=>"btn"%></div>
+						<div>没有可激活的会员卡  <%=link_to "返回",activation_card_path,:class=>"btn"%></div>
 					<%end%>
 					
 				</div>
 			<%end%>
 		<%else%>
-			<p>没有找到相关VIP卡</p>
+			<p>没有找到相关会员卡</p>
 		<%end%>
 
 		
@@ -53,11 +53,11 @@
 		<ul>
 			<li>
 				<strong>为什么要填手机号码？</strong>
-				<div>答：为了保障VIP卡的使用安全，每一张卡在购买时均已指定使用者手机号码，您只有在正确输入手机号码时才可以使用您的VIP卡。</div>
+				<div>答：为了保障会员卡的使用安全，每一张卡在购买时均已指定使用者手机号码，您只有在正确输入手机号码时才可以使用您的会员卡。</div>
 			</li>
 			<li>
 				<strong>为什么还要验证手机号码?</strong>
-				<div>答：为了保障VIP卡的使用安全，在您激活VIP卡时，我们需要验证您的身份真实性。</div>
+				<div>答：为了保障会员卡的使用安全，在您激活会员卡时，我们需要验证您的身份真实性。</div>
 			</li>
 		</ul>
 	</div>

@@ -1,7 +1,7 @@
 #encoding:utf-8
 class Ecstore::Card < Ecstore::Base
 	self.table_name = "sdb_imodec_cards"
-  	attr_accessor :buyer_tel, :card_type, :no, :sale_status, :status, :pay_status, :use_status, :user_tel, :value, :password,:sold_at,:used_at,:try_password_times
+  	#attr_accessor :buyer_tel, :card_type, :no, :sale_status, :status, :pay_status, :use_status, :user_tel, :value, :password,:sold_at,:used_at,:try_password_times
   	
   	has_one :member_card, :foreign_key=>"card_id"
 
