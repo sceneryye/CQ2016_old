@@ -36,7 +36,7 @@
                       <%end%>
                       
                        <!-- &nbsp;&nbsp;&nbsp;
-                      <%=link_to "发送手机验证码","javascript:void(0);",:method=>:put,:class=>"btn send_sms_code",:'data-url'=>send_sms_code_admin_user_path(@user)%>
+                      <%=link_to "发送手机验证码","javascript:void(0);",:method=>:put,:class=>"button send_sms_code",:'data-url'=>send_sms_code_admin_user_path(@user)%>
                       <span id="return_msg" class="help"></span> -->
                       
               </div>
@@ -63,7 +63,7 @@
 
             <div class="control-group">
               <div class="controls">
-                <%= f.submit '使用会员卡', :class => "btn btn-primary",:id=>"use_card"%>
+                <%= f.submit '使用会员卡', :class => "button",:id=>"use_card"%>
                 <span class="msg"></span>
               </div>
             </div>

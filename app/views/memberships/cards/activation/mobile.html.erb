@@ -11,7 +11,7 @@
 				<%=text_field_tag :tel,@card.member_card&&@card.member_card.user_tel,:class=>"field-input sms_tel"%>
 				
 				<span class="sms">
-					<%=link_to "发送激活码","javascript:void(0)",:"data-url"=>send_sms_code_card_path,:class=>"btn",:id=>"send_sms_code"%>
+					<%=link_to "发送激活码","javascript:void(0)",:"data-url"=>send_sms_code_card_path,:class=>"button",:id=>"send_sms_code"%>
 					<span class="tip sms_tip"></span>
 				</span>
 			</div>
@@ -23,7 +23,7 @@
 			</div>
 
 			<div class="field">
-				<%=f.submit "确认提交",:class=>"btn submit"%>
+				<%=f.submit "确认提交",:class=>"button submit"%>
 			</div>
 
 		<%end%>

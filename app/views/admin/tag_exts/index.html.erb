@@ -1,6 +1,6 @@
 <%=form_for :search,:url=>admin_tag_exts_path,:html=>{:class=>"form-search"},:method=>:get do |f|%>
 <%=f.text_field :key,:placeholder=>"标签",:value=>params[:search]&&params[:search][:key]%>
-<%=f.submit "搜索",:class=>"btn"%>
+<%=f.submit "搜索",:class=>"button"%>
 <%end%>
 
 <table class="table table-bordered table-hover">

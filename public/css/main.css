@@ -22,15 +22,15 @@ a {
   transition: 300ms;
 }
 .thumb{width:100px;}
-.btn {
+.button {
   font-weight: 300;
   border: 0;
 }
-.btn.btn-primary {
+.button.button-primary {
   background-color:  #fb0401; 
 }
-.btn.btn-primary:hover,
-.btn.btn-primary.active {
+.button.button-primary:hover,
+.button.button-primary.active {
   background-color: #bf0705;
   -webkit-box-shadow: none;
   -moz-box-shadow: none;

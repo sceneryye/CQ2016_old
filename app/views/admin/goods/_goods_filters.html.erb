@@ -1,11 +1,11 @@
-<div id="filters" style="float:left">
+<div id="filters">
 	<%=form_for :s, :url=>search_admin_goods_path,:method=>:get,:remote=>true,:html=>{:class=>"form-search",:id=>"simple_search"} do |f|%>
 		<%=hidden_field_tag :view,@view%>
 		<%=hidden_field_tag :template,@template%>
 
 		<%=f.text_field :q,:placeholder=>"货号/商品名"%>
-		<%=f.submit "搜索",:class=>"btn btn-success",:name=>nil%> 
-		<%=link_to "清除",admin_goods_path,:class=>"btn"%> 
+		<%=f.submit "搜索",:class=>"button button-success",:name=>nil%> 
+		<%=link_to "清除",admin_goods_path,:class=>"button"%> 
 	<%end%>
 
 	<%=link_to "高级搜索>>","#",:id=>"toggle_search"%>
@@ -43,8 +43,8 @@
 		</div>
 
 		<div class="filter-actions">
-			<%=f.submit "搜索",:name=>nil,:class=>"btn btn-success"%> 
-			<%=link_to "清除","#",:class=>"btn",:id=>"reset_form"%> 
+			<%=f.submit "搜索",:name=>nil,:class=>"button button-success"%> 
+			<%=link_to "清除","#",:class=>"button",:id=>"reset_form"%> 
 		</div>
 	<%end%>
 </div>

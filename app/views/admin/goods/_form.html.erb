@@ -72,7 +72,7 @@
       <div class="controls">
         <%#=form_for :good,:url=>uploadpic_admin_goods_path,:html => {:multipart => true} ,:method=>:post do |f|%>
             <%#= file_field :good, :file, :id=>'csvfile',:accept => "application/msexcel",:class=>"batch" %>
-            <%#= f.submit '上传图片(780x1100)', :class => "btn btn-primary" %>
+            <%#= f.submit '上传图片(780x1100)', :class => "button" %>
         <%#end%>
         <%= f.text_field :medium_pic,:class=>"span10"%>
       </div>

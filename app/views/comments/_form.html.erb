@@ -4,5 +4,5 @@
     <%=f.hidden_field :commentable_id,:value=>commentable_id%>
     <%=f.hidden_field :commentable_type,:value=>commentable_type%>
     <div><%=f.text_area :content%></div>
-    <div><%=f.submit "提交",:class=>"btn btn-inverse #{'login' unless signed_in?}"%></div>
+    <div><%=f.submit "提交",:class=>"button button-inverse #{'login' unless signed_in?}"%></div>
 <%end%>

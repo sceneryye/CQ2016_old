@@ -46,7 +46,7 @@
       <div class="actions">
         <div>支付成功后，可以在<%=link_to "订单详情",detail_order_path(@order),:target=>"_blank"%>处查看订单和追踪订单状态</div>
         <br>
-        <%=f.submit "安全支付",:class=>"btn  btn-success btn-lg" if @order.pay_status == '0' && @order.status == 'active' && @order.payment != 'offline' %>
+        <%=f.submit "安全支付",:class=>"button  button-success button-lg" if @order.pay_status == '0' && @order.status == 'active' && @order.payment != 'offline' %>
       </div>
   <%end%>
 </div>

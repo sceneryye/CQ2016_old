@@ -112,8 +112,8 @@
                             <div class="col-sm-12">  
                                 <div class="help-block" style="color:red">*打星号的为必填项*</div>                                 
                                 <div class="form-group">
-                                     <%=f.submit "提 交",:class=>"btn btn-success btn-lg",:name=>"btn",:id=>"btn" %>
-                                     <%=link_to "返 回","/",:class=>"btn btn-success btn-lg", :style=>'color:white'%>            
+                                     <%=f.submit "提 交",:class=>"button button-success button-lg",:name=>"button",:id=>"button" %>
+                                     <%=link_to "返 回","/",:class=>"button button-success button-lg", :style=>'color:white'%>            
                                 </div>
                             </div>
                         </div>
@@ -136,8 +136,8 @@
 <script  type="text/javascript">
           $('#ckb').click(function(){
             if ($(this).prop('checked')){
-                $('#btn').removeAttr('disabled');
+                $('#button').removeAttr('disabled');
             } else {
-                $('#btn').attr('disabled', 'true');
+                $('#button').attr('disabled', 'true');
             }
         });</script>

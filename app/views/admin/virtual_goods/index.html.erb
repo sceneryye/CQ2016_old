@@ -1,8 +1,8 @@
 <%=form_for :vgood,:url=>import_admin_virtual_goods_path,:html => {:multipart => true} ,:method=>:post do |f|%>
 	<div>
 	    <%= f.file_field :file, :id=>'csvfile',:accept => "text/csv",:class=>"hide" %> 
-	    <%=link_to "导入","#",:class=>"btn btn-primary",:id=>"import"%>
-	    <%=link_to "模板下载","/template/虚拟商品导入模板.csv",:class=>"btn"%>
+	    <%=link_to "导入","#",:class=>"button",:id=>"import"%>
+	    <%=link_to "模板下载","/template/虚拟商品导入模板.csv",:class=>"button"%>
 	</div>
 <%end%>
 
@@ -28,7 +28,7 @@
 <br>
 <h4>
 	虚拟商品
-	<%=link_to "添加虚拟商品",new_admin_virtual_good_path,:class=>"btn btn-primary pull-right"%>
+	<%=link_to "添加虚拟商品",new_admin_virtual_good_path,:class=>"button pull-right"%>
 </h4>
 <br>
 <table class="table table-striped table-bordered">

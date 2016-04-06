@@ -1,14 +1,14 @@
 
 <div class="scope">
-    <%=link_to "未出售的卡",admin_cards_path(:sold=>0),:class=>"btn"%>
-    <%=link_to "已出售的卡",admin_cards_path(:sold=>1),:class=>"btn"%>
+    <%=link_to "未出售的卡",admin_cards_path(:sold=>0),:class=>"button"%>
+    <%=link_to "已出售的卡",admin_cards_path(:sold=>1),:class=>"button"%>
 </div>
 
 <%=form_for :card,:url=>import_admin_cards_path,:html => {:multipart => true} ,:method=>:post do |f|%>
 
-  <div class="btn-group">
+  <div class="button-group">
     <%= file_field :card, :file, :id=>'csvfile',:accept => "text/csv" %> 
-    <%= f.submit '导入', :class => "btn btn-primary" %>
+    <%= f.submit '导入', :class => "button" %>
   </div>
   &nbsp;&nbsp;&nbsp;&nbsp;
   <%=link_to "下载csv模板","/pic/card_模板.csv"%>
@@ -32,15 +32,15 @@
 
 <%=form_for :search,:url=>admin_cards_path,:html=>{:class=>"form-search"},:method=>:get do |f|%>
 <%=f.text_field :key,:placeholder=>"卡号",:value=>params[:search]&&params[:search][:key]%>
-<%=f.submit "搜索",:class=>"btn"%>
+<%=f.submit "搜索",:class=>"button"%>
 <%end%>
 <%=form_for :card,:url=>export_admin_cards_path,:method=>:post do |f|%>
 <%= f.hidden_field :select_all,:class=>"sel_operation", :value => 0 %>
 <div class="actions">
-    <%=f.submit "导出",:class=>"export_btn btn" %>
+    <%=f.submit "导出",:class=>"export_button button" %>
     
-    <div class="btn-group">
-      <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+    <div class="button-group">
+      <a class="button dropdown-toggle" data-toggle="dropdown" href="#">
         标签
         <span class="caret"></span>
       </a>

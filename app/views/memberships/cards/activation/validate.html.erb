@@ -19,7 +19,7 @@
 				</span>
 				<span class="sms">
 					<%=hidden_field_tag :tel,@card.member_card.user_tel,:class=>"sms_tel"%>
-					<%=link_to "发送验证码","javascript:void(0)",:"data-url"=>send_sms_code_card_path,:class=>"btn",:id=>"send_sms_code"%>
+					<%=link_to "发送验证码","javascript:void(0)",:"data-url"=>send_sms_code_card_path,:class=>"button",:id=>"send_sms_code"%>
 					<span class="tip sms_tip"></span>
 					
 				</span>
@@ -44,7 +44,7 @@
 			<%end%>
 
 			<div class="field">
-				<%=f.submit "确认提交",:class=>"btn submit"%>
+				<%=f.submit "确认提交",:class=>"button submit"%>
 			</div>
 
 		<%end%>

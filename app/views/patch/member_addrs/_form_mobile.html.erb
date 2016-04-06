@@ -80,12 +80,12 @@
         <span class="form_td"><input name="addr[def_addr]" type="hidden" value="1" checked="true" /></span>
       </dd></dl>
       <br/>
-      <div class="ui-btn-area">
+      <div class="ui-button-area">
         <%if @method == :put%>
-            <input type="submit" class="am-btn am-btn-warning am-btn-block "  value="<%=I18n.t "confirm"%>">
+            <input type="submit" class="am-button am-button-warning am-button-block "  value="<%=I18n.t "confirm"%>">
 
         <%else%>
-            <input type="submit" class="am-btn  am-btn-warning am-btn-block  "   value="<%=I18n.t "confirm"%>">
+            <input type="submit" class="am-button  am-button-warning am-button-block  "   value="<%=I18n.t "confirm"%>">
 
         <%end%>
       </div>
@@ -94,7 +94,7 @@
 </div>
 
   <script>
-   $(".am-btn-block").click(function(){
+   $(".am-button-block").click(function(){
        var mobile=$("#addr_mobile").val()
 
        if(mobile.length==0)

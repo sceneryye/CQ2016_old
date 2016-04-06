@@ -42,7 +42,7 @@
               <%= f.label :sms_validate, "手机验证码 :", :class => "control-label" %>
               <div class="controls">
                 <%= f.text_field :sms_code,:class=>"input-small"%>
-                <%=link_to "发送手机验证码","javascript:void(0);",:method=>:put,:class=>"btn send_sms_code",:'data-url'=>send_sms_code_admin_user_path(@user),:id=>"send_sms_code"%>
+                <%=link_to "发送手机验证码","javascript:void(0);",:method=>:put,:class=>"button send_sms_code",:'data-url'=>send_sms_code_admin_user_path(@user),:id=>"send_sms_code"%>
                 <span class="help"></span>
               </div>
             </div>
@@ -84,7 +84,7 @@
 
           <div class="control-group">
             <div class="controls">
-              <%= f.submit '购买', :class => "btn btn-primary",:id=>"buy_card",:confirm=>"确定购买？" %>
+              <%= f.submit '购买', :class => "button",:id=>"buy_card",:confirm=>"确定购买？" %>
               <span class="msg"></span>
             </div>
           </div>

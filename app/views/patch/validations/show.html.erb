@@ -28,7 +28,7 @@
 			<%if @user.email_validated?%>
 				<%=link_to "修改",email_validation_path%>
 			<%else%>
-				<%=link_to "立即认证",email_validation_path,:class=>"btn btn-success"%>
+				<%=link_to "立即认证",email_validation_path,:class=>"button button-success"%>
 			<%end%>
 		</td>
 	</tr>
@@ -47,7 +47,7 @@
 			<%if @user.sms_validated?%>
 				<%=link_to "修改",mobile_validation_path%>
 			<%else%>
-				<%=link_to "立即认证",mobile_validation_path,:class=>"btn btn-success"%>
+				<%=link_to "立即认证",mobile_validation_path,:class=>"button button-success"%>
 			<%end%>
 		</td>
 	</tr>

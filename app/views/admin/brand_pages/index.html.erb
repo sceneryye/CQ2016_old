@@ -6,7 +6,7 @@
   <%=form_for :search,:url=>admin_brand_pages_path,:html=>{:class=>"form-search"},:method=>:get do |f|%>
   <%=hidden_field_tag :scope,params[:scope]%>
   <%=f.text_field :key,:placeholder=>"基地名",:value=>params[:search]&&params[:search][:key]%>
-  <%=f.submit "搜索",:class=>"btn"%>
+  <%=f.submit "搜索",:class=>"button"%>
   <%end%>
 </div>
 

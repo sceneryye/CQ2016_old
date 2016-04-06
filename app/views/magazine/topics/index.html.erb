@@ -8,10 +8,10 @@
 <% end %>
 
 <div class="categories clearfix">
-  <div class="btn-group">
-    <%=link_to "查看所有" , "/topics", :class=>"btn"%>
+  <div class="button-group">
+    <%=link_to "查看所有" , "/topics", :class=>"button"%>
     <%Imodec::Category.all.each do |category|%>
-    <%=link_to category.name,"?category_id=#{category.id}",:class=>"btn #{'active' if params[:category_id] == category.id.to_s }"%>
+    <%=link_to category.name,"?category_id=#{category.id}",:class=>"button #{'active' if params[:category_id] == category.id.to_s }"%>
     <%end%>
   </div>
 </div>

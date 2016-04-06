@@ -12,7 +12,7 @@
 				</strong>
 				&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 				<%if @order.status == 'active'&&@order.pay_status == '0' && @order.payment != 'offline'%>
-				<%=link_to "付款",order_path(@order),:class=>"btn btn-inverse" %>
+				<%=link_to "付款",order_path(@order),:class=>"button button-inverse" %>
 				<%end%>
 			</li>
 			<li>订单备注 : <%=@order.memo%></li>

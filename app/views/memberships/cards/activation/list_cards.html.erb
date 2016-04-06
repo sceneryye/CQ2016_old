@@ -33,10 +33,10 @@
 				</table>
 				<div class="field actions">
 					<%if @cards.select { |c| c.pay_status&&!c.used?&&c.normal? }.size > 0%>
-						<%=f.submit "确认选择",:class=>"btn submit"%>
+						<%=f.submit "确认选择",:class=>"button submit"%>
 						<span class="error"></span>
 					<%else%>
-						<div>没有可激活的会员卡  <%=link_to "返回",activation_card_path,:class=>"btn"%></div>
+						<div>没有可激活的会员卡  <%=link_to "返回",activation_card_path,:class=>"button"%></div>
 					<%end%>
 					
 				</div>

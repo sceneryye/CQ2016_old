@@ -4,4 +4,4 @@ $("#coupon_<%=params[:member_id]%>").append('<div>'+
 		' (<%=@memc.coupon.cpns_name.truncate(10)%>) '+
 		' <%=link_to "x",admin_coupon_path(@memc.coupon.cpns_id,:member_id=>@user.member_id,:memc_code=>@memc.memc_code),:title=>"删除",:class=>"cancel",:confirm=>"确定删除优惠券#{@memc.memc_code}？",:remote=>true,:method=>:delete%>'+
 	' </span></div>');
-$(".btn-group").removeClass("open");
+$(".button-group").removeClass("open");

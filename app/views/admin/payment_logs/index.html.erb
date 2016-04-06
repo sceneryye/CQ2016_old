@@ -1,8 +1,8 @@
 <h4>支付日志</h4>
 <%=form_for :s,:url=>admin_payment_logs_path,:method=>:get,:html=>{:class=>"form-search"} do |f|%>
   <%=f.text_field :q, :value=>params[:s]&&params[:s][:q],:placeholder=>"订单号/支付号"%>
-  <input type="submit" value="搜索" class="btn btn-success">
-  <%=link_to "清除",admin_payment_logs_path,:class=>"btn"%>
+  <input type="submit" value="搜索" class="button button-success">
+  <%=link_to "清除",admin_payment_logs_path,:class=>"button"%>
 <%end%>
 
 <table class="table table-bordered table-striped">

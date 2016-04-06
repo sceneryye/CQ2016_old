@@ -38,12 +38,12 @@
                   <li>免费送货到家</li>
                   <li class="plan-action">
                     <%if signed_in?%>                
-                      <!-- <a class="btn btn-primary" href="/card/purchase?level=you">立刻申请</a> -->
-                      <a class="btn btn-primary" href="/member/new?apply_type=3&return_url=<%=params[:return_url]%>">立刻申请</a>
+                      <!-- <a class="button" href="/card/purchase?level=you">立刻申请</a> -->
+                      <a class="button" href="/member/new?apply_type=3&return_url=<%=params[:return_url]%>">立刻申请</a>
                     <%else%>
-                      <a class="btn btn-primary" href="/login?return_url=%2fvip">立刻申请</a>
+                      <a class="button" href="/login?return_url=%2fvip">立刻申请</a>
                     <%end%>                    
-                    <a class="btn btn-primary" href="<%=@return_url%>">以后再说</a>
+                    <a class="button" href="<%=@return_url%>">以后再说</a>
                   </li>
                 </ul>
               </div>
@@ -58,13 +58,13 @@
                   <li>二年以上：20%</li>
                   <li class="plan-action">
                     <%if signed_in?%>                
-                      <!-- <a class="btn btn-primary" href="/card/purchase?level=you">立刻申请</a> -->
-                       <a class="btn btn-primary" href="/member/new?apply_type=2&return_url=<%=params[:return_url]%>">立刻申请</a>
+                      <!-- <a class="button" href="/card/purchase?level=you">立刻申请</a> -->
+                       <a class="button" href="/member/new?apply_type=2&return_url=<%=params[:return_url]%>">立刻申请</a>
                     <%else%>
-                      <a class="btn btn-primary" href="/login?return_url=%2fvip">立刻申请</a>
+                      <a class="button" href="/login?return_url=%2fvip">立刻申请</a>
                     <%end%>
 
-                    <a class="btn btn-primary" href="<%=@return_url%>">以后再说</a>
+                    <a class="button" href="<%=@return_url%>">以后再说</a>
                   </li>
                 </ul>
               </div>

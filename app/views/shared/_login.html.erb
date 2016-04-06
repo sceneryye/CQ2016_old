@@ -15,7 +15,7 @@
               <%=form_for :session,:url=>"/login", :remote=>true do |f|%>
                 <%=f.text_field :username,:placeholder=>"邮箱",:class=>"new-input"%>
                 <%=f.password_field :password, :placeholder=>"密码",:class=>"new-input"%>
-                <%=f.submit "登 录",:class=>"btn new_btn"%>
+                <%=f.submit "登 录",:class=>"button new_button"%>
               <%end%>
               <div class="clear"></div>
               <div class="other-login">
@@ -73,8 +73,8 @@
                 <%=f.text_field :mobile,:value=>"",:class=>"new-input",:placeholder=>"手机"%>
               </li>
               <li>
-                <%=f.submit "注 册",:class=>"btn register_btn"%>
-                <%=link_to "返 回","#",:class=>"btn back_btn"%>
+                <%=f.submit "注 册",:class=>"button register_button"%>
+                <%=link_to "返 回","#",:class=>"button back_button"%>
               </li>
             </ul>
             <%end%>

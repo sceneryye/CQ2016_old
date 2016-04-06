@@ -34,7 +34,7 @@ class Admin::BrandPagesController < Admin::BaseController
   end
 
   def update
-      @brand = Ecstore::Brand.find_by_brand_id(params[:brand_page][:brand_id])
+      @brand = Ecstore::Brand.find_by_brand_id(brand_page_params[:brand_id])
       @brand.update_attributes params[:brand]
 
       @brand_page = Ecstore::BrandPage.find(params[:id])
@@ -46,10 +46,10 @@ class Admin::BrandPagesController < Admin::BaseController
   end
 
   def create
-      @brand = Ecstore::Brand.find_by_brand_id(params[:brand_page][:brand_id])
+      @brand = Ecstore::Brand.find_by_brand_id(brand_page_params[:brand_id])
       @brand.update_attributes params[:brand]
 
-      @brand_page = Ecstore::BrandPage.new(params[:brand_page])
+      @brand_page = Ecstore::BrandPage.new brand_page_params
       if @brand_page.save
           redirect_to edit_admin_brand_page_url(@brand)
       else
@@ -87,6 +87,11 @@ class Admin::BrandPagesController < Admin::BaseController
     Ecstore::Brand.where(:reco=>true).update_all :reco=>false
     @brand.update_attribute :reco, true
     redirect_to return_url
+  end
+
+  private
+  def brand_page_params
+    params.require(:brand_page).permit(:context,:brand_id)
   end
 
 end

@@ -55,7 +55,7 @@
 </head>
 <body>
 <header id="header" class="header clearfix">
-  <div class="head_logo fl"><a href="/vshop/<%=@supplier.id%>"  mars_sead="nav_home_btn"></a></div>
+  <div class="head_logo fl"><a href="/vshop/<%=@supplier.id%>"  mars_sead="nav_home_button"></a></div>
 
   <div class="head_right fr" style="display:none"><a href="brand-search.html"><span class="h_search"></span></a></div>
 </header>
@@ -76,7 +76,7 @@
     <ul class="am-navbar-nav am-cf sm-block-grid-4">
 
       <li >
-        <a class="am-btn  am-btn-danger" id="showgood" href="###">
+        <a class="am-button  am-button-danger" id="showgood" href="###">
 				<span  class="am-icon-dashboard">
 				</span>
 
@@ -84,7 +84,7 @@
       </li>
 
       <li>
-        <a  class="am-btn  am-btn-danger" href="tel:<%=@supplier.tel%>">
+        <a  class="am-button  am-button-danger" href="tel:<%=@supplier.tel%>">
 				<span class="am-icon-phone">
 				</span>
 
@@ -92,7 +92,7 @@
       </li>
 
       <li >
-        <a  class="am-btn  am-btn-danger" href="/vshop/<%=@supplier.id%>/user?id=<%=@supplier.id%>" onclick="setBackAct(&#39;topHeaderUserHome&#39;);" id="reddot"">
+        <a  class="am-button  am-button-danger" href="/vshop/<%=@supplier.id%>/user?id=<%=@supplier.id%>" onclick="setBackAct(&#39;topHeaderUserHome&#39;);" id="reddot"">
 				<span class="am-icon-user">
 				</span>
 
@@ -100,12 +100,12 @@
       </li>
 
       <li >
-        <a  class="am-btn  am-btn-danger" href="/cart/mobile?id=<%=@supplier.id%>">
+        <a  class="am-button  am-button-danger" href="/cart/mobile?id=<%=@supplier.id%>">
 				<span class="am-icon-shopping-cart"></span>
         </a>
       </li>
       <li class="am-navbar-labels am-navbar-more " >
-         <a class="am-btn  am-btn-danger" id="showall" >
+         <a class="am-button  am-button-danger" id="showall" >
                <%if  I18n.locale.to_s=="zh_cn"%>
             <span id="lange" class="am-navbar-label">English</span>
            <%elsif  I18n.locale.to_s =="en"%>
@@ -176,7 +176,7 @@
 
     </ul>
     <div class="am-share-footer">
-      <button class="am-btn am-btn-default am-btn-block" data-am-share-close="">
+      <button class="am-button am-button-default am-button-block" data-am-share-close="">
         关闭
       </button>
     </div>

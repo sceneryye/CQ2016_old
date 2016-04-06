@@ -12,8 +12,8 @@
    </div>
 
     <%=render :partial=>"form_mobile",:locals=>{ :display=>true }%>
-    <%#=link_to "删除",member_addr_path(id:@addr,platform:params[:platform],supplier_id:params[:supplier_id]),:method=>:delete,:class=>"am-btn am-btn-danger am-round ",:confirm=>"确定要删除吗？"%>
-   <br> <a href="/member_addrs/<%=@addr.id%>?platform=mobile&supplier_id=<%=@supplier.id%>" class="am-btn am-btn-danger am-round " style="float: right;width: 30%" data-confirm="确定要删除吗？" data-method="delete" rel="nofollow"><%=I18n.t "delete"%></a>
+    <%#=link_to "删除",member_addr_path(id:@addr,platform:params[:platform],supplier_id:params[:supplier_id]),:method=>:delete,:class=>"am-button am-button-danger am-round ",:confirm=>"确定要删除吗？"%>
+   <br> <a href="/member_addrs/<%=@addr.id%>?platform=mobile&supplier_id=<%=@supplier.id%>" class="am-button am-button-danger am-round " style="float: right;width: 30%" data-confirm="确定要删除吗？" data-method="delete" rel="nofollow"><%=I18n.t "delete"%></a>
 
 <%else%>
      <h4>修改地址</h4>

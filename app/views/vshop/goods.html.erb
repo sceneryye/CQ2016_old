@@ -1,10 +1,10 @@
 <br/>     <br/>
 <% if (Ecstore::Account.find(@user.member_id).supplier_id)==(Ecstore::Supplier.find_by_name("万家物流").id)%>
-<a class="btn btn-primary" href="/vshop/goods?cat_id=<%=Ecstore::GoodCat.find_by_cat_name("物流").cat_id%>">物流</a>
-    <a class="btn btn-primary" href="/vshop/goods?name=货源">货源</a>
-    <a class="btn btn-primary" href="/vshop/goods?cat_id=<%=Ecstore::GoodCat.find_by_cat_name("车源").cat_id%>">车源</a>
-    <a class="btn btn-primary" href="/vshop/goods?cat_id=<%=Ecstore::GoodCat.find_by_cat_name("门对门").cat_id%>">门对门</a>
-    <a class="btn btn-primary" href="/vshop/goods?cat_id=<%=Ecstore::GoodCat.find_by_cat_name("自提").cat_id%>">自提</a>
+<a class="button" href="/vshop/goods?cat_id=<%=Ecstore::GoodCat.find_by_cat_name("物流").cat_id%>">物流</a>
+    <a class="button" href="/vshop/goods?name=货源">货源</a>
+    <a class="button" href="/vshop/goods?cat_id=<%=Ecstore::GoodCat.find_by_cat_name("车源").cat_id%>">车源</a>
+    <a class="button" href="/vshop/goods?cat_id=<%=Ecstore::GoodCat.find_by_cat_name("门对门").cat_id%>">门对门</a>
+    <a class="button" href="/vshop/goods?cat_id=<%=Ecstore::GoodCat.find_by_cat_name("自提").cat_id%>">自提</a>
 
 
 <%end%>
@@ -12,9 +12,9 @@
 
   <script src="/assets/jquery.js?body=1" type="text/javascript"></script>
   <script src="/assets/jquery_ujs.js?body=1" type="text/javascript"></script>
-<%=link_to "添加商品",'/admin/goods/new',:class=>"btn btn-primary"%>
+<%=link_to "添加商品",'/admin/goods/new',:class=>"button"%>
   <% if (Ecstore::Account.find(@user.member_id).supplier_id)==(Ecstore::Supplier.find_by_name("万家物流").id)%>
-  <%=link_to "添加货源小黑板",'/admin/goods/black_good_new',:style => "color:red",:class=>"btn "%>
+  <%=link_to "添加货源小黑板",'/admin/goods/black_good_new',:style => "color:red",:class=>"button "%>
       <%end%>
 </div>
 <%if @goodes%>

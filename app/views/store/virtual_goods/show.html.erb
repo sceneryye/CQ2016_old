@@ -74,14 +74,14 @@
             <div class="download">
                   <%if @coupon%>
                         <%if @coupon.start?%>
-                              <div class="btn btn-inverse btn-large disabled">暂未开始</div>
+                              <div class="button button-inverse button-large disabled">暂未开始</div>
                         <%elsif @coupon.expired?%>
-                              <div class="btn btn-inverse btn-large disabled">优惠已过期</div>
+                              <div class="button button-inverse button-large disabled">优惠已过期</div>
                         <%else%>
-                              <%=link_to "VIP体验券免费短信下载","#{ signed_in? ? '#download' : '#' }", data: { toggle: "modal" }, :class=>"btn btn-inverse btn-large #{'login' unless signed_in? }"%>
+                              <%=link_to "VIP体验券免费短信下载","#{ signed_in? ? '#download' : '#' }", data: { toggle: "modal" }, :class=>"button button-inverse button-large #{'login' unless signed_in? }"%>
                         <%end%>
                   <%else%>
-                        <div class="btn btn-inverse btn-large disabled">暂无优惠活动</div>
+                        <div class="button button-inverse button-large disabled">暂无优惠活动</div>
                   <%end%>
             </div>
             

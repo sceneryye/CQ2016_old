@@ -181,7 +181,7 @@ $(document).ready(function(){
 
 		if($("#batch_inputs input").length==0){
 			alert("请选择要操作的数据项！");
-			$("#batch_actions .btn-group").removeClass("open");
+			$("#batch_actions .button-group").removeClass("open");
 			return false;
 		}
 
@@ -201,21 +201,21 @@ $(document).ready(function(){
 		var goods_ids = getGoodIds();
 
 		var data = { act: act, goods_ids: goods_ids }
-		var _btn =  this;
+		var _button =  this;
 		$.ajax(url,{
 			type: "put",
 			data: data,
 			success: function(res){
 				var search_url = $("#goods").data("url")
 				$.getScript(search_url,function(){
-					$(_btn).removeClass("disabled");
+					$(_button).removeClass("disabled");
 					if(res.csv){
 						window.location.href = res.csv;
 					}
 				});
 				$("#batch_inputs").empty();
 				$("#count").text("0");
-				$("#batch_actions .btn-group").removeClass("open");
+				$("#batch_actions .button-group").removeClass("open");
 
 				
 			}
@@ -293,14 +293,14 @@ $(document).ready(function(){
 
 
 		var data = { act: "tag", goods_ids: goodIds, tegs: tegs }
-		var _btn =  this;
+		var _button =  this;
 		$.ajax(url,{
 			type: "put",
 			data: data,
 			success: function(res){
 				var reqUrl = $("#goods").data("url");
 				$.getScript(reqUrl);
-				$(_btn).removeClass("disabled");
+				$(_button).removeClass("disabled");
 				$("#batch_inputs").empty();
 				$("#tegs .close").trigger("click");
 				$("#count").text("0");
@@ -361,14 +361,14 @@ $(document).ready(function(){
 	// 	});
 
 	// 	var data = { act: "tag", goods_ids: goods_ids, tegs: tegs }
-	// 	var _btn =  this;
+	// 	var _button =  this;
 	// 	$.ajax(url,{
 	// 		type: "put",
 	// 		data: data,
 	// 		success: function(res){
 	// 			var search_url = $("#goods").data("url")
 	// 			$.getScript(search_url);
-	// 			$(_btn).removeClass("disabled");
+	// 			$(_button).removeClass("disabled");
 	// 			$("#batch_inputs").empty();
 	// 			$("#count").text("0");
 				

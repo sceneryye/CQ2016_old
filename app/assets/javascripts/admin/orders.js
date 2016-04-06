@@ -146,14 +146,14 @@ $(document).ready(function(){
 
 
 		var data = { act: "tag", order_ids: orderIds, tegs: tegs }
-		var _btn =  this;
+		var _button =  this;
 		$.ajax(url,{
 			type: "put",
 			data: data,
 			success: function(res){
 				var reqUrl = $("#orders").attr("data-url");
 				$.getScript(reqUrl);
-				$(_btn).removeClass("disabled");
+				$(_button).removeClass("disabled");
 				$("#batch_inputs").empty();
 				$("#tegs .close").trigger("click");
 				$("#count").text("0");
@@ -167,7 +167,7 @@ $(document).ready(function(){
  	$("#batch_actions .batch").click(function(){
  		var orderIds = getOrderIds();
  		if(orderIds.length == 0){
- 			$("#batch_actions .btn-group").removeClass("open");
+ 			$("#batch_actions .button-group").removeClass("open");
  			alert("请选择要操作的数据项！");
  			return false;
  		}
@@ -180,20 +180,20 @@ $(document).ready(function(){
 		var url = "/admin/orders/batch"
 
 		var data = { act: act, order_ids: orderIds }
-		var _btn =  this;
+		var _button =  this;
 		$.ajax(url,{
 			type: "put",
 			data: data,
 			success: function(res){
 				var reqUrl = $("#order").data("url");
 				$.getScript(reqUrl,function(){
-					$(_btn).removeClass("disabled");
+					$(_button).removeClass("disabled");
 					if(res.csv) window.location.href =  res.csv;
 				});
-				$(_btn).removeClass("disabled");
+				$(_button).removeClass("disabled");
 				$("#batch_inputs").empty();
 				$("#count").text("0");
-				$("#batch_actions .btn-group").removeClass("open");
+				$("#batch_actions .button-group").removeClass("open");
 				$("#select_page").attr("checked",false);
 			}
 		});

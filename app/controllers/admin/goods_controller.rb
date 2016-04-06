@@ -226,21 +226,21 @@ module Admin
        end
 
       def search
-            @template =  params[:template] || "index_goods"
-            @view =  params[:view] || "index"
-            @layout = params[:layout] || "admin"
+        @template =  params[:template] || "index_goods"
+        @view =  params[:view] || "index"
+        @layout = params[:layout] || "admin"
 
-            marketable = params[:marketable].to_s
+        marketable = params[:marketable].to_s
 
-            if params[:order].present?
-                @field, @sorter = params[:order].split("-")
-                @order = "#{@field} #{@sorter}"
-                @next_sorter = @sorter == "asc" ? "desc" : "asc"
-            end
+        if params[:order].present?
+            @field, @sorter = params[:order].split("-")
+            @order = "#{@field} #{@sorter}"
+            @next_sorter = @sorter == "asc" ? "desc" : "asc"
+        end
 
-            @order = "goods_id desc" if @order.blank?
-           
-            @goods = Ecstore::Good.order(@order)
+        @order = "goods_id desc" if @order.blank?
+       
+        @goods = Ecstore::Good.order(@order)
 		    #	@goods = @goods.includes(:cat,:brand,:good_type,:tegs,:supplier)
 
         if marketable.present?
@@ -299,7 +299,7 @@ module Admin
       end
 
 
-   def edit
+      def edit
        @good =  Ecstore::Good.find(params[:id])
        @products = @good.products
        @spec_items = Ecstore::SpecItem.all
@@ -375,6 +375,7 @@ module Admin
       end
 
       def update
+        return render text: goods_params
             @good  =  Ecstore::Good.find(params[:id])
             @action_url = admin_good_path(@good)
             @good.update_attributes(goods_params)
@@ -573,10 +574,10 @@ module Admin
             end
       end
 
-       private 
-       def goods_params
+      private 
+      def goods_params
         params.require(:good).permit(:desc, :price,:mktprice,:store,:name,:freight,:p_order,:intro,
-                            :cat_id,:brand_id,:supplier_id,:bn,:up_or_down,:spec_info,
+                            :cat_id,:brand_id,:supplier_id,:bn,:up_or_down,:spec_info,:products_attributes,
                             :small_pic,:medium_pic,:big_pic,:place,:place_info,:marketable,:uptime)
       end
 

@@ -1,20 +1,21 @@
-
-<%=render "goods_filters"%>
-<div class="btn-group">
-  <%=form_for :good,:url=>import_admin_goods_path,:html => {:multipart => true} ,:method=>:post do |f|%>
-      <%= file_field :good, :file, :id=>'csvfile',:accept => "application/msexcel",:class=>"batch" %>
-      <%= f.submit 'EXCEL批量导入商品', :class => "btn btn-primary" %>
-  <%end%>
+<div class="columns small-6">
+	<%=render "goods_filters"%>
 </div>
-<div>
+<div class="columns small-6 callout">
+	  <%=form_for :good,:url=>import_admin_goods_path,:html => {:multipart => true} ,:method=>:post do |f|%>
+	      <%= file_field :good, :file, :id=>'csvfile',:accept => "application/msexcel",:class=>"batch" %>
+	      <%= f.submit 'EXCEL批量导入商品', :class => "button" %>
+	  <%end%>
+</div>
+<div class="columns small-12 callout">
 	<p>
 		<div id="batch_inputs" class="hide"></div>
 		<div id="batch_actions">
-            <%=link_to "添加",'/admin/goods/new',:class=>"btn btn-primary"%>
-		    <%=link_to "删除","#",:class=>"btn batch",:data=>{:act=>:destroy},:confirm=>"确定删除吗?"%>
-			<%#=link_to "导出","#",:class=>"btn batch",:data=>{:act=>:export}%>
-			<div class="btn-group">
-			  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+            <%=link_to "添加",'/admin/goods/new',:class=>"button"%>
+		    <%=link_to "删除","#",:class=>"button batch",:data=>{:act=>:destroy},:confirm=>"确定删除吗?"%>
+			<%#=link_to "导出","#",:class=>"button batch",:data=>{:act=>:export}%>
+			<div class="button-group">
+			  <a class="button dropdown-toggle" data-toggle="dropdown" href="#">
 			    批量操作
 			    <span class="caret"></span>
 			  </a>
@@ -25,8 +26,8 @@
 			    <!-- <li><a href="#">link</a></li> -->
 			  </ul>
 			</div>
-			<div class="btn-group">
-			  <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+			<div class="button-group">
+			  <a class="button dropdown-toggle" data-toggle="dropdown" href="#">
 			    标签
 			    <span class="caret"></span>
 			  </a>
@@ -40,6 +41,8 @@
 		</div>
 
 	</p>
+</div>
+<div class="columns small-12 callout">
   <%=form_for :member,:url=>export_admin_goods_path,:method=>:post do |f|%>
       <%= f.hidden_field :select_all,:class=>"sel_operation", :value => 0 %>
       <input type="hidden" name="all_goods_ids" value="<%=@goods_ids%>" />
@@ -50,7 +53,7 @@
 		<%=link_to "取消选择","#",:id=>"cancel_all"%>
         &nbsp;&nbsp;&nbsp;&nbsp;
       <!-- <%if current_admin.has_right_of("goods","export") %>
-        <%= f.submit '导出商品', :class => "btn btn-primary" %>
+        <%= f.submit '导出商品', :class => "button" %>
       <div style="float:right;">
         <ul class="clearfix unstyled">
           <li class="checkbox-verticle"><%= check_box_tag "fields[]","进货价",true%>进货价</li>

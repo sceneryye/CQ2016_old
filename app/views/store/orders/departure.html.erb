@@ -21,7 +21,7 @@
  </div>
 </header>
 <div class="href">
-   <a id="ahref" class="am-btn am-btn-default" href="/orders/new_manco_addr?supplier_id=<%=@supplier.id%>" title="">新增寄货人地址 </a>
+   <a id="ahref" class="am-button am-button-default" href="/orders/new_manco_addr?supplier_id=<%=@supplier.id%>" title="">新增寄货人地址 </a>
 </div>
   <form action="arrival" class="am-form" method="post">
     <input type="hidden" name="supplier_id"value="<%=@supplier.id%>">
@@ -41,7 +41,7 @@
                    <td ><%=def_addr.name%></td>
                    <td ><%=def_addr.mobile%></td>
                    <td ><%=def_addr.addr%></td>
-                   <td><input type="button"   data-url="/orders/destroyaddr" value="删除" class="am-btn am-btn-primary delete "></td>
+                   <td><input type="button"   data-url="/orders/destroyaddr" value="删除" class="am-button am-button-primary delete "></td>
 
                  </tr>
 
@@ -50,7 +50,7 @@
 
 
        </table>
-       <input type="submit" class="am-btn am-btn-primary am-btn-block form-sure" value="确认选择" >
+       <input type="submit" class="am-button am-button-primary am-button-block form-sure" value="确认选择" >
    </form>
 <br/>
 <br/>

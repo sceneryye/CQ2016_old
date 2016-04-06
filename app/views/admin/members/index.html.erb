@@ -4,11 +4,11 @@
 <%if current_admin.login_name=="admin" %>
 <div class="page-header">
   <h2>所有会员</h2>
-  <div class="btn-group">
-    <%= f.submit '导出会员', :class => "btn btn-primary" %>
+  <div class="button-group">
+    <%= f.submit '导出会员', :class => "button" %>
   </div>
-  <%=link_to "短信群发","#sms_editor",:class=>"btn btn-primary",:'data-toggle'=>"modal"%>
-  <%=link_to "短信自定义发送","#sms_define",:class=>"btn btn-primary",:'data-toggle'=>"modal"%>
+  <%=link_to "短信群发","#sms_editor",:class=>"button",:'data-toggle'=>"modal"%>
+  <%=link_to "短信自定义发送","#sms_define",:class=>"button",:'data-toggle'=>"modal"%>
   <ul class="clearfix unstyled">
     <% @column_data.each do |column| %>
       <li class="checkbox-verticle">
@@ -96,8 +96,8 @@
       <%=f.text_area :text,:rows=>3,:style=>"width:510px;"%>
     </div>
     <div class="modal-footer">
-      <a href="#" class="btn" data-dismiss="modal">关闭</a>
-      <%=f.submit "发送",:class=>"btn btn-primary"%>
+      <a href="#" class="button" data-dismiss="modal">关闭</a>
+      <%=f.submit "发送",:class=>"button"%>
     </div>
     <%end%>
 </div>
@@ -117,8 +117,8 @@
       </div>
     </div>
     <div class="modal-footer">
-      <a href="#" class="btn" data-dismiss="modal">关闭</a>
-      <%=f.submit "发送",:class=>"btn btn-primary"%>
+      <a href="#" class="button" data-dismiss="modal">关闭</a>
+      <%=f.submit "发送",:class=>"button"%>
     </div>
     <%end%>
 </div>

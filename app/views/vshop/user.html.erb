@@ -90,7 +90,7 @@
     <em class="s_fav"></em>我的收藏<span></span><i class="s_onsale"></i>
   </a>
 
-  <a href="user-logout.html" class="btn_white btn_out" mars_sead="logout_btn" style="display:none"><%= I18n.t "logout"%></a>
+  <a href="user-logout.html" class="button_white button_out" mars_sead="logout_button" style="display:none"><%= I18n.t "logout"%></a>
   <div class="space20"></div>
 </div>
 
@@ -104,11 +104,11 @@
           }
       </script>
       <a href="/vshop/<%=@supplier.id%>/user" style="font-size: 20px; "><%=@user.account.id%></a>
-      <a href="/auto_login?id=<%=@supplier.id%>&platform=mobile&<%=return_url%>" class="am-btn am-btn-warning " ><%= I18n.t "logout"%></a>
+      <a href="/auto_login?id=<%=@supplier.id%>&platform=mobile&<%=return_url%>" class="am-button am-button-warning " ><%= I18n.t "logout"%></a>
   <%else%>
 
-      <a href="/mlogin?id=<%=@supplier.id%>&platform=mobile&<%=return_url %>" mars_sead="footer-login_btn"><%= I18n.t "login"%></a>
+      <a href="/mlogin?id=<%=@supplier.id%>&platform=mobile&<%=return_url %>" mars_sead="footer-login_button"><%= I18n.t "login"%></a>
       <a href="/mregister?id=<%=@supplier.id%>&platform=mobile&<%=return_url%>"><%= I18n.t "signup"%></a>
   <%end%>
-  <a href="?t=1#" class="backtop" mars_sead="home_foot_top_btn"></a>
+  <a href="?t=1#" class="backtop" mars_sead="home_foot_top_button"></a>
 </div>

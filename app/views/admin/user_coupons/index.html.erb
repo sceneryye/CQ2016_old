@@ -1,7 +1,7 @@
 
 <%=form_for :s,:url=>admin_user_coupons_path,:html=>{:class=>"form-search"},:method=>:get do |f|%>
 	<%=f.text_field :q,:placeholder=>"用户名",:value=>params[:s]&&params[:s][:q]%>
-	<%=f.submit "搜索",:class=>"btn",:name=>nil%>
+	<%=f.submit "搜索",:class=>"button",:name=>nil%>
 <%end%>
 
 <table class="table table-bordered table-hover">
@@ -48,8 +48,8 @@
 			</td>
 			<td>
 				<%if current_admin.has_right_of(controller_name,"create")%>
-				<div class="btn-group">
-					<a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+				<div class="button-group">
+					<a href="#" class="button dropdown-toggle" data-toggle="dropdown">
 						赠送优惠券<span class="caret"></span>
 					</a>
 					<ul class="dropdown-menu">

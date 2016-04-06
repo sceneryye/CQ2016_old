@@ -62,12 +62,12 @@
 		</div>
 		<div class="download">
 			<%if @coupon.start?%>
-				<div class="btn btn-inverse btn-large disabled">暂未开始</div>
+				<div class="button button-inverse button-large disabled">暂未开始</div>
 			<%elsif @coupon.expired?%>
-				<div class="btn btn-inverse btn-large disabled">优惠已过期</div>
+				<div class="button button-inverse button-large disabled">优惠已过期</div>
 				<div class="stat">共下载 <span class="times"><%=@coupon.download_times%></span> 次</div>
 			<%else%>
-				<%=link_to "免费短信下载","#{ signed_in? ? '#download' : '#' }", data: { toggle: "modal" }, :class=>"btn btn-inverse btn-large #{'login' unless signed_in? }"%>
+				<%=link_to "免费短信下载","#{ signed_in? ? '#download' : '#' }", data: { toggle: "modal" }, :class=>"button button-inverse button-large #{'login' unless signed_in? }"%>
 				<div class="stat">已下载 <span class="times"><%=@coupon.download_times%></span> 次</div>
 			<%end%>
 

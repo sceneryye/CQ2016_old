@@ -12,7 +12,7 @@
 </ul>
 <span>
   <%=form_for :member,:url=>export_inventory_member_path,:html => {:multipart => true} ,:method=>:post do |f|%>
-      <%= f.submit '导出库存记录', :class => "btn btn-primary" %>
+      <%= f.submit '导出库存记录', :class => "button" %>
   <%end%>
  </span>
 <table class="table table-striped" id="order_list">

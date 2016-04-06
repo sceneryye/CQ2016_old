@@ -4,7 +4,7 @@
 
 <%=form_for :search,:url=>admin_coupons_path,:html=>{:class=>"form-search"},:method=>:get do |f|%>
 <%=f.text_field :key,:placeholder=>"用户名",:value=>params[:search]&&params[:search][:key]%>
-<%=f.submit "搜索",:class=>"btn"%>
+<%=f.submit "搜索",:class=>"button"%>
 <span class="tip">
 	提示:
 	<span class="label">已使用</span>
@@ -47,8 +47,8 @@
 		
 		<td>
 			<%if current_admin.has_right_of(controller_name,"create")%>
-			<div class="btn-group">
-				<a href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown">
+			<div class="button-group">
+				<a href="#" class="button dropdown-toggle" data-toggle="dropdown">
 					赠送优惠券<span class="caret"></span>
 				</a>
 				<ul class="dropdown-menu">

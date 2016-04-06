@@ -10,8 +10,8 @@
 
 
 <h1>
-  <%=link_to "添加订单促销",new_admin_promotion_path,:class=>"btn btn-primary right" if params[:type]=="order" || params[:type].nil?%>
-  <%=link_to "添加商品促销",new_admin_promotion_path(:type=>"goods"),:class=>"btn btn-primary right" if params[:type] == 'goods'%>
+  <%=link_to "添加订单促销",new_admin_promotion_path,:class=>"button right" if params[:type]=="order" || params[:type].nil?%>
+  <%=link_to "添加商品促销",new_admin_promotion_path(:type=>"goods"),:class=>"button right" if params[:type] == 'goods'%>
 </h1>
 
 
