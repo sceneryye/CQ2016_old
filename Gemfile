@@ -7,7 +7,7 @@ gem "friendly_id"
 gem "babosa"
 gem "ckeditor"
 gem "paperclip"
-gem 'will_paginate'
+#gem 'will_paginate'
 
 # Bundle edge Rails instead:
 # gem 'rails', :git => 'git://github.com/rails/rails.git'
@@ -30,6 +30,7 @@ group :assets do
   gem 'coffee-rails'
 
   gem 'foundation-rails'#,'~>6'
+  gem 'will_paginate-foundation'
   # See https://github.com/sstephenson/execjs#readme for more supported runtimes
   # gem 'therubyracer', :platforms => :ruby
 
