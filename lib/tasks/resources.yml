@@ -32,7 +32,7 @@ tag_exts:
   edit.update: "编辑标签"
 
 events:
-  desc: "摩登活动"
+  desc: "活动"
   index: "活动列表"
   applicants: "查看报名者"
   edit.update: "编辑"
@@ -161,7 +161,7 @@ specifications:
   destroy: "删除"
 
 cards:
-  desc: "会员会员卡管理"
+  desc: "会员卡管理"
   index: "会员卡列表"
   edit: "修改卡信息"
   update: "更新卡信息"

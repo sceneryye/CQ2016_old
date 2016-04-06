@@ -89,9 +89,9 @@
 	</tbody>
 </table>
 <div class="paginations">
-	<%=will_paginate @orders,:container=>false%>
+	<%=will_paginate @orders,:container=>false,renderer: FoundationPagination::Rails  %>
 </div>
 
 <%=render "admin/shared/modal_tegs", :tegs=> Ecstore::Teg.order_tegs %>
 
-<%= javascript_include_tag "admin/indicate_order" %>
+<%=javascript_include_tag "admin/indicate_order" %>
