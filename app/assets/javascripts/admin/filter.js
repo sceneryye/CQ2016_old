@@ -19,7 +19,8 @@ $(document).ready(function(){
 	};
 	
 	$("#toggle_search").click(function(){
-		$("#simple_search,#advanced_search").toggle();
+		$("#simple_search").toggle();
+		$("#advanced_search").toggle();
 		if($("#simple_search").is(":visible")){
 			$(this).text("高级搜索>>");
 		}
