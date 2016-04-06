@@ -18,14 +18,14 @@
                 <span>
                   会员价: 
                   <%if signed_in?%>
-                    ¥<%=(good.price).round%>
+                    <%=number_to_currency good.price,:unit=>"¥",:precision=>2%>
                   <%else%>
                     <a href="javascript:void(0)" class="login">[会员专享]</a>
                   <%end%>
                 </span>
               </div>
               <div class="prices">
-                <span class="mtkprice">市场价: ¥<%=good.price%></span>
+                <span class="mtkprice">市场价: <%=number_to_currency good.price,:unit=>"¥",:precision=>2%></span>
               </div>
 
             </div>

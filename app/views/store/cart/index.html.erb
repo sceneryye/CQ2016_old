@@ -25,13 +25,17 @@
             </div>
           </div>
           <div class="small-4 columns">
-            <label for="middle-label" class="text-left middle">¥<%= format('%.2f',line_item.product.price)%>&nbsp;X</label>
+            <label for="middle-label" class="text-left middle">
+              <%=number_to_currency line_item.product.price,:unit=>"¥",:precision=>0%>&nbsp;X
+            </label>
           </div>
           <div class="columns small-4">
               <%=number_field_tag :quantity,line_item.quantity.to_i,:class=>"textcenter quantity bn-#{line_item.product.good.bn}",:size=>3,:min=>1,:'data-url'=>cart_path(line_item.obj_ident)%>
           </div>
           <div class="columns small-4"%>
-            <label for="middle-label" class="text-right middle  line-total">¥<%=line_item.product.price*line_item.quantity%></label>
+            <label for="middle-label" class="text-right middle  line-total">
+              <%=number_to_currency line_item.product.price*line_item.quantity,:unit=>"¥",:precision=>0%>
+            </label>
              
           </div>
           <div class="columns small-12">

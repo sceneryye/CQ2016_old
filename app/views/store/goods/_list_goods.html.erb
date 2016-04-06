@@ -44,8 +44,8 @@
         <%end%>        
         </h6>
         <p class='text-center'>
-            <span style="color:red;font-size:1.5em;">¥<%=(goods.price).round if goods.price%></span>
-            <span style="margin-left:1em;text-decoration:line-through;">¥<%=(goods.price).round if goods.price%> </span>
+            <span style="color:red;font-size:1.5em;"><%=number_to_currency good.price,:unit=>"¥",:precision=>2%></span>
+            <span style="margin-left:1em;text-decoration:line-through;"><%=number_to_currency good.mktprice,:unit=>"¥",:precision=>2%></span>
         </p>
         <a href="#" class="button expanded" style="display:none">Buy</a>
     </div>
