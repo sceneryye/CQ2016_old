@@ -24,6 +24,6 @@ store/cats_controller.rb        layout 'magazine'
 store/cart_controller.rb        layout "cart"
 store/goods_controller.rb       layout 'new_store', 'memberships'
 
-patch/cards_controller.rb       layout "profile"
-patch/profiles_controller.rb    layout "profile"
+memberships/cards_controller.rb       layout "profile"
+memberships/profiles_controller.rb    layout "profile"
 

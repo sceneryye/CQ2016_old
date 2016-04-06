@@ -246,7 +246,7 @@ end
       end
 
     
-      render :inline=>@modec_pay.html_form_wxpay,:layout=>"patch"
+      render :inline=>@modec_pay.html_form_wxpay, :layout=>"application"
 
       Ecstore::PaymentLog.new do |log|
         log.payment_id = @payment.payment_id

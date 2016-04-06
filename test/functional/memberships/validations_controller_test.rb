@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Patch::MemberAddrsControllerTest < ActionController::TestCase
+class Memberships::ValidationsControllerTest < ActionController::TestCase
   # test "the truth" do
   #   assert true
   # end

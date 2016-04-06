@@ -1,6 +1,6 @@
 require 'test_helper'
 
-class Patch::ProfileControllerTest < ActionController::TestCase
+class Memberships::ProfileControllerTest < ActionController::TestCase
   test "should get show" do
     get :show
     assert_response :success

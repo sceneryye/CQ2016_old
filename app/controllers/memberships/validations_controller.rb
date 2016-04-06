@@ -1,14 +1,14 @@
 #encoding:utf-8
 require 'sms'
 require 'securerandom'
-class Patch::ValidationsController < ApplicationController
+class Memberships::ValidationsController < ApplicationController
 	layout 'application'
 
 
 
 	before_filter do
 		clear_breadcrumbs
-		add_breadcrumb("我的昌麒投资",:member_path)
+		add_breadcrumb("我的昌麒",:member_path)
 	end
 
 	def show
@@ -49,7 +49,7 @@ class Patch::ValidationsController < ApplicationController
 			@user.update_attribute :email, email
 			@user.update_attribute :email_code, email_code
 			ValidationMailer.verify_email(@user).deliver
-			return render :inline=>"<p>验证邮件已发送。</p>", :layout=>"patch"
+			return render :inline=>"<p>验证邮件已发送。</p>",  :layout=>"application"
 		end
 
 		render :status=>:not_found

@@ -1,5 +1,5 @@
 #encoding:utf-8
-module Patch::ProfilesHelper
+module Memberships::ProfilesHelper
 	def education_options
 		%w(高中及以下 大学专科 大学本科 硕士 博士及以上)
 	end

@@ -1,2 +1,0 @@
-module Patch::MembersHelper
-end

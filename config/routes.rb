@@ -105,6 +105,42 @@ resources :cases
   end
 
   scope :module => "memberships" do
+    resource :profile do
+      member do
+        get 'password'
+        put 'modify_password'
+      end
+    end
+   
+    resource :member do
+      member do
+        get 'orders'
+        get 'shares'
+        get 'coupons'
+        get 'cards'
+        get 'advance'
+        get 'after_sale'
+        get 'favorites'
+        get 'goods'
+        get 'inventorys'
+        get 'inventorylog'
+        post 'export_inventory'
+        post 'coupon_check'
+      end
+    end
+
+    
+    resources :aftersales do
+      get 'instruction', :on=>:collection
+    end
+
+    resource :validation do
+      get 'email'
+      get 'mobile'
+      post 'verify'
+      post 'sent'
+      get 'verify_email'
+    end
     resources :member_addrs do
          get "mobile"  ,:on=>:collection
         get 'new_memberaddr_add' ,:on=>:collection
@@ -471,46 +507,6 @@ resources :cases
 
   end
 
-
-  scope :module => "patch" do
-    resource :profile do
-      member do
-        get 'password'
-        put 'modify_password'
-      end
-    end
-   
-    resource :member do
-      member do
-        get 'orders'
-        get 'shares'
-        get 'coupons'
-        get 'cards'
-        get 'advance'
-        get 'after_sale'
-        get 'favorites'
-        get 'goods'
-        get 'inventorys'
-        get 'inventorylog'
-        post 'export_inventory'
-        post 'coupon_check'
-      end
-
-    end
-
-    
-    resources :aftersales do
-      get 'instruction', :on=>:collection
-    end
-
-    resource :validation do
-      get 'email'
-      get 'mobile'
-      post 'verify'
-      post 'sent'
-      get 'verify_email'
-    end
-  end
 
   resources :comments,:only=>[:create]
 

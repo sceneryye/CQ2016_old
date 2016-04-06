@@ -1,5 +1,5 @@
 #encoding:utf-8
-class Patch::ProfilesController < ApplicationController
+class Memberships::ProfilesController < ApplicationController
   # skip_before_filter :authorize_user!
   before_filter :find_user
 
@@ -38,7 +38,7 @@ class Patch::ProfilesController < ApplicationController
       if @user.update_attributes(params[:ecstore_user])       
           redirect_to profile_path(:tab=>params[:tab]), :notice=>"保存成功."
       else
-          render "/patch/profiles/edit"
+          render "/memberships/profiles/edit"
       end
   end
 

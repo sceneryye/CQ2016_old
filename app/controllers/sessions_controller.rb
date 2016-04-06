@@ -3,7 +3,7 @@ class SessionsController < ApplicationController
   require 'rest-client'
 
   skip_before_filter :authorize_user!
-  layout 'patch'
+  layout 'application'
 
   def new
 

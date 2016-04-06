@@ -1,7 +1,7 @@
 #encoding:utf-8
 require 'axlsx'
 
-class Patch::MembersController < ApplicationController
+class Memberships::MembersController < ApplicationController
 	
 	before_filter :authorize_user!
 	# layout 'standard'

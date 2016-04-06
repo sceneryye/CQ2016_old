@@ -126,7 +126,7 @@ class Store::PaymentsController < ApplicationController
 		        render :text=>@modec_pay.html_form_alipaywap
 		    elsif adapter=='wxpay'
 		        render :inline=>@modec_pay.html_form_wxpay
-		     # render :inline=>@modec_pay.html_form_wxpay,:layout=>"patch"
+		     # render :inline=>@modec_pay.html_form_wxpay, :layout=>"application"
 		    else
 		    	if adapter=='deposit'
 		    		advance = @user.advance
