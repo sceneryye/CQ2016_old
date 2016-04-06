@@ -2,13 +2,13 @@
     <div class="container">
         <div class="box last">
             <div class="row">                    
-                <div class="col-sm-12 col-md-6">    
+                <div class="columns small-12 col-md-6">    
                 	<p><%=@flash_message%></p>
                     <h5>您当前的会员卡积分为 : <span style="color:green;font-size:20px">¥<%=@user.advance%></span></h5>               
                     <%=form_for :discount_code,:url =>coupon_check_member_path, :method=>@method,:html=>{ :role=>"form",:id=>"register_form",data: {type: "script"}} do |f|%>                  
   
                        <div class="row">
-                             <div class="col-sm-12">
+                             <div class="columns small-12">
                                 <div class="form-group">
                                     <%=f.text_field :code,:class=>"form-control",:placeholder=>"卡券号码" ,:required=>"required"%>
                                 </div>
@@ -33,10 +33,10 @@
                             </div>
                         </div>
                     <%end%>              
-                </div><!--/.col-sm-12-->
+                </div><!--/.columns small-12-->
             </div><!--/.row-->
             <div class="row">
-            	<div class="col-sm-12">
+            	<div class="columns small-12">
             		<table class="table table-striped" id="coupons_list">
 					<tr>
 						<th>卡券号码</th>

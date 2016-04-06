@@ -1,5 +1,6 @@
 #encoding:utf-8
 class Memberships::MemberAddrsController < ApplicationController
+  before_filter :find_user
 
   layout "application"
 
@@ -8,21 +9,10 @@ class Memberships::MemberAddrsController < ApplicationController
   end
 
   def index
-    if @user.nil?
-      return render :text=>'请先登录;'
-    end
+    
     @addrs = @user.member_addrs.paginate(:per_page=>10,:page=>params[:page])
     add_breadcrumb("收货地址")
-
-    if params[:platform]=="mobile"
-      @supplier = Ecstore::Supplier.find(@user.account.supplier_id)
-
-     redirect_to "/member_addrs/mobile?supplier_id=#{@supplier.id}"
-
-    else
-      @newurl = "new"
-
-    end
+    @newurl = "new"
 
   end
 

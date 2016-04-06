@@ -83,21 +83,21 @@
         <div class="container">
             <div class="box last">
                 <div class="row">
-                    <div class="col-sm-12">
+                    <div class="columns small-12">
                         <h1>案例分享</h1>
                         <p>请与糖友分享您服用昌麒投资茶后的案例！</p>
                         <div class="status alert alert-success" style="display: none"></div>
                         <%=form_for :case,:class=>"contact-form",:html=>{:role=>"form",:remote=>true,data: {type: "script"}} do |f|%>
                         <form id="main-contact-form" class="contact-form" name="contact-form" method="post" action="sendemail.php" role="form">                           
                              <div class="row">
-                                <div class="col-sm-12">
+                                <div class="columns small-12">
                                     <div class="form-group">
                                         <textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="基本病史"></textarea>
                                     </div>
                                 </div>
                             </div>
                             <div class="row">
-                                <div class="col-sm-12">
+                                <div class="columns small-12">
                                     <div class="form-group">
                                         <textarea name="message" id="message" required="required" class="form-control" rows="8" placeholder="服茶效果"></textarea>
                                     </div>
@@ -107,7 +107,7 @@
                                 </div>
                             </div>
                         <%end%>
-                    </div><!--/.col-sm-12-->                   
+                    </div><!--/.columns small-12-->                   
                 </div><!--/.row-->
             </div><!--/.box-->
         </div><!--/.container-->

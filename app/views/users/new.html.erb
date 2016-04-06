@@ -2,7 +2,7 @@
     <div class="container">
         <div class="box last">
             <div class="row">                    
-                <div class="col-sm-12 col-md-6">
+                <div class="columns small-12 col-md-6">
                     <h1>注册</h1>
                     <p> </p>                        
                     <%=form_for :user,:url =>@action_url, :method=>@method,:html=>{ :role=>"form",:id=>"register_form",data: {type: "script"}} do |f|%>
@@ -40,14 +40,14 @@
                             </div>
                         </div>
                          <div class="row">
-                             <div class="col-sm-12">
+                             <div class="columns small-12">
                                 <div class="form-group">
                                     <%=f.text_field :real_name,:value=>"",:class=>"form-control",:placeholder=>"真实姓名",:required=>"required"%>
                                 </div>
                             </div>
                         </div>                           
                        <!--  <div class="row">
-                             <div class="col-sm-12">
+                             <div class="columns small-12">
                                 <div class="form-group">
                                     <%#=f.text_field :discount_code,:value=>"",:class=>"form-control",:placeholder=>"特惠码"%>
                                 </div>
@@ -79,7 +79,7 @@
                         </div>
                     <%end%>
                         <div class="row">
-                            <div class="col-sm-12">                 
+                            <div class="columns small-12">                 
                                 <div class="help-block1 status alert alert-success" style="display: none"></div>
                                 <input type="checkbox" checked="checked" value="agree" name="user[license]" id="license" class="x-input required" autocomplete="off">
                                 <label for="license" class="checkbox_label" id="i_agree">&nbsp;我已阅读并同意：</label><a href="/pages/zhucexieyi" target="_top"  id="reg_term">会员注册协议</a>
@@ -88,7 +88,7 @@
                             </div>
                         </div>
                          <div class="row">
-                            <div class="col-sm-12">                                    
+                            <div class="columns small-12">                                    
                                 <div class="form-group">
                                      <%=f.submit "注 册",:class=>"button button-success button-lg"%>
                                      <%=link_to "返 回","#",:class=>"button button-success button-lg"%>            
@@ -96,7 +96,7 @@
                             </div>
                         </div>
                     <%end%>              
-                </div><!--/.col-sm-12-->
+                </div><!--/.columns small-12-->
             </div><!--/.row-->
         </div><!--/.box-->
     </div><!--/.container-->
