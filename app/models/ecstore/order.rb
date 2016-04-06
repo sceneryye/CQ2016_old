@@ -14,8 +14,6 @@ class Ecstore::Order < Ecstore::Base
 
   belongs_to :wechat_follower, :foreign_key=>"recommend_user"
 
-  belongs_to :dicount_code, :foreign_key=>"discount_code"
-
   attr_accessor :ship_day,:ship_special,:ship_time2
   include Ecstore::AddressFields
 

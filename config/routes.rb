@@ -4,16 +4,6 @@ Modengke::Application.routes.draw do
 
 resources :cases
 
-resources :commissions do
-  collection do
-   get  'platform'
-   get 'bank_info'
-  end
-
-  member do
-    get 'paid'
-  end
-end
 
   mount WeixinRailsMiddleware::Engine, at: "/"
 
@@ -168,8 +158,6 @@ end
     resources :tracks do
       get :pages,:on=>:collection
     end
-
-    resources :discount_codes
 
     resources :carts do
 

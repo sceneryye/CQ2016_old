@@ -16,14 +16,7 @@
               </li>
             </ul>
        </li>
-    <%end%>       
-
-    <%if current_admin.has_right_of("events","index")%>
-    <li class="<%='active' if controller_name=='events'%>">
-      <%=link_to "精彩活动",admin_events_path%>
-    </li>
-    <%end%>
-
+    <%end%>  
     <%if current_admin.has_right_of("homes","index") || 
       current_admin.has_right_of("static_pages","index") ||
       current_admin.has_right_of("footers","index")%>
@@ -48,35 +41,14 @@
               
             </ul>
        </li>
-    <%end%>
+    <%end%>   
 
-    <%if current_admin.has_right_of("metas","index")%>
-          <li class="<%='active' if controller_name=='metas'%>">
-            <%=link_to "SEO管理",admin_metas_path%>
-          </li>
-    <%end%>
-
-     <%if current_admin.has_right_of("brand_pages","index")%>
+    <%if current_admin.has_right_of("brand_pages","index")%>
           <li class="<%='active' if controller_name=='brand_pages'%>">
             <%=link_to "基地页管理",admin_brand_pages_path%>
           </li>
     <%end%>
-    <%if current_admin.has_right_of("virtual_goods","index")%>
-    <li class="<%='active' if %w(offline_coupons virtual_goods).include?(controller_name)%>">
-            <%=link_to admin_virtual_goods_path,:class=>"dropdown-toggle" do %>
-              虚拟商品 <b class="caret" style="border-top-color: #fff;border-bottom-color: #fff; margin-top:7px;margin-left:2px;"></b>
-            <%end%>
-            <ul class="vertical menu " aria-labelledby="dropdownMenu">
-              <li>
-                  <%=link_to "虚拟商品",admin_virtual_goods_path if current_admin.has_right_of("virtual_goods","index")%>
-              </li>
-
-              <li>
-                  <%=link_to "线下优惠券",admin_offline_coupons_path if current_admin.has_right_of("offline_coupons","index")%>
-              </li>
-            </ul>
-    </li>
-    <%end%>
+    
     <%if current_admin.has_right_of("tags","index") || 
       current_admin.has_right_of("tag_exts","index") %>
 
@@ -126,9 +98,6 @@
             </ul>
         </li>
     <%end%>
-
-    
-
 
     <%if current_admin.has_right_of("orders","index")%>
     <li class="<%='active' if controller_name=='orders'%>">
@@ -191,7 +160,6 @@
     </li>
     <%end%>
 
-
     <%if current_admin.super?%>
     <li class="<%='active' if controller_name=='payment_logs'%>">
       <%=link_to "支付日志",admin_payment_logs_path%>
@@ -212,8 +180,6 @@
           <%=link_to "用户分组",'/admin/wechat/groups' if current_admin.has_right_of("promotions","index")%>
           <%=link_to "微信菜单",'/admin/wechat/menu' if current_admin.has_right_of("promotions","index")%>
           <%=link_to "微信群发", '/admin/wechat/batch_sending' if current_admin.has_right_of("promotions","index")%>
-          <%=link_to "平台佣金", '/commissions/platform' if current_admin.has_right_of("promotions","index")%>
-          <%=link_to "推广佣金", '/commissions' if current_admin.has_right_of("promotions","index")%>
         </li>
       </ul>
     </li>
@@ -239,12 +205,32 @@
         </li>
       </ul>
     </li>
-    <%end%>
-    <%if current_admin.has_right_of("discount_codes","index")%>
-          <li class="<%='active' if controller_name=='discount_codes'%>">
-            <%=link_to "特惠码",admin_discount_codes_path%>
+    <%end%>  
+    <%if current_admin.has_right_of("events","index")%>
+      <li class="<%='active' if controller_name=='events'%>">
+        <%=link_to "精彩活动",admin_events_path%>
+      </li>
+    <%end%>  
+    <%if current_admin.has_right_of("metas","index")%>
+          <li class="<%='active' if controller_name=='metas'%>">
+            <%=link_to "SEO管理",admin_metas_path%>
           </li>
-    <%end%>     
-    
+    <%end%>
+    <%if current_admin.has_right_of("virtual_goods","index")%>
+    <li class="<%='active' if %w(offline_coupons virtual_goods).include?(controller_name)%>">
+            <%=link_to admin_virtual_goods_path,:class=>"dropdown-toggle" do %>
+              虚拟商品 <b class="caret" style="border-top-color: #fff;border-bottom-color: #fff; margin-top:7px;margin-left:2px;"></b>
+            <%end%>
+            <ul class="vertical menu " aria-labelledby="dropdownMenu">
+              <li>
+                  <%=link_to "虚拟商品",admin_virtual_goods_path if current_admin.has_right_of("virtual_goods","index")%>
+              </li>
+
+              <li>
+                  <%=link_to "线下优惠券",admin_offline_coupons_path if current_admin.has_right_of("offline_coupons","index")%>
+              </li>
+            </ul>
+    </li>
+    <%end%>
   <%end%>
 </ul>
