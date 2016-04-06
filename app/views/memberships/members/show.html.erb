@@ -52,7 +52,7 @@
         <%@user.member_addrs.each do |addr|%>
         <li>
           <%=link_to edit_member_addr_path(addr),class:@class do%>
-            <i class="fa  fa-edit"></i>&nbsp;<%="#{addr.name}|#{addr.addr}|#{addr.mobile}"%>
+            <i class="fa  fa-edit"></i>&nbsp;<%="#{addr.name}|#{addr.mobile}"%><br><%=addr.addr%>
           <%end%>
         </li>
         <%end%>

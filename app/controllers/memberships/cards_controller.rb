@@ -10,24 +10,56 @@ class Memberships::CardsController < ApplicationController
 
 
   	def activate
+		   
+		@card = Ecstore::Card.find_by_no(card_params[:card_num])
+		if @card.can_use? && !@card.used?
+			@cards_log ||= Logger.new('log/cards.log')
+			// 查询卡片信息
+  			card_id = card_params[:card_num] #'8668083660000059727'
+				password = card_params[:card_pwd] #'111111'
+		    res_data = ActiveSupport::JSON.decode card_get_info(card_id, password)
+		    Rails.logger.info res_data
+		    return render json: {data: res_data}    
 
-		if @user.update_attributes(ecstore_user_params.merge!(:apply_time=>Time.now))
-	    		   
-			@card = Ecstore::Card.find_by_no(ecstore_user_params[:card_num])
-			if @card.can_use? && !@card.used?
-				@cards_log ||= Logger.new('log/cards.log')
-				order_id = "999990053990001_#{Time.now.to_i}#{rand(100).to_s}"
-	  			card_id = ecstore_user_params[:card_num] #'8668083660000059727'
-	    		type = '1'     
+		    @cards_log.info("[#{@user.login_name}][#{Time.now}]#{res_data}")
+		    if res_data[:error_response]
+		 		@cards_log.info("[#{@user.login_name}][#{Time.now}]查询会员卡信息失败:#{res_data[:error_response]}")
+		    	return render json: {data: res_data}
+				###########e.data.ppcs_cardsingleactive_add_response# e.data.error_response.sub_msg					
+			end
 
 
-			    res_data = ActiveSupport::JSON.decode card_active(order_id, card_id, type)
-			    @cards_log.info("[#{@user.login_name}][#{Time.now}]#{res_data}")
-			    if res_data[:error_response]
-			 		@cards_log.info("[#{@user.login_name}][#{Time.now}]激活会员卡失败")
-			    	return render json: {data: res_data}
-					###########e.data.ppcs_cardsingleactive_add_response# e.data.error_response.sub_msg
-				end
+      #   console.log(e.data.card_cardinfo_get_response);
+      #   var msg = e.data.card_cardinfo_get_response.card_info.card_product_info_arrays.card_product_info[0]
+      #   var state = '';
+      #   switch(msg.product_stat) {
+      #     case 0:
+      #     state = '正常';
+      #     break;
+      #     case 1:
+      #     state = '挂失';
+      #     break;
+      #     case 2:
+      #     state = '冻结';
+      #     break;
+      #     case 3:
+      #     state = '作废';
+      #     break;
+      #     default:
+      #     state = '未知';
+      #     break;
+      #   }
+      #   message = '卡号：' + card_id + ';  认证日期：' + e.data.card_cardinfo_get_response.card_info.validity_date +';  余额：' + parseFloat(msg.account_balance / 100) + '元' + ';  产品名称：' + msg.product_name + ';  可用余额：' + parseFloat(msg.valid_balance / 100) + '元' + ';  产品有效期：' + msg.validity_date + ';  产品状态：' + state;
+      #   alert(message);
+      # }
+      # else {
+      #   console.log(e.data.error_response)
+      #   alert('操作失败！' + e.data.error_response.sub_msg)
+
+
+
+
+
 
 				advance = @user.member_advances.order("log_id asc").last
 				shop_advance = 0
@@ -83,9 +115,7 @@ class Memberships::CardsController < ApplicationController
 			else
 				render "memberships/cards/activation/error"
 			end
-	    else	   
-	        render 'activation'
-	    end
+	   
 	end
 
   def active
@@ -523,7 +553,7 @@ class Memberships::CardsController < ApplicationController
 	end
 
 	private
-	  def ecstore_user_params
-	    params.require(:ecstore_user).permit(:name,:card_num,:card_pwd,:id_card_number,:area,:mobile,:addr,:sex)
+	  def card_params
+	    params.require(:ecstore_user).permit(:card_num,:card_pwd)
 	  end
 end
