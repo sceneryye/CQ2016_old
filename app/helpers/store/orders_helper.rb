@@ -22,7 +22,7 @@ module Store::OrdersHelper
       "ips"=>{ :name=>"环迅人民币支付",:extra=>""},
 			"bcom"=>{ :name=>"交通银行网上支付", :extra=>"持交通银行卡在线支付可享受订单金额95折优惠" },
 			"icbc"=>{ :name=>"工商银行网上支付", :extra=>'申请分期付款 (<span class="highlight">申请信用卡分期付款，超低手续费，月还款无压力！</span>)' },
-			"deposit"=>{ :name=>"会员卡", :extra=>"" },
+			"deposit"=>{ :name=>"会员卡积分", :extra=>"" },
 			"offline"=>{ :name=>"货到付款", :extra=>link_to("点击查询货到付款配送区域","http://www.zjs.com.cn/WS_Business/WS_Bussiness_CityArea.aspx?id=6",:target=>"_blank").html_safe }, 
 			"99bill"=>{ :name=>"其他银行网上支付",:extra=>"" },
 			"alipay"=>{ :name=>"支付宝",:extra=>"" },

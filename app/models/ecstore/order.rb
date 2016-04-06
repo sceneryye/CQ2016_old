@@ -233,7 +233,7 @@ class Ecstore::Order < Ecstore::Base
     return "环迅人民币支付" if payment == "ips"
     return "交通银行网上支付" if payment == "bcom"
     return "工商银行网上支付" if payment == "icbc"
-    return "会员卡在线支付" if payment == "deposit"
+    return "会员卡积分在线支付" if payment == "deposit"
     return "货到付款" if payment == "offline"
     return "快钱在线支付" if payment == "99bill"
     return "支付宝在线支付" if payment == "alipay"
