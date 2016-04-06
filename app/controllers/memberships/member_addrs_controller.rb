@@ -1,5 +1,5 @@
 #encoding:utf-8
-class Patch::MemberAddrsController < ApplicationController
+class Memberships::MemberAddrsController < ApplicationController
 
   layout "application"
 
