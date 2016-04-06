@@ -1,36 +1,23 @@
-<%if @recommend_goods.size > 0%>
-<div id="reco_goods">
-        <h3>推荐商品</h3>
+<%@recommend_goods.each do |goods|%>
+<div class="row col">
 
-        <ul class="portfolio-items" style="width:98%">
-          <%@recommend_goods.each do |good|%>
-          <li class="item-inner" style="margin-left:20px;">
-            <div class="product-pic">
-                <%=link_to good_path(good.bn,:tag=>@tag&&@tag.tag_name) do %>
-                    <%=image_tag good.rec_image,:style=>"width:98%",:alt=>good.name%>
-                <%end%>
-            </div>
-            <div class="good-info">
-              <div class="name">
-                  <a href="/products/<%=good.bn%>" target="_blank"><%=good.name%></a>
-              </div>
-              <div class="prices">
-                <span>
-                  会员价: 
-                  <%if signed_in?%>
-                    <%=number_to_currency good.price,:unit=>"¥",:precision=>2%>
-                  <%else%>
-                    <a href="javascript:void(0)" class="login">[会员专享]</a>
-                  <%end%>
-                </span>
-              </div>
-              <div class="prices">
-                <span class="mtkprice">市场价: <%=number_to_currency good.price,:unit=>"¥",:precision=>2%></span>
-              </div>
-
-            </div>
-          </li>
-          <%end%>
-        </ul>
+  <div class="columns small-3">
+    <%=link_to good_path(goods.bn), :target=>"_blank" do %>
+        <%=image_tag goods.list_default_pic,:alt=>goods.name, class: "thumbnail"%>
+    <%end%>
+  </div>
+  <div class="columns small-9">
+      <h5>
+          <%=link_to good_path(goods.bn), :target=>"_blank" do %>
+              <%=goods.name%>[<%=goods.spec_info%>]
+          <%end%> 
+      </h5>
+       <p class='text-center'>
+          <span class='price'><%=number_to_currency goods.price,:unit=>"¥",:precision=>2%></span>
+          <span style="margin-left:1em;text-decoration:line-through;"><%=number_to_currency goods.mktprice,:unit=>"¥",:precision=>2%></span>
+      </p>
+      <!-- <p><%=goods.desc.html_safe%></p> -->
+  </div>
 </div>
-<%end%>
+
+  <%end if @recommend_goods%>

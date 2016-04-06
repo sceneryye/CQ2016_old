@@ -39,7 +39,7 @@
 	<p><%=render :partial=>"store/goods/product/new_spec",:locals=>{ :good=>@good }%></p>
     <p><%=raw @good.desc%></p> 
     <p>
-        <span style="color:red;font-size:1.5em;"><%=number_to_currency @good.price,:unit=>"¥",:precision=>2%></span>
+        <span class='price'><%=number_to_currency @good.price,:unit=>"¥",:precision=>2%></span>
         <span style="margin-left:1em;text-decoration:line-through;"><%=number_to_currency @good.mktprice,:unit=>"¥",:precision=>2%></span>
 	</p>
  	
@@ -92,15 +92,7 @@
             </div>
     <%else%>
     	<%= render "reco_goods" %>
-    <%end%>
-	<div class="row medium-up-3 large-up-5">
-		<div class="column">
-			<img class="thumbnail" src="http://placehold.it/350x200">
-			<h5>Other Product <small>$22</small></h5>
-			<p>In condimentum facilisis porta. Sed nec diam eu diam mattis viverra. Nulla fringilla, orci ac euismod semper, magna diam.</p>
-			<a href="#" class="button hollow tiny expanded">Buy Now</a>
-		</div>
-	</div>
+    <%end%>	
 </div>
 </div>
 </div>

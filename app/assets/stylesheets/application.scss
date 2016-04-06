@@ -14,6 +14,9 @@
  *= require_tree .
  */
 
+ .price {color:red;font-size:1.5em;}
+ .mktprice {margin-left:1em;text-decoration:line-through;}
+
 
  #bottomNav {z-index:9999; position:fixed; bottom:0; left:0; width:100%;
   _position:absolute;
