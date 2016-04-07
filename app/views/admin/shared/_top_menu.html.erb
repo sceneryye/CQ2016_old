@@ -2,30 +2,15 @@
  <%if admin_signed_in?%>
  <li class="admin-info"><h5><%=current_admin.login_name%>
  \<%=link_to "退出",admin_logout_path%></h5></li>
-  <%if current_admin.has_right_of("topics","index") || current_admin.has_right_of("articles","index")%>
-       <li class="<%='active' if %w(topics articles).include?(controller_name)%>">
-            <%=link_to admin_topics_path,:class=>"dropdown-toggle" do %>
-              专题 <b class="caret" style="border-top-color: #fff;border-bottom-color: #fff; margin-top:7px;margin-left:2px;"></b>
-            <%end%>
-            <ul class="vertical menu " aria-labelledby="dropdownMenu">
-              <li>
-                  <%=link_to "所有专题",admin_topics_path if current_admin.has_right_of("topics","index")%>
-              </li>
-              <li>
-                  <%=link_to "所有文章",admin_articles_path if current_admin.has_right_of("articles","index")%>
-              </li>
-            </ul>
-       </li>
-    <%end%>  
+ 
     <%if current_admin.has_right_of("homes","index") || 
       current_admin.has_right_of("static_pages","index") ||
       current_admin.has_right_of("footers","index")%>
        
        <li class="<%='active' if %w(homes static_pages footers).include?(controller_name)%>">
             <%=link_to admin_static_pages_path,:class=>"dropdown-toggle" do %>
-              自定义页面 <b class="caret" style="border-top-color: #fff;border-bottom-color: #fff; margin-top:7px;margin-left:2px;"></b>
+              自定义页面
             <%end%>
-
             <ul class="vertical menu " aria-labelledby="dropdownMenu">
               <li>
                   <%=link_to "自定义页面",admin_static_pages_path if current_admin.has_right_of("static_pages","index")%>
@@ -47,6 +32,11 @@
           <li class="<%='active' if controller_name=='brand_pages'%>">
             <%=link_to "基地页管理",admin_brand_pages_path%>
           </li>
+    <%end%>
+    <%if current_admin.has_right_of("suppliers","index")%>
+    <li class="<%='active' if controller_name=='suppliers'%>">
+      <%=link_to "供应商管理",admin_suppliers_path%>
+    </li>
     <%end%>
     
     <%if current_admin.has_right_of("tags","index") || 
@@ -154,12 +144,6 @@
     </li>
     <%end%>
 
-    <%if current_admin.has_right_of("suppliers","index")%>
-    <li class="<%='active' if controller_name=='suppliers'%>">
-      <%=link_to "供应商管理",admin_suppliers_path%>
-    </li>
-    <%end%>
-
     <%if current_admin.super?%>
     <li class="<%='active' if controller_name=='payment_logs'%>">
       <%=link_to "支付日志",admin_payment_logs_path%>
@@ -232,5 +216,20 @@
             </ul>
     </li>
     <%end%>
+     <%if current_admin.has_right_of("topics","index") || current_admin.has_right_of("articles","index")%>
+       <li class="<%='active' if %w(topics articles).include?(controller_name)%>">
+            <%=link_to admin_topics_path,:class=>"dropdown-toggle" do %>
+              专题 <b class="caret" style="border-top-color: #fff;border-bottom-color: #fff; margin-top:7px;margin-left:2px;"></b>
+            <%end%>
+            <ul class="vertical menu " aria-labelledby="dropdownMenu">
+              <li>
+                  <%=link_to "所有专题",admin_topics_path if current_admin.has_right_of("topics","index")%>
+              </li>
+              <li>
+                  <%=link_to "所有文章",admin_articles_path if current_admin.has_right_of("articles","index")%>
+              </li>
+            </ul>
+       </li>
+    <%end%>  
   <%end%>
 </ul>

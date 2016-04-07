@@ -375,7 +375,6 @@ module Admin
       end
 
       def update
-        return render text: goods_params
             @good  =  Ecstore::Good.find(params[:id])
             @action_url = admin_good_path(@good)
             @good.update_attributes(goods_params)
