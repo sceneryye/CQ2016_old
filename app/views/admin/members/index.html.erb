@@ -1,4 +1,4 @@
-
+<div class='row columns'>
 <%=form_for :member,:url=>export_admin_members_path,:method=>:post do |f|%>
 <%= f.hidden_field :select_all,:class=>"sel_operation", :value => 0 %>
 <%if current_admin.login_name=="admin" %>
@@ -23,10 +23,10 @@
   </ul>
 </div>
 <%end if 1==2%>
+</div>
 
 
-
-<div class='sel_banner'>
+<div class='sel_banner row columns'>
   您当前选定了<a class='sel_nums'>0</a>条记录！  <a href='' class='cancel_all'>取消选定</a> <a href='' class='sel_all'>选定全部</a>
   <p class="total_member hidden"><%=@total_member%></p>
 </div>
@@ -47,37 +47,37 @@
     <%end%>
   </tr>
 
-<% @members.each do |member| %>
-  <tr>
-    <td>
-      <%= check_box_tag "ids[]",member.member_id,false,:class =>'operate_ids'%>
-    </td>
-    <% @column_data.each do |column| %>   
-    
-        <%if column.last.last == "true" %>
-            <td>
-              <%if column.last[1]=='reg_time'%>
-                <%=Time.at(member.account.createtime).strftime('%Y-%m-%d %H:%M') if member.account%>
-              <%else%>
-                <%= getColumnValue(column.last[1],member) %>
-              <%end%>
-            </td>
-        <%end%>
-    <% end %>
-    <%if (current_admin.login_name=="admin")%>
-    <td><%=link_to "查看",info_admin_member_path(member)%></td>
-    <td><%=link_to "编辑",edit_admin_member_path(member)%></td>
-    <td>删除</td>
-        <%else%>
-        <td style="display:none"><%=link_to "查看",info_admin_member_path(member)%></td>
-        <td style="display:none"><%=link_to "编辑",edit_admin_member_path(member)%></td>
-        <td style="display:none">删除</td>
-    <%end%>
-  </tr>
-<% end %>
+  <% @members.each do |member| %>
+    <tr>
+      <td>
+        <%= check_box_tag "ids[]",member.member_id,false,:class =>'operate_ids'%>
+      </td>
+      <% @column_data.each do |column| %>   
+      
+          <%if column.last.last == "true" %>
+              <td>
+                <%if column.last[1]=='reg_time'%>
+                  <%=Time.at(member.account.createtime).strftime('%Y-%m-%d %H:%M') if member.account%>
+                <%else%>
+                  <%= getColumnValue(column.last[1],member) %>
+                <%end%>
+              </td>
+          <%end%>
+      <% end %>
+      <%if (current_admin.login_name=="admin")%>
+      <td><%=link_to "查看",info_admin_member_path(member)%></td>
+      <td><%=link_to "编辑",edit_admin_member_path(member)%></td>
+      <td>删除</td>
+          <%else%>
+          <td style="display:none"><%=link_to "查看",info_admin_member_path(member)%></td>
+          <td style="display:none"><%=link_to "编辑",edit_admin_member_path(member)%></td>
+          <td style="display:none">删除</td>
+      <%end%>
+    </tr>
+  <% end %>
 </table>
 
-<div class="pagination">
+<div class="pagination row columns">
   <%= will_paginate @members,renderer: FoundationPagination::Rails, :container => false %>
 </div>
 <%end%>
@@ -120,5 +120,5 @@
       <a href="#" class="button" data-dismiss="modal">关闭</a>
       <%=f.submit "发送",:class=>"button"%>
     </div>
-    <%end%>
+  <%end%>
 </div>

@@ -39,6 +39,12 @@ class Auth::WeixinController < ApplicationController
 									:expires_at=>token.expires_at,
 									:expires_in=>token.expires_in)
 
+		if return_url
+          redirect = return_url
+      	else
+	      redirect = after_user_sign_in_path
+	    end
+
 		if auth_ext.new_record? || auth_ext.account.nil? || auth_ext.account.user.nil?
 			client = Weixin.new(:access_token=>token.access_token,:expires_at=>token.expires_at)
 			# auth_user = client.get('users/show.json',:uid=>token.openid)
@@ -48,54 +54,57 @@ class Auth::WeixinController < ApplicationController
     		#  return render :text=>login_name
 			check_user = Ecstore::Account.find_by_login_name(login_name)
 			
-			login_name = "#{login_name}_#{rand(9999)}" if check_user
+			if check_user
 
-			now = Time.now
 
-			@account = Ecstore::Account.new  do |ac|
-				#account
-				ac.login_name = login_name
-				ac.login_password = login_name[0,6]#'123456'
-		  		ac.account_type ="member"
-		  		ac.createtime = now.to_i
-		  		# auth_ext
-		  		ac.auth_ext = auth_ext
+				now = Time.now
 
-        		ac.supplier_id = supplier_id        		
-	  		end
-	  		Ecstore::Account.transaction do
-  				if @account.save!(:validate => false)
-		  			@user = Ecstore::User.new do |u|
-			  			u.member_id = @account.account_id
-			  			u.email = "weixin_user#{rand(9999)}@anonymous.com"
-			  			#u.sex = case auth_user.gender when 'f'; '0'; when 'm'; '1'; else '2'; end if auth_user
-			  			u.member_lv_id = 1
-			  			u.cur = "CNY"
-			  			u.reg_ip = request.remote_ip
-			  			#u.addr = auth_user.location || auth_user.loc_name if auth_user
-			  			u.regtime = now.to_i
-			  		end
-		  			@user.save!(:validate=>false)
-		  			sign_in(@account,'1')
-		  			return redirect_to activation_card_path
+				@account = Ecstore::Account.new  do |ac|
+					#account
+					ac.login_name = login_name
+					ac.login_password = login_name[0,6]#'123456'
+			  		ac.account_type ="member"
+			  		ac.createtime = now.to_i
+			  		# auth_ext
+			  		ac.auth_ext = auth_ext
+
+	        		ac.supplier_id = supplier_id        		
 		  		end
-	  		end
+		  		Ecstore::Account.transaction do
+	  				if @account.save!(:validate => false)
+			  			@user = Ecstore::User.new do |u|
+				  			u.member_id = @account.account_id
+				  			u.email = "weixin_user#{rand(9999)}@anonymous.com"
+				  			#u.sex = case auth_user.gender when 'f'; '0'; when 'm'; '1'; else '2'; end if auth_user
+				  			u.member_lv_id = 1
+				  			u.cur = "CNY"
+				  			u.reg_ip = request.remote_ip
+				  			#u.addr = auth_user.location || auth_user.loc_name if auth_user
+				  			u.regtime = now.to_i
+				  		end
+			  			@user.save!(:validate=>false)
+			  			sign_in(@account,'1')
+			  			return redirect_to activation_card_path
+			  		end
+		  		end
+		  	else
+		  		sign_in(check_user,'1')
+			   
+		    	if current_account.member.card_validate=='false'
+			    	redirect =  activation_card_path
+			    end	
+			    return redirect_to redirect
+			end
 
 		else
 			sign_in(auth_ext.account,'1')
 			# return redirect_to "/member/new?return_url=#{redirect}"
-		    if return_url
-	          redirect = return_url
-	      	else
-		      redirect = after_user_sign_in_path
-		    end
+		    
 	    	if current_account.member.card_validate=='false'
 		    	redirect =  activation_card_path
 		    end	
 		    redirect_to redirect
 		end
-	#rescue
-	#	redirect_to(site_path)
 	end
 
 	def cancel
