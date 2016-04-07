@@ -52,7 +52,7 @@
     <%end if @goods%>
 </div>
 <div class="row columns">
-<%=will_paginate @goods,:container=>false if @goods%>
+<%=will_paginate @goods,renderer: FoundationPagination::Rails,:container=>false if @goods%>
 <%=image_tag '/assets/store/big_comingsoon.gif', :class=>"coming" if @goods.blank? %>
 </div>
             
