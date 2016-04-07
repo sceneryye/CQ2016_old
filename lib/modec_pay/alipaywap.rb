@@ -17,7 +17,7 @@ module ModecPay
 			self.method = 'get'
 			self.charset ='utf-8'
       self.action ='http://wappaygw.alipay.com/service/rest.htm'
-      #self.action='http://www.trade-v.com/payments/debug'
+      #self.action='http://www.cq2016.cc/payments/debug'
 
 			self.sorter = Proc.new { |key,val| key }
 			self.filter = Proc.new { |key,val| key.present? }
@@ -30,7 +30,7 @@ module ModecPay
 			self.fields['sec_id'] ='MD5' #'0001' #=>RSA
 
       @member_id ='userid'  #@user.member_id #买家在商户系统的唯一标识。可空
-      @merchant_url = 'http://www.trade-v.com/m' #操作中断返回地址,可空
+      @merchant_url = 'http://www.cq2016.cc/m' #操作中断返回地址,可空
       @pay_expire = 21600 #交易自动关闭时间，单位为 分钟。 默认值 21600（即 15 天），可空
 
     end

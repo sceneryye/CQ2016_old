@@ -28,9 +28,9 @@
        </li>
     <%end%>   
 
-    <%if current_admin.has_right_of("brand_pages","index")%>
+    <%if current_admin.has_right_of("brand_adms","index")%>
           <li class="<%='active' if controller_name=='brand_pages'%>">
-            <%=link_to "基地页管理",admin_brand_pages_path%>
+            <%=link_to "基地管理",admin_brand_adms_path%>
           </li>
     <%end%>
     <%if current_admin.has_right_of("suppliers","index")%>
@@ -59,7 +59,6 @@
             current_admin.has_right_of("tags","index") ||
       current_admin.has_right_of("goods_cats","index") ||
       current_admin.has_right_of("goods_types","index") ||
-      current_admin.has_right_of("brand_adms","index") ||
       current_admin.has_right_of("specifications","index")%>
 
         <li class="<%='active' if %w(goods goods_cats goods_types brand_adms specifications).include?(controller_name)%>">
@@ -76,11 +75,7 @@
               </li>
               <li>
                   <%=link_to "商品类型",admin_goods_types_path  if current_admin.has_right_of("goods_types","index")%>
-              </li>
-              <li>
-                  <%=link_to "商品基地",admin_brand_adms_path  if current_admin.has_right_of("brand_adms","index")%>
-              </li>
-             
+              </li>             
               <li>
                   <%=link_to "商品规格",admin_specifications_path  if current_admin.has_right_of("specifications","index")%>
               </li>

@@ -5,7 +5,7 @@
     <div class="column">
     
         <%=link_to brand_path(brand) do %>
-            <%=image_tag brand.brand_page.logo_url,:alt=>brand.brand_name, class: "thumbnail" if brand.brand_page%>
+            <%=image_tag brand.brand_logo,:alt=>brand.brand_name, class: "thumbnail"%>
         <%end%>
         <!-- <h6><%=link_to brand.brand_name, brand_path(brand)%></h6> -->
     </div>

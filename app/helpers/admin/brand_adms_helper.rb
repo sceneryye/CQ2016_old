@@ -1,5 +1,5 @@
 #encoding:utf-8
-module Admin::BrandPagesHelper
+module Admin::BrandAdmsHelper
 	def brand_status_options(selected=nil)
 		brand_statuses.collect do |key,txt|
 			if selected == key.to_s

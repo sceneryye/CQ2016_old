@@ -1,3 +1,5 @@
+//=require admin/addresses
+
 $ ->
   $("form").on 'click', '.delete', ->
   	$(this).closest("div.item").remove()

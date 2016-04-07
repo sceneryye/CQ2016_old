@@ -238,6 +238,9 @@ resources :cases
     end
 
     resources :brand_adms do
+      get 'toggle', :on=>:member
+      put 'order', :on=>:member
+      put 'reco', :on=>:member
       get :delete
       put :update_brand,:on=>:member
     end
@@ -331,12 +334,6 @@ resources :cases
     end
 
     resources :homes
-
-    resources :brand_pages do
-      get 'toggle', :on=>:member
-      put 'order', :on=>:member
-      put 'reco', :on=>:member
-    end
 
     resources :promotions
 

@@ -9,7 +9,6 @@ class Ecstore::Brand < Ecstore::Base
 	self.table_name = "sdb_b2c_brand"
 	self.primary_key = 'brand_id'
 	has_many :goods,->{where(marketable:'true')}, :foreign_key=>"brand_id"
-	has_one :brand_page
 
 	has_one :seo,->{where(mr_id:3) }, :foreign_key=>:pk
 
@@ -29,6 +28,15 @@ class Ecstore::Brand < Ecstore::Base
 	validates_presence_of :brand_name,:message=>"基地名称不能为空"
 	validates_presence_of :slug,:message=>"访问地址不能为空"
 	validates_uniqueness_of :slug,:message=>"您输入的访问地址已经存在"
+
+	def context=(val)
+	  	super(val.to_json)
+	end
+
+	  def context
+	  	return ActiveSupport::JSON.decode super if super.present?
+	  	return []
+	  end
 
 
 	def logo_url
