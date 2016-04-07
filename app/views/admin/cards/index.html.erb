@@ -1,19 +1,21 @@
-
-<div class="scope">
-    <%=link_to "未出售的卡",admin_cards_path(:sold=>0),:class=>"button"%>
-    <%=link_to "已出售的卡",admin_cards_path(:sold=>1),:class=>"button"%>
-</div>
-
-<%=form_for :card,:url=>import_admin_cards_path,:html => {:multipart => true} ,:method=>:post do |f|%>
-
+<div class='columns medium-2'>
   <div class="button-group">
-    <%= file_field :card, :file, :id=>'csvfile',:accept => "text/csv" %> 
-    <%= f.submit '导入', :class => "button" %>
+      <%=link_to "未出售的卡",admin_cards_path(:sold=>0),:class=>"button"%>
+      <%=link_to "已出售的卡",admin_cards_path(:sold=>1),:class=>"button"%>
   </div>
-  &nbsp;&nbsp;&nbsp;&nbsp;
-  <%=link_to "下载csv模板","/pic/card_模板.csv"%>
-<%end%>
+</div>
+<div class='columns medium-2'>
+  <%=form_for :card,:url=>import_admin_cards_path,:html => {:multipart => true} ,:method=>:post do |f|%>
 
+    <div class="button-group">
+      <%= file_field :card, :file, :id=>'csvfile',:accept => "text/csv" %> 
+      <%= f.submit '导入', :class => "button" %>
+    </div>
+    &nbsp;&nbsp;&nbsp;&nbsp;
+    <%=link_to "下载csv模板","/pic/card_模板.csv"%>
+  <%end%>
+  </div>
+<div class='columns medium-2'>
 <%if flash[:notice] && flash[:notice].is_a?(Hash)%>
 <div id="import_log_list" class="alert">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
@@ -29,14 +31,19 @@
   <%=link_to "显示全部","#",:id=>"show_all"  if flash[:notice].size > 5%>
 </div>
 <%end%>
-
+  </div>
+  <div class='columns medium-3'>
 <%=form_for :search,:url=>admin_cards_path,:html=>{:class=>"form-search"},:method=>:get do |f|%>
+<div class='columns medium-3'>
 <%=f.text_field :key,:placeholder=>"卡号",:value=>params[:search]&&params[:search][:key]%>
+  </div>
+  <div class='columns medium-3'>
 <%=f.submit "搜索",:class=>"button"%>
+  </div>
 <%end%>
 <%=form_for :card,:url=>export_admin_cards_path,:method=>:post do |f|%>
 <%= f.hidden_field :select_all,:class=>"sel_operation", :value => 0 %>
-<div class="actions">
+<div class="actions medium-3 columns">
     <%=f.submit "导出",:class=>"export_button button" %>
     
     <div class="button-group">
@@ -61,6 +68,7 @@
 
 
 </div>
+  </div>
 
 <div class='sel_banner' style="display:none">
   您当前选定了<a class='sel_nums'>0</a>条记录！  <a href='#' class='cancel_all'>取消选定</a> <a href='#' class='sel_all'>选定全部</a>
@@ -84,8 +92,8 @@
     <th>购卡者</th>
     <th>使用者手机</th>
     <th>标签</th>
-    <!-- <th>支付银行</th>
-    <th>银行卡号</th> -->
+    <th>绑定银行</th>
+    <th>银行卡号</th>
     <th>操作</th>
   </tr>
 
@@ -100,8 +108,8 @@
     </td> -->
 
     <td><%=link_to  card.no,admin_card_path(card) %></td>
-    <td>¥<%= card.value %><%="[#{level(card.value)}]" if level(card.value)%></td>
-    <td><%= card.card_type %></td>
+    <td>¥<%= card.value %></td>
+    <td><%="[#{level(card.card_type)}]" if level(card.card_type)%></td>
     <td><%= card.sale_status ? "已出售" : "未出售" %></td>
     <td><%= card.member_card.created_at.strftime("%Y-%m-%d %H:%S:%M") if card.member_card %></td>
     <td><%= card.use_status ?  "已使用" : "未使用"%></td>
@@ -124,12 +132,12 @@
         </span>
       <%end%>
     </td>
-    <!-- <td>
+    <td>
       <%= card.member_card.bank_name if !card.member_card.nil?%>
     </td>
     <td>
       <%= card.member_card.bank_card_no if !card.member_card.nil?%>
-    </td> -->
+    </td>
     <td>
         <%=link_to "日志",logs_admin_card_path(card)%>
         <%=link_to "取消订单",cancel_order_admin_card_path(card),:method=>:put,:confirm=>"确定取消订单？" if card.sale_status && !card.pay_status && card.normal?%>
@@ -147,5 +155,5 @@
 </table>
 <%end%>
 <div class="pagination">
-  <%= will_paginate @cards, :container => false %>
+<%= will_paginate @cards,renderer: FoundationPagination::Rails%>
 </div>

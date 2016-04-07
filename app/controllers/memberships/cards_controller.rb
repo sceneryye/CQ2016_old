@@ -23,7 +23,7 @@ class Memberships::CardsController < ApplicationController
 		    Rails.logger.info res_data 
 
 		    @cards_log.info("[#{@user.login_name}][#{Time.now}]#{res_data}")
-		    if res_data[:error_response]
+		    if res_data["error_response"]
 		 		@cards_log.info("[#{@user.login_name}][#{Time.now}]查询会员卡信息失败")
 		    	return render json: {data: res_data}
 				###########e.data.ppcs_cardsingleactive_add_response# e.data.error_response.sub_msg					
@@ -33,7 +33,7 @@ class Memberships::CardsController < ApplicationController
 
 	      	#   console.log(e.data.card_cardinfo_get_response);
 	      	#   var msg = e.data.card_cardinfo_get_response.card_info.card_product_info_arrays.card_product_info[0]
-     
+     		
 	        status = case res_data["card_cardinfo_get_response"]["card_info"]["card_product_info_arrays"]["card_product_info"][0]["product_stat"]
 	          		when 0
 	          			 '正常'
