@@ -12,7 +12,7 @@ class Memberships::CardsController < ApplicationController
   	def activate
   		
 		@card = Ecstore::Card.find_by_no(card_params[:card_num])
-		if @card.can_use?# && !@card.used?
+		if @card && @card.can_use? && !@card.used?
 
 			@cards_log ||= Logger.new('log/cards.log')
 

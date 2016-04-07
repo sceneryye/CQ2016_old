@@ -61,7 +61,7 @@
       current_admin.has_right_of("goods_types","index") ||
       current_admin.has_right_of("specifications","index")%>
 
-        <li class="<%='active' if %w(goods goods_cats goods_types brand_adms specifications).include?(controller_name)%>">
+        <li class="<%='active' if %w(goods goods_cats goods_types specifications).include?(controller_name)%>">
             <%=link_to admin_goods_path,:class=>"dropdown-toggle" do %>
               商品 <b class="caret" style="border-top-color: #fff;border-bottom-color: #fff; margin-top:7px;margin-left:2px;"></b>
             <%end%>
@@ -69,7 +69,6 @@
               <li>
                   <%=link_to "商品管理",admin_goods_path  if current_admin.has_right_of("goods","index")%>
               </li>
-
               <li>
                   <%=link_to "商品分类",admin_goods_cats_path  if current_admin.has_right_of("goods_cats","index")%>
               </li>

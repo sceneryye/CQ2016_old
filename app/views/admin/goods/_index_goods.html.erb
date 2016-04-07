@@ -9,9 +9,6 @@
 		<th class="order" data-field="bn" data-sorter="asc">商品编号</th>
 		<th class="order" data-field="name" data-sorter="asc">商品名称</th>
 		<th width="50px" align="center">缩略图</th>
-      <%if current_admin.has_right_of("goods","edit")%>
-          <th class="order" data-field="cost" data-sorter="asc">进货价</th>
-      <%end%>             
 		<th class="order" data-field="price" data-sorter="asc">会员价</th>
         <th class="order" data-field="mktprice" data-sorter="asc">市场价</th>
 		<th class="order" data-field="store" data-sorter="asc">库存</th>
@@ -48,9 +45,6 @@
 					<%=image_tag good.list_default_pic, :size => "35x50"%>
 				<%end%>
 			</td>
-          <%if current_admin.has_right_of("goods","edit")%>
-              <td>¥<%=format("%.2f",good.cost)%></td>
-          <%end%>    
 			<td>¥<%=format("%.2f",good.price) if good.price%></td>
             <td>¥<%=format("%.2f",good.mktprice) if good.mktprice%></td>
 			<td><%=good.store.to_i%></td>

@@ -375,6 +375,7 @@ module Admin
       end
 
       def update
+        # return render text: params[:good][:products_attributes]
             @good  =  Ecstore::Good.find(params[:id])
             @action_url = admin_good_path(@good)
             @good.update_attributes(goods_params)
@@ -575,10 +576,13 @@ module Admin
 
       private 
       def goods_params
+
         params.require(:good).permit(:desc, :price,:mktprice,:store,:name,:freight,:p_order,:intro,
-                            :cat_id,:brand_id,:supplier_id,:bn,:up_or_down,:spec_info,:products_attributes,
-                            :small_pic,:medium_pic,:big_pic,:place,:place_info,:marketable,:uptime)
+                            :cat_id,:brand_id,:supplier_id,:bn,:up_or_down,:spec_info,
+                            :small_pic,:medium_pic,:big_pic,:place,:place_info,:marketable,:uptime,
+                            products_attributes: [:product_id,:barcode, :mktprice,:price,:store,:name,:freight,:up_or_down])
       end
+
 
 
   end
