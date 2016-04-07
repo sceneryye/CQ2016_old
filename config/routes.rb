@@ -292,16 +292,34 @@ resources :cases
     end
 
     resources :cards do
-      get 'buy',:on=>:member
-      get 'use',:on=>:member
-      get 'edit_user',:on=>:member
-      get 'edit_pay',:on=>:member
-      get 'logs', :on=>:member
+      member do
+        get 'buy'
+        get 'use'
+        get 'edit_user'
+        get 'edit_pay'
+        get 'logs'
+        put "untag"
+        put "cancel_order"
+        get "allinpay"
+      end
+
+      collection do
+        post 'active'
+        post 'topup'
+        post 'pay_with_pwd'
+        post 'reset_password'
+        post 'freeze'
+        post 'unfreeze'
+        post 'report_loss'
+        post 'cancel_loss'
+        post 'get_info'
+        post 'get_trade_log'
+        post 'pay_to_client'
+      end
+      
       post 'import', :on=>:collection
       post "export",:on=>:collection
       get "tag",:on=>:collection
-      put "untag",:on=>:member
-      put "cancel_order",:on=>:member
     end
 
     resources :users do

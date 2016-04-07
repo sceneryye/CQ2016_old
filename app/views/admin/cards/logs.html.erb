@@ -9,7 +9,7 @@
     <tr>
         <td><%=index + 1%></td>
         <td><%=log.created_at.strftime("%Y-%m-%d %H:%M:%S")%></td>
-        <td><%=log.account.login_name%></td>
+        <td><%=log.account.login_name if log.account%></td>
         <td><%=log.message%></td>
     </tr>
  <%end%>

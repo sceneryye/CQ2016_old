@@ -1,9 +1,15 @@
 #encoding:utf-8
 require 'csv'
+require 'allinpay'
 class Admin::CardsController < Admin::BaseController
   include Admin::CardsHelper
   # GET /admin/cards
   # GET /admin/cards.json
+  include Allinpay
+  
+  def allinpay
+      @card = params[:id]
+  end
   def index
     @labels = Ecstore::Label.all
 
@@ -264,6 +270,119 @@ class Admin::CardsController < Admin::BaseController
 
         flash[:notice] = errors unless errors.empty?
         redirect_to admin_cards_path
+  end
+
+  def active
+    order_id = params[:order_id]
+    card_id = params[:card_id]
+    type = params[:type]
+    res_data = ActiveSupport::JSON.decode card_active(order_id, card_id, type)
+    Rails.logger.info res_data
+    render json: {data: res_data}
+  end
+
+  def topup
+    #data = params.permit(:order_id, :card_id, :prdt_no, :amount, :top_up_way, :opr_id, :desn)
+    order_id = params[:order_id]
+    card_id = params[:card_id]
+    prdt_no = params[:prdt_no]
+    amount = params[:amount]
+    top_up_way = params[:top_up_way]
+    opr_id = params[:opr_id]
+    desn = params[:desn]
+    res_data = ActiveSupport::JSON.decode topup_single_card(order_id, card_id, prdt_no, amount, top_up_way, opr_id, desn)
+    Rails.logger.info res_data
+    render json: {data: res_data}
+  end
+
+  def pay_with_pwd
+    order_id = params[:order_id]
+    mer_order_id = params[:mer_order_id]
+    payment_id = params[:payment_id]
+    amount = params[:amount]
+    card_id = params[:card_id]
+    password = params[:password]
+    res_data = ActiveSupport::JSON.decode pay_with_password(order_id,  mer_order_id, payment_id, amount, card_id, password)
+    Rails.logger.info res_data
+    render json: {data: res_data}
+  end
+
+  def reset_password
+    order_id = params[:order_id]
+    card_id = params[:card_id]
+    password = params[:password]
+    res_data = ActiveSupport::JSON.decode card_reset_password(order_id, card_id, password)
+    Rails.logger.info res_data
+    render json: {data: res_data}
+  end
+
+  def freeze
+    order_id = params[:order_id]
+    card_id = params[:card_id]
+    prdt_id = params[:prdt_id]
+    reason = params[:reason]
+    res_data = ActiveSupport::JSON.decode card_freeze(order_id, card_id, prdt_id, reason)
+    Rails.logger.info res_data
+    render json: {data: res_data}
+  end
+
+  def unfreeze
+    order_id = params[:order_id]
+    card_id = params[:card_id]
+    prdt_id = params[:prdt_id]
+    reason = params[:reason]
+    res_data = ActiveSupport::JSON.decode card_unfreeze(order_id, card_id, prdt_id, reason)
+    Rails.logger.info res_data
+    render json: {data: res_data}
+  end
+
+  def report_loss
+    order_id = params[:order_id]
+    card_id = params[:card_id]
+    id_type = params[:id_type]
+    id_no = params[:id_no]
+    reason = params[:reason]
+    res_data = ActiveSupport::JSON.decode card_report_loss(order_id, card_id, id_no, id_type, reason)
+    Rails.logger.info res_data
+    render json: {data: res_data}
+  end
+
+  def cancel_loss
+    order_id = params[:order_id]
+    card_id = params[:card_id]
+    id_type = params[:id_type]
+    id_no = params[:id_no]
+    reason = params[:reason]
+    res_data = ActiveSupport::JSON.decode card_cancel_loss(order_id, card_id, id_no, id_type, reason)
+    Rails.logger.info res_data
+    render json: {data: res_data}
+  end
+
+  def get_info
+    card_id = params[:card_id]
+    password = params[:password]
+    res_data = ActiveSupport::JSON.decode card_get_info(card_id, password)
+    Rails.logger.info res_data
+    render json: {data: res_data}
+  end
+
+  def get_trade_log
+    begin_date = params[:begin_date]
+    end_date = params[:end_date]
+    card_id = params[:card_id]
+    password = params[:password]
+    page_no = params[:page_no]
+    page_size = params[:page_size]
+    return render json: {data: {error_message: '不能查询90天之前的记录！'}} if Time.parse(begin_date) < (Time.now - 3600 * 24 * 90)
+    res_data = ActiveSupport::JSON.decode card_get_trade_log(begin_date, end_date, card_id, password, page_no, page_size)
+    Rails.logger.info res_data
+    render json: {data: res_data}
+  end
+
+  def pay_to_client
+    data = params[:pay_to_client]
+    res_data = Hash.from_xml pay_for_another data
+    render json: {data: res_data}
   end
 
 

@@ -74,7 +74,7 @@ $(document).ready(function(){
 
   // 单卡充值
   $('.topup-card').on('click', function(){
-    var card_id = '8668083660000001017';
+    var card_id = '8668083660000059727';
     var prdt_no = "0001";
     var amount = '10000';
     var top_up_way = '1';
@@ -85,7 +85,7 @@ $(document).ready(function(){
 
   // 密码支付
   $('.pay-with-password').on('click', function(){
-    var card_id = '8668083660000001017';
+    var card_id = '8668083660000059727';
     var mer_order_id = order_id;
     var payment_id = "<%= rand(100_000_000_0).to_s.ljust(10, '1') %>";
     var amount = '100';
@@ -96,7 +96,7 @@ $(document).ready(function(){
 
   // 卡冻结
   $('.freeze-card').on('click', function(){
-    var card_id = '8668083660000001017';
+    var card_id = '8668083660000059727';
     var prdt_id = "0001";
     var reason = 'lost my card';
     var url = "<%= freeze_card_path %>";
@@ -105,7 +105,7 @@ $(document).ready(function(){
 
   // 卡冻结
   $('.unfreeze-card').on('click', function(){
-    var card_id = '8668083660000001017';
+    var card_id = '8668083660000059727';
     var prdt_id = "0001";
     var reason = 'find my card';
     var url = "<%= unfreeze_card_path %>";
@@ -114,7 +114,7 @@ $(document).ready(function(){
 
   // 卡挂失
   $('.report-loss-card').on('click', function(){
-    var card_id = '8668083660000001017';
+    var card_id = '8668083660000059727';
     var id_type = '1';
     var id_no = '330724198611118011'
     var reason = 'lost my card';
@@ -124,7 +124,7 @@ $(document).ready(function(){
 
   // 卡解挂
   $('.cancel-loss-card').on('click', function(){
-    var card_id = '8668083660000001017';
+    var card_id = '8668083660000059727';
     var id_type = '1';
     var id_no = '330724198611118011'
     var reason = 'lost my card';

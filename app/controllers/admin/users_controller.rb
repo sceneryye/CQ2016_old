@@ -98,8 +98,7 @@ class Admin::UsersController < Admin::BaseController
 
 		return render(:js=>"alert('不能购买,请检查卡状态!')") unless  @card.can_buy?
 
-return render(:js=>"alert('#{member_card_params}')")
-		validate_type = member_card_params.delete :validate_type
+		validate_type = params[:member_card].delete :validate_type
 
 		# if !@buyer.sms_validated?
 		# 	@buyer_card.errors.add(:buyer_tel,"请先在我的昌麒/个人信息管理/账户中心 认证手机号码")
@@ -120,7 +119,7 @@ return render(:js=>"alert('#{member_card_params}')")
 			member_card_params.delete(:sms_code)
 		end
 
-		if (pay_status = member_card_params.delete(:pay_status)) == 'false'
+		if (pay_status = params[:member_card].delete(:pay_status)) == 'false'
 			member_card_params.delete :bank_name
 			member_card_params.delete :bank_card_no
 		end
@@ -238,7 +237,7 @@ return render(:js=>"alert('#{member_card_params}')")
 	end
 	private
 	def member_card_params
-		params.require(:member_card).permit(:buyer_tel,:bank_name,:bank_card_no,:user_tel,:card_id,:user_id,:buy_id,:pay_status,:validate_type)
+		params.require(:member_card).permit(:buyer_tel,:bank_name,:bank_card_no,:user_tel,:card_id,:user_id,:buy_id,:pay_status)
 	end
 
 end

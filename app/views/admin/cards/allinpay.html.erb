@@ -84,7 +84,7 @@
     var order_id = '999990053990001_' + "<%= Time.now.to_i %>" + "<%= rand(100).to_s %>";
   // 激活卡片
   $('.active-card').on('click', function(){
-    var card_id = '8668083660000059727';
+    var card_id = '<%=@card.no%>';
     var type = '1'
     var url = "<%= active_card_path %>";
     $.post(url, {order_id: order_id, card_id: card_id, type: type}, function(e){
@@ -101,7 +101,7 @@
 
   // 单卡充值
   $('.topup-card').on('click', function(){
-    var card_id = '8668083660000059727';
+    var card_id = '<%=@card.no%>';
     var prdt_no = "0001";
     var amount = '10000';
     var top_up_way = '1';
@@ -121,7 +121,7 @@
 
   // 密码支付
   $('.pay-with-password').on('click', function(){
-    var card_id = '8668083660000059727';
+    var card_id = '<%=@card.no%>';
     var mer_order_id = order_id;
     var payment_id = "0000000001";
     var amount = '100';
@@ -141,7 +141,7 @@
 
   // 更改密码
   $('.card-reset-password').on('click', function(){
-    var card_id = '8668083660000059727';
+    var card_id = '<%=@card.no%>';
     var password = '111111';
     var url = "<%= reset_password_card_path %>";
     $.post(url, {order_id: order_id, card_id: card_id, password: password}, function(e){
@@ -158,7 +158,7 @@
 
   // 卡冻结
   $('.freeze-card').on('click', function(){
-    var card_id = '8668083660000059727';
+    var card_id = '<%=@card.no%>';
     var prdt_id = "0001";
     var reason = 'lost my card';
     var url = "<%= freeze_card_path %>";
@@ -176,7 +176,7 @@
 
   // 取消卡冻结
   $('.unfreeze-card').on('click', function(){
-    var card_id = '8668083660000059727';
+    var card_id = '<%=@card.no%>';
     var prdt_id = "0001";
     var reason = 'find my card';
     var url = "<%= unfreeze_card_path %>";
@@ -194,7 +194,7 @@
 
   // 卡挂失
   $('.report-loss-card').on('click', function(){
-    var card_id = '8668083660000059727';
+    var card_id = '<%=@card.no%>';
     var id_type = '1';
     var id_no = '330724198611118011'
     var reason = 'lost my card';
@@ -213,7 +213,7 @@
 
   // 卡解挂
   $('.cancel-loss-card').on('click', function(){
-    var card_id = '8668083660000059727';
+    var card_id = '<%=@card.no%>';
     var id_type = '1';
     var id_no = '330724198611118011'
     var reason = 'lost my card';
@@ -232,7 +232,7 @@
 
   // 查询卡片信息
   $('.get-card-info').on('click', function(){
-    var card_id = '8668083660000059727';
+    var card_id = '<%=@card.no%>';
     var password = '111111'
     var url = "<%= get_info_card_path %>";
     $.post(url, {card_id: card_id, password: password}, function(e){
@@ -269,7 +269,7 @@
 
   // 交易记录查询
   $('.get-card-trade-log').on('click', function(){
-    var card_id = '8668083660000059727';
+    var card_id = '<%=@card.no%>';
     var password = '111111';
     // var begin_date = "<%= (Time.now - 3600 * 24 * 89).strftime('%Y%m%d') %>";
     var begin_date = "20160103";
