@@ -28,5 +28,5 @@
 </table>
 
 <div class="pagination">
-  <%= will_paginate @tags, :container => false %>
+  <%= will_paginate @tags,renderer: FoundationPagination::Rails, :container => false %>
 </div>

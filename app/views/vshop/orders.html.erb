@@ -135,7 +135,7 @@
   </tbody>
 </table>
 <div class="paginations">
-  <%=will_paginate @orders,:container=>false%>
+  <%=will_paginate @orders,renderer: FoundationPagination::Rails,:container=>false%>
 </div>
 
 <%=render "admin/shared/modal_tegs", :tegs=> Ecstore::Teg.order_tegs %>

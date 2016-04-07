@@ -2,9 +2,6 @@
 require 'httpclient'
 Modengke::Application.routes.draw do
 
-resources :cases
-
-
   mount WeixinRailsMiddleware::Engine, at: "/"
 
   root :to=>"home#index",:constraints=>{ :subdomain=>/^(www)?$/ }

@@ -64,5 +64,5 @@
 	<%end if @users.present?%>
 </table>
 <div class="pagination">
-  <%= will_paginate @users, :container => false %>
+  <%= will_paginate @users,renderer: FoundationPagination::Rails, :container => false %>
 </div>

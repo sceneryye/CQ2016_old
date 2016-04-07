@@ -39,5 +39,5 @@
 </table>
 
 <div class="pagination">
-  <%= will_paginate @suppliers, :container => false %>
+  <%= will_paginate @suppliers,renderer: FoundationPagination::Rails, :container => false %>
 </div>

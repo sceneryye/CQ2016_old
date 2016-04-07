@@ -45,5 +45,5 @@
 	</tbody>
 </table>
 <div class="pagination">
-	<%=will_paginate @top_cats,:container=>false%>
+	<%=will_paginate @top_cats,renderer: FoundationPagination::Rails,:container=>false%>
 </div>

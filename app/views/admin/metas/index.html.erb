@@ -27,5 +27,5 @@
 	<%end%>
 </table>
 <div class="pagination">
-	<%=will_paginate @metas, container: false%>
+	<%=will_paginate @metas,renderer: FoundationPagination::Rails, container: false%>
 </div>

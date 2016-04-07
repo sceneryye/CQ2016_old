@@ -27,5 +27,5 @@
 </table>
 
 <div class="pagination">
-  <%= will_paginate @applicants, :container => false if @applicants.size > 0%>
+  <%= will_paginate @applicants,renderer: FoundationPagination::Rails, :container => false if @applicants.size > 0%>
 </div>

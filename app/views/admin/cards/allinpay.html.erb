@@ -1,83 +1,70 @@
-
-<div class="container">
+  <h4><%=@card.no%></h4>
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <button class="button button-success active-card">激活卡片</button>
+      <button class="button active-card">激活卡片</button>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <button class="button button-success topup-card">单卡充值</button>
+      <button class="button topup-card">单卡充值</button>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <button class="button button-success pay-with-password">密码支付</button>
+      <button class="button pay-with-password">密码支付</button>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <button class="button button-success card-reset-password">更改密码</button>
+      <button class="button card-reset-password">更改密码</button>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <button class="button button-success freeze-card">卡冻结</button>
+      <button class="button freeze-card">卡冻结</button>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <button class="button button-success unfreeze-card">卡解冻</button>
+      <button class="button unfreeze-card">卡解冻</button>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <button class="button button-success report-loss-card">卡挂失</button>
+      <button class="button report-loss-card">卡挂失</button>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <button class="button button-success cancel-loss-card">卡解挂</button>
+      <button class="button cancel-loss-card">卡解挂</button>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <button class="button button-success get-card-info">查询卡片信息</button>
+      <button class="button get-card-info">查询卡片信息</button>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <button class="button button-success get-card-trade-log">查询交易记录</button>
+      <button class="button get-card-trade-log">查询交易记录</button>
     </div>
   </div>
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <button class="button button-success pay-for-another">代付</button>
+      <button class="button pay-for-another">代付</button>
     </div>
   </div>
-</div>
 
-
-
-
-<style>
-  button {
-    width: 100%;
-  }
-  .row {
-    margin-top: 20px;
-  }
-</style>
 
 <script>
   $(document).ready(function(){
@@ -86,7 +73,7 @@
   $('.active-card').on('click', function(){
     var card_id = '<%=@card.no%>';
     var type = '1'
-    var url = "<%= active_card_path %>";
+    var url = "<%= active_admin_cards_path %>";
     $.post(url, {order_id: order_id, card_id: card_id, type: type}, function(e){
       if(e.data.ppcs_cardsingleactive_add_response) {
         console.log(e.data.ppcs_cardsingleactive_add_response);
@@ -106,7 +93,7 @@
     var amount = '10000';
     var top_up_way = '1';
     var opr_id = '0229000040';
-    var url = "<%= topup_card_path %>";
+    var url = "<%= topup_admin_cards_path %>";
     $.post(url, {order_id: order_id, card_id: card_id, prdt_no: prdt_no, amount: amount, top_up_way: top_up_way, opr_id: opr_id}, function(e){
       if(e.data.ppcs_cardsingletopup_add_response) {
         console.log(e.data.ppcs_cardsingletopup_add_response);
@@ -126,7 +113,7 @@
     var payment_id = "0000000001";
     var amount = '100';
     var password = '111111';
-    var url = "<%= pay_with_pwd_card_path %>";
+    var url = "<%= pay_with_pwd_admin_cards_path %>";
     $.post(url, {order_id: order_id, card_id: card_id, mer_order_id: mer_order_id, amount: amount, payment_id: payment_id, password: password}, function(e){
       if(e.data.card_paywithpassword_add_response) {
         console.log(e.data.card_paywithpassword_add_response);
@@ -143,7 +130,7 @@
   $('.card-reset-password').on('click', function(){
     var card_id = '<%=@card.no%>';
     var password = '111111';
-    var url = "<%= reset_password_card_path %>";
+    var url = "<%= reset_password_admin_cards_path %>";
     $.post(url, {order_id: order_id, card_id: card_id, password: password}, function(e){
       if(e.data.ppcs_cardpassword_rest_response) {
         console.log(e.data.ppcs_cardpassword_rest_response);
@@ -161,7 +148,7 @@
     var card_id = '<%=@card.no%>';
     var prdt_id = "0001";
     var reason = 'lost my card';
-    var url = "<%= freeze_card_path %>";
+    var url = "<%= freeze_admin_cards_path %>";
     $.post(url, {order_id: order_id, card_id: card_id, prdt_id: prdt_id, reason: reason}, function(e){
       if(e.data.ppcs_cardproductfreeze_add_response) {
         console.log(e.data.ppcs_cardproductfreeze_add_response);
@@ -179,7 +166,7 @@
     var card_id = '<%=@card.no%>';
     var prdt_id = "0001";
     var reason = 'find my card';
-    var url = "<%= unfreeze_card_path %>";
+    var url = "<%= unfreeze_admin_cards_path %>";
     $.post(url, {order_id: order_id, card_id: card_id, prdt_id: prdt_id, reason: reason}, function(e){
       if(e.data.ppcs_cardproductunfreeze_add_response) {
         console.log(e.data.ppcs_cardproductunfreeze_add_response);
@@ -198,7 +185,7 @@
     var id_type = '1';
     var id_no = '330724198611118011'
     var reason = 'lost my card';
-    var url = "<%= report_loss_card_path %>";
+    var url = "<%= report_loss_admin_cards_path %>";
     $.post(url, {order_id: order_id, card_id: card_id, id_type: id_type, id_no: id_no, reason: reason}, function(e){
       if(e.data.ppcs_cardreportloss_add_response) {
         console.log(e.data.ppcs_cardreportloss_add_response);
@@ -217,7 +204,7 @@
     var id_type = '1';
     var id_no = '330724198611118011'
     var reason = 'lost my card';
-    var url = "<%= cancel_loss_card_path %>";
+    var url = "<%= cancel_loss_admin_cards_path %>";
     $.post(url, {order_id: order_id, card_id: card_id, id_type: id_type, id_no: id_no, reason: reason}, function(e){
       if(e.data.ppcs_cardcancelloss_add_response) {
         console.log(e.data.ppcs_cardcancelloss_add_response);
@@ -234,7 +221,7 @@
   $('.get-card-info').on('click', function(){
     var card_id = '<%=@card.no%>';
     var password = '111111'
-    var url = "<%= get_info_card_path %>";
+    var url = "<%= get_info_admin_cards_path %>";
     $.post(url, {card_id: card_id, password: password}, function(e){
       if(e.data.card_cardinfo_get_response) {
         console.log(e.data.card_cardinfo_get_response);
@@ -277,7 +264,7 @@
     var end_date = "20160112";
     var page_no = '1';
     var page_size = '20';
-    var url = "<%= get_trade_log_card_path %>";
+    var url = "<%= get_trade_log_admin_cards_path %>";
     $.post(url, {order_id: order_id, card_id: card_id, password: password, begin_date: begin_date, end_date: end_date, page_no: page_no, page_size: page_size}, function(e){
       if(e.data.ppcs_txnlog_search_response) {
         console.log(e.data.ppcs_txnlog_search_response);
@@ -298,7 +285,7 @@
     var ACCOUNT_PROP = '0';
     var AMOUNT = 200;
 
-    var url = "<%= pay_to_client_card_path %>";
+    var url = "<%= pay_to_client_admin_cards_path %>";
     $.post(url, {pay_to_client: {BANK_CODE: BANK_CODE, ACCOUNT_NO: ACCOUNT_NO, ACCOUNT_NAME: ACCOUNT_NAME, ACCOUNT_PROP: ACCOUNT_PROP, AMOUNT: AMOUNT}}, function(e){
       if(e.info) {
         console.log(e.data.info);

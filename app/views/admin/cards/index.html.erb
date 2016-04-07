@@ -4,20 +4,21 @@
       <%=link_to "已出售的卡",admin_cards_path(:sold=>1),:class=>"button"%>
   </div>
 </div>
-<div class='columns medium-2'>
+<div class='columns medium-3'>
   <%=form_for :card,:url=>import_admin_cards_path,:html => {:multipart => true} ,:method=>:post do |f|%>
 
-    <div class="button-group">
-      <%= file_field :card, :file, :id=>'csvfile',:accept => "text/csv" %> 
-      <%= f.submit '导入', :class => "button" %>
-    </div>
-    &nbsp;&nbsp;&nbsp;&nbsp;
-    <%=link_to "下载csv模板","/pic/card_模板.csv"%>
-  <%end%>
-  </div>
-<div class='columns medium-2'>
+     <div class="input-group">
+        <%=link_to "下载csv模板","/pic/card_模板.csv" , :class => "button input-group-button" %>
+        <%= file_field :card, :file, :id=>'csvfile',:accept => "text/csv",class:'input-group-field' %> 
+         <div class="input-group-button">
+          <%= f.submit '导入', :class => "button" %>            
+          </div>
+      </div>
+  <%end%>  
+</div>
+
 <%if flash[:notice] && flash[:notice].is_a?(Hash)%>
-<div id="import_log_list" class="alert">
+<div id="import_log_list" class="alert columns medium-2">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <ul>
     <%flash[:notice].each do |row_no,msg|%>
@@ -31,21 +32,27 @@
   <%=link_to "显示全部","#",:id=>"show_all"  if flash[:notice].size > 5%>
 </div>
 <%end%>
-  </div>
-  <div class='columns medium-3'>
-<%=form_for :search,:url=>admin_cards_path,:html=>{:class=>"form-search"},:method=>:get do |f|%>
+
 <div class='columns medium-3'>
-<%=f.text_field :key,:placeholder=>"卡号",:value=>params[:search]&&params[:search][:key]%>
-  </div>
-  <div class='columns medium-3'>
-<%=f.submit "搜索",:class=>"button"%>
+<%=form_for :search,:url=>admin_cards_path,:html=>{:class=>"form-search"},:method=>:get do |f|%>
+  <div class="input-group">
+    <%=f.text_field :key,:placeholder=>"卡号",:value=>params[:search]&&params[:search][:key],class:'input-group-field'%>
+    <div class="input-group-button">
+    <%=f.submit "搜索",:class=>"button"%>
+    </div>
   </div>
 <%end%>
-<%=form_for :card,:url=>export_admin_cards_path,:method=>:post do |f|%>
-<%= f.hidden_field :select_all,:class=>"sel_operation", :value => 0 %>
-<div class="actions medium-3 columns">
-    <%=f.submit "导出",:class=>"export_button button" %>
-    
+</div>
+
+<div class="medium-2 columns">
+  <%=form_for :card,:url=>export_admin_cards_path,:method=>:post do |f|%>
+    <%= f.hidden_field :select_all,:class=>"sel_operation", :value => 0 %>
+
+      <%=f.submit "导出",:class=>"export_button button" %>
+  <%end%> 
+</div> 
+
+<div class="medium-1 columns">  
     <div class="button-group">
       <a class="button dropdown-toggle" data-toggle="dropdown" href="#">
         标签
@@ -65,12 +72,9 @@
         <%end%>
       </ul>
     </div>
-
-
 </div>
-  </div>
 
-<div class='sel_banner' style="display:none">
+<div class='sel_banner columns small-12' style="display:none">
   您当前选定了<a class='sel_nums'>0</a>条记录！  <a href='#' class='cancel_all'>取消选定</a> <a href='#' class='sel_all'>选定全部</a>
   <p class="total_card hidden"><%=@cards_total%></p>
 </div>
@@ -89,15 +93,12 @@
     <th>使用状态</th>
     <th>付款状态</th>
     <th>卡状态</th>
-    <th>购卡者</th>
     <th>使用者手机</th>
     <th>标签</th>
     <th>绑定银行</th>
-    <th>银行卡号</th>
     <th>操作</th>
   </tr>
-
-<% @cards.each do |card| %>
+  <% @cards.each do |card| %>
   <tr id="card_<%=card.id%>">
     <td><%=check_box_tag "selected_cards[]", card.id,false,:class =>'operate_ids'%></td>
     
@@ -114,16 +115,7 @@
     <td><%= card.member_card.created_at.strftime("%Y-%m-%d %H:%S:%M") if card.member_card %></td>
     <td><%= card.use_status ?  "已使用" : "未使用"%></td>
     <td><%= card.pay_status ?  "付款" : "未付款"%></td>
-    <td><%= card.status %></td>
-    <td>
-        <div>
-          账户:<%=card.member_card&&card.member_card.buyer ? card.member_card.buyer.login_name : "未登记"%>
-        </div>
-        <div>
-          手机:<%= card.member_card&&card.member_card.buyer_tel.present? ? card.member_card.buyer_tel : "未登记" %>
-        </div>
-    </td>
-   
+    <td><%= card.status %></td>   
     <td><%= card.member_card&&card.member_card.user_tel.present? ? card.member_card.user_tel : "未登记" %></td>
     <td>
       <%card.labels.each do |label|%>
@@ -133,9 +125,7 @@
       <%end%>
     </td>
     <td>
-      <%= card.member_card.bank_name if !card.member_card.nil?%>
-    </td>
-    <td>
+      <%= card.member_card.bank_name if !card.member_card.nil?%><br>
       <%= card.member_card.bank_card_no if !card.member_card.nil?%>
     </td>
     <td>
@@ -149,11 +139,11 @@
           <%=link_to "购卡",buy_admin_card_path(card)  if card.can_buy?%>
           <%=link_to "使用",use_admin_card_path(card)  if card.can_use?%>
         <%end%>
+        <%=link_to "通联",allinpay_admin_card_path(card)%>
     </td>
   </tr>
-<% end %>
+  <% end %>
 </table>
-<%end%>
 <div class="pagination">
 <%= will_paginate @cards,renderer: FoundationPagination::Rails%>
 </div>

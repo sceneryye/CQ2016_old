@@ -29,5 +29,5 @@
 </table>
 
 <div class="pagination">
-  <%= will_paginate @homes, :container => false %>
+  <%= will_paginate @homes,renderer: FoundationPagination::Rails, :container => false %>
 </div>

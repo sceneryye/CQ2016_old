@@ -45,5 +45,5 @@
 </table>
 
 <div class="pagination">
-  <%= will_paginate @topics, :container => false %>
+  <%= will_paginate @topics,renderer: FoundationPagination::Rails, :container => false %>
 </div>

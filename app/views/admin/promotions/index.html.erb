@@ -42,7 +42,7 @@
         </table>
 
         <div class="pagination">
-          <%=will_paginate @promotions,:container=>false%>
+          <%=will_paginate @promotions,renderer: FoundationPagination::Rails,:container=>false%>
         </div>
 
 

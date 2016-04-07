@@ -67,5 +67,5 @@
 </table>
 
 <div class="pagination">
-  <%= will_paginate @payment_logs, :container => false %>
+  <%= will_paginate @payment_logs,renderer: FoundationPagination::Rails, :container => false %>
 </div>

@@ -6,17 +6,21 @@ class Admin::CardsController < Admin::BaseController
   # GET /admin/cards
   # GET /admin/cards.json
   include Allinpay
-  
-  def allinpay
-      @card = params[:id]
-  end
+
+  before_filter :require_permission!
+
+  before_action :set_card, only: [:show,:allinpay,:edit, :update, :destroy,:buy,:use,:edit_user]
+
+
+  def allinpay () end
+
   def index
     @labels = Ecstore::Label.all
 
     sale_status = params[:sold] == "0" ? false : true
     key = params[:search][:key] if params[:search]
 
-    @cards = Ecstore::Card.order("created_at desc")
+    @cards = Ecstore::Card.order("id ASC")
 
     if params[:sold].present?
         @cards = @cards.where(:sale_status=>sale_status)
@@ -27,53 +31,34 @@ class Admin::CardsController < Admin::BaseController
     end
 
 
-    @cards = @cards.paginate(:page=>params[:page],:per_page=>10)
+    @cards = @cards.paginate(:page=>params[:page],:per_page=>20)
     @cards_total = Ecstore::Card.count
 
-
-
   end
 
-  def show
-    @card = Ecstore::Card.find(params[:id])
+  def show ()  end
+
+  def new 
+      @card = Ecstore::Card.new
   end
 
-  # GET /admin/cards/new
-  # GET /admin/cards/new.json
-  # def new
-  #   @card = Ecstore::Card.new
+  def edit () end
 
-  #   respond_to do |format|
-  #     format.html # new.html.erb
-  #     format.json { render json: @card }
-  #   end
-  # end
+  def create
+    @card = Ecstore::Card.new(params[:card])
 
-  # GET /admin/cards/1/edit
-  def edit
-    @card = Ecstore::Card.find(params[:id])
+    respond_to do |format|
+      if @card.save
+        format.html { redirect_to @card, notice: 'Card was successfully created.' }
+        format.json { render json: @card, status: :created, location: @card }
+      else
+        format.html { render action: "new" }
+        format.json { render json: @card.errors, status: :unprocessable_entity }
+      end
+    end
   end
 
-  # POST /admin/cards
-  # POST /admin/cards.json
-  # def create
-  #   @card = Ecstore::Card.new(params[:card])
-
-  #   respond_to do |format|
-  #     if @card.save
-  #       format.html { redirect_to @card, notice: 'Card was successfully created.' }
-  #       format.json { render json: @card, status: :created, location: @card }
-  #     else
-  #       format.html { render action: "new" }
-  #       format.json { render json: @card.errors, status: :unprocessable_entity }
-  #     end
-  #   end
-  # end
-
-  # PUT /admin/cards/1
-  # PUT /admin/cards/1.json
   def update
-    @card = Ecstore::Card.find(params[:id])
 
     respond_to do |format|
       if @card.update_attributes(params[:ecstore_card])
@@ -97,29 +82,21 @@ class Admin::CardsController < Admin::BaseController
     end
   end
 
-  # DELETE /admin/cards/1
-  # DELETE /admin/cards/1.json
-  # def destroy
-  #   @card = Ecstore::Card.find(params[:id])
-  #   @card.destroy
+  def destroy
+    @card.destroy
 
-  #   respond_to do |format|
-  #     format.html { redirect_to cards_url }
-  #     format.json { head :no_content }
-  #   end
-  # end
-
-  def buy
-      @card = Ecstore::Card.find(params[:id])
+    respond_to do |format|
+      format.html { redirect_to cards_url }
+      format.json { head :no_content }
+    end
   end
 
+  def buy () end
 
-  def use
-      @card = Ecstore::Card.find(params[:id])
-  end
 
-  def edit_user
-      @card = Ecstore::Card.find(params[:id])
+  def use () end
+
+  def edit_user 
       @member_card = @card.member_card
       @buyer =  @member_card.buyer
   end
@@ -383,6 +360,12 @@ class Admin::CardsController < Admin::BaseController
     data = params[:pay_to_client]
     res_data = Hash.from_xml pay_for_another data
     render json: {data: res_data}
+  end
+
+  private
+
+  def set_card
+    @card = Ecstore::Card.find(params[:id])
   end
 
 

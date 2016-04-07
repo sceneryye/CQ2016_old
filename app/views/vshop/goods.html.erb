@@ -144,11 +144,11 @@
 
 
     <div class="pagination">
-  <%= will_paginate @goods, :container => false,:params=>{ :page=>params[:page] } %>
+  <%= will_paginate @goods,renderer: FoundationPagination::Rails, :container => false,:params=>{ :page=>params[:page] } %>
 </div>
    <%else%>
 
     <div class="pagination">
-      <%= will_paginate @goodes, :container => false,:params=>{ :page=>params[:page] } %>
+      <%= will_paginate @goodes,renderer: FoundationPagination::Rails, :container => false,:params=>{ :page=>params[:page] } %>
     </div>
     <%end%>

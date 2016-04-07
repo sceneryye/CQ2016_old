@@ -29,6 +29,6 @@
     </table>
 
     <div class="pagination">
-      <%= will_paginate @accounts, :container => false %>
+      <%= will_paginate @accounts,renderer: FoundationPagination::Rails, :container => false %>
     </div>
 

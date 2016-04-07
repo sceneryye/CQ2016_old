@@ -78,7 +78,7 @@
 </table>
 
 <div class="pagination">
-  <%= will_paginate @members, :container => false %>
+  <%= will_paginate @members,renderer: FoundationPagination::Rails, :container => false %>
 </div>
 <%end%>
 <div class="modal hide fade" id="sms_editor">

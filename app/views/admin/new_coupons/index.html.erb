@@ -43,5 +43,5 @@
   </table>
 
   <div class="pagination">
-    <%=will_paginate @coupons,:container=>false%>
+    <%=will_paginate @coupons,renderer: FoundationPagination::Rails,:container=>false%>
   </div>

@@ -17,5 +17,5 @@
 </table>
 
 <div class="pagination">
-  <%= will_paginate @cards, :container => false %>
+  <%= will_paginate @emails,renderer: FoundationPagination::Rails, :container => false %>
 </div>
