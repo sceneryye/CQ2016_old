@@ -27,10 +27,8 @@ module Admin::CardsHelper
 
 	def level(val)
 		case val
-			when 10000; "优摩"
-			when 20000; "超摩"
-			when 50000; "顶摩"
-
+			when 'A'; "贵族至尊卡"
+			else 'B'; "万事如意卡"
 		end
 	end
 
