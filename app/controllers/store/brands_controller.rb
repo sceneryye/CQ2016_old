@@ -11,8 +11,7 @@ class Store::BrandsController < ApplicationController
   def show
 
   	@brand = Ecstore::Brand.find(params[:id])
-       
-  	@brand_page = @brand.brand_page
+    
       return if @brand.status == 'disabled'
 
        page  =  (params[:page] || 1).to_i
