@@ -94,13 +94,12 @@ class Admin::UsersController < Admin::BaseController
 
 		@buyer = Ecstore::User.find(params[:id])
 
-		@card = Ecstore::Card.find(params[:member_card][:card_id])
+		@card = Ecstore::Card.find(member_card_params[:card_id])
 
 		return render(:js=>"alert('不能购买,请检查卡状态!')") unless  @card.can_buy?
 
-
-		@buyer_card = Ecstore::MemberCard.new
-		validate_type = params[:member_card].delete :validate_type
+return render(:js=>"alert('#{member_card_params}')")
+		validate_type = member_card_params.delete :validate_type
 
 		# if !@buyer.sms_validated?
 		# 	@buyer_card.errors.add(:buyer_tel,"请先在我的昌麒/个人信息管理/账户中心 认证手机号码")
@@ -108,26 +107,26 @@ class Admin::UsersController < Admin::BaseController
 		# end
 
 		if validate_type == 'sms'
-			if params[:member_card].has_key?(:sms_code) &&
-				params[:member_card].delete(:sms_code) != @buyer.sms_code
+			if member_card_params.has_key?(:sms_code) &&
+				member_card_params.delete(:sms_code) != @buyer.sms_code
 
-				@buyer_card.errors.add(:buyer_tel,"请填写手机号码") if params[:member_card][:buyer_tel].blank?
-				@buyer_card.errors.add(:user_tel,"请填写手机号码") if params[:member_card][:user_tel].blank?
+				@buyer_card.errors.add(:buyer_tel,"请填写手机号码") if member_card_params[:buyer_tel].blank?
+				@buyer_card.errors.add(:user_tel,"请填写手机号码") if member_card_params[:user_tel].blank?
 				@buyer_card.errors.add(:sms_code,'手机验证码错误')
 
 				return render("buy_card")
 			end
 		else
-			params[:member_card].delete(:sms_code)
+			member_card_params.delete(:sms_code)
 		end
 
-		if (pay_status = params[:member_card].delete(:pay_status)) == 'false'
-			params[:member_card].delete :bank_name
-			params[:member_card].delete :bank_card_no
+		if (pay_status = member_card_params.delete(:pay_status)) == 'false'
+			member_card_params.delete :bank_name
+			member_card_params.delete :bank_card_no
 		end
-		@buyer_card = Ecstore::MemberCard.new(params[:member_card])
+		@buyer_card = Ecstore::MemberCard.new(member_card_params)
 
-		messages =  params[:member_card].dup
+		messages =  member_card_params.dup
 
 		if  @buyer_card.save
 
@@ -146,7 +145,7 @@ class Admin::UsersController < Admin::BaseController
 			end
 			
 			#update buyer sms_validate 
-			@buyer.update_attribute :mobile, params[:member_card][:buyer_tel]
+			@buyer.update_attribute :mobile, member_card_params[:buyer_tel]
 			@buyer.update_attribute :sms_validate, 'true'
 
 			
@@ -174,21 +173,21 @@ class Admin::UsersController < Admin::BaseController
 	end
 
 	def use_card
-		@user = Ecstore::User.find(params[:member_card][:user_id])
-		@card = Ecstore::Card.find(params[:member_card][:card_id])
+		@user = Ecstore::User.find(member_card_params[:user_id])
+		@card = Ecstore::Card.find(member_card_params[:card_id])
 
 		return render(:js=>"alert('不能使用该卡,请检查卡状态!')") unless  @card.can_use?
 
 		is_valid = true
 
 		if @card.card_type == "B"
-			if params[:member_card].delete(:password) != @card.password
+			if member_card_params.delete(:password) != @card.password
 				@user.errors.add :password, "卡密码错误"
 				is_valid = false
 			end
 		end
 
-		# if params[:member_card].delete(:sms_code) != @user.sms_code
+		# if member_card_params.delete(:sms_code) != @user.sms_code
 		# 	@user.errors.add :sms_code, "手机验证码错误" 
 		# 	is_valid = false
 		# end
@@ -217,10 +216,10 @@ class Admin::UsersController < Admin::BaseController
 			@user.update_attribute :advance, @card.value + @user.advance
 			@card.update_attribute :use_status, true
 			@card.update_attribute :used_at, Time.now
-			@card.member_card.update_attributes(params[:member_card])
+			@card.member_card.update_attributes(member_card_params)
 
-			params[:member_card].delete :card_id
-			log = params[:member_card].collect do |key,value|
+			member_card_params.delete :card_id
+			log = member_card_params.collect do |key,value|
 				if %w(user_id buyer_id).include?(key)
 					u = Ecstore::User.find(value)
 					value = u.account.login_name if u&&u.account
@@ -237,4 +236,9 @@ class Admin::UsersController < Admin::BaseController
 
 		render "use_card"
 	end
+	private
+	def member_card_params
+		params.require(:member_card).permit(:buyer_tel,:bank_name,:bank_card_no,:user_tel,:card_id,:user_id,:buy_id,:pay_status,:validate_type)
+	end
+
 end
