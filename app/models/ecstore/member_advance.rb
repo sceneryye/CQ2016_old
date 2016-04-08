@@ -1,5 +1,5 @@
 class Ecstore::MemberAdvance < Ecstore::Base
-	self.table_name = "sdb_b2c_member_advance"
+	self.table_name = "member_advance"
 	belongs_to :user,:foreign_key=>"member_id"
 
 

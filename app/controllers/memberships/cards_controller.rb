@@ -17,29 +17,16 @@ class Memberships::CardsController < ApplicationController
   			card_id = card_params[:card_num]
 			password = card_params[:card_pwd]
 
-			card_info = card_info(password: password, card_id: card_id)
+			card_info = card_info('会员卡激活', password, card_id)
 
 	        if card_info[:error]
 	        	return render text:card_info[:error]
-	        else
-				balance = card_info[:balance]
-				Ecstore::MemberAdvance.create(:member_id=>@user.member_id,
-												  :money=>@card.value,
-												  :message=>"会员卡激活,卡号:#{@card.no}",
-												  :mtime=>Time.now.to_i,
-												  :memo=>"用户本人操作",
-												  :import_money=>@card.value,
-												  :explode_money=>0,
-												  :member_advance=>balance,
-												  :shop_advance=>balance,
-												  :disabled=>'false')
-
-				@user.update_attribute :advance, balance
+	        else				
 				@user.update_attribute :card_validate,'true'
 				@card.update_attribute :use_status,true
 				@card.update_attribute :used_at,Time.now
 				@card.member_card.update_attribute :user_id,@user.member_id
-				
+				@card.member_card.update_attribute :member_id,@user.member_id
 
 				#发微信通知
 				begin
@@ -66,12 +53,16 @@ class Memberships::CardsController < ApplicationController
 	end
 
   	def login
-  		card_id = @user.card_num
+
 	    password = params[:password]
-		if card_info(card_id,password)
-			render show
+	    message = params[:message]
+
+	    card_info = card_info(message,password)
+
+		if card_info["error"]
+			return render text: card_info
 		else
-			render error
+			redirect_to card_path(0)
 		end
   	end
 
@@ -115,7 +106,9 @@ class Memberships::CardsController < ApplicationController
 	    old_pwd = params[:old_pwd]
 	    new_pwd = params[:new_pwd]
 
-		if card_info(card_id,old_pwd)
+	    card_info = card_info('修改密码',old_pwd)
+
+	    if card_info[:error]
 			return render text: '原密码不正确'
 		else
 			# reset_password
@@ -278,7 +271,8 @@ class Memberships::CardsController < ApplicationController
 	    params.require(:card).permit(:card_num,:card_pwd)
 	end
 
-	def card_info (password: session[:card_pwd],card_id:current_user.cards.card_no )
+	def card_info (from='',password=session[:card_pwd],card_id=@user.card_num )
+
 		if password.blank?
 			return {error:'login'}
 		end
@@ -289,7 +283,7 @@ class Memberships::CardsController < ApplicationController
 	    @cards_log.info("[#{@user.login_name}][#{Time.now}]#{res_data}")
 
 	    @card_log = Ecstore::CardLog.create(:member_id=>@user.member_id,
-										:card_id=>@card.id,
+										:card_no=>card_id,
 										:message=>"#{res_data.to_json}")
 
 	    if res_data["error_response"]
@@ -314,6 +308,22 @@ class Memberships::CardsController < ApplicationController
 	        end
 	         #   message = '卡号：' + card_id + ';  认证日期：' + e.data.card_cardinfo_get_response.card_info.validity_date +';  余额：' + parseFloat(msg.account_balance / 100) + '元' + ';  产品名称：' + msg.product_name + ';  可用余额：' + parseFloat(msg.valid_balance / 100) + '元' + ';  产品有效期：' + msg.validity_date + ';  产品状态：' + state;
 	        balance = res_data["card_cardinfo_get_response"]["card_info"]["card_product_info_arrays"]["card_product_info"][0]["valid_balance"]
+
+	        				balance = card_info[:balance]
+				Ecstore::MemberAdvance.create(:member_id=>@user.member_id,
+												  :money=>@card.value,
+												  :message=>"#{from},卡号:#{@card.no}",
+												  :mtime=>Time.now.to_i,
+												  :memo=>"用户本人操作",
+												  :import_money=>@card.value,
+												  :explode_money=>0,
+												  :member_advance=>balance,
+												  :shop_advance=>balance,
+												  :disabled=>'false')
+				@user.update_attribute :advance, balance
+
+	        session[:card_pwd] = password
+
 	    end
 	    return {status: status, balance: balance}
 	end
