@@ -14,25 +14,15 @@ class Memberships::CardsController < ApplicationController
   		
 		@card = Ecstore::Card.find_by_no(card_params[:card_num])
 		if @card && @card.can_use? && !@card.used?
+  			card_id = card_params[:card_num]
+			password = card_params[:card_pwd]
 
+			card_info = card_info(password: password, card_id: card_id)
 
-  			card_id = card_params[:card_num] #'8668083660000059727'
-			password = card_params[:card_pwd] #'111111'
-
-			card_info(card_id,password)
-
-	        
-		     		     
-		     	advance = @user.member_advances.order("log_id asc").last
-				shop_advance = 0
-				if advance
-					shop_advance = advance.shop_advance
-				else
-					shop_advance = @user.advance
-				end
-				shop_advance += @card.value
-			
-
+	        if card_info[:error]
+	        	return render text:card_info[:error]
+	        else
+				balance = card_info[:balance]
 				Ecstore::MemberAdvance.create(:member_id=>@user.member_id,
 												  :money=>@card.value,
 												  :message=>"会员卡激活,卡号:#{@card.no}",
@@ -40,45 +30,39 @@ class Memberships::CardsController < ApplicationController
 												  :memo=>"用户本人操作",
 												  :import_money=>@card.value,
 												  :explode_money=>0,
-												  :member_advance=>(@user.advance + @card.value),
-												  :shop_advance=>shop_advance,
+												  :member_advance=>balance,
+												  :shop_advance=>balance,
 												  :disabled=>'false')
 
-				@user.update_attribute :advance, (@card.value + @user.advance)
+				@user.update_attribute :advance, balance
 				@user.update_attribute :card_validate,'true'
 				@card.update_attribute :use_status,true
 				@card.update_attribute :used_at,Time.now
 				@card.member_card.update_attribute :user_id,@user.member_id
 				
 
-				#发微信
-				# begin
-				# 	@sms_log ||= Logger.new('log/sms.log')
-				# 	text = "您购买的昌麒会员卡#{@card.no}已被#{mask @card.member_card.user_tel}激活,如有疑问请致电400-826-4568[CQ昌麒]"
-				# 	if Sms.send(@card.member_card.buyer_tel,text)
-				# 		tel = @card.member_card.buyer_tel
-				# 		@sms_log.info("[#{@user.login_name}][#{Time.now}][#{tel}]#{text}")
-				# 	end
+				#发微信通知
+				begin
+					@weixin_log ||= Logger.new('log/weixin.log')
 
-				# 	text = "您的昌麒会员卡#{@card.no}已激活,如有疑问请致电客服400-826-4568[CQ昌麒]"
-				# 	if Sms.send(@card.member_card.user_tel,text)
-				# 		tel = @card.member_card.user_tel
-				# 		@sms_log.info("[#{@user.login_name}][#{Time.now}][#{tel}]#{text}")
-				# 	end
-
-				# rescue
-				# 	@sms_log.info("[#{@user.login_name}][#{Time.now}]激活会员卡,发送短信失败")
-				# end
+					text = "您的昌麒会员卡#{@card.no}已激活,如有疑问请致电客服400-826-4568[CQ昌麒]"
+					# if weixin.send(@card.member_card.user_tel,text)
+					# 	tel = @card.member_card.user_tel
+					# 	@weixin_log.info("[#{@user.login_name}][#{Time.now}][#{tel}]#{text}")
+					# end
+				rescue
+					@weixin_log.info("[#{@user.login_name}][#{Time.now}]激活会员卡,发送微信失败")
+				end
 
 				Ecstore::CardLog.create(:member_id=>@user.member_id,
 	                                                :card_id=>@card.id,
 	                                                :message=>"会员卡激活,用户本人操作")
+				redirect_to cards_path
 
-
-				render "memberships/cards/activation/complete"
-			else
-				render "memberships/cards/activation/error"
 			end
+		else
+			return render text: '会员卡无法激活'
+		end
 	end
 
   	def login
@@ -92,16 +76,7 @@ class Memberships::CardsController < ApplicationController
   	end
 
   	def show
-  		if session[:pwd].blank?
-  			return
-  		end
-  		card_id = params[:card_id]
-	    password = params[:password]
-	    res_data = ActiveSupport::JSON.decode card_get_info(card_id, password)
-	    Rails.logger.info res_data
-	    render json: {data: res_data}
-
-		@cards = Ecstore::Card.sold_cards_of(@user.member_id)
+  		
 
 		# if params[:card].has_key?(:card_no)
 		# 	@card = Ecstore::Card.find_by_no(params[:card][:card_no])
@@ -291,15 +266,17 @@ class Memberships::CardsController < ApplicationController
 			render "memberships/cards/activation"
 			return
 		end
-
+	end
 
 	private
 	def card_params
 	    params.require(:card).permit(:card_num,:card_pwd)
 	end
 
-	def card_info (*password,*card_id )
-
+	def card_info (password: session[:card_pwd],card_id:current_user.cards.card_no )
+		if password.blank?
+			return {error:'login'}
+		end
 		@cards_log ||= Logger.new('log/cards.log')
 
 	  	res_data = ActiveSupport::JSON.decode card_get_info(card_id, password)
@@ -311,8 +288,8 @@ class Memberships::CardsController < ApplicationController
 										:message=>"#{res_data.to_json}")
 
 	    if res_data["error_response"]
-	 		@cards_log.info("[#{@user.login_name}][#{Time.now}]查询会员卡信息失败")
-	    	return render json: {data: res_data}
+	 		@cards_log.info("[#{@user.login_name}][#{Time.now}]查询会员卡信息失败")	  
+	 		return {error:res_data["error_response"]["sub_msg"]} 	
 			###########e.data.ppcs_cardsingleactive_add_response# e.data.error_response.sub_msg					
 		else
 			
@@ -331,7 +308,9 @@ class Memberships::CardsController < ApplicationController
 	          			'未知'          
 	        end
 	         #   message = '卡号：' + card_id + ';  认证日期：' + e.data.card_cardinfo_get_response.card_info.validity_date +';  余额：' + parseFloat(msg.account_balance / 100) + '元' + ';  产品名称：' + msg.product_name + ';  可用余额：' + parseFloat(msg.valid_balance / 100) + '元' + ';  产品有效期：' + msg.validity_date + ';  产品状态：' + state;
+	        balance = res_data["card_cardinfo_get_response"]["card_info"]["card_product_info_arrays"]["card_product_info"][0]["valid_balance"]
 	    end
+	    return {status: status, balance: balance}
 	end
 
 	def get_order_id

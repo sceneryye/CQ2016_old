@@ -290,6 +290,7 @@ Modengke::Application.routes.draw do
 
       collection do        
         get "trading_log"
+        post 'active'
         post 'topup'
         post 'pay_with_pwd'
         post 'reset_password'

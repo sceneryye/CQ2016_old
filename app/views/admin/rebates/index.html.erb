@@ -1,4 +1,4 @@
-<div class='columns medium-2'>
+<div class='columns medium-6'>
   <div class="button-group">
       <%=link_to "未发放的返利",admin_rebates_path(:sold=>0),:class=>"button"%>
       <%=link_to "已发放的返利",admin_rebates_path(:sold=>1),:class=>"button"%>
@@ -6,7 +6,7 @@
 </div>
 
 <%if flash[:notice] && flash[:notice].is_a?(Hash)%>
-<div id="import_log_list" class="alert columns medium-2">
+<div id="import_log_list" class="alert columns medium-3">
   <button type="button" class="close" data-dismiss="alert">&times;</button>
   <ul>
     <%flash[:notice].each do |row_no,msg|%>
@@ -40,27 +40,7 @@
   <%end%> 
 </div> 
 
-<div class="medium-1 columns">  
-    <div class="button-group">
-      <a class="button dropdown-toggle" data-toggle="dropdown" href="#">
-        标签
-        <span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu">
-        <li>
-          <%=link_to "javascript:void(0);",:'data-url'=>admin_labels_path,:class=>"dialog" do %>
-            添加标签
-          <%end%>
-        </li>
-        <li class="divider"></li>
-        <%@labels.each do |label|%>
-        <li>
-          <%=link_to label.name,"javascript:void(0);",:'data-url'=>tag_admin_rebates_path(:label=>label.id),:class=>"tagd"%>
-        </li>
-        <%end%>
-      </ul>
-    </div>
-</div>
+
 
 <div class='sel_banner columns small-12' style="display:none">
   您当前选定了<a class='sel_nums'>0</a>条记录！  <a href='#' class='cancel_all'>取消选定</a> <a href='#' class='sel_all'>选定全部</a>
@@ -82,7 +62,7 @@
     <th>付款状态</th>
     <th>卡状态</th>
     <th>使用者手机</th>
-    <th>标签</th>
+
     <th>绑定银行</th>
     <th>操作</th>
   </tr>
