@@ -54,7 +54,7 @@ class SessionsController < ApplicationController
              # @line_items.update_all(:member_id=>@account.account_id,
              #                                       :member_ident=>Digest::MD5.hexdigest(@account.account_id.to_s))
       if @account.member.card_validate=='false'
-          @return_url = activation_card_path
+          @return_url = new_member_path
       end
   		render "create"
   	else

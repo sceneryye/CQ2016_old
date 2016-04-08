@@ -127,8 +127,13 @@ class Memberships::CardsController < ApplicationController
 		end	
 	end
 
-  	def index
-  		begin_date = params[:begin_date]
+	def index
+		@tradings = Ecstore::CardTradingLog.paginate(:page=>params[:page],:per_page=>20)
+	end
+
+  	def renew_record
+
+  		begin_date = params[:begin_date] 
 	    end_date = params[:end_date]
 	    card_id = params[:card_id]
 	    password = params[:password]
