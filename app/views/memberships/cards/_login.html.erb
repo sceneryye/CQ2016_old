@@ -1,0 +1,22 @@
+<!--- 输入卡密登录//-->
+<div class="row">
+<div class="medium-5 large-3 columns">
+	<div class="callout secondary">
+	<%=form_for :card,:url=>login_card_path, :remote=>true do |f|%>
+	<div class="row">
+	<div class="small-12 columns">
+	<label>Find Your Dream Planet
+	<input type="text" placeholder="Search destinations">
+	</label>
+	</div>
+	<div class="small-12 columns">
+	<label>Number of Moons
+	<input type="number" placeholder="Moons required">
+	</label>
+	<button type="submit" class="button">Search Now!</button>
+	</div>
+	</div>
+	<%end%>
+	</div>
+</div>
+	</div>

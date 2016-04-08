@@ -138,49 +138,26 @@ Modengke::Application.routes.draw do
       post 'sent'
       get 'verify_email'
     end
+
     resources :member_addrs do
-         get "mobile"  ,:on=>:collection
+        get "mobile"  ,:on=>:collection
         get 'new_memberaddr_add' ,:on=>:collection
     end
+
     match '/vip' => 'vip#index', :via => [:get]
-    resource  :card do
+
+    resources  :cards do
       collection do
-        post 'active'
+        get 'recharge'
         post 'topup'
-        post 'pay_with_pwd'
-        post 'reset_password'
-        post 'freeze'
-        post 'unfreeze'
-        post 'report_loss'
-        post 'cancel_loss'
-        post 'get_info'
-        post 'get_trade_log'
-        post 'pay_to_client'
 
-        get 'search'
+        get 'rebates'
 
-        get 'activation'
-        post 'confirm_activation'
-        post 'validate_activation'
-        post 'activate'
-        get 'complete_activation'
-        post 'input_mobile'
-        post 'select'
-        put 'update_mobile'
-        put 'modify_mobile'
-        get 'cancel_mobile'
-
-        get 'purchase'
-        scope "purchase" do
-          post 'confirm_buyer'
-          post 'confirm_user'
-          get 'user'
-        end
-
-        get 'send_sms_code'
+        post 'login'
 
       end
     end
+
     resources  :member_cards
   end
 
@@ -196,9 +173,11 @@ Modengke::Application.routes.draw do
       get :pages,:on=>:collection
     end
 
-    resources :carts do
+    resources :carts 
 
+    resources :rebates do
     end
+
     resources :wechat do
       get :menu,:on=>:collection
       get :menu_edit,:on=>:collection
@@ -300,8 +279,8 @@ Modengke::Application.routes.draw do
         get "allinpay"
       end
 
-      collection do
-        post 'active'
+      collection do        
+        get "trading_log"
         post 'topup'
         post 'pay_with_pwd'
         post 'reset_password'
@@ -328,6 +307,7 @@ Modengke::Application.routes.draw do
       get 'select', :on=>:member
       put 'validate_mobile',:on=>:member
     end
+    
     resources :member_cards
 
     resources :tag_exts

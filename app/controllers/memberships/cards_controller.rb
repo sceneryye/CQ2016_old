@@ -8,8 +8,9 @@ class Memberships::CardsController < ApplicationController
 
   	include Allinpay
 
+  	def new () end
 
-  	def activate
+  	def create
   		
 		@card = Ecstore::Card.find_by_no(card_params[:card_num])
 		if @card && @card.can_use? && !@card.used?
@@ -19,36 +20,10 @@ class Memberships::CardsController < ApplicationController
   			card_id = card_params[:card_num] #'8668083660000059727'
 			password = card_params[:card_pwd] #'111111'
 
-		    res_data = ActiveSupport::JSON.decode card_get_info(card_id, password)
-		    Rails.logger.info res_data 
+			card_info(card_id,password)
 
-		    @cards_log.info("[#{@user.login_name}][#{Time.now}]#{res_data}")
-		    if res_data["error_response"]
-		 		@cards_log.info("[#{@user.login_name}][#{Time.now}]查询会员卡信息失败")
-		    	return render json: {data: res_data}
-				###########e.data.ppcs_cardsingleactive_add_response# e.data.error_response.sub_msg					
-			end
-			
-			#{"data":{"card_cardinfo_get_response":{"res_timestamp":20160406213434,"res_sign":"77AFA3C325F8E63404A573B3C306E468","card_info":{"card_stat":0,"brh_id":"0229000040","brand_id":"0001","validity_date":20170210,"card_id":8668083660000001017,"card_product_info_arrays":{"card_product_info":[{"product_stat":0,"product_id":"0001","product_name":"通用金额","validity_date":20170210,"valid_balance":476631,"card_id":8668083660000001017,"account_balance":486631},{"product_stat":0,"product_id":"0282","product_name":"200元现金券","validity_date":20991231,"valid_balance":553619,"card_id":8668083660000001017,"account_balance":553619},{"product_stat":0,"product_id":1000,"product_name":"积分","validity_date":20160210,"valid_balance":1745700,"card_id":8668083660000001017,"account_balance":1745700}]}}}}}
-
-	      	#   console.log(e.data.card_cardinfo_get_response);
-	      	#   var msg = e.data.card_cardinfo_get_response.card_info.card_product_info_arrays.card_product_info[0]
-     		
-	        status = case res_data["card_cardinfo_get_response"]["card_info"]["card_product_info_arrays"]["card_product_info"][0]["product_stat"]
-	          		when 0
-	          			 '正常'
-	          		when 1
-	          			'挂失'          
-	          		when 2
-	          			'冻结'          
-	          		when 3
-	         			'作废'          
-	          		else 
-	          			'未知'          
-	        end
-
-		      #   message = '卡号：' + card_id + ';  认证日期：' + e.data.card_cardinfo_get_response.card_info.validity_date +';  余额：' + parseFloat(msg.account_balance / 100) + '元' + ';  产品名称：' + msg.product_name + ';  可用余额：' + parseFloat(msg.valid_balance / 100) + '元' + ';  产品有效期：' + msg.validity_date + ';  产品状态：' + state;
-		     
+	        
+		     		     
 		     	advance = @user.member_advances.order("log_id asc").last
 				shop_advance = 0
 				if advance
@@ -107,130 +82,29 @@ class Memberships::CardsController < ApplicationController
 			else
 				render "memberships/cards/activation/error"
 			end
-	   
 	end
 
-  def active
-    order_id = params[:order_id]
-    card_id = params[:card_id]
-    type = params[:type]
-    res_data = ActiveSupport::JSON.decode card_active(order_id, card_id, type)
-    Rails.logger.info res_data
-    render json: {data: res_data}
-  end
+  	def login
+  		card_id = @user.card_num
+	    password = params[:password]
+		if card_info(card_id,password)
+			render show
+		else
+			render error
+		end
+  	end
 
-  def topup
-    #data = params.permit(:order_id, :card_id, :prdt_no, :amount, :top_up_way, :opr_id, :desn)
-    order_id = params[:order_id]
-    card_id = params[:card_id]
-    prdt_no = params[:prdt_no]
-    amount = params[:amount]
-    top_up_way = params[:top_up_way]
-    opr_id = params[:opr_id]
-    desn = params[:desn]
-    res_data = ActiveSupport::JSON.decode topup_single_card(order_id, card_id, prdt_no, amount, top_up_way, opr_id, desn)
-    Rails.logger.info res_data
-    render json: {data: res_data}
-  end
+  	def show
+  		if session[:pwd].blank?
+  			return
+  		end
+  		card_id = params[:card_id]
+	    password = params[:password]
+	    res_data = ActiveSupport::JSON.decode card_get_info(card_id, password)
+	    Rails.logger.info res_data
+	    render json: {data: res_data}
 
-  def pay_with_pwd
-    order_id = params[:order_id]
-    mer_order_id = params[:mer_order_id]
-    payment_id = params[:payment_id]
-    amount = params[:amount]
-    card_id = params[:card_id]
-    password = params[:password]
-    res_data = ActiveSupport::JSON.decode pay_with_password(order_id,  mer_order_id, payment_id, amount, card_id, password)
-    Rails.logger.info res_data
-    render json: {data: res_data}
-  end
-
-  def reset_password
-    order_id = params[:order_id]
-    card_id = params[:card_id]
-    password = params[:password]
-    res_data = ActiveSupport::JSON.decode card_reset_password(order_id, card_id, password)
-    Rails.logger.info res_data
-    render json: {data: res_data}
-  end
-
-  def freeze
-    order_id = params[:order_id]
-    card_id = params[:card_id]
-    prdt_id = params[:prdt_id]
-    reason = params[:reason]
-    res_data = ActiveSupport::JSON.decode card_freeze(order_id, card_id, prdt_id, reason)
-    Rails.logger.info res_data
-    render json: {data: res_data}
-  end
-
-  def unfreeze
-    order_id = params[:order_id]
-    card_id = params[:card_id]
-    prdt_id = params[:prdt_id]
-    reason = params[:reason]
-    res_data = ActiveSupport::JSON.decode card_unfreeze(order_id, card_id, prdt_id, reason)
-    Rails.logger.info res_data
-    render json: {data: res_data}
-  end
-
-  def report_loss
-    order_id = params[:order_id]
-    card_id = params[:card_id]
-    id_type = params[:id_type]
-    id_no = params[:id_no]
-    reason = params[:reason]
-    res_data = ActiveSupport::JSON.decode card_report_loss(order_id, card_id, id_no, id_type, reason)
-    Rails.logger.info res_data
-    render json: {data: res_data}
-  end
-
-  def cancel_loss
-    order_id = params[:order_id]
-    card_id = params[:card_id]
-    id_type = params[:id_type]
-    id_no = params[:id_no]
-    reason = params[:reason]
-    res_data = ActiveSupport::JSON.decode card_cancel_loss(order_id, card_id, id_no, id_type, reason)
-    Rails.logger.info res_data
-    render json: {data: res_data}
-  end
-
-  def get_info
-    card_id = params[:card_id]
-    password = params[:password]
-    res_data = ActiveSupport::JSON.decode card_get_info(card_id, password)
-    Rails.logger.info res_data
-    render json: {data: res_data}
-  end
-
-  def get_trade_log
-    begin_date = params[:begin_date]
-    end_date = params[:end_date]
-    card_id = params[:card_id]
-    password = params[:password]
-    page_no = params[:page_no]
-    page_size = params[:page_size]
-    return render json: {data: {error_message: '不能查询90天之前的记录！'}} if Time.parse(begin_date) < (Time.now - 3600 * 24 * 90)
-    res_data = ActiveSupport::JSON.decode card_get_trade_log(begin_date, end_date, card_id, password, page_no, page_size)
-    Rails.logger.info res_data
-    render json: {data: res_data}
-  end
-
-  def pay_to_client
-    data = params[:pay_to_client]
-    res_data = Hash.from_xml pay_for_another data
-    render json: {data: res_data}
-  end
-
-
-
-
-
-
-
-	def show
-		# @cards = Ecstore::Card.sold_cards_of(@user.member_id)
+		@cards = Ecstore::Card.sold_cards_of(@user.member_id)
 
 		# if params[:card].has_key?(:card_no)
 		# 	@card = Ecstore::Card.find_by_no(params[:card][:card_no])
@@ -246,123 +120,72 @@ class Memberships::CardsController < ApplicationController
 		# end
 	end
 
-	def search
-		if params[:search].has_key?(:no)
-			card_no = params[:search][:no]
-			@card = Ecstore::Card.find_by_no(card_no)
+  	def recharge () end
 
-			unless @card
-			      flash[:error] = '您输入的会员卡号不存在'
-				render "memberships/cards/activation"
-				return
-			end
-
-			unless @card.can_use?
-				flash[:error] = '您输入的会员卡号不能激活,请检查卡状态'
-				render "memberships/cards/activation"
-				return
-			end
-
-			if @card.used?
-				flash[:error] = '您输入的会员卡号已被激活，请核实'
-				render "memberships/cards/activation"
-				return
-			end
-
-			render "memberships/cards/activation/validate"
-		end
-		
-		if params[:search].has_key?(:user_tel)
-			user_tel = params[:search][:user_tel]
-			@cards = Ecstore::MemberCard.where(:user_tel=>user_tel).collect do |mc|
-				mc.card
-			end
-			render "memberships/cards/activation/list_cards"
-		end
+  	def topup
+	    #data = params.permit(:order_id, :card_id, :prdt_no, :amount, :top_up_way, :opr_id, :desn)
+	    order_id = params[:order_id]
+	    card_id = params[:card_id]
+	    prdt_no = params[:prdt_no]
+	    amount = params[:amount]
+	    top_up_way = params[:top_up_way]
+	    opr_id = params[:opr_id]
+	    desn = params[:desn]
+	    res_data = ActiveSupport::JSON.decode topup_single_card(order_id, card_id, prdt_no, amount, top_up_way, opr_id, desn)
+	    Rails.logger.info res_data
+	    render json: {data: res_data}
 	end
 
-	def purchase
-		@level = params[:level] || "you"
-		@buyer_tel = @user.mobile if @user
-	end
+  	def edit () end
 
-	def confirm_buyer
-		@buyer_tel = params[:buyer_tel]
-		@level = params[:level]
-		if @buyer_tel.blank? || !(/^[1-9][0-9]{10}$/ =~ @buyer_tel)
-			@error = "请输入正确的手机号码"
-			render "memberships/cards/purchase"
-			return
-		end
-		if @user.mobile == @buyer_tel
-			redirect_to user_card_url(:level=>@level,:buyer_tel=>@buyer_tel)
+  	def update
+	    card_id = @user.card_num
+	    old_pwd = params[:old_pwd]
+	    new_pwd = params[:new_pwd]
+
+		if card_info(card_id,old_pwd)
+			return render text: '原密码不正确'
 		else
-			render "memberships/cards/purchase/update_mobile"
-		end
+			# reset_password
+		    order_id = get_order_id
+		    res_data = ActiveSupport::JSON.decode card_reset_password(order_id, card_id, new_pwd)
+		    Rails.logger.info res_data
+		    render json: {data: res_data}
+		    session[:password] = params[:new_pws]
+		end	
 	end
 
-	def modify_mobile
-		@buyer_tel = params[:buyer_tel]
-		@level = params[:level]
-		@user.update_attribute :mobile, @buyer_tel
-		redirect_to user_card_url(:level=>@level,:buyer_tel=>@buyer_tel)
+  	def index
+  		begin_date = params[:begin_date]
+	    end_date = params[:end_date]
+	    card_id = params[:card_id]
+	    password = params[:password]
+	    page_no = params[:page_no]
+	    page_size = params[:page_size]
+	    return render json: {data: {error_message: '不能查询90天之前的记录！'}} if Time.parse(begin_date) < (Time.now - 3600 * 24 * 90)
+	    res_data = ActiveSupport::JSON.decode card_get_trade_log(begin_date, end_date, card_id, password, page_no, page_size)
+	    Rails.logger.info res_data
+	    render json: {data: res_data}
+  	end	
+
+	def pay_with_pwd
+	    order_id = params[:order_id]
+	    mer_order_id = params[:mer_order_id]
+	    payment_id = params[:payment_id]
+	    amount = params[:amount]
+	    card_id = params[:card_id]
+	    password = params[:password]
+	    res_data = ActiveSupport::JSON.decode pay_with_password(order_id,  mer_order_id, payment_id, amount, card_id, password)
+	    Rails.logger.info res_data
+	    render json: {data: res_data}
+	end	
+
+	def pay_to_client
+	    data = params[:pay_to_client]
+	    res_data = Hash.from_xml pay_for_another data
+	    render json: {data: res_data}
 	end
-
-	def confirm_user
-		para = params[:member_card].merge!(:buyer_id=>@user.member_id)
-		level = params[:level]
-		product_bn = Ecstore::Config.find_by_key("#{level}_bn").value
-		@product = Ecstore::Product.find_by_bn(product_bn)
-
-		@card = Ecstore::Card.where(:value=>@product.price,
-									  :card_type=>"A",
-									  :sale_status=>false,
-									  :use_status=>false,
-									  :status=>"正常",
-									  :pay_status=>false).first
-
-		unless @card
-			render "memberships/cards/purchase/lack"
-			return
-		end
-
-		@card.member_card = Ecstore::MemberCard.new(para)
-		
-		if @card.save(:validate=>false)
-			@cart = Ecstore::Cart.where(:obj_ident=>"goods_#{@product.goods_id}_#{@product.product_id}",
-							  :member_id=>@user.member_id).first_or_initialize do |cart|
-				cart.obj_type = "goods"
-				cart.quantity = 1
-				cart.time = Time.now.to_i
-			end
-			if @cart.new_record?
-				@cart.save
-			else
-				Ecstore::Cart.where(:obj_ident=>@cart.obj_ident,:member_id=>@cart.member_id).update_all(:quantity=>@cart.quantity+1)
-			end
-
-			# begin
-			# 	@sms_log ||= Logger.new('log/sms.log')
-			# 	text = "您已成功购买昌麒会员卡,感谢您对我们的支持，如需帮助可致电客服400-826-4568[CQ昌麒]"
-			# 	tel = @card.member_card.buyer_tel
-			# 	if Sms.send(@card.member_card.buyer_tel,text)
-			# 		@sms_log.info("[#{@user.login_name}][#{Time.now}][#{tel}]#{text}")
-			# 	end
-			# rescue
-			# 	@sms_log.info("[#{@user.login_name}][#{Time.now}]购买会员卡,发送短信失败")
-			# end
-			
-
-			Ecstore::CardLog.create(:member_id=>@user.member_id,
-                                                :card_id=>@card.id,
-                                                :message=>"加入购物车")
-
-			redirect_to "/cart.html"
-		else
-			@error_msg = "提交订单失败，请联系客服:400-826-4568"
-			render "memberships/cards/purchase/error"
-		end
-	end
+	
 
 	def confirm_activation
 		@card = Ecstore::Card.find_by_no(params[:card][:no])
@@ -430,43 +253,6 @@ class Memberships::CardsController < ApplicationController
 		end
 	end
 
-	def update_mobile
-		@card = Ecstore::Card.find_by_no(params[:card][:no])
-		@user.update_attribute :mobile, @card.member_card.user_tel
-		@user.update_attribute :sms_validate,'true'
-		render "memberships/cards/activation/confirm"
-	end
-
-	def input_mobile
-		@card = Ecstore::Card.find_by_no(params[:card][:no])
-		tel = params[:tel]
-		sms_code = params[:sms_code]
-
-		@card.errors.add(:tel,"请输入手机号码") if tel.blank?
-		@card.errors.add(:sms_code,"请输入激活码")  if sms_code.blank?
-		@card.errors.add(:sms_code,"激活码错误") if sms_code != @user.sms_code
-
-		if @card.errors.messages.empty?
-			# @user.update_attribute :mobile, tel
-			# @user.update_attribute :sms_validate, true
-			if @card.member_card
-				@card.member_card.update_attribute :user_tel,tel
-				@card.member_card.update_attribute :user_id,@user.member_id
-			else
-				@member_card  = Ecstore::MemberCard.new do |mc|
-					mc.card_id = @card.id
-					mc.user_tel = tel
-					mc.user_id = @user.member_id
-				end
-				@member_card.save(:validate=>false)
-			end
-			
-
-			render "memberships/cards/activation/confirm"
-		end
-
-	end
-
 	def validate_activation
 		if params[:card][:no].blank?
 			@error = "请输入会员卡号"
@@ -509,43 +295,48 @@ class Memberships::CardsController < ApplicationController
 			return
 		end
 
-	end
-
-	def select
-		card_no = params[:card]
-		@card =  Ecstore::Card.find_by_no(card_no)
-		render "memberships/cards/activation/validate"
-	end
-
-	def cancel_mobile
-		@card =  Ecstore::Card.find_by_no(params[:no])
-		render "memberships/cards/activation/confirm"
-	end
-
-	
-
-	def send_sms_code
-		sms_code = rand(1000000).to_s(16)
-		tel = params[:tel]
-		text = "您的会员卡验证码是：#{sms_code}，如此条验证码非您本人申请，请立即致电客服400-826-4568核实[CQ昌麒]"
-
-		
-		@sms_log ||= Logger.new('log/sms.log')
-		if Sms.send(tel,text)
-			@user.update_attribute :sms_code, sms_code
-			@user.update_attribute :sent_sms_at, Time.now
-			@sms_log.info("[#{@user.login_name}][#{Time.now}][#{tel}]发送手机验证码: #{sms_code}")
-
-			render :json=>{:code=>'t',:msg=>'验证码已发送'}.to_json
-		end
-
-	rescue Exception=> e
-		@sms_log.info("[#{@user.login_name}][#{Time.now}][#{tel}]发送手机验证码失败:#{e}")
-		render :json=>{ :code=>'f',:msg=>e }.to_json
-	end
 
 	private
 	  def card_params
 	    params.require(:card).permit(:card_num,:card_pwd)
+	  end
+
+	  def card_info (card_id, password)
+
+
+	  	 res_data = ActiveSupport::JSON.decode card_get_info(card_id, password)
+		    Rails.logger.info res_data 
+
+		    @cards_log.info("[#{@user.login_name}][#{Time.now}]#{res_data}")
+		    if res_data["error_response"]
+		 		@cards_log.info("[#{@user.login_name}][#{Time.now}]查询会员卡信息失败")
+		    	return render json: {data: res_data}
+				###########e.data.ppcs_cardsingleactive_add_response# e.data.error_response.sub_msg					
+			end
+			
+			#{"data":{"card_cardinfo_get_response":{"res_timestamp":20160406213434,"res_sign":"77AFA3C325F8E63404A573B3C306E468","card_info":{"card_stat":0,"brh_id":"0229000040","brand_id":"0001","validity_date":20170210,"card_id":8668083660000001017,"card_product_info_arrays":{"card_product_info":[{"product_stat":0,"product_id":"0001","product_name":"通用金额","validity_date":20170210,"valid_balance":476631,"card_id":8668083660000001017,"account_balance":486631},{"product_stat":0,"product_id":"0282","product_name":"200元现金券","validity_date":20991231,"valid_balance":553619,"card_id":8668083660000001017,"account_balance":553619},{"product_stat":0,"product_id":1000,"product_name":"积分","validity_date":20160210,"valid_balance":1745700,"card_id":8668083660000001017,"account_balance":1745700}]}}}}}
+
+	      	#   console.log(e.data.card_cardinfo_get_response);
+	      	#   var msg = e.data.card_cardinfo_get_response.card_info.card_product_info_arrays.card_product_info[0]
+     		
+	        status = case res_data["card_cardinfo_get_response"]["card_info"]["card_product_info_arrays"]["card_product_info"][0]["product_stat"]
+	          		when 0
+	          			 '正常'
+	          		when 1
+	          			'挂失'          
+	          		when 2
+	          			'冻结'          
+	          		when 3
+	         			'作废'          
+	          		else 
+	          			'未知'          
+	        end
+	         #   message = '卡号：' + card_id + ';  认证日期：' + e.data.card_cardinfo_get_response.card_info.validity_date +';  余额：' + parseFloat(msg.account_balance / 100) + '元' + ';  产品名称：' + msg.product_name + ';  可用余额：' + parseFloat(msg.valid_balance / 100) + '元' + ';  产品有效期：' + msg.validity_date + ';  产品状态：' + state;
+
+
+	  end
+
+	  def get_order_id
+	  	 order_id = "999990053990001_#{Time.now.to_i}#{rand(100).to_s}"
 	  end
 end

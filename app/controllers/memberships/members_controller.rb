@@ -27,7 +27,7 @@ class Memberships::MembersController < ApplicationController
   def update
     if @user.update_attributes(ecstore_user_params.merge!(:apply_time=>Time.now))
   
-      redirect_to activation_card_path
+      redirect_to new_card_path
     else
       render "new"
     end

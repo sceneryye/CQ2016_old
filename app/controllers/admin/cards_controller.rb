@@ -11,7 +11,13 @@ class Admin::CardsController < Admin::BaseController
 
   before_action :set_card, only: [:show,:allinpay,:edit, :update, :destroy,:buy,:use,:edit_user]
 
-
+  def trading_log
+    @log = Ecstore::CardTradingLog.order("id ASC")
+    if params[:card_no]
+      @log =@log.where(card_no: params[:card_no])
+    @log = @log.paginate(:page=>params[:page],:per_page=>20)
+  end
+  
   def allinpay () end
 
   def index

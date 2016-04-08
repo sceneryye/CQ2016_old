@@ -1,5 +1,5 @@
 class Ecstore::CardLog < Ecstore::Base
-	self.table_name = "sdb_imodec_card_logs"
+	self.table_name = "card_logs"
   	
   	belongs_to :card, :foreign_key=>"card_id"
 

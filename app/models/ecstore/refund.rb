@@ -1,7 +1,6 @@
 #encoding:utf-8
 class Ecstore::Refund < Ecstore::Base
 	self.table_name  = 'sdb_ectools_refunds'
-	self.accessor_all_columns
 
 	has_one :bill, ->{where(:bill_type=>"refunds")}, :foreign_key=>"bill_id"
 
