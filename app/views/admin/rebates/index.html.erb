@@ -97,14 +97,9 @@
     </td> -->
 
     <td><%=link_to  rebate.no,admin_rebate_path(rebate) %></td>
-    <td>¥<%= rebate.value %></td>
-    <td><%="[#{level(rebate.rebate_type)}]" if level(rebate.rebate_type)%></td>
-    <td><%= rebate.sale_status ? "已出售" : "未出售" %></td>
-    <td><%= rebate.member_rebate.created_at.strftime("%Y-%m-%d %H:%S:%M") if rebate.member_rebate %></td>
-    <td><%= rebate.use_status ?  "已使用" : "未使用"%></td>
-    <td><%= rebate.pay_status ?  "付款" : "未付款"%></td>
+    <td>¥<%= rebate.amount %></td>
+
     <td><%= rebate.status %></td>   
-    <td><%= rebate.member_rebate&&rebate.member_rebate.user_tel.present? ? rebate.member_rebate.user_tel : "未登记" %></td>
     <td>
       <%rebate.labels.each do |label|%>
         <span class="tag" label="<%=label.id%>">
@@ -120,12 +115,8 @@
         <%=link_to "日志",logs_admin_rebate_path(rebate)%>
         <%=link_to "取消订单",cancel_order_admin_rebate_path(rebate),:method=>:put,:confirm=>"确定取消订单？" if rebate.sale_status && !rebate.pay_status && rebate.normal?%>
 
-        <%unless rebate.use_status%>
-          <%=link_to "修改",edit_admin_rebate_path(rebate)%>
-          <%=link_to "修改支付信息",edit_pay_admin_rebate_path(rebate) if !rebate.member_rebate.nil?%>
-          <%=link_to "修改用卡人",edit_user_admin_rebate_path(rebate) if rebate.sale_status && rebate.rebate_type=="A" && rebate.status!="作废"&&rebate.status!="锁定"%>
-          <%=link_to "购卡",buy_admin_rebate_path(rebate)  if rebate.can_buy?%>
-          <%=link_to "使用",use_admin_rebate_path(rebate)  if rebate.can_use?%>
+        <%unless rebate.status%>
+          
         <%end%>
         <%=link_to "通联",allinpay_admin_rebate_path(rebate)%>
     </td>

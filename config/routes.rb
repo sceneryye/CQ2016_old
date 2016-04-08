@@ -176,6 +176,15 @@ Modengke::Application.routes.draw do
     resources :carts 
 
     resources :rebates do
+       member do
+        get "allinpay"
+      end
+
+      collection do        
+       
+      end
+      
+      post "export",:on=>:collection
     end
 
     resources :wechat do
