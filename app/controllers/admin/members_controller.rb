@@ -7,13 +7,9 @@ module Admin
 
       def index
         @total_member = Ecstore::Member.count()
-        if (current_admin.login_name=="sale_0001")
-          @members = Ecstore::Member.where(:member_id=>"2455").paginate(:page => params[:page], :per_page => 20).order("member_id DESC")
-        elsif (current_admin.login_name=="sale_0002")
-          @members = Ecstore::Member.where(:member_id=>"2456").paginate(:page => params[:page], :per_page => 20).order("member_id DESC")
-        else
-          @members = Ecstore::Member.paginate(:page => params[:page], :per_page => 20).order("member_id DESC")
-        end
+        
+        @members = Ecstore::Member.paginate(:page => params[:page], :per_page => 20).order("member_id DESC")
+        
 
         @column_data = YAML.load(File.open(Rails.root.to_s+"/config/columns/member.yml"))
 

@@ -56,7 +56,6 @@ class Auth::WeixinController < ApplicationController
 
 			if check_user.nil?
 				now = Time.now
-
 				@account = Ecstore::Account.new  do |ac|
 					#account
 					ac.login_name = login_name
@@ -82,14 +81,14 @@ class Auth::WeixinController < ApplicationController
 				  		end
 			  			@user.save!(:validate=>false)
 			  			sign_in(@account,'1')
-			  			return redirect_to new_cards_path
+			  			return redirect_to new_member_path
 			  		end
 		  		end
 		  	else
 		  		sign_in(check_user,'1')
 			   
 		    	if current_account.member.card_validate=='false'
-			    	redirect =  new_cards_path
+			    	redirect =  new_member_path
 			    end	
 			    return redirect_to redirect
 			end
@@ -99,7 +98,7 @@ class Auth::WeixinController < ApplicationController
 			# return redirect_to "/member/new?return_url=#{redirect}"
 		    
 	    	if current_account.member.card_validate=='false'
-		    	redirect =  new_cards_path
+		    	redirect =  new_member_path
 		    end	
 		    redirect_to redirect
 		end

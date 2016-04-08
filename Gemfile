@@ -20,6 +20,7 @@ gem "geocoder"
 gem 'spreadsheet'
 
 # open-ssl
+gem 'r509'
 gem 'certified'
 
 #gem 'weibo_2' #,:git=>"https://github.com/simsicon/weibo_2.git"
