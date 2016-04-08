@@ -1,20 +1,8 @@
 <div class='columns medium-2'>
   <div class="button-group">
-      <%=link_to "未出售的卡",admin_cards_path(:sold=>0),:class=>"button"%>
-      <%=link_to "已出售的卡",admin_cards_path(:sold=>1),:class=>"button"%>
+      <%=link_to "未发放的返利",admin_rebates_path(:sold=>0),:class=>"button"%>
+      <%=link_to "已发放的返利",admin_rebates_path(:sold=>1),:class=>"button"%>
   </div>
-</div>
-<div class='columns medium-3'>
-  <%=form_for :card,:url=>import_admin_cards_path,:html => {:multipart => true} ,:method=>:post do |f|%>
-
-     <div class="input-group">
-        <%=link_to "下载csv模板","/pic/card_模板.csv" , :class => "button input-group-button" %>
-        <%= file_field :card, :file, :id=>'csvfile',:accept => "text/csv",class:'input-group-field' %> 
-         <div class="input-group-button">
-          <%= f.submit '导入', :class => "button" %>            
-          </div>
-      </div>
-  <%end%>  
 </div>
 
 <%if flash[:notice] && flash[:notice].is_a?(Hash)%>
@@ -34,7 +22,7 @@
 <%end%>
 
 <div class='columns medium-3'>
-<%=form_for :search,:url=>admin_cards_path,:html=>{:class=>"form-search"},:method=>:get do |f|%>
+<%=form_for :search,:url=>admin_rebates_path,:html=>{:class=>"form-search"},:method=>:get do |f|%>
   <div class="input-group">
     <%=f.text_field :key,:placeholder=>"卡号",:value=>params[:search]&&params[:search][:key],class:'input-group-field'%>
     <div class="input-group-button">
@@ -45,7 +33,7 @@
 </div>
 
 <div class="medium-2 columns">
-  <%=form_for :card,:url=>export_admin_cards_path,:method=>:post do |f|%>
+  <%=form_for :rebate,:url=>export_admin_rebates_path,:method=>:post do |f|%>
     <%= f.hidden_field :select_all,:class=>"sel_operation", :value => 0 %>
 
       <%=f.submit "导出",:class=>"export_button button" %>
@@ -67,7 +55,7 @@
         <li class="divider"></li>
         <%@labels.each do |label|%>
         <li>
-          <%=link_to label.name,"javascript:void(0);",:'data-url'=>tag_admin_cards_path(:label=>label.id),:class=>"tagd"%>
+          <%=link_to label.name,"javascript:void(0);",:'data-url'=>tag_admin_rebates_path(:label=>label.id),:class=>"tagd"%>
         </li>
         <%end%>
       </ul>
@@ -76,10 +64,10 @@
 
 <div class='sel_banner columns small-12' style="display:none">
   您当前选定了<a class='sel_nums'>0</a>条记录！  <a href='#' class='cancel_all'>取消选定</a> <a href='#' class='sel_all'>选定全部</a>
-  <p class="total_card hidden"><%=@cards_total%></p>
+  <p class="total_rebate hidden"><%=@rebates_total%></p>
 </div>
 
-<table class="table table-bordered table-hover" id="cards_list">
+<table class="table table-bordered table-hover" id="rebates_list">
   <tr>
     <th>
         <%=check_box_tag "select_all","all"%>
@@ -98,52 +86,52 @@
     <th>绑定银行</th>
     <th>操作</th>
   </tr>
-  <% @cards.each do |card| %>
-  <tr id="card_<%=card.id%>">
-    <td><%=check_box_tag "selected_cards[]", card.id,false,:class =>'operate_ids'%></td>
+  <% @rebates.each do |rebate| %>
+  <tr id="rebate_<%=rebate.id%>">
+    <td><%=check_box_tag "selected_rebates[]", rebate.id,false,:class =>'operate_ids'%></td>
     
     <!-- <td >
-        <%=link_to admin_card_path(card),:class=>"editable",:remote=>"true" do%>
+        <%=link_to admin_rebate_path(rebate),:class=>"editable",:remote=>"true" do%>
             <%=image_tag "finder_drop_arrow.gif"%>
         <%end%> 
     </td> -->
 
-    <td><%=link_to  card.no,admin_card_path(card) %></td>
-    <td>¥<%= card.value %></td>
-    <td><%="[#{level(card.card_type)}]" if level(card.card_type)%></td>
-    <td><%= card.sale_status ? "已出售" : "未出售" %></td>
-    <td><%= card.member_card.created_at.strftime("%Y-%m-%d %H:%S:%M") if card.member_card %></td>
-    <td><%= card.use_status ?  "已使用" : "未使用"%></td>
-    <td><%= card.pay_status ?  "付款" : "未付款"%></td>
-    <td><%= card.status %></td>   
-    <td><%= card.member_card&&card.member_card.user_tel.present? ? card.member_card.user_tel : "未登记" %></td>
+    <td><%=link_to  rebate.no,admin_rebate_path(rebate) %></td>
+    <td>¥<%= rebate.value %></td>
+    <td><%="[#{level(rebate.rebate_type)}]" if level(rebate.rebate_type)%></td>
+    <td><%= rebate.sale_status ? "已出售" : "未出售" %></td>
+    <td><%= rebate.member_rebate.created_at.strftime("%Y-%m-%d %H:%S:%M") if rebate.member_rebate %></td>
+    <td><%= rebate.use_status ?  "已使用" : "未使用"%></td>
+    <td><%= rebate.pay_status ?  "付款" : "未付款"%></td>
+    <td><%= rebate.status %></td>   
+    <td><%= rebate.member_rebate&&rebate.member_rebate.user_tel.present? ? rebate.member_rebate.user_tel : "未登记" %></td>
     <td>
-      <%card.labels.each do |label|%>
+      <%rebate.labels.each do |label|%>
         <span class="tag" label="<%=label.id%>">
-          <%=label.name%><%=link_to "x",untag_admin_card_path(card,:label=>label.id),:remote=>true,:method=>:put,:class=>"delete"%>
+          <%=label.name%><%=link_to "x",untag_admin_rebate_path(rebate,:label=>label.id),:remote=>true,:method=>:put,:class=>"delete"%>
         </span>
       <%end%>
     </td>
     <td>
-      <%= card.member_card.bank_name if !card.member_card.nil?%><br>
-      <%= card.member_card.bank_card_no if !card.member_card.nil?%>
+      <%= rebate.member_rebate.bank_name if !rebate.member_rebate.nil?%><br>
+      <%= rebate.member_rebate.bank_rebate_no if !rebate.member_rebate.nil?%>
     </td>
     <td>
-        <%=link_to "日志",logs_admin_card_path(card)%>
-        <%=link_to "取消订单",cancel_order_admin_card_path(card),:method=>:put,:confirm=>"确定取消订单？" if card.sale_status && !card.pay_status && card.normal?%>
+        <%=link_to "日志",logs_admin_rebate_path(rebate)%>
+        <%=link_to "取消订单",cancel_order_admin_rebate_path(rebate),:method=>:put,:confirm=>"确定取消订单？" if rebate.sale_status && !rebate.pay_status && rebate.normal?%>
 
-        <%unless card.use_status%>
-          <%=link_to "修改",edit_admin_card_path(card)%>
-          <%=link_to "修改支付信息",edit_pay_admin_card_path(card) if !card.member_card.nil?%>
-          <%=link_to "修改用卡人",edit_user_admin_card_path(card) if card.sale_status && card.card_type=="A" && card.status!="作废"&&card.status!="锁定"%>
-          <%=link_to "购卡",buy_admin_card_path(card)  if card.can_buy?%>
-          <%=link_to "使用",use_admin_card_path(card)  if card.can_use?%>
+        <%unless rebate.use_status%>
+          <%=link_to "修改",edit_admin_rebate_path(rebate)%>
+          <%=link_to "修改支付信息",edit_pay_admin_rebate_path(rebate) if !rebate.member_rebate.nil?%>
+          <%=link_to "修改用卡人",edit_user_admin_rebate_path(rebate) if rebate.sale_status && rebate.rebate_type=="A" && rebate.status!="作废"&&rebate.status!="锁定"%>
+          <%=link_to "购卡",buy_admin_rebate_path(rebate)  if rebate.can_buy?%>
+          <%=link_to "使用",use_admin_rebate_path(rebate)  if rebate.can_use?%>
         <%end%>
-        <%=link_to "通联",allinpay_admin_card_path(card)%>
+        <%=link_to "通联",allinpay_admin_rebate_path(rebate)%>
     </td>
   </tr>
   <% end %>
 </table>
 <div class="pagination">
-<%= will_paginate @cards,renderer: FoundationPagination::Rails%>
+<%= will_paginate @rebates,renderer: FoundationPagination::Rails%>
 </div>

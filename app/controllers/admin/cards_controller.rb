@@ -15,6 +15,7 @@ class Admin::CardsController < Admin::BaseController
     @log = Ecstore::CardTradingLog.order("id ASC")
     if params[:card_no]
       @log =@log.where(card_no: params[:card_no])
+    end
     @log = @log.paginate(:page=>params[:page],:per_page=>20)
   end
   

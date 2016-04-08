@@ -63,7 +63,7 @@
 
         <li class="<%='active' if %w(goods goods_cats goods_types specifications).include?(controller_name)%>">
             <%=link_to admin_goods_path,:class=>"dropdown-toggle" do %>
-              商品 <b class="caret" style="border-top-color: #fff;border-bottom-color: #fff; margin-top:7px;margin-left:2px;"></b>
+              商品管理
             <%end%>
             <ul class="vertical menu " aria-labelledby="dropdownMenu">
               <li>
@@ -123,6 +123,11 @@
     <%if current_admin.has_right_of("cards","index")%>
     <li class="<%='active' if controller_name=='cards'%>">
       <%=link_to "会员卡管理",admin_cards_path%>
+    </li>
+    <%end%>
+    <%if current_admin.has_right_of("rebates","index")%>
+    <li class="<%='active' if controller_name=='rebates'%>">
+      <%=link_to "返利管理",admin_rebates_path%>
     </li>
     <%end%>
 

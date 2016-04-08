@@ -1,14 +1,16 @@
 #encoding:utf-8
-class Admin::RebatsController < Admin::BaseController
+class Admin::RebatesController < Admin::BaseController
+	before_filter :require_permission!
 
 
-  def show
+	def show
 
-  end
-  
-  def index
-    
+	end
+	  
+	def index
 
-  end
+	    @rebates =Ecstore::Rebate.all
+
+	end
 
 end

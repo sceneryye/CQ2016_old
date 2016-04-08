@@ -19,10 +19,10 @@
     <div class="accordion-content" data-tab-content>
       <ul class="menu vertical">
       <%if @user.card_validate=='true'%>
-        <li><%=link_to "去充值",'#',class:@class%></li>
-        <li><%=link_to "更改密码",'#',class:@class%></li>
-        <li><%=link_to "余额查询",'#',class:@class%></li>
-        <li><%=link_to "交易记录",'#',class:@class%></li>
+        <li><%=link_to "去充值",recharge_cards_path,class:@class%></li>
+        <li><%=link_to "更改密码",edit_card_path(0),class:@class%></li>
+        <li><%=link_to "余额查询",card_path(0),class:@class%></li>
+        <li><%=link_to "交易记录",cards_path,class:@class%></li>
       <%else%>
         <li><%=link_to "激活会员卡", new_member_path ,class:@class%></li>
       <%end%>
@@ -35,12 +35,10 @@
     <div class="accordion-content" data-tab-content>
       <ul class="menu vertical">
         <% if @user.member_lv_id==2%>
-          <li><%=link_to "申请提现",'#',class:@class%></li>   
-        <%eles%>   
           <li><%=link_to "我的子卡",'#',class:@class%></li>
         <%end%>
-        <li><%=link_to "待提现",'#',class:@class%></li>
-        <li><%=link_to "提现记录",'#',class:@class%></li>
+        <li><%=link_to "待提现",rebates_cards_path(status:0),class:@class%></li>
+        <li><%=link_to "提现记录",rebates_cards_path,class:@class%></li>
       </ul>
     </div>
   </li>
@@ -71,39 +69,3 @@
 -->
  
 </div>
-
-<ul class="vertical menu" data-accordion-menu style='display:none'>
-  <li><%=@user.name%></b> &nbsp;欢迎您！</li>
-  <li>
-    <%=link_to '我的订单', '#',class:@class%>
-    <ul class="menu vertical nested">
-      <li><%=link_to "待付款订单(#{@unpay_count})",orders_member_path(:pay_status=>'0',:status=>'active'),class:@class%></li>
-      <li><%=link_to "已付款(#{@paid_count})",orders_member_path(:pay_status=>'0',:status=>'paid'),class:@class%></li>
-      <li><%=link_to "历史订单",orders_member_path,class:@class%></li>
-    </ul>
-  </li>
-   <li><%=link_to "我的购物车",'/cart',class:@class%></li>
-  <!-- <li><a href="#">我的收藏</a></li> -->
-  <li><%=link_to '收货地址管理', member_addrs_path,class:@class%></li>
-  <li><%=link_to '账户管理', card_path,class:@class%>
-   <ul class="menu vertical nested">
-      <li><%=link_to "去充值",'#',class:@class%></li>
-      <li><%=link_to "更改密码",'#',class:@class%></li>
-      <li><%=link_to "余额查询",'#',class:@class%></li>
-      <li><%=link_to "交易记录",'#',class:@class%></li>
-    </ul>
-  </li>
-  <li><%=link_to '提现管理', card_path,class:@class%>
-    <ul class="menu vertical nested">
-    <% if @user.member_lv_id==2%>
-      <li><%=link_to "申请提现",'#',class:@class%></li>   
-    <%eles%>   
-      <li><%=link_to "我的子卡",'#',class:@class%></li>
-    <%end%>
-      <li><%=link_to "待提现",'#',class:@class%></li>
-      <li><%=link_to "提现记录",'#',class:@class%></li>
-    </ul>
-  </li>
-</ul>
-
-
