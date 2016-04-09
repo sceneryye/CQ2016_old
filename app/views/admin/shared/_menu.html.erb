@@ -1,6 +1,6 @@
-<ul class="vertical menu" data-responsive-menu="drilldown medium-dropdown" style="background:#e6e6e6;">
+<ul class="vertical dropdown menu" data-dropdown-menu style="background:#e6e6e6;">
  <%if admin_signed_in?%>
- <li class="admin-info"><h5><%=current_admin.login_name%>
+ <li><h5><%=current_admin.login_name%>
  \<%=link_to "退出",admin_logout_path%></h5></li>
  
     <%if current_admin.has_right_of("homes","index") || 
@@ -11,7 +11,7 @@
             <%=link_to admin_static_pages_path,:class=>"dropdown-toggle" do %>
               自定义页面
             <%end%>
-            <ul class="vertical menu " aria-labelledby="dropdownMenu">
+            <ul class="menu">
               <li>
                   <%=link_to "自定义页面",admin_static_pages_path if current_admin.has_right_of("static_pages","index")%>
               </li>

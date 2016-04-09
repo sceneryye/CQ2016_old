@@ -1,7 +1,6 @@
 #encoding:utf-8
 class Admin::GoodsLabelsController < Admin::BaseController
-  # GET /admin/cards
-  # GET /admin/cards.json
+
   def index
     @labels = Ecstore::GoodLabel.paginate(:page=>params[:page],:per_page=>20)
   end

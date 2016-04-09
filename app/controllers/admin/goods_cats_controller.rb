@@ -1,7 +1,6 @@
 #encoding:utf-8
 class Admin::GoodsCatsController < Admin::BaseController
-  # GET /admin/cards
-  # GET /admin/cards.json
+
   def index
     @top_cats = Ecstore::GoodCat.where(:parent_id=>0).paginate(:page=>params[:page],:per_page=>30)
   end
@@ -73,7 +72,7 @@ class Admin::GoodsCatsController < Admin::BaseController
 
   def update
     @goodcat = Ecstore::GoodCat.find(params[:id])
-    if @goodcat.update_attributes(params[:ecstore_good_cat])
+    if @goodcat.update_attributes(goods_cat_params)
       redirect_to edit_admin_goods_cat_url(@goodcat)
     else
       render action: "edit"
@@ -84,5 +83,9 @@ class Admin::GoodsCatsController < Admin::BaseController
     @goodcat = Ecstore::GoodCat.find(params[:id])
     @goodcat.destroy
     redirect_to admin_goods_cats_path
+  end
+  private 
+  def goods_cat_params
+    params.require(:ecstore_good_cat).permit(:cat_name,:type_id,:cat_id)
   end
 end

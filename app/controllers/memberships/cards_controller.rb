@@ -68,19 +68,8 @@ class Memberships::CardsController < ApplicationController
 
   	def show
   		
+  		@card_info = Ecstore::MemberAdvance.where(member_id: @user.member_id).last
 
-		# if params[:card].has_key?(:card_no)
-		# 	@card = Ecstore::Card.find_by_no(params[:card][:card_no])
-		# 	if @card
-		# 		render "memberships/cards/confirm_activation"
-		# 	else
-		# 		render "memberships/cards/activation"
-		# 	end
-		# end
-
-		# if params[:card].has_key?(:user_tel)
-			
-		# end
 	end
 
   	def recharge () end
@@ -308,19 +297,18 @@ class Memberships::CardsController < ApplicationController
 	        end
 	         #   message = '卡号：' + card_id + ';  认证日期：' + e.data.card_cardinfo_get_response.card_info.validity_date +';  余额：' + parseFloat(msg.account_balance / 100) + '元' + ';  产品名称：' + msg.product_name + ';  可用余额：' + parseFloat(msg.valid_balance / 100) + '元' + ';  产品有效期：' + msg.validity_date + ';  产品状态：' + state;
 	        balance = res_data["card_cardinfo_get_response"]["card_info"]["card_product_info_arrays"]["card_product_info"][0]["valid_balance"]
-
-	        				balance = card_info[:balance]
-				Ecstore::MemberAdvance.create(:member_id=>@user.member_id,
-												  :money=>@card.value,
-												  :message=>"#{from},卡号:#{@card.no}",
-												  :mtime=>Time.now.to_i,
-												  :memo=>"用户本人操作",
-												  :import_money=>@card.value,
-												  :explode_money=>0,
-												  :member_advance=>balance,
-												  :shop_advance=>balance,
-												  :disabled=>'false')
-				@user.update_attribute :advance, balance
+			
+			Ecstore::MemberAdvance.create(:member_id=>@user.member_id,
+										  :money=>balance,
+										  :message=>"#{from},卡号:#{@card.no}",
+										  :mtime=>Time.now.to_i,
+										  :memo=>"用户本人操作",
+										  :import_money=>@card.value,
+										  :explode_money=>0,
+										  :member_advance=>balance,
+										  :shop_advance=>balance,
+										  :disabled=>'false')
+			@user.update_attribute :advance, balance
 
 	        session[:card_pwd] = password
 
