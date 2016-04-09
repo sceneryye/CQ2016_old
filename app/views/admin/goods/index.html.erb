@@ -20,7 +20,7 @@
 		</div>
 </div>
 
-<div class="columns small-12 callout">
+<div class="columns small-12">
   <%=form_for :member,:url=>export_admin_goods_path,:method=>:post do |f|%>
       <%= f.hidden_field :select_all,:class=>"sel_operation", :value => 0 %>
       <input type="hidden" name="all_goods_ids" value="<%=@goods_ids%>" />
