@@ -8,9 +8,7 @@
       current_admin.has_right_of("footers","index")%>
        
        <li class="<%='active' if %w(homes static_pages footers).include?(controller_name)%>">
-            <%=link_to admin_static_pages_path do %>
-              自定义页面
-            <%end%>
+            <%=link_to '自定义页面', admin_static_pages_path %>
             <ul class="menu">
               <li>
                   <%=link_to "自定义页面",admin_static_pages_path if current_admin.has_right_of("static_pages","index")%>
@@ -44,7 +42,7 @@
 
        <li class="<%='active' if %w(tags tag_exts).include?(controller_name)%>">
                 <%=link_to "标签管理",admin_tags_path%>
-                <ul class="vertical menu">
+                <ul class="menu">
                     <li>
                       <%=link_to "标签管理",admin_tags_path if current_admin.has_right_of("tags","index")%>
                     </li>
@@ -65,7 +63,7 @@
             <%=link_to admin_goods_path,:class=>"dropdown-toggle" do %>
               商品管理
             <%end%>
-            <ul class="vertical menu " aria-labelledby="dropdownMenu">
+            <ul class="menu " aria-labelledby="dropdownMenu">
               <li>
                   <%=link_to "商品管理",admin_goods_path  if current_admin.has_right_of("goods","index")%>
               </li>
@@ -96,7 +94,7 @@
         <%=link_to admin_promotions_path,:class=>"dropdown-toggle" do %>
           促销管理 <b class="caret" style="border-top-color: #fff;border-bottom-color: #fff; margin-top:7px;margin-left:2px;"></b>
         <%end%>
-        <ul class="vertical menu " aria-labelledby="dropdownMenu">
+        <ul class="menu " aria-labelledby="dropdownMenu">
           <li>
               <%=link_to "订单促销",admin_promotions_path(:type=>"order") if current_admin.has_right_of("promotions","index")%>
           </li>
@@ -170,7 +168,7 @@
     <%if current_admin.has_right_of("trace","index")%>
     <li class="<%='active' if controller_name=='trace'%>">
       <a href="#">行为跟踪</a>
-      <ul class="vertical menu " aria-labelledby="dropdownMenu">
+      <ul class="menu " aria-labelledby="dropdownMenu">
         <li>
           <%=link_to "微信推荐访问",admin_tracks_path if current_admin.has_right_of("promotions","index")%>
           <%=link_to "站内追踪",'/admin/tracks/pages' if current_admin.has_right_of("promotions","index")%>
@@ -180,13 +178,7 @@
     <%end%>
     <%if current_admin.has_right_of("cart","index")%>
     <li class="<%='active' if controller_name=='cart'%>">
-      <a href="#">用户购物车</a>
-      <ul class="vertical menu " aria-labelledby="dropdownMenu">
-        <li>
-          <%=link_to "昌麒购物车", admin_carts_path if current_admin.has_right_of("promotions","index")%>
-
-        </li>
-      </ul>
+     <%=link_to "昌麒购物车", admin_carts_path if current_admin.has_right_of("promotions","index")%>
     </li>
     <%end%>  
     <%if current_admin.has_right_of("events","index")%>
@@ -204,7 +196,7 @@
             <%=link_to admin_virtual_goods_path,:class=>"dropdown-toggle" do %>
               虚拟商品 <b class="caret" style="border-top-color: #fff;border-bottom-color: #fff; margin-top:7px;margin-left:2px;"></b>
             <%end%>
-            <ul class="vertical menu " aria-labelledby="dropdownMenu">
+            <ul class="menu " aria-labelledby="dropdownMenu">
               <li>
                   <%=link_to "虚拟商品",admin_virtual_goods_path if current_admin.has_right_of("virtual_goods","index")%>
               </li>
@@ -220,7 +212,7 @@
             <%=link_to admin_topics_path,:class=>"dropdown-toggle" do %>
               专题 <b class="caret" style="border-top-color: #fff;border-bottom-color: #fff; margin-top:7px;margin-left:2px;"></b>
             <%end%>
-            <ul class="vertical menu " aria-labelledby="dropdownMenu">
+            <ul class="menu " aria-labelledby="dropdownMenu">
               <li>
                   <%=link_to "所有专题",admin_topics_path if current_admin.has_right_of("topics","index")%>
               </li>
