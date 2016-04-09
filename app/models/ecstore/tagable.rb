@@ -1,6 +1,6 @@
 class Ecstore::Tagable < Ecstore::Base
 	self.table_name = "sdb_desktop_tag_rel"
-	self.accessor_all_columns
+	
 
 	belongs_to :teg, :foreign_key=>"tag_id"
 

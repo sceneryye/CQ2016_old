@@ -2,7 +2,7 @@ class Ecstore::Address < Ecstore::Base
 	self.table_name = "sdb_imodec_addresses"
 	belongs_to :brand, :polymorphic=>true
 
-	self.accessor_all_columns
+	
 
 	geocoded_by :name
 	after_validation :geocode

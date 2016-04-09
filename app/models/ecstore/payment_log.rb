@@ -3,7 +3,7 @@ class Ecstore::PaymentLog < Ecstore::Base
 	belongs_to  :payment
 	
 
-	self.accessor_all_columns
+	
 
 	[:request,:return,:notify].each do |method|
 		class_eval <<-RUBY_EVAL,__FILE__,__LINE__+1

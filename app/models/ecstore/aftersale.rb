@@ -2,7 +2,7 @@
 class Ecstore::Aftersale < Ecstore::Base
 	self.table_name = "sdb_aftersales_return_product"
 
-	self.accessor_all_columns
+	
 
 
 	attr_accessor :items

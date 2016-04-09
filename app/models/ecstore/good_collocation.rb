@@ -5,5 +5,5 @@ class Ecstore::GoodCollocation < Ecstore::Base
 
   serialize :collocations, Array
 
-  self.accessor_all_columns
+  
 end

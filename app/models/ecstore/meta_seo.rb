@@ -2,7 +2,7 @@
 class Ecstore::MetaSeo < Ecstore::Base
 	self.table_name = "sdb_imodec_seo"
 	
-	self.accessor_all_columns
+	
 
 	serialize :params, Hash
 

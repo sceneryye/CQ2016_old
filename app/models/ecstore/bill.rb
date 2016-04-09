@@ -1,6 +1,6 @@
 class Ecstore::Bill < Ecstore::Base
 	self.table_name = 'sdb_ectools_order_bills'
-	self.accessor_all_columns
+	
 
 	belongs_to :payment, :foreign_key => "bill_id"
 	belongs_to :refund, :foreign_key=>"bill_id"

@@ -6,5 +6,5 @@ class Ecstore::Inventory < Ecstore::Base
   belongs_to :product,:foreign_key=>"product_id"
 
 
-  self.accessor_all_columns
+  
 end

@@ -10,9 +10,6 @@ class Ecstore::VirtualGood < Ecstore::Base
 	extend FriendlyId
 	friendly_id :slug
 
-	self.accessor_all_columns
-
-
 	validates_presence_of :name, :message=>"名称不能为空"
 	validates_presence_of :price, :message=>"价格不能为空"
 	validates :price, :numericality =>{ :greater_than_or_equal_to=>0,:message=>"价格必须大于等于0的数字"},

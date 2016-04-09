@@ -1,7 +1,7 @@
 #encoding:utf-8
 class Ecstore::Reship < Ecstore::Base
 	self.table_name = 'sdb_b2c_reship'
-	self.accessor_all_columns
+	
 
 	has_many :reship_items, :foreign_key=>"reship_id"
 

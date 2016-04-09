@@ -2,7 +2,7 @@
 require 'digest'
 class Ecstore::UserCoupon < Ecstore::Base
 	self.table_name = "sdb_imodec_user_coupons"
-	self.accessor_all_columns
+	
 
 	belongs_to :new_coupon,:foreign_key=>"coupon_id"
 

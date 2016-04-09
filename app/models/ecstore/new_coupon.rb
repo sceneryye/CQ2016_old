@@ -4,7 +4,7 @@ require 'digest'
 
 class Ecstore::NewCoupon < Ecstore::Base
 	self.table_name = "sdb_imodec_coupons"
-	self.accessor_all_columns
+	
 
 	attr_accessor :current_code
 

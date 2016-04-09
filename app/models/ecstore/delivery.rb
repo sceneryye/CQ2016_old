@@ -1,7 +1,7 @@
 #encoding:utf-8
 class Ecstore::Delivery < Ecstore::Base
 	self.table_name = 'sdb_b2c_delivery'
-	self.accessor_all_columns
+	
 	has_many :delivery_items, :foreign_key=>"delivery_id", :class_name=>"Ecstore::DeliveryItem"
 
 	attr_accessor :delivery_items

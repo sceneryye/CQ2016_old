@@ -14,7 +14,7 @@ module Ecstore
 		# )
 		self.establish_connection(Ecstore.database_config)
 
-		def self.accessor_all_columns
+		def 
 			self.column_names.each do |col|
           			attr_accessor col.to_sym
        		end

@@ -1,7 +1,7 @@
 #encoding:utf-8
 class Ecstore::OfflineCoupon < Ecstore::Base
 	self.table_name = "sdb_imodec_offline_coupons"
-	self.accessor_all_columns
+	
 	belongs_to :brand, :foreign_key=>"brand_id"
 	has_many :coupon_downloads
 

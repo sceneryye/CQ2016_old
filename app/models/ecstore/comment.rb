@@ -1,7 +1,7 @@
 #encoding:utf-8
 class Ecstore::Comment < Ecstore::Base
 	self.table_name = "sdb_imodec_comments"
-	self.accessor_all_columns
+	
 	belongs_to :good, :foreign_key=>"commentable_id"
 	belongs_to :user, :foreign_key=>"member_id"
 

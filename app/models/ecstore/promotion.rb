@@ -1,7 +1,7 @@
 #encoding:utf-8
 class Ecstore::Promotion < Ecstore::Base
   self.table_name = 'sdb_imodec_promotions'
-  self.accessor_all_columns
+  
   
 
   serialize :goods,  Array
