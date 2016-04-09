@@ -1,7 +1,6 @@
 #encoding:utf-8
 class Ecstore::Teg < Ecstore::Base
 	self.table_name = "sdb_desktop_tag"
-	self.accessor_all_columns
 
 	has_many :tagables,:foreign_key=>"tag_id"
 	has_many :goods, :through=>:tagables

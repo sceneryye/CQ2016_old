@@ -1,14 +1,14 @@
-<ul class="vertical dropdown menu" data-dropdown-menu style="background:#e6e6e6;">
+<ul class="vertical dropdown menu" data-dropdown-menu>
  <%if admin_signed_in?%>
  <li><h5><%=current_admin.login_name%>
- \<%=link_to "退出",admin_logout_path%></h5></li>
+ |<%=link_to "退出",admin_logout_path%></h5></li>
  
     <%if current_admin.has_right_of("homes","index") || 
       current_admin.has_right_of("static_pages","index") ||
       current_admin.has_right_of("footers","index")%>
        
        <li class="<%='active' if %w(homes static_pages footers).include?(controller_name)%>">
-            <%=link_to admin_static_pages_path,:class=>"dropdown-toggle" do %>
+            <%=link_to admin_static_pages_path do %>
               自定义页面
             <%end%>
             <ul class="menu">
