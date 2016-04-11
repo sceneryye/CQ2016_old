@@ -85,6 +85,6 @@ class Admin::BrandAdmsController < Admin::BaseController
   private 
   def brand_params
     params.require(:brand).permit(:brand_name,:status,:brand_logo,:brand_url,:reco,:context,
-      :ordernum,:slug,:brand_desc,:detail_desc,:meta_seo_attributes)
+      :ordernum,:slug,:brand_slogan,:detail_desc,:meta_seo_attributes)
   end
 end
