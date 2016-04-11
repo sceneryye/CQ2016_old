@@ -6,7 +6,7 @@ class Ecstore::Brand < Ecstore::Base
 	extend FriendlyId
 	friendly_id :brand_name, :use => [:slugged, :finders]
 
-	self.table_name = "sdb_b2c_brand"
+	self.table_name = "brands"
 	self.primary_key = 'brand_id'
 	has_many :goods,->{where(marketable:'true')}, :foreign_key=>"brand_id"
 

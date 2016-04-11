@@ -3,11 +3,10 @@
 <div class="row small-up-1 large-up-2">
     <%@menu_brands.each do |brand|%>
     <div class="column">
-    
-        <%=link_to brand_path(brand) do %>
+    <%=link_to brand_path(brand) do%>
+    	<h4>[<%=brand.brand_name%>]<%=brand.brand_slogan%></h4>
             <%=image_tag brand.brand_logo,:alt=>brand.brand_name, class: "thumbnail"%>
-        <%end%>
-        <!-- <h6><%=link_to brand.brand_name, brand_path(brand)%></h6> -->
+    <%end%>
     </div>
     <%end if @menu_brands%>
 </div>
