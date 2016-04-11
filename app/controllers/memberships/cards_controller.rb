@@ -75,17 +75,17 @@ class Memberships::CardsController < ApplicationController
   	def recharge () end
 
   	def topup
+  		card_id = @user.card_num;
+    	prdt_no = "0001";
+    	amount =  params[:amount];
+    	top_up_way = '1';
+    	opr_id = '0229000040';
 	    #data = params.permit(:order_id, :card_id, :prdt_no, :amount, :top_up_way, :opr_id, :desn)
-	    order_id = params[:order_id]
-	    card_id = params[:card_id]
-	    prdt_no = params[:prdt_no]
-	    amount = params[:amount]
-	    top_up_way = params[:top_up_way]
-	    opr_id = params[:opr_id]
+	    
 	    desn = params[:desn]
 	    res_data = ActiveSupport::JSON.decode topup_single_card(order_id, card_id, prdt_no, amount, top_up_way, opr_id, desn)
 	    Rails.logger.info res_data
-	    render json: {data: res_data}
+	    redirect_to card_path(0)
 	end
 
   	def edit () end
