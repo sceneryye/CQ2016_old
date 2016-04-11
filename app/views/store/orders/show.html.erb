@@ -1,5 +1,5 @@
 <div class="order-holder">
-  <%=form_for :payment,:url=>payments_path(:order_id=>@order.order_id),:method=>'post',:html=>{ :target=>"_blank" } do |f|%>
+  <%=form_for :payment,:url=>payments_path(:order_id=>@order.order_id), method: 'post',:html=>{ :target=>"_blank" } do |f|%>
       <%=f.hidden_field :currency, :value=>"CNY" %>
       
       <div class="order">
@@ -25,24 +25,12 @@
       </div>
 
       <div class="payments" id="payment_choices">
-        <h5>已选择的支付方式现修改为：</h5>
+        <h5>支付方式现修改为：</h5>
 
-        <%if @order.part_pay?%>
-            <label class="checkbox">
-              <%=f.check_box :part_pay, { :checked=>true, :'data-amount'=>@order.part_pay.to_i,:id=>"advance" }, @order.part_pay.to_i, 0%> <b>会员卡积分先支付</b>
-              余额(<span>¥<%=@order.part_pay.to_i%></span>)
-            </label>
-        <%end%>        
-        <%#if @user.advance >= @order.final_amount%>
+       
             <label class="radio">
               <%=f.radio_button :pay_app_id, "deposit", { :checked=>(@order.payment == 'deposit') } %> <b>会员卡积分</b>
             </label>
-        <%#end%>
-<!-- 
-        <label class="radio">
-          <%=f.radio_button :pay_app_id, "wxpay", { :checked=>(@order.payment == 'wxpay') }%> <b>微信支付</b>
-        </label>
- -->
       <div class="actions">
         <div>支付成功后，可以在<%=link_to "订单详情",detail_order_path(@order),:target=>"_blank"%>处查看订单和追踪订单状态</div>
         <br>

@@ -14,6 +14,7 @@
 //= require jquery_ujs
 //= require foundation
 //= require ckeditor/init
+//= require foundation-datepicker.min
 //= require_tree .
 
 $(function(){ $(document).foundation(); });

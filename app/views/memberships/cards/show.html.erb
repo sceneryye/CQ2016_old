@@ -2,10 +2,31 @@
 <%if session[:card_pwd].blank?%>
 	<%=render :partial=>"login"%>
 <%else%>
+<div class="row">
+	<div class="medium-5 large-3 columns">
+		<div class="callout secondary">
+			<div class="row">
+				<div class="small-12 columns">
+					<label>您的会员卡号:<%=@user.card_num%>
+					</label>
+					</div>
+					<div class="small-12 columns">
+					<label>
+						卡内余额：<%=@card_info.member_advance%>
+					</label>
+					<label>
+						最后查询时间：<%=l Time.at(@card_info.mtime)%>
+					</label>
+					<%=link_to "刷新信息",'#',:class=>"button expanded"%>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 	<div class="row">
 		<div class="medium-5 large-3 columns">
-			卡内余额：<%=@card_info.member_advance%><br>
-			最后查询时间：<%=l Time.at(@card_info.mtime)%>
+			<br>
+			
 		</div>
 	</div>
 <%end%>

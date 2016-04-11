@@ -31,15 +31,15 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :brand_desc, "基地简介", :class => "control-label" %>
+      <%= f.label :brand_slogan, "基地口号", :class => "control-label" %>
       <div class="controls">
-        <%=f.text_area :brand_desc,:placeholder=>"基地简单描述",:class=>"span5",:rows=>3%>
+        <%=f.text_area :brand_slogan,:placeholder=>"基地口号",:class=>"span5",:rows=>3%>
       </div>
     </div>
 
 
     <div class="control-group">
-      <%= f.label :detail_desc, "详细简介", :class => "control-label" %>
+      <%= f.label :detail_desc, "详细介绍", :class => "control-label" %>
       <div class="controls">
         <%= f.cktext_area :detail_desc, :toolbar => 'Easy',:language=>'zh-cn',:height => 300 %>
       </div>

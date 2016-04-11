@@ -261,14 +261,6 @@ class Store::OrdersController < ApplicationController
     
     @def_addr = @addrs.where(:def_addr=>1).first || @addrs.first
 
-    # if @pmtable
-      @order_promotions = Ecstore::Promotion.matched_promotions(@line_items)
-      @goods_promotions = Ecstore::Promotion.matched_goods_promotions(@line_items)
-      @coupons = @user.usable_coupons
-    # end
-
-    @coupon_id = params[:coupon_id]
-
    
   end
 
