@@ -44,7 +44,6 @@
 		<%=@brand.detail_desc.html_safe%>
 	</div>	
 	<div class="tabs-left">
-		<span class="brand-logo"><%=image_tag @brand.brand_logo,:alt=>@brand.brand_name%></span>
 		<ul class="nav nav-list">
 		    <%@brand.context.each_with_index do |menu,index|%>
 		    	<%if menu["menu_name"].present?%>
