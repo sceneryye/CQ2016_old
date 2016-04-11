@@ -35,8 +35,4 @@ class HomeController < ApplicationController
 		render :layout=>nil
 	end
 	
-	def subscription_success
-		@title = "昌麒投资"
-	end
-
 end
