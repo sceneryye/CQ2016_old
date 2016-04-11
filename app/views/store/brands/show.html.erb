@@ -38,7 +38,9 @@
 		</div>
 	</div>
 	<div class="callout warning">
-		[<%=@brand.brand_name%>]<%=@brand.brand_slogan.html_safe%>
+		<h4>[<%=@brand.brand_name%>]<%=@brand.brand_slogan.html_safe%></h4>
+
+		<%=image_tag @brand.brand_logo,:alt=>@brand.brand_name,class:'thumbnail'%>
 	</div>
 	 <div class="callout">
 		<%=@brand.detail_desc.html_safe%>
