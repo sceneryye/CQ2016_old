@@ -4,6 +4,50 @@ class Store::PaymentsController < ApplicationController
 	layout 'order'
 
 	skip_before_filter :verify_authenticity_token,:only=>[:callback,:notify]
+
+	def index
+		rel_id = params[:order_id]
+		@order  = Ecstore::Order.find_by_order_id(rel_id)
+		installment =  1
+		part_pay =  0
+
+		pay_app_id ='deposit' #payment_params[:pay_app_id]
+
+		
+		#  update order payment
+		@order.update_attributes :payment=>pay_app_id,:last_modified=>Time.now.to_i,:installment=>installment,:part_pay=>part_pay if pay_app_id.to_s != @order.payment.to_s
+
+		# payment_params.merge! Ecstore::Payment::PAYMENTS[pay_app_id.to_sym]
+
+		@payment = Ecstore::Payment.new   do |payment|
+			payment.payment_id = Ecstore::Payment.generate_payment_id
+			payment.pay_app_id = pay_app_id
+			payment.status = 'ready'
+			payment.pay_ver = '1.0'
+			payment.paycost = 0
+
+			payment.account = '昌麒投资'
+			payment.member_id = payment.op_id = @user.member_id
+			payment.pay_account = @user.login_name
+			payment.ip = request.remote_ip
+
+			payment.t_begin = payment.t_confirm = Time.now.to_i
+			
+			payment.pay_bill = Ecstore::Bill.new do |bill|
+				bill.rel_id  = rel_id
+				bill.bill_type = "payments"
+				bill.pay_object  = "order"
+				bill.money = @order.pay_amount
+			end
+		end
+
+		@payment.money = @payment.cur_money = @order.pay_amount
+		if @payment.save
+        	redirect_to "/payments/pay?id=#{@payment.payment_id}"
+		else			
+			redirect_to order_url(@order)
+		end
+  	end
  
 	def create
 		rel_id = params[:order_id]
@@ -46,7 +90,6 @@ class Store::PaymentsController < ApplicationController
 		end
 
 		@payment.money = @payment.cur_money = @order.pay_amount
-
 		if @payment.save
         	redirect_to "/payments/pay?id=#{@payment.payment_id}"
 		else			

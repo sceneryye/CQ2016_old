@@ -58,24 +58,8 @@
 				<div class="section payment" id="payments">
 					<h5>支付方式</h5>   
 
-					<%=f.radio_button :payment, "deposit", :checked=>true%> <b>会员卡积分</b>
-				
-					<!-- <%if @user.advance>0 && @user.advance < @cart_total%>
-				 	<label class="checkbox">
-						<%=f.check_box :part_pay, { :checked=>true, :'data-amount'=>@user.advance, :id=>"advance" }, @user.advance, 0%> <b>会员卡积分先支付</b>
-						余额(<span>¥<%=@user.advance%></span>)
-					</label>
-					<%end%>     
-			      <label class="radio">
-			        <%=f.radio_button :payment, "wxpay", :checked=>true%> <b>微信支付</b>
-			       <span class="extra-desc"><img src="/assets/store/wxpay.png"/></span>
-			      </label>
-
-					<%if @user.advance >= @cart_total%>
-				 	<label class="radio" >
-						<%=f.radio_button :payment, "deposit", :checked=>true%> <b>会员卡积分</b>
-					</label>
-					<%end%> -->
+					<%=f.radio_button :payment, "deposit", :checked=>true%> <b>会员卡积分</b>		
+					
 				</div>
 
 				<div class="order-items">
@@ -117,13 +101,7 @@
 					</table>
 				</div>
 
-				<%if @pmtable%>
-				<div class="section promotions">
-					<!-- <h5>优惠: </h5> -->
-					<%#=render "promotions"%>
-					<%=render "coupons"%>
-				</div>
-				<%end%>
+			
 				<div class="section checkout clearfix">
 					<h5>结算信息</h5>
 					<div class="left">
@@ -136,18 +114,7 @@
 							</div>
 						</div>
 					</div>
-					<div class="right">
-						<div class="tax" id="order_tax">
-							<div class="item">
-								<span class="text">需要发票：</span>
-								<span class="money">(税金:0%)<%=f.check_box :is_tax, {}, 'true','false'%></span>
-							</div>
-
-							<div class="item hide tax-input">
-								<span class="text">发票抬头：</span>
-								<span class="money"><%=f.text_field :tax_company,:class=>"tax-owner"%></span>
-							</div>
-						</div>
+					<div class="right">						
 						<div class="cost" id="order_cost">
 							<div class="item">
 								<span class="text">商品总额：</span>
@@ -155,24 +122,7 @@
 								<span class="money" data-amount="<%=@cart_total%>" id="cart_amount">
 									<%=@cart_total.round%> 
 								</span>
-							</div>
-							
-							<%if @order_promotions.present? || @goods_promotions.present? %>
-							<div class="item">
-								<span class="text">优惠：</span>
-								<span class="rmb-symbol">¥</span>
-								<span class="money" data-amount="0" id="pmt_amount"></span>
-							</div>
-							<%end%>
-
-
-							<div class="item">
-								<span class="text">优惠卡券：</span>
-								<span class="rmb-symbol">-¥</span>
-								<span class="money" data-amount="0" id="coupon_amount">
-									 0
-								</span>
-							</div>
+							</div>						
 							
 							<div class="item">
 								<span class="text">订单总金额：</span>

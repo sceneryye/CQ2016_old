@@ -117,7 +117,25 @@ class Memberships::CardsController < ApplicationController
 	end
 
 	def index
-		@tradings = Ecstore::CardTradingLog.paginate(:page=>params[:page],:per_page=>20)
+		#@tradings = Ecstore::CardTradingLog.paginate(:page=>params[:page],:per_page=>20)
+
+	    if  @user
+	      @tradings =  @user.orders.where(pay_status:'1').order("createtime desc")
+	    else
+	      redirect_to "/auto_login?#{return_url}&id=1"
+	    end
+	end
+
+	def rebates
+		#@tradings = Ecstore::CardTradingLog.paginate(:page=>params[:page],:per_page=>20)
+
+	    if @user
+	    	if params[:status] == '0'
+		      @rebates =  @user.orders.where(pay_status:'1').order("createtime desc")
+		  end
+	    else
+	      redirect_to "/auto_login?#{return_url}&id=1"
+	    end
 	end
 
   	def renew_record
