@@ -1,1 +1,27 @@
 <% provide :title, '修改会员卡密码' %>
+
+<!--- 输入卡密登录//-->
+<div class="row">
+	<div class="medium-5 large-3 columns">
+		<div class="callout secondary">
+			<%=form_for :card,:url=>card_path(0),method:'put' do |f|%>
+			<div class="row">
+				<div class="small-12 columns">
+					<label>您的会员卡号
+						<%=f.text_field :card_id,readonly:'true',:required=>"required",value:@user.card_num%>
+					</label>
+					</div>
+					<div class="small-12 columns">
+					<label>
+						<%=f.password_field :old_pwd,placeholder:'旧密码',:required=>"required"%>
+					</label>
+					<label>
+						<%=f.password_field :new_pwd,placeholder:'新密码',:required=>"required"%>
+					</label>
+					<%=f.submit "提 交",:class=>"button expanded"%>
+				</div>
+			</div>
+			<%end%>
+		</div>
+	</div>
+</div>

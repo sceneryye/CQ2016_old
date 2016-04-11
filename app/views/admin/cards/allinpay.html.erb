@@ -111,7 +111,7 @@
     var card_id = '<%=@card.no%>';
     var mer_order_id = order_id;
     var payment_id = "0000000001";
-    var amount = '100';
+    var amount = '100000';
     var password = '111111';
     var url = "<%= pay_with_pwd_admin_cards_path %>";
     $.post(url, {order_id: order_id, card_id: card_id, mer_order_id: mer_order_id, amount: amount, payment_id: payment_id, password: password}, function(e){
