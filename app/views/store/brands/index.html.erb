@@ -2,9 +2,9 @@
 
 <div class="row small-up-1 large-up-2">
     <%@menu_brands.each do |brand|%>
-    <div class="column">
+    <div class="column callout alert">
     <%=link_to brand_path(brand) do%>
-    	<h4>[<%=brand.brand_name%>]<%=brand.brand_slogan%></h4>
+    <h4>[<%=brand.brand_name%>]<%=brand.brand_slogan%></h4>
             <%=image_tag brand.brand_logo,:alt=>brand.brand_name, class: "thumbnail"%>
     <%end%>
     </div>
