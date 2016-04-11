@@ -4,8 +4,9 @@
     <%@menu_brands.each do |brand|%>
     <div class="column callout alert">
     <%=link_to brand_path(brand) do%>
-    <h4>[<%=brand.brand_name%>]<%=brand.brand_slogan%></h4>
-            <%=image_tag brand.brand_logo,:alt=>brand.brand_name, class: "thumbnail"%>
+   
+          <div id="grad" >  <%=image_tag brand.brand_logo,:alt=>brand.brand_name, class: "thumbnail"%> <div id="grad1">
+            <h4 id="ht3">[<%=brand.brand_name%>]<%=brand.brand_slogan%></h4></div></div>
     <%end%>
     </div>
     <%end if @menu_brands%>
@@ -18,3 +19,28 @@
 	<%=raw Ecstore::Config.get(:brand_cover) %>
 <%end%>
 
+<style>
+	#grad {
+		 position:relative;
+		
+		
+	}
+#grad1 {
+	position:absolute;
+	left;0;bottom:0;
+	height: 120px;
+	width:100%;
+    background: -webkit-linear-gradient(white, black); /* Safari 5.1 - 6.0 */
+    background: -o-linear-gradient(white, black); /* Opera 11.1 - 12.0 */
+    background: -moz-linear-gradient(white, black); /* Firefox 3.6 - 15 */
+    background: linear-gradient(white,black); /* 标准的语法（必须放在最后） */
+	filter:alpha(opacity=50); 
+    -moz-opacity:0.5; 
+     opacity:0.7;
+}
+	#ht3 {
+	padding:10px;/*或者padding-top:20px;padding-bottom:20px;*/
+    height:auto;
+	color:white;
+	}
+</style>
