@@ -1,7 +1,7 @@
 #encoding:utf-8
 class Store::SearchController < ApplicationController
 
-	layout 'standard'
+	layout 'application'
 
 	def index
 		page  =  (params[:page] || 1).to_i

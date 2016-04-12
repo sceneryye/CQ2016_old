@@ -3,7 +3,7 @@ class Store::CatsController < ApplicationController
     layout 'application'
   	before_filter :require_top_cats
 
- 
+   
       def goods_list
         @cat = Ecstore::Category.find_by_cat_id("")
 

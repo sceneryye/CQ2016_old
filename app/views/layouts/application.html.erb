@@ -46,7 +46,7 @@
           <ul class="dropdown menu" data-dropdown-menu>
             <li class="menu-text"><a href='/'><img src="/img/logo.png"></a></li>
             <li class="has-submenu">
-              <%=link_to '产品中心', cat_path(5), class:"menu-link #{@product_active}"%>
+              <%=link_to '产品中心', cats_path, class:"menu-link #{@product_active}"%>
               <ul class="submenu menu vertical" data-submenu>
                <%@menu_categories.each do |category|%>
                 <li><%=link_to category.cat_name, cat_path(category)%></li> 

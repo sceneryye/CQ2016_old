@@ -21,10 +21,8 @@
       @users_active = 'active'
     when 'groupbuys'
       @groupbuys_active = 'active'
-    when 'events'
-      @events_active = 'active'  
-    when 'searchs'
-      @searchs_active = 'active'
+    when 'search' 'cats'
+      @search_active = 'active'
     else
       @forums_active = 'active'
   end
@@ -36,7 +34,7 @@
   <%=link_to cart_index_path,class: "item #{@groupbuys_active}  button" do%>
     <i class="fa fa-cart-plus"></i>
   <%end%>
-  <%=link_to cat_path(5),class: "item #{@events_active}  button" do%>
+  <%=link_to cats_path,class: "item #{@search_active}  button" do%>
     <i class="fa fa-search"></i>
   <%end%>
   <%if signed_in?

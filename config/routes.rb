@@ -92,7 +92,6 @@ Modengke::Application.routes.draw do
   end
 
   scope :module => "magazine" do
-    # match 'subscription_success' => "topics#index"
     resources :topics do
       resources :pages
     end
