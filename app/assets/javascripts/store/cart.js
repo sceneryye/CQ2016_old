@@ -4,7 +4,10 @@ $(document).ready(function(){
 	var pDoc = window.parent.document;
 	
 	$("#cart .quantity").on("change",function(){
-		var quantity = $(this).val();
+
+		var quantity = parseInt($(this).val());
+		if (quantity<=0) quantity = 1;
+		$(this).val(quantity);
 		if(!/\d+/.test(quantity)) return false;
 		var url = $(this).data('url');
 		$.ajax(url,{
