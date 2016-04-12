@@ -3,9 +3,11 @@
 <div class="row small-up-1 large-up-2">
     <%@menu_brands.each do |brand|%>
     <div class="column callout alert">
+     <div id="grad" >  
     <%=link_to brand_path(brand) do%>
    
-          <div id="grad" >  <%=image_tag brand.brand_logo,:alt=>brand.brand_name, class: "thumbnail"%> <div id="grad1">
+         <%=image_tag brand.brand_logo,:alt=>brand.brand_name, class: "thumbnail"%> 
+         <div id="grad1">
             <h3 id="ht3">[<%=brand.brand_name%>]<%=brand.brand_slogan%></h3></div></div>
     <%end%>
     </div>
@@ -39,7 +41,8 @@
      opacity:0.8;
 }
 	#ht3 {
-
+padding:18px;
+font-size: 17px;
     height:auto;
 	color:white;
 	}
