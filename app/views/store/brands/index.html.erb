@@ -6,7 +6,7 @@
     <%=link_to brand_path(brand) do%>
    
           <div id="grad" >  <%=image_tag brand.brand_logo,:alt=>brand.brand_name, class: "thumbnail"%> <div id="grad1">
-            <h4 id="ht3">[<%=brand.brand_name%>]<%=brand.brand_slogan%></h4></div></div>
+            <h3 id="ht3">[<%=brand.brand_name%>]<%=brand.brand_slogan%></h3></div></div>
     <%end%>
     </div>
     <%end if @menu_brands%>
@@ -34,9 +34,9 @@
     background: -o-linear-gradient(white, black); /* Opera 11.1 - 12.0 */
     background: -moz-linear-gradient(white, black); /* Firefox 3.6 - 15 */
     background: linear-gradient(white,black); /* 标准的语法（必须放在最后） */
-	filter:alpha(opacity=50); 
-    -moz-opacity:0.5; 
-     opacity:0.7;
+	filter:alpha(opacity=80); 
+    -moz-opacity:0.8; 
+     opacity:0.8;
 }
 	#ht3 {
 
