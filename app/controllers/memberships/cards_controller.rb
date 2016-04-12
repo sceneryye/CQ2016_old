@@ -26,8 +26,17 @@ class Memberships::CardsController < ApplicationController
 				@user.update_attribute :card_validate,'true'
 				@card.update_attribute :use_status,true
 				@card.update_attribute :used_at,Time.now
-				@card.member_card.update_attribute :user_id,@user.member_id
-				@card.member_card.update_attribute :member_id,@user.member_id
+				
+				if @card.member_card.nil?
+					@member_card = Ecstore::MemberCard.new do |member_card|
+						member_card.user_id = @user.member_id
+						member_card.member_id = @user.member_id
+					end
+					@member_card.save!
+				else
+					@card.member_card.update_attribute :user_id,@user.member_id
+					@card.member_card.update_attribute :member_id,@user.member_id
+				end
 
 
 				#发微信通知
@@ -46,12 +55,23 @@ class Memberships::CardsController < ApplicationController
 				Ecstore::CardLog.create(:member_id=>@user.member_id,
 	                                                :card_id=>@card.id,
 	                                                :message=>"会员卡激活,用户本人操作")
-				redirect_to cards_path
+				redirect_to bank_cards_path
 
 			end
 		else
 			return render text: '会员卡无法激活'
 		end
+	end
+
+	def member_card
+		@member_card = @user.member_card
+	    if @addr.update_attributes(addr_params)
+	    	redirect_to card_path(0), notice: '会员卡激活成功'
+	    else
+	    	flash[:error] = "银行卡验证失败" 
+	    	render 'bank'
+	    end
+
 	end
 
   	def login
@@ -177,6 +197,10 @@ class Memberships::CardsController < ApplicationController
 	private
 	def card_params
 	    params.require(:card).permit(:card_num,:card_pwd)
+	end
+
+	def member_card_params
+	    params.require(:member_card).permit(:bank_name,:bank_card_no,:bank_branch)
 	end
 
 	def card_info (from='',password=session[:card_pwd],card_id=@user.card_num )

@@ -1,6 +1,16 @@
 #encoding:utf-8
 module ApplicationHelper
 
+  def show_error_message(message = I18n.t('activerecord.errors.messages.blank'))
+    ['<small class="error">', message, '</small>'].join.html_safe
+  end
+
+  def flash_class(type)
+    { notice: 'success',
+      alert:  'info',
+      error:  'warning' }[type]
+    end
+
 	def getColumnValue(conf,obj)
 			attrs = conf.split(".")
 			if attrs.length ==1

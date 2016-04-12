@@ -38,7 +38,7 @@
         <% if @user.member_lv_id==2%>
           <li><%=link_to "我的子卡",'#',class:@class%></li>
         <%end%>
-        <li><%=link_to "提现明显",rebates_cards_path(status:0),class:@class%></li>
+        <li><%=link_to "提现明细",rebates_cards_path(status:0),class:@class%></li>
         <li><%=link_to "提现记录",rebates_cards_path,class:@class%></li>
       </ul>
     </div>

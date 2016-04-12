@@ -7,7 +7,8 @@
     </div>  
     
 </div>              
-<%= form_for :member_card,:url => bank_card_path,:method=>:post,:html=>{:role=>"form",data: {type: "script"}} do |f|%>    
+<%= form_for :member_card,:url => bank_card_path,:method=>:post,:html=>{:role=>"form",data: {type: "script"}} do |f|%>  
+  <%= render 'layouts/form_errors', object: @member_card %>  
     <div class="row">
         <div class="columns small-12">
             <div class="form-group">
