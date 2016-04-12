@@ -22,11 +22,13 @@ class Memberships::CardsController < ApplicationController
 	        if card_info[:error]
 	        	return render text:card_info[:error]
 	        else				
+	        	@user.update_attribute :card_num ,card_id
 				@user.update_attribute :card_validate,'true'
 				@card.update_attribute :use_status,true
 				@card.update_attribute :used_at,Time.now
 				@card.member_card.update_attribute :user_id,@user.member_id
 				@card.member_card.update_attribute :member_id,@user.member_id
+
 
 				#发微信通知
 				begin

@@ -13,20 +13,20 @@ class Memberships::MembersController < ApplicationController
 	end
 
   def new
-    if @user && (@user.member_lv_id>1 || @user.apply_type>1)
-      redirect_to advance_member_path
-    end
-    if params[:apply_type]=='2'
-      @checked2='checked'
-    else
-      @checked3='checked'
-    end
+   
   end
 
 
   def update
-    if @user.update_attributes(ecstore_user_params.merge!(:apply_time=>Time.now))
-  
+    user_params = ecstore_user_params
+    addr_params = ecstore_user_params
+   
+
+    if @user.update_attributes(user_params.merge!(:apply_time=>Time.now))    
+
+      addr_params.merge!(:member_id=>@user.member_id,:def_addr=>1).delete(:id_card_number)  
+      @addr = Ecstore::MemberAddr.create(addr_params)
+
       redirect_to new_card_path
     else
       render "new"
@@ -86,7 +86,7 @@ class Memberships::MembersController < ApplicationController
 
   private
    def ecstore_user_params
-      params.require(:ecstore_user).permit(:name,:card_num,:area,:mobile,:addr,:sex,:id_card_number)
+      params.require(:ecstore_user).permit(:name,:card_num,:area,:mobile,:addr,:sex,:id_card_number,:province, :city, :district,)
     end
 
 	
