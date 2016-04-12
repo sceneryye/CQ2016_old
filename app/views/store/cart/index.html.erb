@@ -1,3 +1,4 @@
+<% provide :title, '昌麒生态园-购物车' %>
 <table class="hover" id="cart">
   <%@line_items.select{ |x| x.good.present? && x.product.present? }.each do |line_item|%>
   <tr><td colspan='3' id='line_<%=line_item.obj_ident%>'>
