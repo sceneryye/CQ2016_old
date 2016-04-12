@@ -19,10 +19,11 @@
     <div class="accordion-content" data-tab-content>
       <ul class="menu vertical">
       <%if @user.card_validate=='true'%>
-        <li><%=link_to "去充值",recharge_cards_path,class:@class%></li>
+        <li><%=link_to "账户信息",card_path(0),class:@class%></li>        
+        <li><%=link_to "余额查询",card_path(0),class:@class%></li>        
+        <li><%=link_to "成交明细",cards_path,class:@class%></li>        
         <li><%=link_to "更改密码",edit_card_path(0),class:@class%></li>
-        <li><%=link_to "余额查询",card_path(0),class:@class%></li>
-        <li><%=link_to "交易记录",cards_path,class:@class%></li>
+        <li><%=link_to "账面充值",recharge_cards_path,class:@class%></li>
       <%else%>
         <li><%=link_to "激活会员卡", new_member_path ,class:@class%></li>
       <%end%>
@@ -37,7 +38,7 @@
         <% if @user.member_lv_id==2%>
           <li><%=link_to "我的子卡",'#',class:@class%></li>
         <%end%>
-        <li><%=link_to "待提现",rebates_cards_path(status:0),class:@class%></li>
+        <li><%=link_to "提现明显",rebates_cards_path(status:0),class:@class%></li>
         <li><%=link_to "提现记录",rebates_cards_path,class:@class%></li>
       </ul>
     </div>

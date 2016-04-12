@@ -8,6 +8,71 @@ Modengke::Application.routes.draw do
   get 'blank'=>"home#blank"
   get 'home'=>"home#index1"
 
+  scope :module => "memberships" do
+    resources  :cards do
+      collection do
+        get 'recharge'
+        post 'topup'
+
+        post 'bank'
+
+        get 'rebates'
+
+        post 'login'
+
+      end
+    end
+
+    resources  :member_cards
+
+    resource :profile do
+      member do
+        get 'password'
+        put 'modify_password'
+      end
+    end
+   
+    resource :member do
+      member do
+        get 'orders'
+        get 'shares'
+        get 'coupons'
+        get 'cards'
+        get 'advance'
+        get 'after_sale'
+        get 'favorites'
+        get 'goods'
+        get 'inventorys'
+        get 'inventorylog'
+        post 'export_inventory'
+        post 'coupon_check'
+      end
+    end
+
+    
+    resources :aftersales do
+      get 'instruction', :on=>:collection
+    end
+
+    resource :validation do
+      get 'email'
+      get 'mobile'
+      post 'verify'
+      post 'sent'
+      get 'verify_email'
+    end
+
+    resources :member_addrs do
+        get "mobile"  ,:on=>:collection
+        get 'new_memberaddr_add' ,:on=>:collection
+    end
+
+    match '/vip' => 'vip#index', :via => [:get]
+
+   
+  end
+
+
 
   resources :pages, :only=>[:show]
 
@@ -98,66 +163,6 @@ Modengke::Application.routes.draw do
     match '/more_topics' => 'topics#more', :via => [:get]
     match '/list_topics' => 'topics#list', :via => [:get]
     match '/flash' => 'flashes#index', :via => [:get]
-  end
-
-  scope :module => "memberships" do
-    resource :profile do
-      member do
-        get 'password'
-        put 'modify_password'
-      end
-    end
-   
-    resource :member do
-      member do
-        get 'orders'
-        get 'shares'
-        get 'coupons'
-        get 'cards'
-        get 'advance'
-        get 'after_sale'
-        get 'favorites'
-        get 'goods'
-        get 'inventorys'
-        get 'inventorylog'
-        post 'export_inventory'
-        post 'coupon_check'
-      end
-    end
-
-    
-    resources :aftersales do
-      get 'instruction', :on=>:collection
-    end
-
-    resource :validation do
-      get 'email'
-      get 'mobile'
-      post 'verify'
-      post 'sent'
-      get 'verify_email'
-    end
-
-    resources :member_addrs do
-        get "mobile"  ,:on=>:collection
-        get 'new_memberaddr_add' ,:on=>:collection
-    end
-
-    match '/vip' => 'vip#index', :via => [:get]
-
-    resources  :cards do
-      collection do
-        get 'recharge'
-        post 'topup'
-
-        get 'rebates'
-
-        post 'login'
-
-      end
-    end
-
-    resources  :member_cards
   end
 
   get 'admin'=>'admin/sessions#new'

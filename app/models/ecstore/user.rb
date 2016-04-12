@@ -1,6 +1,6 @@
 #encoding:utf-8
 class Ecstore::User < Ecstore::Base
-  self.table_name = "sdb_b2c_members"
+  self.table_name = "members"
   self.primary_key = 'member_id'
 
 

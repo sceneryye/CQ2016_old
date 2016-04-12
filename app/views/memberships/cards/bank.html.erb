@@ -1,7 +1,5 @@
-<% provide :title, '会员卡激活-会员卡信息' %>
-	<h4>还没有激活您的会员卡，请按以下提示操作，激活您的会员卡 </h4>
-	<h4>第二步会员卡</h4>
-
+<% provide :title, '会员卡激活-银行卡信息' %>
+  <h4>第三步银行卡信息</h4>
 
 <div class="row">       
     <div class="columns small-12 medium-6">     
@@ -9,11 +7,11 @@
     </div>  
     
 </div>              
-<%=form_for :card, :url=>cards_path,:method=>:post,:html=>{:role=>"form",data: {type: "script"}} do |f|%>    
+<%= form_for :member_card,:url => bank_card_path,:method=>:post,:html=>{:role=>"form",data: {type: "script"}} do |f|%>    
     <div class="row">
         <div class="columns small-12">
             <div class="form-group">
-                <%=f.text_field :card_num,:placeholder=>"*卡号",:required=>"required"%>
+                <%=f.text_field :bank_name,:placeholder=>"*发行银行",:required=>"required"%>
             </div>
             <div class="help-block" rel="user_name"></div>
         </div>                           
@@ -21,7 +19,15 @@
     <div class="row">
         <div class="columns small-12">
             <div class="form-group">
-                <%=f.password_field :card_pwd,value:"",:placeholder=>"*卡密码",:required=>"required"%>
+                <%=f.text_field :bank_card_no,:placeholder=>"*银行卡号",:required=>"required"%>
+            </div>
+            <div class="help-block" rel="user_name"></div>
+        </div>                           
+    </div> 
+     <div class="row">
+        <div class="columns small-12">
+            <div class="form-group">
+                <%=f.text_field :bank_branch,:placeholder=>"*支行名称",:required=>"required"%>
             </div>
             <div class="help-block" rel="user_name"></div>
         </div>                           
@@ -34,4 +40,4 @@
             </div>
         </div>
     </div>
-<%end%>        
+<%end%> 

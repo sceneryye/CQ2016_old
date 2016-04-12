@@ -3,14 +3,13 @@ require 'digest/md5'
 require 'csv'
 
 class Ecstore::Member < Ecstore::Base
-	self.table_name = "sdb_b2c_members"
+	self.table_name = "members"
 	belongs_to :account,:foreign_key=>"member_id"
 	belongs_to :member_lv,:foreign_key=>"member_lv_id"
 	belongs_to :tag,:foreign_key=>"member_id"
 	belongs_to :user,:foreign_key=>"member_id"
 	has_many :members_case,:foreign_key=>"member_id"
 
-	 attr_accessor :email, :mobile, :member_lv_id, :advance, :card_num, :id_card_number, :addr, :point
 	def reg_time
 		return #Time.at(self.regtime).strftime("%Y-%m-%d %H:%M:%S")
 	end
