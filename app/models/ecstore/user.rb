@@ -6,7 +6,7 @@ class Ecstore::User < Ecstore::Base
 
   belongs_to :account,:foreign_key=>"member_id"
 
-  has_one :discount_code, :foreign_key=>"member_id"
+  has_one :member_card, :foreign_key=>"member_id"
 
   has_many :line_items,->{where(obj_type:"goods" )},:class_name=>"Cart",:foreign_key=>"member_id"
 

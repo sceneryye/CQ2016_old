@@ -31,26 +31,17 @@ class Memberships::CardsController < ApplicationController
 					@member_card = Ecstore::MemberCard.new do |member_card|
 						member_card.user_id = @user.member_id
 						member_card.member_id = @user.member_id
+						member_card.card_id = @card.id
 					end
 					@member_card.save!
 				else
 					@card.member_card.update_attribute :user_id,@user.member_id
 					@card.member_card.update_attribute :member_id,@user.member_id
+					member_card.card_id = @card.id
 				end
-
 
 				#发微信通知
-				begin
-					@weixin_log ||= Logger.new('log/weixin.log')
-
-					text = "您的昌麒会员卡#{@card.no}已激活,如有疑问请致电客服400-826-4568[CQ昌麒]"
-					# if weixin.send(@card.member_card.user_tel,text)
-					# 	tel = @card.member_card.user_tel
-					# 	@weixin_log.info("[#{@user.login_name}][#{Time.now}][#{tel}]#{text}")
-					# end
-				rescue
-					@weixin_log.info("[#{@user.login_name}][#{Time.now}]激活会员卡,发送微信失败")
-				end
+				send_message('激活')
 
 				Ecstore::CardLog.create(:member_id=>@user.member_id,
 	                                                :card_id=>@card.id,
@@ -320,5 +311,19 @@ class Memberships::CardsController < ApplicationController
 	  #       balance = (balance.to_f)/100			
 			
 		end
+	end
+
+	def send_message (message)
+		# begin
+		# 	@weixin_log ||= Logger.new('log/weixin.log')
+
+		# 	text = "您的昌麒会员卡#{@card.no}已激活,如有疑问请致电客服400-826-4568[CQ昌麒]"
+		# 	# if weixin.send(@card.member_card.user_tel,text)
+		# 	# 	tel = @card.member_card.user_tel
+		# 	# 	@weixin_log.info("[#{@user.login_name}][#{Time.now}][#{tel}]#{text}")
+		# 	# end
+		# rescue
+		# 	@weixin_log.info("[#{@user.login_name}][#{Time.now}]激活会员卡,发送微信失败")
+		# end
 	end
 end

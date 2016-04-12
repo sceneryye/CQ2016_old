@@ -14,7 +14,8 @@ Modengke::Application.routes.draw do
         get 'recharge'
         post 'topup'
 
-        post 'bank'
+        get 'bank'
+        post 'member_card'
 
         get 'rebates'
 

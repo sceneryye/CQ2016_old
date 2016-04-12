@@ -5,6 +5,7 @@ class Ecstore::MemberCard < Ecstore::Base
 	belongs_to :card, :foreign_key=>"card_id"
 	belongs_to :buyer, :foreign_key=>"buyer_id",:class_name=>"User"
 	belongs_to :user, :foreign_key=>"user_id",:class_name=>"User"
+	belongs_to :user, :foreign_key=>"member_id"
 
 	# validates :user_tel,
 	# 		   :presence=>{:presence=>true,:message=>"请填写手机号码"},
