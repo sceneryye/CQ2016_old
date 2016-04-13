@@ -1,6 +1,6 @@
 #encoding:utf-8
 class Ecstore::Product < Ecstore::Base
-	self.table_name  = "sdb_b2c_products"
+	self.table_name  = "products"
 
 	belongs_to :good, :foreign_key=>"goods_id"
 	has_many :custom_values,:foreign_key=>"product_id"

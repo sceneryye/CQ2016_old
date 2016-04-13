@@ -170,15 +170,22 @@ class Memberships::CardsController < ApplicationController
 
 	def pay
 
-	    order_id = get_order_id
-	    mer_order_id = order_id
+		pay_params = params[:card]
+	    order_id = get_order_id 
+	    mer_order_id = "#{pay_params[:order_id]}_#{rand(100).to_s}"
   		card_id = @user.card_num;
-	    payment_id = params[:payment_id]
-	    amount = params[:amount].to_i*100
-	    password = params[:password]
+	    payment_id = "0000000001"
+	    amount = pay_params[:amount].to_i*100
+	    password = pay_params[:password]
 	    res_data = ActiveSupport::JSON.decode pay_with_password(order_id,  mer_order_id, payment_id, amount, card_id, password)
-	    Rails.logger.info res_data
-	    render json: {data: res_data}
+	    res_info = save_log res_data
+
+	    if res_info[:error]
+	    	return render text: res_info[:error]
+	    else
+	    	card_info = card_info('支付')
+	    	redirect_to payments_path(order_id: pay_params[:order_id])
+	    end
 	end	
 
 	def pay_to_client
@@ -259,8 +266,7 @@ class Memberships::CardsController < ApplicationController
 	  	order_id = "999990053990001_#{Time.now.to_i}#{rand(100).to_s}"
 	end
 
-	def save_log (res_data)
-		from =''
+	def save_log (res_data,from='')
 		card_no = @user.card_num
 		card_id = Ecstore::Card.find_by_no(card_no)[:id]
 		member_id = @user.member_id
@@ -278,41 +284,57 @@ class Memberships::CardsController < ApplicationController
 	 		return  {error:res_data["error_response"]["sub_msg"]} 	
 			###########e.data.ppcs_cardsingleactive_add_response# e.data.error_response.sub_msg					
 		else
-			
-			# #{"card_cardinfo_get_response":{"res_timestamp":20160406213434,"res_sign":"77AFA3C325F8E63404A573B3C306E468","card_info":{"card_stat":0,"brh_id":"0229000040","brand_id":"0001","validity_date":20170210,"card_id":8668083660000001017,"card_product_info_arrays":{"card_product_info":[{"product_stat":0,"product_id":"0001","product_name":"通用金额","validity_date":20170210,"valid_balance":476631,"card_id":8668083660000001017,"account_balance":486631},{"product_stat":0,"product_id":"0282","product_name":"200元现金券","validity_date":20991231,"valid_balance":553619,"card_id":8668083660000001017,"account_balance":553619},{"product_stat":0,"product_id":1000,"product_name":"积分","validity_date":20160210,"valid_balance":1745700,"card_id":8668083660000001017,"account_balance":1745700}]}}}}
-			##{"ppcs_cardsingletopup_add_response"=>{"res_timestamp"=>20160411140644, "res_sign"=>"9EFBFD4D562A5472E5F8B334F20BC45E", "trans_no"=>"0003950251", "result_info"=>{"amount"=>1000, "prdt_no"=>"0001", "validity_date"=>20170210, "top_up_way"=>1, "valid_balance"=>201771, "card_id"=>8668083660000001017, "account_balance"=>211771, "desn"=>""}, "order_id"=>"999990053990001_146035491139"}}
-     		 result_info  = res_data["ppcs_cardsingletopup_add_response"]["result_info"]
-     		 import_money = result_info["amount"].to_f/100
-     		 balance = result_info["account_balance"]/100
+			balance = import_money = explode_money = 0
+									     		
+     		if res_data["card_paywithpassword_add_response"].present?
+     			from = '密码支付'
+     			#{"card_paywithpassword_add_response":{"res_timestamp":20160414050912,"res_sign":"778D195C92769B4C8356CE05F553A0B4","pay_result_info":{"amount":5400,"pay_txn_id":"0003951534","mer_order_id":20160414048398,"mer_id":999990053990001,"pay_cur":"CNY","pay_txn_tm":20160116051038,"mer_tm":20160414051058,"payment_id":"0000000001","type":"01","card_id":8668083660000001017,"stat":1},"order_id":"999990053990001_146058185899"}}
+     			result_info  = res_data["card_paywithpassword_add_response"]["pay_result_info"]
+	     		explode_money = result_info["amount"].to_f/100
+	     		# money = card_info ('pay')[:blance]
 
-     		 Ecstore::MemberAdvance.create(:member_id=>@user.member_id,
+     		elsif res_data["card_cardinfo_get_response"].present?
+     			from = '查询卡信息'
+     			#{"card_cardinfo_get_response":{"res_timestamp":20160406213434,"res_sign":"77AFA3C325F8E63404A573B3C306E468","card_info":{"card_stat":0,"brh_id":"0229000040","brand_id":"0001","validity_date":20170210,"card_id":8668083660000001017,"card_product_info_arrays":{"card_product_info":[{"product_stat":0,"product_id":"0001","product_name":"通用金额","validity_date":20170210,"valid_balance":476631,"card_id":8668083660000001017,"account_balance":486631},{"product_stat":0,"product_id":"0282","product_name":"200元现金券","validity_date":20991231,"valid_balance":553619,"card_id":8668083660000001017,"account_balance":553619},{"product_stat":0,"product_id":1000,"product_name":"积分","validity_date":20160210,"valid_balance":1745700,"card_id":8668083660000001017,"account_balance":1745700}]}}}}
+		        status = case res_data["card_cardinfo_get_response"]["card_info"]["card_product_info_arrays"]["card_product_info"][0]["product_stat"]
+		          		when 0
+		          			 '正常'
+		          		when 1
+		          			'挂失'          
+		          		when 2
+		          			'冻结'          
+		          		when 3
+		         			'作废'          
+		          		else 
+		          			'未知'          
+		        end
+		         #   message = '卡号：' + card_id + ';  认证日期：' + e.data.card_cardinfo_get_response.card_info.validity_date +';  余额：' + parseFloat(msg.account_balance / 100) + '元' + ';  产品名称：' + msg.product_name + ';  可用余额：' + parseFloat(msg.valid_balance / 100) + '元' + ';  产品有效期：' + msg.validity_date + ';  产品状态：' + state;
+		        balance = res_data["card_cardinfo_get_response"]["card_info"]["card_product_info_arrays"]["card_product_info"][0]["valid_balance"]
+		        balance = (balance.to_f)/100		
+
+     		elsif res_data["ppcs_cardsingletopup_add_response"].present?
+     			from = '单卡充值'
+     			#{"ppcs_cardsingletopup_add_response"=>{"res_timestamp"=>20160411140644, "res_sign"=>"9EFBFD4D562A5472E5F8B334F20BC45E", "trans_no"=>"0003950251", "result_info"=>{"amount"=>1000, "prdt_no"=>"0001", "validity_date"=>20170210, "top_up_way"=>1, "valid_balance"=>201771, "card_id"=>8668083660000001017, "account_balance"=>211771, "desn"=>""}, "order_id"=>"999990053990001_146035491139"}}
+     			result_info  = res_data["ppcs_cardsingletopup_add_response"]["result_info"]
+	     		import_money = result_info["amount"].to_f/100
+	     		money = result_info["account_balance"].to_f/100
+     		end
+
+     		
+     		Ecstore::MemberAdvance.create(:member_id=>@user.member_id,
 										  :money=>balance,
 										  :message=>"#{from},卡号:#{card_no}",
 										  :mtime=>Time.now.to_i,
-										  :memo=>"用户本人操作",
+										  :memo=>"#{from}-用户本人操作",
 										  :import_money=>import_money,
-										  :explode_money=>0,
+										  :explode_money=> explode_money,
 										  :member_advance=>balance,
 										  :shop_advance=>balance,
 										  :disabled=>'false')
 			@user.update_attribute :advance, balance
-			return {import_money: import_money, balance: balance}
 
-	  #       status = case res_data["card_cardinfo_get_response"]["card_info"]["card_product_info_arrays"]["card_product_info"][0]["product_stat"]
-	  #         		when 0
-	  #         			 '正常'
-	  #         		when 1
-	  #         			'挂失'          
-	  #         		when 2
-	  #         			'冻结'          
-	  #         		when 3
-	  #        			'作废'          
-	  #         		else 
-	  #         			'未知'          
-	  #       end
-	  #        #   message = '卡号：' + card_id + ';  认证日期：' + e.data.card_cardinfo_get_response.card_info.validity_date +';  余额：' + parseFloat(msg.account_balance / 100) + '元' + ';  产品名称：' + msg.product_name + ';  可用余额：' + parseFloat(msg.valid_balance / 100) + '元' + ';  产品有效期：' + msg.validity_date + ';  产品状态：' + state;
-	  #       balance = res_data["card_cardinfo_get_response"]["card_info"]["card_product_info_arrays"]["card_product_info"][0]["valid_balance"]
-	  #       balance = (balance.to_f)/100			
+			return {import_money: import_money, balance: balance}
+	
 			
 		end
 	end
