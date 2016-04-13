@@ -7,7 +7,8 @@
 			  <th>会员卡号</th>
 			  <td><%=@user.card_num%></td>
 			</tr>
-			<%if params[:id] =='0'%>
+			<%case params[:id]
+				when '0'%>
 			<tr>
 			  <th>会员姓名</th>
 			  <td><%=@user.name%></td>
@@ -20,7 +21,7 @@
 			  <th>绑定银行卡号</th>
 			  <td><%=@user.member_card.bank_card_no if @user.member_card%></td>
 			</tr>
-			<%elsif params[:id] =='1'%>
+			<%when '1','2'%>
 				<%if session[:card_pwd].blank?%>
 				<tr><td colspan='2'><%=render :partial=>"login"%></td></tr>
 				<%else%>
@@ -33,7 +34,7 @@
 				  <td><%=l Time.at(@card_info.mtime)%></td>
 				</tr>
 				<tr>
-				  <th colspan='2'><%=link_to "刷新余额信息",card_path(1),:class=>"button expanded"%></th>
+				  <th colspan='2'><%=link_to "刷新余额信息",card_path(2),:class=>"button expanded"%></th>
 				</tr>
 				<%end%>
 			<%end%>

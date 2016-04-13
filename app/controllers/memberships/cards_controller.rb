@@ -80,6 +80,9 @@ class Memberships::CardsController < ApplicationController
   	end
 
   	def show
+  		if session[:card_pwd] && params[:id]=='2'
+  			card_info '查询余额'
+  		end
   		
   		@card_info = Ecstore::MemberAdvance.where(member_id: @user.member_id).last
 	end
@@ -104,7 +107,7 @@ class Memberships::CardsController < ApplicationController
 	    	return render text: res_info[:error]
 	    else
 	    	card_info = card_info('充值')
-	    	redirect_to card_path(0)
+	    	redirect_to card_path(1), notice: "成功充值：#{amount/100}"
 	    end
 	end
 
@@ -125,7 +128,7 @@ class Memberships::CardsController < ApplicationController
 		    res_data = ActiveSupport::JSON.decode card_reset_password(order_id, card_id, new_pwd)
 		    Rails.logger.info res_data
 		    card_info = card_info('修改密码',old_pwd)
-		   	redirect_to card_path(0)
+		   	redirect_to member_path, notice: '密码修改成功'
 		end	
 	end
 
@@ -166,11 +169,12 @@ class Memberships::CardsController < ApplicationController
   	end	
 
 	def pay_with_pwd
-	    order_id = params[:order_id]
-	    mer_order_id = params[:mer_order_id]
+
+	    order_id = get_order_id
+	    mer_order_id = order_id
+  		card_id = @user.card_num;
 	    payment_id = params[:payment_id]
 	    amount = params[:amount].to_i*100
-	    card_id = params[:card_id]
 	    password = params[:password]
 	    res_data = ActiveSupport::JSON.decode pay_with_password(order_id,  mer_order_id, payment_id, amount, card_id, password)
 	    Rails.logger.info res_data
