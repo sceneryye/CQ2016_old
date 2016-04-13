@@ -25,8 +25,8 @@
         		订单状态：<%=order.status_text%>
         	</div>
         	<div class="columns small-12,medium-3 ">
-        		<%=link_to "查看",detail_order_path(order),:target=>"_blank", class:'button secondary'%>
-          		<%=link_to "去付款",order_path(order),class:'button',:target=>"_blank" if order.status == 'active' && order.pay_status=='0'%>
+        		<%=link_to "订单详情",detail_order_path(order),:target=>"_blank", class:'button secondary hollow'%>
+          		<%=link_to "去付款",order_path(order),class:'button hollow',:target=>"_blank" if order.status == 'active' && order.pay_status=='0'%>
         	</div>
     	</div>
         </td>

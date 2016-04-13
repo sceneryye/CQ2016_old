@@ -68,9 +68,9 @@ class Admin::UsersController < Admin::BaseController
 			render :json=>{:code=>'t',:msg=>'验证码已发送'}.to_json
 		end
 
-	rescue Exception=> e
-		@sms_log.info("[#{current_admin.login_name}][#{Time.now}][#{tel}]发送手机验证码失败:#{e}")
-		render :json=>{ :code=>'f',:msg=>e }.to_json
+		rescue Exception=> e
+			@sms_log.info("[#{current_admin.login_name}][#{Time.now}][#{tel}]发送手机验证码失败:#{e}")
+			render :json=>{ :code=>'f',:msg=>e }.to_json
 	end
 
 	def validate_mobile

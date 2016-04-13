@@ -1,32 +1,44 @@
 <% provide :title, '昌麒生态园-会员卡信息' %>
-<%if session[:card_pwd].blank?%>
-	<%=render :partial=>"login"%>
-<%else%>
 <div class="row">
-	<div class="medium-5 large-3 columns">
-		<div class="callout secondary">
-			<div class="row">
-				<div class="small-12 columns">
-					<label>您的会员卡号:<%=@user.card_num%>
-					</label>
-					</div>
-					<div class="small-12 columns">
-					<label>
-						卡内余额：<%=@card_info.member_advance%>
-					</label>
-					<label>
-						最后查询时间：<%=l Time.at(@card_info.mtime)%>
-					</label>
-					<%=link_to "刷新信息",'#',:class=>"button expanded"%>
-				</div>
-			</div>
+	<div class="medium-6 large-4 columns">
+		<div class="callout">
+		<table>
+			<tr>
+			  <th>会员卡号</th>
+			  <td><%=@user.card_num%></td>
+			</tr>
+			<%if params[:id] =='0'%>
+			<tr>
+			  <th>会员姓名</th>
+			  <td><%=@user.name%></td>
+			</tr>
+			<tr>
+			  <th>绑定银行</th>
+			  <td><%=@user.member_card.bank_name if @user.member_card%></td>
+			</tr>
+			<tr>
+			  <th>绑定银行卡号</th>
+			  <td><%=@user.member_card.bank_card_no if @user.member_card%></td>
+			</tr>
+			<%elsif params[:id] =='1'%>
+				<%if session[:card_pwd].blank?%>
+				<tr><td colspan='2'><%=render :partial=>"login"%></td></tr>
+				<%else%>
+				<tr>
+				  <th>卡内余额：</th>
+				  <td><%=@card_info.member_advance%></td>
+				</tr>
+				<tr>
+				  <th>最后查询时间：</th>
+				  <td><%=l Time.at(@card_info.mtime)%></td>
+				</tr>
+				<tr>
+				  <th colspan='2'><%=link_to "刷新余额信息",card_path(1),:class=>"button expanded"%></th>
+				</tr>
+				<%end%>
+			<%end%>
+		</table>
+		
 		</div>
 	</div>
 </div>
-	<div class="row">
-		<div class="medium-5 large-3 columns">
-			<br>
-			
-		</div>
-	</div>
-<%end%>

@@ -56,7 +56,7 @@ class Memberships::CardsController < ApplicationController
 
 	def member_card
 		@member_card = @user.member_card
-	    if @addr.update_attributes(addr_params)
+	    if @member_card.update_attributes(member_card_params)
 	    	redirect_to card_path(0), notice: '会员卡激活成功'
 	    else
 	    	flash[:error] = "银行卡验证失败" 
