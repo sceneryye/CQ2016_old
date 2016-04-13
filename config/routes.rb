@@ -21,6 +21,8 @@ Modengke::Application.routes.draw do
 
         post 'login'
 
+        post 'pay'
+
       end
     end
 

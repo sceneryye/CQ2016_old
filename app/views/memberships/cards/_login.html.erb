@@ -8,8 +8,8 @@
 					<label>您的会员卡号
 						<%=f.text_field :card_id,readonly:'true',:required=>"required",value:@user.card_num%>
 					</label>
-					</div>
-					<div class="small-12 columns">
+				</div>
+				<div class="small-12 columns">
 					<label>请小心输入，输错三次当天会被锁定
 						<%=f.password_field :password,placeholder:'密码',:required=>"required"%>
 					</label>

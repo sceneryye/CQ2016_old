@@ -1,3 +1,36 @@
+<% provide :title, '昌麒生态园-订单支付' %>
+
+<div class="row">
+  <div class="medium-6 large-4 columns">
+    <div class="callout secondary">
+      <%=form_for :card,:url=>pay_cards_path do |f|%>
+      <div class="row">
+        <div class="small-12 columns">
+          <label>订单编号
+            <%=f.text_field :order_id,readonly:'true',:required=>"required",value:@order.order_id%>
+          </label>
+        </div>
+        <div class="small-12 columns">
+          <label>订单金额
+            <%=f.text_field :amount,readonly:'true',:required=>"required",value:@order.final_amount%>
+          </label>
+        </div>
+        <div class="small-12 columns">
+          <label>您的会员卡号
+            <%=f.text_field :card_id,readonly:'true',:required=>"required",value:@user.card_num%>
+          </label>
+        </div>
+        <div class="small-12 columns">
+          <label>
+            <%=f.password_field :password,placeholder:'密码',:required=>"required"%>
+          </label>
+          <%=f.submit "提 交",:class=>"button expanded"%>
+        </div>
+      </div>
+      <%end%>
+    </div>
+  </div>
+</div>
 <div class="order-holder">
   <%=form_for :payment,:url=>payments_path(:order_id=>@order.order_id), method: 'post',:html=>{ :target=>"_blank" } do |f|%>
       <%=f.hidden_field :currency, :value=>"CNY" %>
