@@ -168,7 +168,7 @@ class Memberships::CardsController < ApplicationController
 	    render json: {data: res_data}
   	end	
 
-	def pay_with_pwd
+	def pay
 
 	    order_id = get_order_id
 	    mer_order_id = order_id
