@@ -63,7 +63,7 @@ class Memberships::MembersController < ApplicationController
 	end
 
 	def orders
-		@orders = @user.orders.paginate(:page=>params[:page],:per_page=>10)
+		@orders = @user.orders.order('order_id DESC').paginate(:page=>params[:page],:per_page=>10)
 		add_breadcrumb("我的订单")
      @coupon_id = params[:coupon_id]
     if @coupon_id

@@ -142,34 +142,25 @@ class Memberships::CardsController < ApplicationController
 	    end
 	end
 
-	def rebates
-		#@tradings = Ecstore::CardTradingLog.paginate(:page=>params[:page],:per_page=>20)
+	def tradings_log
+		status = params[:status]
+		if status.blank?
+			status = 0			
+		end
+		if status == 0
+			@no='disabled'
+		else
+			@yes = 'disabled'
+		end
+		@tradings = Ecstore::CardTradingLog.where(status: status).paginate(:page=>params[:page],:per_page=>20)
 
-	    if @user
-	    	if params[:status] == '0'
-		      @rebates =  @user.orders.where(pay_status:'1').order("createtime desc")
-		  end
-	    else
-	      redirect_to "/auto_login?#{return_url}&id=1"
-	    end
 	end
 
-  	def renew_record
-
-  		begin_date = params[:begin_date] 
-	    end_date = params[:end_date]
-	    card_id = params[:card_id]
-	    password = params[:password]
-	    page_no = params[:page_no]
-	    page_size = params[:page_size]
-	    return render json: {data: {error_message: '不能查询90天之前的记录！'}} if Time.parse(begin_date) < (Time.now - 3600 * 24 * 90)
-	    res_data = ActiveSupport::JSON.decode card_get_trade_log(begin_date, end_date, card_id, password, page_no, page_size)
-	    Rails.logger.info res_data
-	    render json: {data: res_data}
-  	end	
+	def rebates
+		@rebates = Ecstore::Rebate.paginate(:page=>params[:page],:per_page=>20)
+	end  	
 
 	def pay
-
 		pay_params = params[:card]
 	    order_id = get_order_id 
 	    mer_order_id = "#{pay_params[:order_id]}_#{rand(100).to_s}"
@@ -183,10 +174,38 @@ class Memberships::CardsController < ApplicationController
 	    if res_info[:error]
 	    	return render text: res_info[:error]
 	    else
+
+	    	@log = Ecstore::CardTradingLog.new do |log|
+	    		log.card_no = card_id
+	    		log.amount = pay_params[:amount]
+	    		log.trading_time = Time.now
+	    		log.order_id = pay_params[:order_id]
+	    	end
+	    	@log.save!
+
 	    	card_info = card_info('支付')
 	    	redirect_to payments_path(order_id: pay_params[:order_id])
 	    end
 	end	
+
+	def withdrawl
+		Ecstore::CardTradingLog.where(status:0).update_attribute(status: 1)
+		redirect_to rebates_cards_path
+	end
+
+	def renew_record
+
+  		begin_date = params[:begin_date] 
+	    end_date = params[:end_date]
+	    card_id = params[:card_id]
+	    password = params[:password]
+	    page_no = params[:page_no]
+	    page_size = params[:page_size]
+	    return render json: {data: {error_message: '不能查询90天之前的记录！'}} if Time.parse(begin_date) < (Time.now - 3600 * 24 * 90)
+	    res_data = ActiveSupport::JSON.decode card_get_trade_log(begin_date, end_date, card_id, password, page_no, page_size)
+	    Rails.logger.info res_data
+	    render json: {data: res_data}
+  	end	
 
 	def pay_to_client
 	    data = params[:pay_to_client]

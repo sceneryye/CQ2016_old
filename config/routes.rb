@@ -18,10 +18,12 @@ Modengke::Application.routes.draw do
         post 'member_card'
 
         get 'rebates'
+        get 'withdrawl'
+        get 'tradings_log'
 
         post 'login'
-
         post 'pay'
+
 
       end
     end

@@ -1,5 +1,5 @@
-<% provide :title, '昌麒生态园-提现记录' %>
-<!-- <%= form_for :rebates, data: {abide: ''} do|f| %>
+<% provide :title, '昌麒生态园-会员卡交易记录' %>
+<!-- <%= form_for :tradings_log, data: {abide: ''} do|f| %>
     <%#= render 'layouts/form_errors', object: @rebates%>
       <table class="table">
         <thead>
@@ -16,6 +16,13 @@
       <%=f.submit '查询', class: 'button expanded'%>
 <%end%> -->
 
+<div class='button-group'>
+  <%=link_to '未提现', tradings_log_cards_path(status:0),class:'button hollow @no'%>
+  <%=link_to '已提现', tradings_log_cards_path(status:1),class:'button hollow @yes'%>
+  <%if params[:status]!='1'%
+    <%=link_to '申请提现', withdrawl_cards_path,class:'button expaned'%>
+  <%end%>
+</div>
 <table class="table table-striped" id="rebate_list">
   <tr>
     <th>交易号</th>
@@ -28,8 +35,8 @@
       <tr>
         <td><%=rebate.order_id%></td>
         <td><%=rebate.created_at%></td>
-        <td>¥<%=rebate.final_amount%></td>
-        <td>¥<%=rebate.final_amount*0.1%></td>      
+        <td>¥<%=rebate.amount%></td>
+        <td>¥<%=rebate.amount*0.1%></td>      
       </tr>
   <%end if @rebates%>
 
