@@ -152,7 +152,7 @@ class Memberships::CardsController < ApplicationController
 		else
 			@yes = 'disabled'
 		end
-		@tradings = Ecstore::CardTradingLog.where(status: @status.to_i).paginate(:page=>params[:page],:per_page=>20)
+		@tradings = Ecstore::CardTradingLog.where("status=?",@status.to_i).paginate(:page=>params[:page],:per_page=>20)
 
 	end
 
@@ -200,7 +200,7 @@ class Memberships::CardsController < ApplicationController
 			rebate.trading_ids = tradding_ids
 		end
 		if @rebate.save!				
-			@tradings.update_all (status: 1,rebate_id: @rebate.id)
+			@tradings.update_all("status=1,rebate_id=#{@rebate.id}")
 			redirect_to rebates_cards_path, notice: '提现申请成功'
 	    else
 	    	redirect_to rebates_cards_path, notice: "提现申请失败" 
