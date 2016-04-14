@@ -19,7 +19,7 @@ Modengke::Application.routes.draw do
 
         get 'rebates'
         get 'withdrawl'
-        get 'tradings_log'
+        get 'tradings'
 
         post 'login'
         post 'pay'

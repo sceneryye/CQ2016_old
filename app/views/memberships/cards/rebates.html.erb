@@ -18,18 +18,16 @@
 
 <table class="table table-striped" id="rebate_list">
   <tr>
-    <th>交易号</th>
-    <th>交易时间</th>
-    <th>交易金额</th>
+    <th>流水号</th>
+    <th>提现时间</th>
     <th>提现金额</th>
   </tr>
 
   <%@rebates.each  do |rebate|%>
       <tr>
-        <td><%=rebate.order_id%></td>
-        <td><%=rebate.created_at%></td>
-        <td>¥<%=rebate.final_amount%></td>
-        <td>¥<%=rebate.final_amount*0.1%></td>      
+        <td><%=rebate.id%></td>
+        <td><%=l rebate.created_at%></td>
+        <td>¥<%=rebate.amount%></td>    
       </tr>
   <%end if @rebates%>
 

@@ -142,17 +142,17 @@ class Memberships::CardsController < ApplicationController
 	    end
 	end
 
-	def tradings_log
-		status = params[:status]
-		if status.blank?
-			status = 0			
+	def tradings
+		@status = params[:status]
+		if @status.blank?
+			@status = '0'			
 		end
-		if status == 0
+		if @status == '0'
 			@no='disabled'
 		else
 			@yes = 'disabled'
 		end
-		@tradings = Ecstore::CardTradingLog.where(status: status).paginate(:page=>params[:page],:per_page=>20)
+		@tradings = Ecstore::CardTradingLog.where(status: @status.to_i).paginate(:page=>params[:page],:per_page=>20)
 
 	end
 
@@ -189,8 +189,22 @@ class Memberships::CardsController < ApplicationController
 	end	
 
 	def withdrawl
-		Ecstore::CardTradingLog.where(status:0).update_attribute(status: 1)
-		redirect_to rebates_cards_path
+		rate = 0.1
+		@tradings = Ecstore::CardTradingLog.where(status:0)
+		amount = @tradings.collect { |trading| trading.amount }.inject(:+).to_f
+		tradding_ids = @tradings.collect { |trading| trading.id.to_s }.join(',')
+
+		@rebate = Ecstore::Rebate.new do |rebate|
+			rebate.member_id = @user.member_id
+			rebate.amount = amount * rate
+			rebate.trading_ids = tradding_ids
+		end
+		if @rebate.save!				
+			@tradings.update_all (status: 1,rebate_id: @rebate.id)
+			redirect_to rebates_cards_path, notice: '提现申请成功'
+	    else
+	    	redirect_to rebates_cards_path, notice: "提现申请失败" 
+	    end
 	end
 
 	def renew_record

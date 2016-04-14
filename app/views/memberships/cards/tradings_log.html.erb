@@ -17,10 +17,10 @@
 <%end%> -->
 
 <div class='button-group'>
-  <%=link_to '未提现', tradings_log_cards_path(status:0),class:'button hollow @no'%>
-  <%=link_to '已提现', tradings_log_cards_path(status:1),class:'button hollow @yes'%>
-  <%if params[:status]!='1'%
-    <%=link_to '申请提现', withdrawl_cards_path,class:'button expaned'%>
+  <%=link_to '未提现', tradings_cards_path(status:0),class:"button hollow #{@no}"%>
+  <%=link_to '已提现', tradings_cards_path(status:1),class:"button hollow #{@yes}"%>
+  <%if @status == '0'%>
+    <%=link_to '申请提现', withdrawl_cards_path ,class:'button expaned'%>
   <%end%>
 </div>
 <table class="table table-striped" id="rebate_list">
@@ -31,13 +31,13 @@
     <th>提现金额</th>
   </tr>
 
-  <%@rebates.each  do |rebate|%>
+  <%@tradings.each  do |trading|%>
       <tr>
-        <td><%=rebate.order_id%></td>
-        <td><%=rebate.created_at%></td>
-        <td>¥<%=rebate.amount%></td>
-        <td>¥<%=rebate.amount*0.1%></td>      
+        <td><%=trading.order_id%></td>
+        <td><%=trading.created_at%></td>
+        <td>¥<%=trading.amount%></td>
+        <td>¥<%=trading.amount*0.1%></td>      
       </tr>
-  <%end if @rebates%>
+  <%end if @trading%>
 
 </table>
