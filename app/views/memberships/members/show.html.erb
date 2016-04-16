@@ -9,8 +9,8 @@
     <div class="accordion-content" data-tab-content>
       <ul class="menu vertical">
         <li><%=link_to "待付款订单(#{@unpay_count})",orders_member_path(:pay_status=>'0',:status=>'active'),class:@class%></li>
-        <li><%=link_to "已付款(#{@paid_count})",orders_member_path(:pay_status=>'0',:status=>'paid'),class:@class%></li>
-        <li><%=link_to "历史订单",orders_member_path,class:@class%></li>
+        <li><%=link_to "已付款订单(#{@paid_count})",orders_member_path(:pay_status=>'1',:status=>'paid'),class:@class%></li>
+        <li><%=link_to "历史订单(#{@history_count})",orders_member_path,class:@class%></li>
       </ul>
     </div>
   </li>

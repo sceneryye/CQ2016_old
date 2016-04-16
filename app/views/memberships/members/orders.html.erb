@@ -1,4 +1,10 @@
 <% provide :title, '昌麒生态园-订单列表' %>
+<%=render partial: '/memberships/cards/breadcrembs' , locals:{current:'我的订单'}%>
+<div class="button-group">
+    <%=link_to "待付款订单",orders_member_path(:pay_status=>'0',:status=>'active'),class:"button hollow alert #{@unpaid}"%></li>
+    <%=link_to "已付款订单",orders_member_path(:pay_status=>'1',:status=>'paid'),class:"button hollow alert #{@paid}"%></li>
+    <%=link_to "历史订单",orders_member_path,class:"button hollow alert #{@history}"%></li>
+</div>
 <table class="hover" id="order_list">
  <!--  <tr>
     <th>订单号</th>

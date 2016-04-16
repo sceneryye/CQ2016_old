@@ -76,13 +76,18 @@ class Memberships::CardsController < ApplicationController
 		if card_info["error"]
 			redirect_to card_path(id),notice:"密码错误"
 		else
-			redirect_to card_path(0)
+			redirect_to card_path(id)
 		end
   	end
 
   	def show
   		if session[:card_pwd] && params[:id]=='2'
   			card_info '查询余额'
+  		end
+
+  		@current ='余额查询'
+  		if params[:id]=='0'
+  			@current='会员卡信息'
   		end
   		
   		@card_info = Ecstore::MemberAdvance.where(member_id: @user.member_id).last
@@ -129,6 +134,7 @@ class Memberships::CardsController < ApplicationController
 		    res_data = ActiveSupport::JSON.decode card_reset_password(order_id, card_id, new_pwd)
 
 		    card_info = card_info('修改密码后查询',new_pwd)
+		    session[:card_pwd] = nil
 		   	redirect_to member_path, notice: '密码修改成功'
 		end	
 	end

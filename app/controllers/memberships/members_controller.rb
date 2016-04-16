@@ -59,11 +59,28 @@ class Memberships::MembersController < ApplicationController
 	def show
 		@orders = @user.orders.limit(5)
 		@unpay_count = @user.orders.where(:pay_status=>'0',:status=>'active').size
+    @paid_count = @user.orders.where(:pay_status=>'1',:status=>'active').size
+    @history_count = @user.orders.where("pay_status='1' and (ship_status = '1' or status <> 'active')").size
 		add_breadcrumb("我的昌麒")
 	end
 
 	def orders
-		@orders = @user.orders.order('order_id DESC').paginate(:page=>params[:page],:per_page=>10)
+    pay_status = params[:pay_status]
+    status = params[:status]
+    if  pay_status.present?
+      condition = "pay_status='#{pay_status}'"
+      if pay_status=='1'
+        @paid ='disabled'
+      else
+        @unpaid='disabled'
+      end
+
+    else
+      condition = "pay_status='1' and (ship_status = '1' or status <> 'active')"
+      @history ='disabled'
+    end
+		@orders = @user.orders.where(condition).order('order_id DESC').paginate(:page=>params[:page],:per_page=>10)
+
 		add_breadcrumb("我的订单")
      @coupon_id = params[:coupon_id]
     if @coupon_id

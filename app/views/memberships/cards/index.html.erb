@@ -1,4 +1,5 @@
 <% provide :title, '昌麒生态园-会员卡交易记录' %>
+<%=render partial: 'breadcrembs' , locals:{current:'会员卡交易记录'}%>
 <!-- <%= form_for :tradings, data: {abide: ''} do|f| %>
     <%#= render 'layouts/form_errors', object: @tradings%>
       <table class="table">
@@ -33,7 +34,7 @@
         <td>¥<%=trading.final_amount*0.1%></td>      
       </tr>
   <%end%>
-  <%if %@tradings.blank?%>
+  <%if @tradings.blank?%>
   <tr><td colspan='4'>暂无交易记录</td></tr>
   <%end%>
 

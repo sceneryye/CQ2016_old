@@ -1,49 +1,50 @@
 <% provide :title, '昌麒生态园-会员卡信息' %>
-<div class="row">
-	<div class="medium-6 large-4 columns">
-		<div class="callout">
-		<table>
-			<tr>
-			  <th>会员卡号</th>
-			  <td><%=@user.card_num%></td>
-			</tr>
-			<tr>
-			  <th>会员类型</th>
-			  <td><%=level(@user.member_card.card.card_type)%></td>
-			</tr>
-			<%case params[:id]
-				when '0'%>
-			<tr>
-			  <th>会员姓名</th>
-			  <td><%=@user.name%></td>
-			</tr>
-			<tr>
-			  <th>绑定银行</th>
-			  <td><%=@user.member_card.bank_name if @user.member_card%></td>
-			</tr>
-			<tr>
-			  <th>绑定银行卡号</th>
-			  <td><%=@user.member_card.bank_card_no if @user.member_card%></td>
-			</tr>
-			<%when '1','2'%>
-				<%if session[:card_pwd].blank?%>
-				<tr><td colspan='2'><%=render :partial=>"login"%></td></tr>
-				<%else%>
+<%=render partial: 'breadcrembs' , locals:{current:@current}%>
+<%if session[:card_pwd].blank?%>
+	<%=render :partial=>"login"%>
+<%else%>
+	<div class="row">
+		<div class="medium-6 large-4 columns">
+			<div class="callout">
+			<table>
 				<tr>
-				  <th>卡内余额：</th>
-				  <td><%=@card_info.member_advance%></td>
+				  <th>会员卡号</th>
+				  <td><%=@user.card_num%></td>
 				</tr>
 				<tr>
-				  <th>最后查询时间：</th>
-				  <td><%=l Time.at(@card_info.mtime)%></td>
+				  <th>会员类型</th>
+				  <td><%=level(@user.member_card.card.card_type)%></td>
+				</tr>
+				<%case params[:id]
+					when '0'%>
+				<tr>
+				  <th>会员姓名</th>
+				  <td><%=@user.name%></td>
 				</tr>
 				<tr>
-				  <th colspan='2'><%=link_to "刷新余额信息",card_path(2),:class=>"button expanded"%></th>
+				  <th>绑定银行</th>
+				  <td><%=@user.member_card.bank_name if @user.member_card%></td>
 				</tr>
+				<tr>
+				  <th>绑定银行卡号</th>
+				  <td><%=@user.member_card.bank_card_no if @user.member_card%></td>
+				</tr>
+				<%when '1','2'%>				
+					<tr>
+					  <th>卡内余额：</th>
+					  <td><%=@card_info.member_advance%></td>
+					</tr>
+					<tr>
+					  <th>最后查询时间：</th>
+					  <td><%=l Time.at(@card_info.mtime)%></td>
+					</tr>
+					<tr>
+					  <th colspan='2'><%=link_to "刷新余额信息",card_path(2),:class=>"button expanded"%></th>
+					</tr>
 				<%end%>
-			<%end%>
-		</table>
-		
+			</table>
+			
+			</div>
 		</div>
 	</div>
-</div>
+<%end%>
