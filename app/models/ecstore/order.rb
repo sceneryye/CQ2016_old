@@ -312,7 +312,7 @@ class Ecstore::Order < Ecstore::Base
                "发货状态(ship_status)",
                "下单时间(createtime)",
                "支付方式(payment)",
-               "会员用户名(member_id)",
+               "会员会员名(member_id)",
                "订单状态(status)",
                "收货地区(ship_area)",
                "收货人(ship_name)",

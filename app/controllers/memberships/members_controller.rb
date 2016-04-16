@@ -36,7 +36,7 @@ class Memberships::MembersController < ApplicationController
   def advance
     @deposit = 0
     if @user.member_lv_id<2 #普通会员
-        if @user.apply_type>1 #用户已申请
+        if @user.apply_type>1 #会员已申请
             @member_lv = Ecstore::MemberLv.find(@user.apply_type)
             @deposit = @member_lv.deposit
         else          

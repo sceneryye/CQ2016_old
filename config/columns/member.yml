@@ -3,8 +3,8 @@
   - 会员ID
   - member_id
   - "true"
-10-account_name-用户名: 
-  - 用户名
+10-account_name-会员名: 
+  - 会员名
   - account.name
   - "true"
 11-name-姓名: 

@@ -24,7 +24,7 @@
       <%if @doctor%>
         <%=f.select :member_id,options_from_collection_for_select(@doctor,:member_id,:name,@code.member_id),{:include_blank=>"请选择"},{:class=>"span3"} %>
       <%else%>
-        请先到用户管理指定医生
+        请先到会员管理指定医生
       <%end%>
       </div>
     </div>

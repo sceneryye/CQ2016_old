@@ -9,7 +9,7 @@
   <%=f.hidden_field :buyer_id,:value=>@member_card.buyer_id%>
   <fieldset>
      <div class="control-group">
-      <%= f.label :login_name, "购卡用户名 :", :class => "control-label " %>
+      <%= f.label :login_name, "购卡会员名 :", :class => "control-label " %>
       <div class="controls">
         <span class="plain-text "><%=@buyer&&@buyer.account ? @buyer.account.login_name : "未登记"%></span>
       </div>

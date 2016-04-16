@@ -19,7 +19,7 @@
         <%end%>
     </li>
     <li>
-    	<%= f.text_field :login_name, :placeholder=>"用户名", :class=>"trinput" %>
+    	<%= f.text_field :login_name, :placeholder=>"会员名", :class=>"trinput" %>
     	<div class="help-block">
     		<%=@account.errors.messages[:login_name].join(" ")%>
     	</div>

@@ -10,7 +10,7 @@ module Admin::CardsHelper
 	end
 
 	def search_options
-		{"用户名"=>'login_name',"手机号码"=>"mobile"}
+		{"会员名"=>'login_name',"手机号码"=>"mobile"}
 	end
 
 	def card_sale_status_options

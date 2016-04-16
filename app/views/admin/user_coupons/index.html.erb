@@ -1,6 +1,6 @@
 
 <%=form_for :s,:url=>admin_user_coupons_path,:html=>{:class=>"form-search"},:method=>:get do |f|%>
-	<%=f.text_field :q,:placeholder=>"用户名",:value=>params[:s]&&params[:s][:q]%>
+	<%=f.text_field :q,:placeholder=>"会员名",:value=>params[:s]&&params[:s][:q]%>
 	<%=f.submit "搜索",:class=>"button",:name=>nil%>
 <%end%>
 
@@ -9,9 +9,9 @@
 		<tr>
 			<th>
 				<%if @field == "login_name"%>
-					<%=link_to "用户名","?order=#{@next_order}"%>
+					<%=link_to "会员名","?order=#{@next_order}"%>
 				<%else%>
-					<%=link_to "用户名","?order=login_name-asc"%>
+					<%=link_to "会员名","?order=login_name-asc"%>
 				<%end%>
 			</th>
 

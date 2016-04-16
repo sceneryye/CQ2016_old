@@ -33,7 +33,7 @@ module ModecPay
      # self.fields['goods_tag'] = '' #商品标记，不能随便填 String（32），否
 
       self.fields['trade_type'] = 'JSAPI' #JSAPI, NATIVE, APP
-      self.fields['openid'] = '' #用户的openid, trade_type为JSAPP时，必传，否
+      self.fields['openid'] = '' #会员的openid, trade_type为JSAPP时，必传，否
       self.fields['nonce_str'] =  Digest::MD5.hexdigest(rand(1000).to_s) #随机串,不长于32位
       self.fields['products_id'] = '' #trade_type为NATIVE时，需要，此id为二维码中包含的商品ID
 
@@ -75,7 +75,7 @@ module ModecPay
     end
 
     def openid=(val)
-      self.fields['openid'] = val #支付用户openid
+      self.fields['openid'] = val #支付会员openid
     end
 
 

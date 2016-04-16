@@ -255,6 +255,9 @@ class Store::OrdersController < ApplicationController
 
 
   def new
+    if @account.member.card_validate=='false'
+          return redirect_to new_member_path
+    end
     # @order = Ecstore::Order.new
 
     @addrs =  @user.member_addrs

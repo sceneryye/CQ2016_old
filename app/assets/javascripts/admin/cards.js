@@ -44,7 +44,7 @@ $(document).ready(function(){
 	$("form.search :submit").bind("click",function(){
 		var key = $(this).closest("form").find("input[name='search[key]']").val();
 		 if($.trim(key)== ''){
-		 	alert("请输入用户名或手机号码");
+		 	alert("请输入会员名或手机号码");
 		 	return false;
 		 }
 	});
@@ -62,7 +62,7 @@ $(document).ready(function(){
 			var mobile = $("#member_card_user_tel").val();
 			var user_tel = $("#user_tel").val();
 			if(mobile!=user_tel){
-				alert("用卡人手机号码和搜索到的用户手机号码不一致，不能使用此会员卡 !");
+				alert("用卡人手机号码和搜索到的会员手机号码不一致，不能使用此会员卡 !");
 				return false;
 			}
 		}else{

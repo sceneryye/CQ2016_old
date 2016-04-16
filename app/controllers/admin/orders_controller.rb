@@ -70,7 +70,7 @@ class Admin::OrdersController < Admin::BaseController
 	# end
 
 	# def export_order(orders)
-	# 	field_name = ["订单号(order_id)","订单总额(final_amount)","付款状态(pay_status)","发货状态(ship_status)","下单时间(createtime)","支付方式(payment)","会员用户名(member_id)","订单状态(status)","收货地区(ship_area)","收货人(ship_name)","收货地址(ship_addr)","收货人电话(ship_tel)","收货人手机(ship_mobile)"]  #csv文件的头（标题）
+	# 	field_name = ["订单号(order_id)","订单总额(final_amount)","付款状态(pay_status)","发货状态(ship_status)","下单时间(createtime)","支付方式(payment)","会员会员名(member_id)","订单状态(status)","收货地区(ship_area)","收货人(ship_name)","收货地址(ship_addr)","收货人电话(ship_tel)","收货人手机(ship_mobile)"]  #csv文件的头（标题）
 	#     output = CSV.generate do |csv|
 	#       csv << field_name
 	#       content = []

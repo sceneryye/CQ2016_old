@@ -7,6 +7,10 @@
 			  <th>会员卡号</th>
 			  <td><%=@user.card_num%></td>
 			</tr>
+			<tr>
+			  <th>会员类型</th>
+			  <td><%=level(@user.member_card.card.card_type)%></td>
+			</tr>
 			<%case params[:id]
 				when '0'%>
 			<tr>

@@ -16,9 +16,9 @@ class Ecstore::Account < Ecstore::Base
   	has_many :commission,:foreign_key=>"member_id"
 
 
-	validates :login_name, :presence=>{:presence=>true,:message=>"请填写用户名"}
+	validates :login_name, :presence=>{:presence=>true,:message=>"请填写会员名"}
 
-	validates :login_name, :length=>{:in=>3..50,:message=>"用户名应为3到50个字符"},
+	validates :login_name, :length=>{:in=>3..50,:message=>"会员名应为3到50个字符"},
 						     :if=>Proc.new { |c| c.login_name.present? }
 
 	validates :login_password,  :presence=>{:presence=>true,:message=>"请填写密码"}
@@ -45,7 +45,7 @@ class Ecstore::Account < Ecstore::Base
 		if Ecstore::Account.find_by_login_name(self.login_name) ||
 		   Ecstore::User.find_by_mobile(self.login_name) ||
 		   Ecstore::User.find_by_email(self.login_name)
-			errors.add(:login_name, "用户名已经被使用！") if new_record?
+			errors.add(:login_name, "会员名已经被使用！") if new_record?
 		end
 	end
 

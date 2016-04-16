@@ -39,7 +39,7 @@ module Admin
             @memc.transaction do
               @memc.save
               coupon.increment!(:cpns_gen_quantity) if @memc
-              coupon_logger.info("[#{current_admin.login_name}][#{Time.now.strftime("%Y-%m-%d %H:%M:%S")}][IP:#{request.remote_ip}]:添加优惠券#{coupon_code}(#{coupon.cpns_name}[#{coupon.cpns_id}])给用户[#{@user.account.login_name}]")
+              coupon_logger.info("[#{current_admin.login_name}][#{Time.now.strftime("%Y-%m-%d %H:%M:%S")}][IP:#{request.remote_ip}]:添加优惠券#{coupon_code}(#{coupon.cpns_name}[#{coupon.cpns_id}])给会员[#{@user.account.login_name}]")
             end
             render "create"
         else
@@ -56,7 +56,7 @@ module Admin
                       :member_id=>params[:member_id],
                       :memc_code=>params[:memc_code]).destroy_all #update_all({:memc_enabled=>'false',:disabled=>'true'})
 
-            coupon_logger.info("[#{current_admin.login_name}][#{Time.now.strftime("%Y-%m-%d %H:%M:%S")}][IP:#{request.remote_ip}]:删除用户[#{user.account.login_name}]优惠券#{params[:memc_code]}(#{coupon.cpns_name}[#{params[:cpns_id]}])")
+            coupon_logger.info("[#{current_admin.login_name}][#{Time.now.strftime("%Y-%m-%d %H:%M:%S")}][IP:#{request.remote_ip}]:删除会员[#{user.account.login_name}]优惠券#{params[:memc_code]}(#{coupon.cpns_name}[#{params[:cpns_id]}])")
             
             render "destroy"
           rescue

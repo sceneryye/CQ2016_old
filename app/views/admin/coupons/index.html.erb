@@ -3,7 +3,7 @@
 </p>
 
 <%=form_for :search,:url=>admin_coupons_path,:html=>{:class=>"form-search"},:method=>:get do |f|%>
-<%=f.text_field :key,:placeholder=>"用户名",:value=>params[:search]&&params[:search][:key]%>
+<%=f.text_field :key,:placeholder=>"会员名",:value=>params[:search]&&params[:search][:key]%>
 <%=f.submit "搜索",:class=>"button"%>
 <span class="tip">
 	提示:
@@ -15,7 +15,7 @@
 <table class="table table-bordered">
 	<thead>
 	<tr>
-		<th>用户名</th>
+		<th>会员名</th>
 		<th>注册时间</th>
 		<th>EMAIL</th>
 		<th>优惠券</th>

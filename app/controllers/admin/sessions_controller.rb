@@ -15,7 +15,7 @@ class Admin::SessionsController < Admin::BaseController
             admin_sign_in admin
   		redirect_to after_admin_sign_in_path
   	else
-  		redirect_to new_admin_session_path,:notice=>"用户名或密码错误"
+  		redirect_to new_admin_session_path,:notice=>"会员名或密码错误"
   	end
   end
   	

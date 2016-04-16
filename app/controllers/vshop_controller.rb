@@ -161,8 +161,8 @@ end
     col =  case @by
              when 'mobile' then '手机号码'
              when 'email' then '邮箱'
-             when 'login_name' then '用户名'
-             else '用户名'
+             when 'login_name' then '会员名'
+             else '会员名'
            end
     if value.present?
       @user = Ecstore::User.joins(:account).where("#{@by} = ?",value).first

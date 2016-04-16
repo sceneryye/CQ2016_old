@@ -1,9 +1,9 @@
 <%if @users&&@users.size > 0%>
-<p>搜索到多个用户，请先选择用户。</p>
+<p>搜索到多个会员，请先选择会员。</p>
 <table class="table table-bordered table-hover" id="cards_list">
   
   <tr>
-    <th>用户名</th>
+    <th>会员名</th>
     <th>邮箱</th>
     <th>手机号码</th>
     <th>手机是否验证</th>
@@ -20,5 +20,5 @@
   <%end%>
 </table>
 <%else%>
-    <p class="well">没有找到相关用户,<%=link_to "返回",admin_cards_path%></p>
+    <p class="well">没有找到相关会员,<%=link_to "返回",admin_cards_path%></p>
 <%end%>

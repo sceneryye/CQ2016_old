@@ -112,8 +112,8 @@ WeixinRailsMiddleware::WeixinController.class_eval do
   # 关注公众账号
   def handle_subscribe_event
     if @keyword.present?
-      # 扫描带参数二维码事件: 1. 用户未关注时，进行关注后的事件推送
-      #  return reply_text_message("扫描带参数二维码事件: 1. 用户未关注时，进行关注后的事件推送, keyword: #{@keyword}")
+      # 扫描带参数二维码事件: 1. 会员未关注时，进行关注后的事件推送
+      #  return reply_text_message("扫描带参数二维码事件: 1. 会员未关注时，进行关注后的事件推送, keyword: #{@keyword}")
     end
    # reply_text_message("感谢您关注保亨生物--昌麒投资茶")
     @keyword = "subscribe"
@@ -125,9 +125,9 @@ WeixinRailsMiddleware::WeixinController.class_eval do
     Rails.logger.info("#{@weixin_message.FromUserName} 取消关注")
   end
 
-  # 扫描带参数二维码事件: 2. 用户已关注时的事件推送
+  # 扫描带参数二维码事件: 2. 会员已关注时的事件推送
   def handle_scan_event
-    # reply_text_message("扫描带参数二维码事件: 2. 用户已关注时的事件推送, keyword: #{@keyword}")
+    # reply_text_message("扫描带参数二维码事件: 2. 会员已关注时的事件推送, keyword: #{@keyword}")
   end
 
   def handle_location_event # 上报地理位置事件

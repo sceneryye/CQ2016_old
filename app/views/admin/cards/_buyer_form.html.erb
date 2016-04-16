@@ -5,7 +5,7 @@
 
         <fieldset>
           <div class="control-group">
-            <%= f.label :login_name, "用户名 :", :class => "control-label" %>
+            <%= f.label :login_name, "会员名 :", :class => "control-label" %>
             <div class="controls">
               <span class="plain-text "><%=@user.account.login_name%></span>
             </div>
@@ -76,7 +76,7 @@
   <% end %>
 <%else%>
   <p class="error">
-    没有找到相关用户!
+    没有找到相关会员!
      <%=link_to "返回",admin_cards_path%>
   </p>
 <%end%>

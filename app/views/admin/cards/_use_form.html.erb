@@ -14,7 +14,7 @@
             </div>
 
             <div class="control-group">
-              <%= f.label :login_name, "用户名 :", :class => "control-label" %>
+              <%= f.label :login_name, "会员名 :", :class => "control-label" %>
               <div class="controls">
                 <span class="plain-text ">
                   <%=@user.account.login_name if @user.account%>
@@ -72,7 +72,7 @@
     <% end %>
 <%else%>
   <p class="well error">
-     没有找到相关用户, 请先注册用户 !
+     没有找到相关会员, 请先注册会员 !
      <%=link_to "返回",admin_cards_path%>
   </p>
 <%end%>

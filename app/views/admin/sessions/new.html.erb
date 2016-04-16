@@ -4,9 +4,9 @@
 <%end%>
 <%=form_for :session,:url=>admin_sessions_path,:html=>{:class=>"form-horizontal"} do |f|%>
 <div class="control-group">
-    <label class="control-label" for="inputEmail">用户名</label>
+    <label class="control-label" for="inputEmail">会员名</label>
     <div class="controls">
-      <%=f.text_field :login_name,:placeholder=>"用户名"%>
+      <%=f.text_field :login_name,:placeholder=>"会员名"%>
     </div>
   </div>
   <div class="control-group">

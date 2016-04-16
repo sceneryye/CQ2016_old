@@ -60,7 +60,7 @@ class Ecstore::Member < Ecstore::Base
 	      	if(fields.include?("1-member_id-会员ID"))
 	      		content.push member.member_id
 	      	end
-	      	if (fields.include?("10-account_name-用户名"))
+	      	if (fields.include?("10-account_name-会员名"))
 	      		if member.account.nil?
 	      			content.push ""
 	      		else

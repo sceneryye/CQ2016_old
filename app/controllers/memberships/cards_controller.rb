@@ -45,7 +45,7 @@ class Memberships::CardsController < ApplicationController
 
 				Ecstore::CardLog.create(:member_id=>@user.member_id,
 	                                                :card_id=>@card.id,
-	                                                :message=>"会员卡激活,用户本人操作")
+	                                                :message=>"会员卡激活,会员本人操作")
 				redirect_to bank_cards_path
 
 			end
@@ -126,8 +126,8 @@ class Memberships::CardsController < ApplicationController
 			# reset_password
 		    order_id = get_order_id
 		    res_data = ActiveSupport::JSON.decode card_reset_password(order_id, card_id, new_pwd)
-		    Rails.logger.info res_data
-		    card_info = card_info('修改密码',old_pwd)
+
+		    card_info = card_info('修改密码后查询',new_pwd)
 		   	redirect_to member_path, notice: '密码修改成功'
 		end	
 	end
@@ -281,7 +281,7 @@ class Memberships::CardsController < ApplicationController
 										  :money=>balance,
 										  :message=>"#{from},卡号:#{card_id}",
 										  :mtime=>Time.now.to_i,
-										  :memo=>"用户本人操作",
+										  :memo=>"会员本人操作",
 										  :import_money=>balance,
 										  :explode_money=>0,
 										  :member_advance=>balance,
@@ -358,7 +358,7 @@ class Memberships::CardsController < ApplicationController
 										  :money=>balance,
 										  :message=>"#{from},卡号:#{card_no}",
 										  :mtime=>Time.now.to_i,
-										  :memo=>"#{from}-用户本人操作",
+										  :memo=>"#{from}-会员本人操作",
 										  :import_money=>import_money,
 										  :explode_money=> explode_money,
 										  :member_advance=>balance,
