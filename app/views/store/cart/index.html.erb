@@ -1,7 +1,6 @@
 <% provide :title, '昌麒生态园-购物车' %>
 <%if @line_item.blank?%>
   <h4>您的购物车是空的。<h4><br>
-  <%=link_to '继续购物', root_path, :class=>"button small alert hollow"%>
 <%end%>
 <table class="hover" id="cart">
   <%@line_items.select{ |x| x.good.present? && x.product.present? }.each do |line_item|%>
@@ -64,7 +63,7 @@
       <span class="total">¥<%=@cart_total%></span>
     </th>
     <th>
-      <%=link_to '安全结算', new_order_path, :class=>"button small alert hollow float-right"%>
+      <%=link_to '安全结算', new_order_path, :class=>"button small alert hollow float-right" if @line_item%>
     </th>
   <tr>
 </table>

@@ -30,5 +30,8 @@
         <td>¥<%=rebate.amount%></td>    
       </tr>
   <%end if @rebates%>
+  <%if @rebates.blank?%>
+  <tr><td colspan='3'>暂无提现记录</td></tr>
+  <%end%>
 
 </table>

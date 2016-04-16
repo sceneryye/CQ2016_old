@@ -39,5 +39,8 @@
         <td>¥<%=trading.amount*0.1%></td>      
       </tr>
   <%end if @tradings%>
+  <%if %@tradings.blank?%>
+  <tr><td colspan='4'>暂无交易记录</td></tr>
+  <%end%>
 
 </table>
