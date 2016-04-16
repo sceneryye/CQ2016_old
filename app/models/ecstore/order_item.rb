@@ -1,5 +1,5 @@
 class Ecstore::OrderItem < Ecstore::Base
-	self.table_name = "sdb_b2c_order_items"
+	self.table_name = "order_items"
 	belongs_to :order, :foreign_key=>"order_id"
 
 	belongs_to :product, :foreign_key=>"product_id"

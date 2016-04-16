@@ -23,7 +23,7 @@ class Admin::PagesController < Admin::BaseController
   end
 
   def create
-    @page = Imodec::Page.new(params[:imodec_page])
+    @page = Imodec::Page.new(page_params)
     
     respond_to do |format|
       if @page.save
@@ -40,7 +40,7 @@ class Admin::PagesController < Admin::BaseController
     @page = Imodec::Page.find(params[:id])
 
     respond_to do |format|
-      if @page.update_attributes(params[:imodec_page])
+      if @page.update_attributes(page_params)
         format.html { redirect_to admin_pages_url, notice: 'Page was successfully updated.' }
         format.json { head :no_content }
       else
@@ -61,30 +61,34 @@ class Admin::PagesController < Admin::BaseController
     end
   end
 
-  # def set_position
-  #   @page = ::Imodec::Page.find(params[:id])
-  #   @page_prev = ::Imodec::Page.find_by_position_id(params[:position_id])
-  #   if @page_prev
-  #     @page_prev.position_id = nil
-  #   end
+  def set_position
+    @page = ::Imodec::Page.find(params[:id])
+    @page_prev = ::Imodec::Page.find_by_position_id(params[:position_id])
+    if @page_prev
+      @page_prev.position_id = nil
+    end
     
-  #   respond_to do |format|
-  #     if @page.update_attribute("position_id", params[:position_id].to_i)
-  #       if @page_prev
-  #         @page_prev.save!
-  #         format.json { render json: {page_prev_id: @page_prev.id} }
-  #       else
-  #         format.json { render json: {page_prev_id: 0} }
-  #       end
-  #     else
-  #       format.json { render json: @page.errors, status: :unprocessable_entity }
-  #     end
-  #   end
+    respond_to do |format|
+      if @page.update_attribute("position_id", params[:position_id].to_i)
+        if @page_prev
+          @page_prev.save!
+          format.json { render json: {page_prev_id: @page_prev.id} }
+        else
+          format.json { render json: {page_prev_id: 0} }
+        end
+      else
+        format.json { render json: @page.errors, status: :unprocessable_entity }
+      end
+    end
 
-  #   # respond_to do |format|
-  #   #   # format.json { head :ok }
-  #   #   format.json { render json: @page.errors }
-  #   # end
-  # end
+    # respond_to do |format|
+    #   # format.json { head :ok }
+    #   format.json { render json: @page.errors }
+    # end
+  end
 
+  private
+  def page_params
+      params.require(:page).permit(:title,:slug,:layout,:category,:body,:keywords,:description,meta_seo_attributes:[])
+  end
 end

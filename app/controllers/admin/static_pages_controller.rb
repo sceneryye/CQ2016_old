@@ -51,7 +51,7 @@ class Admin::StaticPagesController < Admin::BaseController
 	end
 
 	def create
-		@page  = Ecstore::Page.new params[:page]
+		@page  = Ecstore::Page.new page_params
 		if @page.save
 			redirect_to admin_static_pages_url
 		else
@@ -61,7 +61,7 @@ class Admin::StaticPagesController < Admin::BaseController
 
 	def update
 		@page  = Ecstore::Page.find(params[:id])
-		if @page.update_attributes(params[:page])
+		if @page.update_attributes(page_params)
 			redirect_to admin_static_pages_url
 		else
 			render :edit
@@ -72,5 +72,9 @@ class Admin::StaticPagesController < Admin::BaseController
 		@page  = Ecstore::Page.find(params[:id])
 		@page.destroy
 		redirect_to admin_static_pages_url
+	end
+	private
+	def page_params
+	    params.require(:page).permit(:title,:slug,:layout,:category,:body,:keywords,:description,meta_seo_attributes:[])
 	end
 end

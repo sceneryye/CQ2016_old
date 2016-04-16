@@ -8,7 +8,7 @@ class Ecstore::Good < Ecstore::Base
 
   SUIT_NAME = "套装 Suit"
 
-  self.table_name = "sdb_b2c_goods"
+  self.table_name = "goods"
 
   attr_accessor :up_or_down
 

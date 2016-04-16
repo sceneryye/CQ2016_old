@@ -26,7 +26,7 @@
     <div class="control-group">
       <%= f.label :brand_logo, "基地logo", :class => "control-label" %>
       <div class="controls">
-        <%=f.text_field :logo_url,:value=>@brand.brand_logo,:placeholder=>"基地页Logo地址",:class=>"span4"%>
+        <%=f.text_field :brand_logo,:value=>@brand.brand_logo,:placeholder=>"基地页Logo地址"%>
       </div>
     </div>
 
@@ -51,8 +51,8 @@
       <div class="item">
         <span class='no'><%=index+1%>.</span>
         <%=text_field_tag "brand_page[context][][menu_name]",menu["menu_name"],:placeholder=>"菜单名",:class=>"input_small"%>
-        <%=text_field_tag "brand_page[context][][image_url]",menu["image_url"],:placeholder=>"图片地址",:class=>"span4"%>
-         <%=text_field_tag "brand_page[context][][image_alt]",menu["image_alt"],:placeholder=>"图片描述信息(alt)",:class=>"span4"%>
+        <%=text_field_tag "brand_page[context][][image_url]",menu["image_url"],:placeholder=>"图片地址"%>
+         <%=text_field_tag "brand_page[context][][image_alt]",menu["image_alt"],:placeholder=>"图片描述信息(alt)"%>
         <%=link_to "&times;".html_safe,"javascript:void(0);",:class=>"delete"%>
         <span class="pos-control">
               <i class=" icon-arrow-up"></i>

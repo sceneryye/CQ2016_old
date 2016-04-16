@@ -1,6 +1,6 @@
 require "digest/md5"
 class Ecstore::Cart < Ecstore::Base
-	self.table_name = 'sdb_b2c_cart_objects'
+	self.table_name = 'cart_objects'
 
 	belongs_to :user,:foreign_key=>"member_id"
   	belongs_to :supplier,:foreign_key=>"supplier_id"

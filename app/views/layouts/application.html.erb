@@ -75,7 +75,7 @@
                 <%end%>
               </ul>
               <li><%=link_to '关于我们', page_path('aboutus'), class:"menu-link #{@page_active}"%></li>
-            <li class='hide-for-small-only'><a href="/home#contact"  class='menu-link'>联系我们</a></li>  
+              <li class='hide-for-small-only'><%=link_to '联系我们', page_path('contactus'), class:"menu-link #{@page_active}"%></li>  
             </ul>
             </div>
             <div class="top-bar-right" style ='display:none'>
