@@ -1,6 +1,6 @@
 class Ecstore::Category < Ecstore::Base
       
-	self.table_name = "sdb_b2c_goods_cat"
+	self.table_name = "goods_cat"
 	self.primary_key = 'cat_id'
 	has_many :goods, ->{where(marketable: 'true')} ,:foreign_key=> "cat_id"
 				

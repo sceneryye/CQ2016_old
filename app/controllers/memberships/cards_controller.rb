@@ -159,12 +159,12 @@ class Memberships::CardsController < ApplicationController
 		else
 			@yes = 'disabled'
 		end
-		@tradings = Ecstore::CardTradingLog.where("status=?",@status.to_i).paginate(:page=>params[:page],:per_page=>20)
+		@tradings = Ecstore::CardTradingLog.where("card_no='#{@user.card_num}' and status=#{@status}").paginate(:page=>params[:page],:per_page=>20)
 
 	end
 
 	def rebates
-		@rebates = Ecstore::Rebate.paginate(:page=>params[:page],:per_page=>20)
+		@rebates = Ecstore::Rebate.where(member_id: @user.member_id).paginate(:page=>params[:page],:per_page=>20)
 	end  	
 
 	def pay

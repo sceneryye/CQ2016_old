@@ -20,7 +20,7 @@
 <div class='button-group'>
   <%=link_to '未提现', tradings_cards_path(status:0),class:"button hollow #{@no}"%>
   <%=link_to '已提现', tradings_cards_path(status:1),class:"button hollow #{@yes}"%>
-  <%if @status == '0'%>
+  <%if @status == '0' && @tradings%>
     <%=link_to '申请提现', withdrawl_cards_path ,class:'button expaned'%>
   <%end%>
 </div>
