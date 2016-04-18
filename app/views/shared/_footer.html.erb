@@ -1,10 +1,10 @@
  <footer id="footer">
- <hr>
- <small>
-   &copy; 2014 - <span id='copyright_year'></span>, 昌麒投资有限公司<br>                    
-     技术支持: <a target="_blank" href="http://www.cq2016.cc/" title="上海普慧信息科技有限公司">上海普慧信息科技有限公司</a><br>
-     浙ICP备14024074号-1
-</small>
+   <hr>
+   <small>
+     &copy; 2014 - <span id='copyright_year'></span>, 昌麒投资有限公司<br>                    
+       技术支持: <a target="_blank" href="http://www.cq2016.cc/" title="上海普慧信息科技有限公司">上海普慧信息科技有限公司</a><br>
+       浙ICP备14024074号-1
+  </small>
 </footer><!--/#footer-->
 <script>
     var myDate = new Date();
@@ -12,39 +12,34 @@
     document.getElementById('copyright_year').innerText=currentYear;
 </script> 
 
-  <div class="row columns">
-      <%
-  case controller_name
+<div class="row columns"  id="bottomNav">
+  <%case controller_name
     when 'home'
       @home_active = 'active'
-    when 'users'
-      @users_active = 'active'
-    when 'groupbuys'
-      @groupbuys_active = 'active'
+    when 'cart'
+      @cart_active = 'active'
     when 'search' 'cats'
       @search_active = 'active'
-    else
-      @forums_active = 'active'
-  end
-%>
-<div class="expanded button-group show-for-small-only " id="bottomNav">
-  <%=link_to root_path,class: "item #{@home_active} button" do%>
-    <i class="fa fa-home"></i>
-  <%end%>
-  <%=link_to cart_index_path,class: "item #{@groupbuys_active}  button" do%>
-    <i class="fa fa-cart-plus"></i>
-  <%end%>
-  <%=link_to cats_path,class: "item #{@search_active}  button" do%>
-    <i class="fa fa-search"></i>
-  <%end%>
-  <%if signed_in?
-      @user_url = member_path
-    else
-      @user_url= login_path
-    end%>
-  <%=link_to @user_url,class: "item #{@users_active}  button" do%>
-    <i class="fa fa-user"></i>
-  <%end%>
- 
-</div>
+    else'users'
+      @users_active = 'active'
+  end%>
+  <div class="expanded button-group show-for-small-only ">
+    <%=link_to root_path,class: "item #{@home_active} button" do%>
+      <i class="fa fa-home"></i>
+    <%end%>
+    <%=link_to cart_index_path,class: "item #{@cart_active}  button" do%>
+      <i class="fa fa-cart-plus"></i>
+    <%end%>
+    <%=link_to cats_path,class: "item #{@search_active}  button" do%>
+      <i class="fa fa-search"></i>
+    <%end%>
+    <%if signed_in?
+        @user_url = member_path
+      else
+        @user_url= login_path
+      end%>
+    <%=link_to @user_url,class: "item #{@users_active}  button" do%>
+      <i class="fa fa-user"></i>
+    <%end%> 
+  </div>
 </div>

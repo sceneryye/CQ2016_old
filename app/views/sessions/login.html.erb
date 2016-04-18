@@ -1,3 +1,4 @@
+<script src="http://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 <script>
 
 function isWeixinBrowser(){
@@ -128,8 +129,20 @@ var iswxb= isWeixinBrowser();
                             </div>
                         <%end%>  
                         <%else%>
-                            <p>请扫描二维码关注我们从微信端注册</p>
-                            <img src="/img/qrcode.jpg" title="二维码" style="width:100%">
+                            <p>请扫描二维码登录</p>
+                            <div id="login_container"></div>
+                            <script>
+                             var obj = new WxLogin({
+                              id:"login_container", 
+                              appid: "wx3fdf90506bc07fcc", 
+                              scope: "snsapi_login", 
+                              redirect_uri: "http%3a%2f%2fwww.cq2016.cc/%2fauth%2fweixin%2f1%2fcallback",
+                              state: "",
+                              style: "white",
+                              href: ""
+                            });
+                            </script>
+                            <!-- <img src="/img/qrcode.jpg" title="二维码" style="width:100%"> -->
                         <%end%>            
                     </div><!--/.columns small-12-->
                 </div><!--/.row-->

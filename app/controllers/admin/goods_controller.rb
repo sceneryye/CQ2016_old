@@ -128,8 +128,8 @@ module Admin
         if act == "export"
           goods = Ecstore::Good.where(conditions).includes(:good_type,:brand,:cat,:products)
           file = Ecstore::Good.exporttmp(goods)
-          return render :json=>{:csv=>"/tmp/goods.csv"}
-          #return send_file file, :filename=>"goods_#{Time.now.strftime('%Y%m%d%H%M%S')}.csv", :type=>"text/csv"
+          # return render :json=>{:csv=>"/tmp/goods.csv"}
+          return send_file file, :filename=>"goods_#{Time.now.strftime('%Y%m%d%H%M%S')}.csv", :type=>"text/csv"
 
         end
 
@@ -404,7 +404,7 @@ module Admin
       end
 
       def import(options={:encoding=>"GB18030:UTF-8"})
-        file = goods_params[:file].tempfile
+        file = params[:good][:file].tempfile
         book = Spreadsheet.open(file)
         pp "starting import ..."
         sheet = book.worksheet(0)

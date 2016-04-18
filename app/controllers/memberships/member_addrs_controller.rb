@@ -17,7 +17,6 @@ class Memberships::MemberAddrsController < ApplicationController
   end
 
 
-
   def edit
     @addr = Ecstore::MemberAddr.find(params[:id])
     @method = :put

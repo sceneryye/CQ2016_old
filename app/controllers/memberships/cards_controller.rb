@@ -68,6 +68,10 @@ class Memberships::CardsController < ApplicationController
   	def login
   		id = params[:id]
 
+  		if id.blank?
+  			id = 0
+  		end
+
 	    password = params[:card][:password]
 	    from = params[:from]
 
