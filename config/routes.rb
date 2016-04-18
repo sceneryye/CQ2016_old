@@ -71,9 +71,6 @@ Modengke::Application.routes.draw do
         get "mobile"  ,:on=>:collection
         get 'new_memberaddr_add' ,:on=>:collection
     end
-
-    match '/vip' => 'vip#index', :via => [:get]
-
    
   end
 

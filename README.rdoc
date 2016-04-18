@@ -17,7 +17,6 @@ magazine/pages_controller.rb    layout false
 magazine/topics_controller.rb
 
 memberships/cards_controller.rb layout 'memberships'
-memberships/vip_controller.rb   layout 'memberships'
 
 store/brands_controller.rb      layout 'magazine'
 store/cats_controller.rb        layout 'magazine'
