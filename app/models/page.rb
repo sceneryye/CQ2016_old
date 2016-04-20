@@ -1,5 +1,7 @@
 #encoding:utf-8
-class Page < AbstractPage
+class Page < ActiveRecord::Base
+	
+	self.table_name = 'sdb_imodec_static_pages'
 
 	extend FriendlyId
 	

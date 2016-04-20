@@ -5,7 +5,7 @@ class PagesController < ApplicationController
 	def show
 		@page = Page.includes(:meta_seo).find(params[:id])
 
-      render :layout=> @page.layout.present? ? @page.layout : nil
+        render :layout=> @page.layout.present? ? @page.layout : nil
 
 	end
 

@@ -1,7 +1,6 @@
 #encoding:utf-8
 class MetaSeo < ActiveRecord::Base
-	self.table_name = "sdb_imodec_seo"
-	
+	self.table_name = "sdb_imodec_seo"	
 	
 
 	serialize :params, Hash
