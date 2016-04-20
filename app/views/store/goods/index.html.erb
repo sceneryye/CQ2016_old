@@ -1,4 +1,4 @@
-<%=render "shared/metable", :resource=>nil%>
+<%=render "layouts/metable", :resource=>nil%>
 <%=content_for :head do%>
     <%= stylesheet_link_tag "store/newest" %>
 <%end%>
@@ -15,7 +15,7 @@
 </ul>
 
 
-<%=render "store/shared/cover"%>
+<%=render "store/layouts/cover"%>
 <div class="products clearfix">
   <div class="left">
     <%=render "store/goods/list_tags"%>

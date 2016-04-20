@@ -15,7 +15,7 @@
 </div>
 <hr>
 
-<%=render "shared/metable", :resource=>nil%>
+<%=render "layouts/metable", :resource=>nil%>
 
 <%=content_for :cover do%>
 	<%=raw Ecstore::Config.get(:brand_cover) %>
