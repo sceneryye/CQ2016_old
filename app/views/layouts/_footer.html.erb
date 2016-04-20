@@ -1,3 +1,5 @@
+
+<div class="row columns small-12">
  <footer id="footer">
    <hr>
    <small>
@@ -6,13 +8,15 @@
        浙ICP备14024074号-1
   </small>
 </footer><!--/#footer-->
+
 <script>
     var myDate = new Date();
     var currentYear = myDate.getFullYear(); 
     document.getElementById('copyright_year').innerText=currentYear;
 </script> 
+</div>
 
-<div class="row columns"  id="bottomNav">
+<div class="row columns small-12"  id="bottomNav">
   <%case controller_name
     when 'home'
       @home_active = 'active'
@@ -24,21 +28,21 @@
       @users_active = 'active'
   end%>
   <div class="expanded button-group show-for-small-only ">
-    <%=link_to root_path,class: "item #{@home_active} button" do%>
+    <%=link_to root_path,class: "button #{@home_active}" do%>
       <i class="fa fa-home"></i>
     <%end%>
-    <%=link_to cart_index_path,class: "item #{@cart_active}  button" do%>
+    <%=link_to cart_index_path,class: "button #{@cart_active}" do%>
       <i class="fa fa-cart-plus"></i>
     <%end%>
-    <%=link_to cats_path,class: "item #{@search_active}  button" do%>
+    <%=link_to cats_path,class: "button #{@search_active}" do%>
       <i class="fa fa-search"></i>
     <%end%>
     <%if signed_in?
         @user_url = member_path
-      else
+    else
         @user_url= login_path
-      end%>
-    <%=link_to @user_url,class: "item #{@users_active}  button" do%>
+    end%>
+    <%=link_to @user_url,class: "button #{@users_active}" do%>
       <i class="fa fa-user"></i>
     <%end%> 
   </div>

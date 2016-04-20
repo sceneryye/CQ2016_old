@@ -23,8 +23,6 @@ Modengke::Application.routes.draw do
 
         post 'login'
         post 'pay'
-
-
       end
     end
 
@@ -75,19 +73,12 @@ Modengke::Application.routes.draw do
   end
 
 
-
   resources :pages, :only=>[:show]
 
   namespace :auth do
     resources :accounts
     resources :weixin do
       get 'callback',:on=>:member
-    end
-    resources :weibo do
-      get 'callback',:on=>:collection
-    end
-    resources :douban do
-      get 'callback',:on=>:collection
     end
   end
 
@@ -101,34 +92,6 @@ Modengke::Application.routes.draw do
     post 'search', :on=>:collection
     post 'change_password',:on=>:collection
     post 'update' ,:on=>:member
-  end
-
-  resources :vshop do
-    collection do
-      get 'login'
-      get 'register'
-      get 'article'
-      get 'apply'
-      post 'search'
-      post 'change_password'
-      get 'goods'
-      get 'orders'
-      get 'members'
-      get 'weixin'
-      post "destory"
-    end
-    member do
-      get :user
-      get :category
-      get :commodity
-      get :order
-     # post :payments
-      get :payments
-      get :native
-      post :paynotifyurl
-      get :paynotifyurl
-      get :feedback
-    end
   end
 
   get 'auto_login'=>"sessions#auto_login"
@@ -149,23 +112,6 @@ Modengke::Application.routes.draw do
 
   resources :events
 
-
-  scope :module => "blog" do
-    #constraints :subdomain => "blog" do
-    root :to => "articles#index",  as: :blog_root
-    resources :articles
-
-    #end
-  end
-
-  scope :module => "magazine" do
-    resources :topics do
-      resources :pages
-    end
-    match '/more_topics' => 'topics#more', :via => [:get]
-    match '/list_topics' => 'topics#list', :via => [:get]
-    match '/flash' => 'flashes#index', :via => [:get]
-  end
 
   get 'admin'=>'admin/sessions#new'
 
