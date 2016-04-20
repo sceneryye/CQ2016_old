@@ -35,8 +35,8 @@ class Admin::ImagesController < Admin::BaseController
 	mark = Magick::Image.read(mark_file).first
   	@goods.each do |good|
   		good.images.each do |image|
-  			src = "#{ECSTORE_ROOT_PATH}/#{image.m_url}"
-  			# middle = "#{ECSTORE_ROOT_PATH}/#{image.m_url}"
+  			src = "#{ROOT_PATH}/#{image.m_url}"
+  			# middle = "#{ROOT_PATH}/#{image.m_url}"
   			# ar = middle.split("/")
   			# ar.pop
   			# `mkdir -p #{ar.join("/")}`
@@ -78,7 +78,7 @@ class Admin::ImagesController < Admin::BaseController
     water_logger.debug("[begin][#{Time.now}] **********begin rollbacking***********")
     @goods.each do |good|
         good.images.each do |image|
-          src = "#{ECSTORE_ROOT_PATH}/#{image.m_url}"
+          src = "#{ROOT_PATH}/#{image.m_url}"
           if File.exists?(src)
               origin_id = Dir.new(File.dirname(src)).collect do |f|
                                 parts = f.split(".")

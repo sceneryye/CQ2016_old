@@ -18,8 +18,8 @@ class Memberships::MembersController < ApplicationController
 
 
   def update
-    user_params = ecstore_user_params
-    addr_params = ecstore_user_params
+    user_params = user_params
+    addr_params = user_params
    
 
     if @user.update_attributes(user_params.merge!(:apply_time=>Time.now))    
@@ -94,7 +94,7 @@ class Memberships::MembersController < ApplicationController
 
 
   private
-   def ecstore_user_params
+   def user_params
       params.require(:user).permit(:name,:card_num,:area,:mobile,:addr,:sex,:id_card_number,:province, :city, :district,)
     end
 

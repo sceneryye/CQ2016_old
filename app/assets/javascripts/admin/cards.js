@@ -19,7 +19,7 @@ $(document).ready(function(){
   });
 });
 	
-	$("#ecstore_card_pay_status").bind("change",function(){
+	$("#card_pay_status").bind("change",function(){
 		if($(this).val()=="true"){
 			$(this).next(".datetime").removeClass("hide");
 		}else{
