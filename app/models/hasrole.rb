@@ -1,5 +1,5 @@
 #encoding:utf-8
-class Hasrole < Base
+class Hasrole < ActiveRecord::Base
   self.table_name = "sdb_desktop_hasrole"
   
 

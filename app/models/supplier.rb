@@ -1,4 +1,4 @@
-class Supplier < Base
+class Supplier < ActiveRecord::Base
   #include WeixinRailsMiddleware::AutoGenerateWeixinTokenSecretKey
 	self.table_name = "sdb_imodec_suppliers"
 

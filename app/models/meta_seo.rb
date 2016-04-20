@@ -1,5 +1,5 @@
 #encoding:utf-8
-class MetaSeo < Base
+class MetaSeo < ActiveRecord::Base
 	self.table_name = "sdb_imodec_seo"
 	
 	

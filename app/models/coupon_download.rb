@@ -1,4 +1,4 @@
-class CouponDownload < Base
+class CouponDownload < ActiveRecord::Base
 	self.table_name = "sdb_imodec_coupon_downloads"
 
 	

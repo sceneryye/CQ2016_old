@@ -1,5 +1,5 @@
 #encoding:utf-8
-class OfflineCoupon < Base
+class OfflineCoupon < ActiveRecord::Base
 	self.table_name = "sdb_imodec_offline_coupons"
 	
 	belongs_to :brand, :foreign_key=>"brand_id"

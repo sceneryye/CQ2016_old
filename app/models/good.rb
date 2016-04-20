@@ -2,7 +2,7 @@
 require 'csv'
 require 'spreadsheet'
 
-class Good < Base
+class Good < ActiveRecord::Base
 
   NEW_GOOD_START_ID = 0  #2398
 

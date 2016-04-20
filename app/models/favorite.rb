@@ -1,4 +1,4 @@
-class Favorite < Base
+class Favorite < ActiveRecord::Base
 	self.table_name = "sdb_b2c_member_goods"
 	default_scope {where(type:'fav')}
 	self.primary_key = "gnotify_id"

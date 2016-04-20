@@ -1,6 +1,6 @@
 #encoding:utf-8
 require 'csv'
-class Order < Base
+class Order < ActiveRecord::Base
 
   self.table_name = "orders"
   has_many :order_dining , :foreign_key=>"order_id"

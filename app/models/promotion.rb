@@ -1,5 +1,5 @@
 #encoding:utf-8
-class Promotion < Base
+class Promotion < ActiveRecord::Base
   self.table_name = 'sdb_imodec_promotions'
   
   

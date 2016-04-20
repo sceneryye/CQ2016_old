@@ -1,4 +1,4 @@
-class ImageAttach < Base
+class ImageAttach < ActiveRecord::Base
   self.table_name = "sdb_image_image_attach"
 
   belongs_to :image

@@ -1,5 +1,5 @@
 #encoding:utf-8
-class Delivery < Base
+class Delivery < ActiveRecord::Base
 	self.table_name = 'sdb_b2c_delivery'
 	
 	has_many :delivery_items, :foreign_key=>"delivery_id", :class_name=>"DeliveryItem"

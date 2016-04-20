@@ -1,4 +1,4 @@
-class Bill < Base
+class Bill < ActiveRecord::Base
 	self.table_name = 'sdb_ectools_order_bills'
 	
 

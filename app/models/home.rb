@@ -1,5 +1,5 @@
 #encoding:utf-8
-class Home < Base
+class Home < ActiveRecord::Base
   self.table_name  = 'sdb_imodec_homes'
   
   belongs_to :supplier,	:foreign_key=>"supplier_id"

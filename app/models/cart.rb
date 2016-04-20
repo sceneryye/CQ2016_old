@@ -1,5 +1,5 @@
 require "digest/md5"
-class Cart < Base
+class Cart < ActiveRecord::Base
 	self.table_name = 'cart_objects'
 
 	belongs_to :user,:foreign_key=>"member_id"

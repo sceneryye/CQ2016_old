@@ -1,5 +1,5 @@
 #encoding:utf-8
-class Comment < Base
+class Comment < ActiveRecord::Base
 	self.table_name = "sdb_imodec_comments"
 	
 	belongs_to :good, :foreign_key=>"commentable_id"

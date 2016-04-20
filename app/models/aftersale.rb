@@ -1,5 +1,5 @@
 #encoding:utf-8
-class Aftersale < Base
+class Aftersale < ActiveRecord::Base
 	self.table_name = "sdb_aftersales_return_product"
 
 	

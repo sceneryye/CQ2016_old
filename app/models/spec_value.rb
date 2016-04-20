@@ -1,5 +1,5 @@
 #encoding:utf-8
-class SpecValue < Base
+class SpecValue < ActiveRecord::Base
 	self.table_name = "sdb_b2c_spec_values"
 	
 	belongs_to :spec,:foreign_key=>"spec_id"

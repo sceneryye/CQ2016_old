@@ -1,4 +1,4 @@
-class OrderItem < Base
+class OrderItem < ActiveRecord::Base
 	self.table_name = "order_items"
 	belongs_to :order, :foreign_key=>"order_id"
 

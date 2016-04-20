@@ -1,5 +1,5 @@
 #encoding:utf-8
-class MemberAddr < Base
+class MemberAddr < ActiveRecord::Base
 	self.table_name = 'member_addrs'
 
 	belongs_to :user, :foreign_key=>"member_id"

@@ -1,5 +1,5 @@
 #encoding:utf-8
-class Spec < Base
+class Spec < ActiveRecord::Base
 	self.table_name = "sdb_b2c_specification"
 	self.primary_key = "spec_id"
 	

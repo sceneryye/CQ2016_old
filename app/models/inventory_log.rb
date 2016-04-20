@@ -1,4 +1,4 @@
-class InventoryLog < Base
+class InventoryLog < ActiveRecord::Base
 	self.table_name = "sdb_imodec_inventory_log"
 
   belongs_to :user,:foreign_key=>"member_id"

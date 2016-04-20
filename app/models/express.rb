@@ -1,5 +1,5 @@
 
- class Express < Base
+ class Express < ActiveRecord::Base
    self.table_name ="sdb_b2c_expresses"
   attr_accessor :arrival, :departure, :total, :unit_price
 

@@ -1,4 +1,4 @@
-class GoodCat < Base
+class GoodCat < ActiveRecord::Base
   self.table_name = "goods_cat"
   self.primary_key = 'cat_id'
   has_many :goods,->{where(marketable:'true')},:foreign_key=> "cat_id"

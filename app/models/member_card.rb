@@ -1,5 +1,5 @@
 #encoding:utf-8
-class MemberCard < Base
+class MemberCard < ActiveRecord::Base
 	self.table_name = "member_cards"
 
 	belongs_to :card, :foreign_key=>"card_id"

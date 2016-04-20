@@ -1,4 +1,4 @@
-class OrderPmt < Base
+class OrderPmt < ActiveRecord::Base
 	self.table_name = "sdb_imodec_order_promotions"
 	belongs_to :order, :foreign_key=>"order_id"
 

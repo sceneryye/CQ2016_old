@@ -1,5 +1,5 @@
 #encoding:utf-8
-class Teg < Base
+class Teg < ActiveRecord::Base
 	self.table_name = "sdb_desktop_tag"
 
 	has_many :tagables,:foreign_key=>"tag_id"

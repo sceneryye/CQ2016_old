@@ -1,5 +1,5 @@
 #encoding:utf-8
-class Role < Base
+class Role < ActiveRecord::Base
   self.table_name = "sdb_desktop_roles"
   self.primary_key = 'role_id'
   

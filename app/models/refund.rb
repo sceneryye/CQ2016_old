@@ -1,5 +1,5 @@
 #encoding:utf-8
-class Refund < Base
+class Refund < ActiveRecord::Base
 	self.table_name  = 'sdb_ectools_refunds'
 
 	has_one :bill, ->{where(:bill_type=>"refunds")}, :foreign_key=>"bill_id"

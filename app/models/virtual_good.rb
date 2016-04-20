@@ -1,5 +1,5 @@
 #encoding:utf-8
-class VirtualGood < Base
+class VirtualGood < ActiveRecord::Base
 	self.table_name = "sdb_imodec_virtual_goods"
 
 	belongs_to :brand

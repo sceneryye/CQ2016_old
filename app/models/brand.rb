@@ -1,5 +1,5 @@
 #encoding:utf-8
-class Brand < Base
+class Brand < ActiveRecord::Base
 
 	include Metable
 

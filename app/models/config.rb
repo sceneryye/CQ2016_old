@@ -1,5 +1,5 @@
 #encoding:utf-8
-class Config < Base
+class Config < ActiveRecord::Base
       self.table_name = "sdb_imodec_configs"
       #attr_accessor :name,:key,:value
 

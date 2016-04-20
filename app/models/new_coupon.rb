@@ -2,7 +2,7 @@
 require 'securerandom'
 require 'digest'
 
-class NewCoupon < Base
+class NewCoupon < ActiveRecord::Base
 	self.table_name = "sdb_imodec_coupons"
 	
 

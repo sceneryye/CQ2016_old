@@ -1,5 +1,5 @@
 #encoding:utf-8
-class Applicant < Base
+class Applicant < ActiveRecord::Base
   self.table_name = "sdb_imodec_applicants"
  
   validates_presence_of :name,:message=>"请填写姓名"

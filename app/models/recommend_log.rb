@@ -1,5 +1,5 @@
 #encoding:utf-8
-class RecommendLog < Base
+class RecommendLog < ActiveRecord::Base
 	self.table_name  = 'sdb_imodec_recommend_log'
 	
 

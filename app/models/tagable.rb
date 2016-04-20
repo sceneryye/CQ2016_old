@@ -1,4 +1,4 @@
-class Tagable < Base
+class Tagable < ActiveRecord::Base
 	self.table_name = "sdb_desktop_tag_rel"
 	
 

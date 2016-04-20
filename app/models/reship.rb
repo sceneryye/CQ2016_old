@@ -1,5 +1,5 @@
 #encoding:utf-8
-class Reship < Base
+class Reship < ActiveRecord::Base
 	self.table_name = 'sdb_b2c_reship'
 	
 

@@ -1,5 +1,5 @@
 #encoding:utf-8
-class GoodType < Base
+class GoodType < ActiveRecord::Base
   self.table_name = "sdb_b2c_goods_type"
   has_many :good_type_specs,:foreign_key=>"type_id"
   has_many :goods, :foreign_key=>"type_id"

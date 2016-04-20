@@ -1,5 +1,5 @@
 #encoding:utf-8
-class Payment < Base
+class Payment < ActiveRecord::Base
 	self.table_name = 'sdb_ectools_payments'
 	
 	#has_one :pay_bill,->{where(:pay_object=>"order",:bill_type=>"payments")},:foreign_key=>"bill_id",:class_name=>"Bill"

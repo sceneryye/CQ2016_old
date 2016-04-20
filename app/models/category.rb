@@ -1,4 +1,4 @@
-class Category < Base
+class Category < ActiveRecord::Base
       
 	self.table_name = "goods_cat"
 	self.primary_key = 'cat_id'

@@ -1,5 +1,5 @@
 #encoding:utf-8
-class Product < Base
+class Product < ActiveRecord::Base
 	self.table_name  = "products"
 
 	belongs_to :good, :foreign_key=>"goods_id"

@@ -1,5 +1,5 @@
 #encoding:utf-8
-class OrderLog < Base
+class OrderLog < ActiveRecord::Base
 	self.table_name = "order_log"
 	belongs_to :order, :foreign_key=>"rel_id"
 

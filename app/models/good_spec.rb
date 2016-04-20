@@ -1,4 +1,4 @@
-class GoodSpec < Base
+class GoodSpec < ActiveRecord::Base
 	self.table_name = "sdb_b2c_goods_spec_index"
 
 	belongs_to :good,			:foreign_key=>"goods_id"

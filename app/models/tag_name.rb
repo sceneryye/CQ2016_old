@@ -1,4 +1,4 @@
-class TagName < Base
+class TagName < ActiveRecord::Base
 	self.table_name = "sdb_desktop_tag"
 
 	has_many :tags,:foreign_key=>"tag_id"

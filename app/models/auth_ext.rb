@@ -1,4 +1,4 @@
-class AuthExt < Base
+class AuthExt < ActiveRecord::Base
 	self.table_name = "sdb_pam_auth_ext"
 	belongs_to :account,:foreign_key=>"account_id"
 

@@ -1,4 +1,4 @@
-class Seo < Base
+class Seo < ActiveRecord::Base
 
 	warn 'warning : Seo is old seo model, please use Ectore::MetaSeo'
 

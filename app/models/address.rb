@@ -1,4 +1,4 @@
-class Address < Base
+class Address < ActiveRecord::Base
 	self.table_name = "sdb_imodec_addresses"
 	belongs_to :brand, :polymorphic=>true
 

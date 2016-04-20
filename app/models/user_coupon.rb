@@ -1,6 +1,6 @@
 #encoding:utf-8
 require 'digest'
-class UserCoupon < Base
+class UserCoupon < ActiveRecord::Base
 	self.table_name = "sdb_imodec_user_coupons"
 	
 

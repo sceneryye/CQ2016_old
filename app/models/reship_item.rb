@@ -1,4 +1,4 @@
-class ReshipItem < Base
+class ReshipItem < ActiveRecord::Base
 	self.table_name = 'sdb_b2c_reship_items'
 	
 	

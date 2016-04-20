@@ -1,4 +1,4 @@
-class Manager < Base
+class Manager < ActiveRecord::Base
 	self.table_name = "sdb_desktop_users"
   attr_accessor :user_id, :status, :name
 

@@ -1,6 +1,6 @@
 #encoding:utf-8
 
-class PublicAccount < Base
+class PublicAccount < ActiveRecord::Base
   #include WeixinRailsMiddleware::AutoGenerateWeixinTokenSecretKey
   self.table_name = 'public_accounts'
 

@@ -1,4 +1,4 @@
-class PaymentLog < Base
+class PaymentLog < ActiveRecord::Base
 	self.table_name = "sdb_imodec_payment_logs"
 	belongs_to  :payment
 	

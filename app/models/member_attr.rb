@@ -1,4 +1,4 @@
-class MemberAttr < Base
+class MemberAttr < ActiveRecord::Base
 	self.table_name = "sdb_dbeav_meta_register"
 	has_many :member_attr_values,:foreign_key=>"mr_id"
 

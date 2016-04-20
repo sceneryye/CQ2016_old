@@ -2,7 +2,7 @@
 require 'digest/md5'
 require 'csv'
 
-class Member < Base
+class Member < ActiveRecord::Base
 	self.table_name = "members"
 	belongs_to :account,:foreign_key=>"member_id"
 	belongs_to :member_lv,:foreign_key=>"member_lv_id"

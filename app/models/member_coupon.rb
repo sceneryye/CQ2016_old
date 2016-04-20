@@ -1,4 +1,4 @@
-class MemberCoupon < Base
+class MemberCoupon < ActiveRecord::Base
 	self.table_name = "sdb_b2c_member_coupon"
 	self.primary_key = :memc_code
 

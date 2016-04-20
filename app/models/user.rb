@@ -1,5 +1,5 @@
 #encoding:utf-8
-class User < Base
+class User < ActiveRecord::Base
   self.table_name = "members"
   self.primary_key = 'member_id'
 

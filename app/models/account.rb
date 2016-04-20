@@ -1,7 +1,7 @@
 #encoding:utf-8
 require 'digest/md5'
 require 'pp'
-class Account < Base
+class Account < ActiveRecord::Base
 
 	self.table_name = "sdb_pam_account"	
 	attr_accessor :license,:current_password

@@ -1,5 +1,5 @@
 #encoding:utf-8
-class Region < Base
+class Region < ActiveRecord::Base
 	self.table_name = "sdb_ectools_regions"
 	default_scope {order("region_id ASC")}
 

@@ -1,5 +1,5 @@
 #encoding:utf-8
-class Card < Base
+class Card < ActiveRecord::Base
 	self.table_name = "cards"
   	#attr_accessor :buyer_tel, :card_type, :no, :sale_status, :status, :pay_status, :use_status, :user_tel, :value, :password,:sold_at,:used_at,:try_password_times
   	

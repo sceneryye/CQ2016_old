@@ -1,5 +1,5 @@
 require 'digest/md5'
-class Coupon < Base
+class Coupon < ActiveRecord::Base
 	self.table_name = "sdb_b2c_coupons"
 
 	belongs_to :rule,:foreign_key=>"rule_id"

@@ -1,4 +1,4 @@
-class Tag < Base
+class Tag < ActiveRecord::Base
 	self.table_name = "sdb_desktop_tag_rel"
 	self.primary_key = 'rel_id'
 	belongs_to :tag_name,:foreign_key=>"tag_id"
