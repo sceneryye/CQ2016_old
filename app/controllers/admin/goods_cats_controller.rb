@@ -86,6 +86,6 @@ class Admin::GoodsCatsController < Admin::BaseController
   end
   private 
   def goods_cat_params
-    params.require(:ecstore_good_cat).permit(:cat_name,:type_id,:cat_id)
+    params.require(:good_cat).permit(:cat_name,:type_id,:cat_id)
   end
 end

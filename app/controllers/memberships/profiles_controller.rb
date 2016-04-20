@@ -25,17 +25,17 @@ class Memberships::ProfilesController < ApplicationController
 
   def update
 
-      params[:ecstore_user].merge!(:bank_info=>params[:bank_info].to_s) if params[:bank_info]
+      params[:user].merge!(:bank_info=>params[:bank_info].to_s) if params[:bank_info]
 
-      params[:ecstore_user].merge!(params[:date]) if params[:date]
+      params[:user].merge!(params[:date]) if params[:date]
       @tab = params[:tab]
       if params[:tab]=="interest"
-        params[:ecstore_user].merge!(:places=>nil) unless params[:ecstore_user][:places]
-        params[:ecstore_user].merge!(:interests=>nil) unless params[:ecstore_user][:interests]
-        params[:ecstore_user].merge!(:colors=>nil) unless params[:ecstore_user][:colors]
+        params[:user].merge!(:places=>nil) unless params[:user][:places]
+        params[:user].merge!(:interests=>nil) unless params[:user][:interests]
+        params[:user].merge!(:colors=>nil) unless params[:user][:colors]
       end
 
-      if @user.update_attributes(params[:ecstore_user])       
+      if @user.update_attributes(params[:user])       
           redirect_to profile_path(:tab=>params[:tab]), :notice=>"保存成功."
       else
           render "/memberships/profiles/edit"

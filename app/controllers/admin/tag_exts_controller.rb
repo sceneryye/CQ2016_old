@@ -18,9 +18,9 @@ class Admin::TagExtsController < Admin::BaseController
 	def update
 		@tag_ext = TagExt.find_by_tag_id(params[:id])
 		 if @tag_ext
-			@tag_ext.update_attributes(params[:ecstore_tag_ext])
+			@tag_ext.update_attributes(params[:tag_ext])
 		else
-			TagExt.create params[:ecstore_tag_ext]
+			TagExt.create params[:tag_ext]
 		end
 
 		redirect_to admin_tag_exts_url

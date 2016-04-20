@@ -95,7 +95,7 @@ class Memberships::MembersController < ApplicationController
 
   private
    def ecstore_user_params
-      params.require(:ecstore_user).permit(:name,:card_num,:area,:mobile,:addr,:sex,:id_card_number,:province, :city, :district,)
+      params.require(:user).permit(:name,:card_num,:area,:mobile,:addr,:sex,:id_card_number,:province, :city, :district,)
     end
 
 	

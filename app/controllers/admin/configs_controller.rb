@@ -12,7 +12,7 @@ class Admin::ConfigsController < Admin::BaseController
 	end
 
 	def create
-		@config = Config.new(params[:ecstore_config])
+		@config = Config.new(params[:config])
 		if @config.save
 			redirect_to admin_configs_url
 		else
@@ -23,7 +23,7 @@ class Admin::ConfigsController < Admin::BaseController
 
 	def update
 		@config = Config.find(params[:id])
-		if @config.update_attributes(params[:ecstore_config])
+		if @config.update_attributes(params[:config])
 			redirect_to admin_configs_url
 		else
 			render :edit

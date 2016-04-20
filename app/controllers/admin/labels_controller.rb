@@ -11,7 +11,7 @@ class Admin::LabelsController < Admin::BaseController
 
 	def update
 		@label = Label.find(params[:id])
-		if @label.update_attributes(params[:ecstore_label])
+		if @label.update_attributes(params[:label])
 			redirect_to  admin_labels_url
 		else
 			render "edit"

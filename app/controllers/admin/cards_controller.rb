@@ -68,9 +68,9 @@ class Admin::CardsController < Admin::BaseController
   def update
 
     respond_to do |format|
-      if @card.update_attributes(params[:ecstore_card])
+      if @card.update_attributes(params[:card])
 
-        message = params[:ecstore_card].collect  do |key,value|
+        message = params[:card].collect  do |key,value|
             I18n.t("card.#{key}") + "=" + value
         end.join(",")
 

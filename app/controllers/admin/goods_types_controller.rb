@@ -51,9 +51,9 @@ class Admin::GoodsTypesController < Admin::BaseController
 
   def updateType
     @goodtype = GoodType.find(params[:id])
-    @goodtype.name = params[:ecstore_good_type][:name]
+    @goodtype.name = params[:good_type][:name]
     GoodTypeSpec.where(:type_id=>params[:id]).delete_all
-    params[:ecstore_good_type][:spec].each do |spec|
+    params[:good_type][:spec].each do |spec|
         if spec !=""
           @GoodTypeSpec = GoodTypeSpec.new
           @GoodTypeSpec.type_id = @goodtype.type_id

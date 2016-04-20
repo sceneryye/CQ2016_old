@@ -420,7 +420,7 @@ class Admin::OrdersController < Admin::BaseController
 
     def update_memo
     	@order = Order.find(params[:id])
-    	@order.memo = params[:ecstore_order][:memo]
+    	@order.memo = params[:order][:memo]
     	@order.save
     	order_log = OrderLog.new do |order_log|
 	                order_log.rel_id = @order.order_id
@@ -429,7 +429,7 @@ class Admin::OrdersController < Admin::BaseController
 	                order_log.alttime = Time.now.to_i
 	                order_log.behavior = "memo"
 	                order_log.result = "SUCCESS"
-	                order_log.log_text = "memo info:#{params[:ecstore_order][:memo]}"
+	                order_log.log_text = "memo info:#{params[:order][:memo]}"
 	             end.save
     	redirect_to admin_orders_url
     end

@@ -1,4 +1,3 @@
-module Ecstore
 	module AddressFields
 
 		def province
@@ -49,4 +48,3 @@ module Ecstore
 			end
 		end
 	end
-end
