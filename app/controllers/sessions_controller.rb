@@ -43,9 +43,9 @@ class SessionsController < ApplicationController
     @platform = params[:platform]
 
     if @platform == 'vshop'
-      @account = Ecstore::Account.admin_authenticate(params[:session][:username],params[:session][:password])
+      @account = Account.admin_authenticate(params[:session][:username],params[:session][:password])
     else
-      @account = Ecstore::Account.user_authenticate(params[:session][:username],params[:session][:password])
+      @account = Account.user_authenticate(params[:session][:username],params[:session][:password])
     end
 
     if @account

@@ -4,6 +4,6 @@ class Store::SuppliersController < ApplicationController
   	# before_filter :require_top_cats
   	
   	def show
-        @supplier = Ecstore::Supplier.find(params[:id])   
+        @supplier = Supplier.find(params[:id])   
     end
 end

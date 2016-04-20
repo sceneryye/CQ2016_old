@@ -27,9 +27,9 @@ module Admin
         end
 
         # conditions = nil  if goods_ids.include?("all")
-        goods = Ecstore::Good.where(conditions).includes(:good_type,:brand,:cat,:products)
+        goods = Good.where(conditions).includes(:good_type,:brand,:cat,:products)
 
-        #content=Ecstore::Good.export_xls_with_pic(fields,goods) #导出excel
+        #content=Good.export_xls_with_pic(fields,goods) #导出excel
         package = Axlsx::Package.new
         workbook = package.workbook
         workbook.styles do |s|
@@ -110,11 +110,11 @@ module Admin
 
         send_data package.to_stream.read,:filename=>"goods_#{Time.now.strftime('%Y%m%d%H%M%S')}.xlsx"
 
-        #content = Ecstore::Good.export_cvs(fields,goods) #导出cvs
+        #content = Good.export_cvs(fields,goods) #导出cvs
         # MS Office 需要转码
         # send_data(content, :type => 'text/csv',:filename => "goods_#{Time.now.strftime('%Y%m%d%H%M%S')}.csv")
 
-        # content = Ecstore::Good.export_xls(fields,goods) #导出excel
+        # content = Good.export_xls(fields,goods) #导出excel
         # send_data(content, :type => "text/excel;charset=utf-8; header=present",:filename => "goods_#{Time.now.strftime('%Y%m%d%H%M%S')}.xls")
       end
 
@@ -126,23 +126,23 @@ module Admin
         # conditions = nil  if goods_ids.include?("all")
 
         if act == "export"
-          goods = Ecstore::Good.where(conditions).includes(:good_type,:brand,:cat,:products)
-          file = Ecstore::Good.exporttmp(goods)
+          goods = Good.where(conditions).includes(:good_type,:brand,:cat,:products)
+          file = Good.exporttmp(goods)
           # return render :json=>{:csv=>"/tmp/goods.csv"}
           return send_file file, :filename=>"goods_#{Time.now.strftime('%Y%m%d%H%M%S')}.csv", :type=>"text/csv"
 
         end
 
         if act == "destroy"
-          Ecstore::Good.where(conditions).destroy_all
+          Good.where(conditions).destroy_all
         end
 
         if act == "up"
-          Ecstore::Good.where(conditions).update_all(:marketable=>'true',:uptime=>Time.now.to_i)
+          Good.where(conditions).update_all(:marketable=>'true',:uptime=>Time.now.to_i)
         end
 
         if act == "down"
-          Ecstore::Good.where(conditions).update_all(:marketable=>'false',:downtime=>Time.now.to_i)
+          Good.where(conditions).update_all(:marketable=>'false',:downtime=>Time.now.to_i)
         end
 
         if act=="tag"
@@ -150,32 +150,32 @@ module Admin
 
           tegs.values.each  do |teg|
             if teg[:technicals] == "checked"
-              Ecstore::Tagable.where(:rel_id=>goods_ids,:tag_type=>"goods",:tag_id=>teg[:tag_id]).delete_all if teg[:state] == "none"
+              Tagable.where(:rel_id=>goods_ids,:tag_type=>"goods",:tag_id=>teg[:tag_id]).delete_all if teg[:state] == "none"
             end
 
             if teg[:technicals] == "uncheck"
               goods_ids.each do |order_id|
-                Ecstore::Tagable.create(:rel_id=>order_id,:tag_id=>teg[:tag_id],:tag_type=>"goods",:app_id=>"b2c")
+                Tagable.create(:rel_id=>order_id,:tag_id=>teg[:tag_id],:tag_type=>"goods",:app_id=>"b2c")
               end
             end
 
             if teg[:technicals] == "partcheck"
               if teg[:state] == "all"
                 goods_ids.each do |order_id|
-                  tagable = Ecstore::Tagable.where(:rel_id=>order_id,:tag_id=>teg[:tag_id],:tag_type=>"goods").first_or_initialize(:app_id=>"b2c")
+                  tagable = Tagable.where(:rel_id=>order_id,:tag_id=>teg[:tag_id],:tag_type=>"goods").first_or_initialize(:app_id=>"b2c")
                   tagable.save
                 end
               end
 
               if teg[:state] == "none"
-                Ecstore::Tagable.where(:rel_id=>goods_ids,:tag_type=>"goods",:tag_id=>teg[:tag_id]).delete_all
+                Tagable.where(:rel_id=>goods_ids,:tag_type=>"goods",:tag_id=>teg[:tag_id]).delete_all
               end
             end
           end
         end
 
         if act == "get_same_tags"
-          tag_ids = Ecstore::Tagable.where(:rel_id=>goods_ids,:tag_type=>"goods").pluck(:tag_id)
+          tag_ids = Tagable.where(:rel_id=>goods_ids,:tag_type=>"goods").pluck(:tag_id)
 
           hash = Hash.new
 
@@ -221,7 +221,7 @@ module Admin
        end
 
        def select_gifts
-            @gifts = Ecstore::Product.where(:goods_type=>"gift").paginate(:page=>params[:page],:per_page=>20)
+            @gifts = Product.where(:goods_type=>"gift").paginate(:page=>params[:page],:per_page=>20)
             render :layout=>"dialog"
        end
 
@@ -240,7 +240,7 @@ module Admin
 
         @order = "goods_id desc" if @order.blank?
        
-        @goods = Ecstore::Good.order(@order)
+        @goods = Good.order(@order)
 		    #	@goods = @goods.includes(:cat,:brand,:good_type,:tegs,:supplier)
 
         if marketable.present?
@@ -268,7 +268,7 @@ module Admin
 
             # cat filter
             if cat_id.present?
-                cat = Ecstore::Category.find_by_cat_id(cat_id)
+                cat = Category.find_by_cat_id(cat_id)
                 cat_ids = cat.categories.collect { |cat| cat.cat_id } << cat.cat_id
                 @goods = @goods.where(:cat_id=>cat_ids) if cat_ids.present?
             end
@@ -300,9 +300,9 @@ module Admin
 
 
       def edit
-       @good =  Ecstore::Good.find(params[:id])
+       @good =  Good.find(params[:id])
        @products = @good.products
-       @spec_items = Ecstore::SpecItem.all
+       @spec_items = SpecItem.all
        @action_url = admin_good_path(@good)
        @method = :put
       end
@@ -310,7 +310,7 @@ module Admin
       def toggle_future
         return_url =  request.env["HTTP_REFERER"]
         return_url =  admin_goods_url if return_url.blank?
-        @good = Ecstore::Good.find(params[:id])
+        @good = Good.find(params[:id])
         val = @good.future == 'false' ? 'true' : 'false'
         @good.update_attribute :future, val
         redirect_to return_url
@@ -319,7 +319,7 @@ module Admin
       def toggle_agent
         return_url =  request.env["HTTP_REFERER"]
         return_url =  admin_goods_url if return_url.blank?
-        @good = Ecstore::Good.find(params[:id])
+        @good = Good.find(params[:id])
         val = @good.agent == 'false' ? 'true' : 'false'
         @good.update_attribute :agent, val
         redirect_to return_url
@@ -328,26 +328,26 @@ module Admin
       def toggle_sell
         return_url =  request.env["HTTP_REFERER"]
         return_url =  admin_goods_url if return_url.blank?
-        @good = Ecstore::Good.find(params[:id])
+        @good = Good.find(params[:id])
         val = @good.sell == 'false' ? 'true' : 'false'
         @good.update_attribute :sell, val
         redirect_to return_url
       end
 
       def spec
-            @good =  Ecstore::Good.find(params[:id])
+            @good =  Good.find(params[:id])
             @products = @good.products
-            @spec_items = Ecstore::SpecItem.all
+            @spec_items = SpecItem.all
       end
 
       def add_spec_item
-            @good =  Ecstore::Good.find(params[:id])
-            @spec_items = Ecstore::SpecItem.all
-            render :partial=>"admin/goods/spec_item",:locals=>{:item=>Ecstore::GoodSpecItem.new(:spec_value_id=>params[:spec_value_id])}
+            @good =  Good.find(params[:id])
+            @spec_items = SpecItem.all
+            render :partial=>"admin/goods/spec_item",:locals=>{:item=>GoodSpecItem.new(:spec_value_id=>params[:spec_value_id])}
       end
 
       def remove_spec_item
-            @good_spec_item = Ecstore::GoodSpecItem.find(params[:good_spec_item_id])
+            @good_spec_item = GoodSpecItem.find(params[:good_spec_item_id])
             @good_spec_item.destroy
             render :json=>{:code=>'t',:message=>'deleted successfully'}.to_json
       rescue
@@ -355,7 +355,7 @@ module Admin
       end
 
       def new
-        @good  =  Ecstore::Good.new
+        @good  =  Good.new
         @action_url =  admin_goods_path
         @method = :post
       end
@@ -365,7 +365,7 @@ module Admin
       end
 
       def create
-        @good  =  Ecstore::Good.new(goods_params)
+        @good  =  Good.new(goods_params)
         if @good.save
           redirect_to admin_goods_url
         else
@@ -376,7 +376,7 @@ module Admin
 
       def update
         # return render text: params[:good][:products_attributes]
-            @good  =  Ecstore::Good.find(params[:id])
+            @good  =  Good.find(params[:id])
             @action_url = admin_good_path(@good)
             @good.update_attributes(goods_params)
             @good.save!
@@ -384,7 +384,7 @@ module Admin
       end
 
       def update_spec
-            @good  =  Ecstore::Good.find(params[:id])
+            @good  =  Good.find(params[:id])
             params[:good_spec_items].select do |item|
                 item[:spec_item_id].present?
             end.each do |good_spec_item|
@@ -393,7 +393,7 @@ module Admin
                 if good_spec_item_obj
                     good_spec_item_obj.update_attributes(good_spec_item)
                 else
-                    @good.good_spec_items << Ecstore::GoodSpecItem.new(good_spec_item)
+                    @good.good_spec_items << GoodSpecItem.new(good_spec_item)
                 end
             end
             if @good.save
@@ -411,16 +411,16 @@ module Admin
         spec_id = ""
 
         supplier =sheet[0,1]
-        #supplierT = Ecstore::Supplier.unscoped.find_by_name(supplier)
-        supplierT = Ecstore::Supplier.where(:name=>supplier).first
+        #supplierT = Supplier.unscoped.find_by_name(supplier)
+        supplierT = Supplier.where(:name=>supplier).first
         if !supplierT.blank?
           supplier = supplierT.id
         else
           supplier=0
         end
 
-        good_type = Ecstore::GoodType.find_by_name(sheet[1,1])
-        @good = Ecstore::Good.new
+        good_type = GoodType.find_by_name(sheet[1,1])
+        @good = Good.new
         sheet.each_with_index do |row,i|
             #if i>4 && !row[1].blank? && !row[0].blank?
             if i>3
@@ -435,23 +435,23 @@ module Admin
 
                 if !row[0].blank? #品类为空的为商品
                     pp "staring...."
-                    @new_good = Ecstore::Good.find_by_bn(bn)
+                    @new_good = Good.find_by_bn(bn)
                     if @new_good&&@new_good.persisted?
                         @good = @new_good
                     else
-                        @good = Ecstore::Good.new
+                        @good = Good.new
                         @good.bn = bn
                     end
                     @good.type_id = good_type.type_id
                     @good.supplier_id = supplier
                     cat_arr = row[0].split("->")
                     cat_deep = cat_arr.length - 1
-                    good_cat = Ecstore::GoodCat.find_by_cat_name(cat_arr[cat_deep])
+                    good_cat = GoodCat.find_by_cat_name(cat_arr[cat_deep])
                     @good.cat_id = good_cat.cat_id
 
                     @good.medium_pic = row[2]
                     @good.big_pic = row[3]
-                    brand = Ecstore::Brand.unscoped.find_by_brand_name(row[1])
+                    brand = Brand.unscoped.find_by_brand_name(row[1])
                     if !brand.blank?
                         @good.brand_id = brand.brand_id
                     end
@@ -460,9 +460,9 @@ module Admin
                     @good.store = row[10]
                     country_name =row[11]
                     if !country_name.blank?
-                      result = Ecstore::Country.find_by_country_name(country_name)
+                      result = Country.find_by_country_name(country_name)
                       if result.blank?
-                        country = Ecstore::Country.new
+                        country = Country.new
                         country.country_name = country_name
                         country.save
                       end
@@ -499,15 +499,15 @@ module Admin
                     else
                         @good.marketable = 'false'
                     end
-                    spec_id = Ecstore::Spec.where(:spec_name=>row[7]).first.spec_id
+                    spec_id = Spec.where(:spec_name=>row[7]).first.spec_id
                     @good.save!
                 else
                     pp "here...."
-                    @new_product = Ecstore::Product.find_by_bn(bn)
+                    @new_product = Product.find_by_bn(bn)
                     if !@new_product.nil? && @new_product.persisted?
                         @product = @new_product
                     else
-                        @product = Ecstore::Product.new
+                        @product = Product.new
                         @product.bn = bn
                     end
                     @product.barcode = row[5]
@@ -523,9 +523,9 @@ module Admin
                     @product.mktprice = row[18]
 
                     @product.save!
-                    Ecstore::GoodSpec.where(:product_id=>@product.product_id).delete_all
-                    sp_val_id = Ecstore::SpecValue.where(:spec_value=>row[7],:spec_id=>spec_id).first.spec_value_id
-                    Ecstore::GoodSpec.new do |gs|
+                    GoodSpec.where(:product_id=>@product.product_id).delete_all
+                    sp_val_id = SpecValue.where(:spec_value=>row[7],:spec_id=>spec_id).first.spec_value_id
+                    GoodSpec.new do |gs|
                         gs.type_id =  @good.type_id
                         gs.spec_id = spec_id
                         gs.spec_value_id = sp_val_id
@@ -540,32 +540,32 @@ module Admin
       end
 
       def collocation
-        @good = Ecstore::Good.find(params[:id])
+        @good = Good.find(params[:id])
         @collocations = @good.good_collocation.collocations if @good.good_collocation
-        @goods = Ecstore::Good.where("marketable = ? and goods_id <> ? ",'true', @good.goods_id ).includes(:cat).includes(:brand).paginate(:page=>params[:page],:per_page=>20,:order => 'uptime DESC')
+        @goods = Good.where("marketable = ? and goods_id <> ? ",'true', @good.goods_id ).includes(:cat).includes(:brand).paginate(:page=>params[:page],:per_page=>20,:order => 'uptime DESC')
       end
 
       def set_suits
-        @good = Ecstore::Good.find(params[:id])
+        @good = Good.find(params[:id])
         @good.p_50 = 'true'
         @good.save
         redirect_to admin_goods_path
       end
 
       def cancel_suits
-        @good = Ecstore::Good.find(params[:id])
+        @good = Good.find(params[:id])
         @good.p_50 = 'false'
         @good.save
         redirect_to admin_goods_path
       end
 
       def create_collocation
-            @good =  Ecstore::Good.find_by_goods_id(params[:collocation][:goods_id])
+            @good =  Good.find_by_goods_id(params[:collocation][:goods_id])
             if @good.good_collocation.present?
                 @collocation = @good.good_collocation
                 @collocation.collocations = params[:collocation][:collocations]
             else
-                @collocation =  Ecstore::GoodCollocation.new params[:collocation]
+                @collocation =  GoodCollocation.new params[:collocation]
             end
             if @collocation.save
                 render :js=>"alert('保存成功')"

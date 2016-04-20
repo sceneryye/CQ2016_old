@@ -12,7 +12,7 @@ class Memberships::CardsController < ApplicationController
 
   	def create
   		
-		@card = Ecstore::Card.find_by_no(card_params[:card_num])
+		@card = Card.find_by_no(card_params[:card_num])
 		if @card && @card.can_use? && !@card.used?
   			card_id = card_params[:card_num]
 			password = card_params[:card_pwd]
@@ -28,7 +28,7 @@ class Memberships::CardsController < ApplicationController
 				@card.update_attribute :used_at,Time.now
 				
 				if @card.member_card.nil?
-					@member_card = Ecstore::MemberCard.new do |member_card|
+					@member_card = MemberCard.new do |member_card|
 						member_card.user_id = @user.member_id
 						member_card.member_id = @user.member_id
 						member_card.card_id = @card.id
@@ -43,7 +43,7 @@ class Memberships::CardsController < ApplicationController
 				#发微信通知
 				send_message('激活')
 
-				Ecstore::CardLog.create(:member_id=>@user.member_id,
+				CardLog.create(:member_id=>@user.member_id,
 	                                                :card_id=>@card.id,
 	                                                :message=>"会员卡激活,会员本人操作")
 				redirect_to bank_cards_path
@@ -93,7 +93,7 @@ class Memberships::CardsController < ApplicationController
   			@current='会员卡信息'
   		end
   		
-  		@card_info = Ecstore::MemberAdvance.where(member_id: @user.member_id).last
+  		@card_info = MemberAdvance.where(member_id: @user.member_id).last
 	end
 
   	def recharge () end
@@ -144,7 +144,7 @@ class Memberships::CardsController < ApplicationController
 	end
 
 	def index
-		#@tradings = Ecstore::CardTradingLog.paginate(:page=>params[:page],:per_page=>20)
+		#@tradings = CardTradingLog.paginate(:page=>params[:page],:per_page=>20)
 
 	    if  @user
 	      @tradings =  @user.orders.where(pay_status:'1').order("createtime desc")
@@ -163,12 +163,12 @@ class Memberships::CardsController < ApplicationController
 		else
 			@yes = 'disabled'
 		end
-		@tradings = Ecstore::CardTradingLog.where("card_no='#{@user.card_num}' and status=#{@status}").paginate(:page=>params[:page],:per_page=>20)
+		@tradings = CardTradingLog.where("card_no='#{@user.card_num}' and status=#{@status}").paginate(:page=>params[:page],:per_page=>20)
 
 	end
 
 	def rebates
-		@rebates = Ecstore::Rebate.where(member_id: @user.member_id).paginate(:page=>params[:page],:per_page=>20)
+		@rebates = Rebate.where(member_id: @user.member_id).paginate(:page=>params[:page],:per_page=>20)
 	end  	
 
 	def pay
@@ -186,7 +186,7 @@ class Memberships::CardsController < ApplicationController
 	    	return render text: res_info[:error]
 	    else
 
-	    	@log = Ecstore::CardTradingLog.new do |log|
+	    	@log = CardTradingLog.new do |log|
 	    		log.card_no = card_id
 	    		log.amount = pay_params[:amount]
 	    		log.trading_time = Time.now
@@ -201,11 +201,11 @@ class Memberships::CardsController < ApplicationController
 
 	def withdrawl
 		rate = 0.1
-		@tradings = Ecstore::CardTradingLog.where(status:0)
+		@tradings = CardTradingLog.where(status:0)
 		amount = @tradings.collect { |trading| trading.amount }.inject(:+).to_f
 		tradding_ids = @tradings.collect { |trading| trading.id.to_s }.join(',')
 
-		@rebate = Ecstore::Rebate.new do |rebate|
+		@rebate = Rebate.new do |rebate|
 			rebate.member_id = @user.member_id
 			rebate.amount = amount * rate
 			rebate.trading_ids = tradding_ids
@@ -260,7 +260,7 @@ class Memberships::CardsController < ApplicationController
 
 	    @cards_log.info("[#{@user.login_name}][#{Time.now}]#{res_data}")
 
-	    @card_log = Ecstore::CardLog.create(:member_id=>@user.member_id,
+	    @card_log = CardLog.create(:member_id=>@user.member_id,
 										:card_no=>card_id,
 										:message=>"#{res_data.to_json}")
 
@@ -288,7 +288,7 @@ class Memberships::CardsController < ApplicationController
 	        balance = res_data["card_cardinfo_get_response"]["card_info"]["card_product_info_arrays"]["card_product_info"][0]["valid_balance"]
 	        balance = (balance.to_f)/100
 			
-			Ecstore::MemberAdvance.create(:member_id=>@user.member_id,
+			MemberAdvance.create(:member_id=>@user.member_id,
 										  :money=>balance,
 										  :message=>"#{from},卡号:#{card_id}",
 										  :mtime=>Time.now.to_i,
@@ -312,13 +312,13 @@ class Memberships::CardsController < ApplicationController
 
 	def save_log (res_data,from='')
 		card_no = @user.card_num
-		card_id = Ecstore::Card.find_by_no(card_no)[:id]
+		card_id = Card.find_by_no(card_no)[:id]
 		member_id = @user.member_id
 		@cards_log ||= Logger.new('log/cards.log')
 
 	    @cards_log.info("[#{@user.login_name}][#{Time.now}]#{res_data}")
 
-	    @card_log = Ecstore::CardLog.create(:member_id=>@user.member_id,
+	    @card_log = CardLog.create(:member_id=>@user.member_id,
 										:card_no=>card_no,
 										:card_id=>card_id,
 										:message=>"#{res_data.to_json}")
@@ -365,7 +365,7 @@ class Memberships::CardsController < ApplicationController
      		end
 
      		
-     		Ecstore::MemberAdvance.create(:member_id=>@user.member_id,
+     		MemberAdvance.create(:member_id=>@user.member_id,
 										  :money=>balance,
 										  :message=>"#{from},卡号:#{card_no}",
 										  :mtime=>Time.now.to_i,

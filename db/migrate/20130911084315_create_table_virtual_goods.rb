@@ -18,6 +18,6 @@ class CreateTableVirtualGoods < ActiveRecord::Migration
   	drop_table :sdb_imodec_virtual_goods
   end
   def connection
-  	@connection =  Ecstore::Base.connection
+  	@connection =  Base.connection
   end
 end

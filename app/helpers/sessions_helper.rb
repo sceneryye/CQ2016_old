@@ -3,7 +3,7 @@ module SessionsHelper
 		return @account unless @account.nil?
 		if cookies["MEMBER"].present?
 			account_id = cookies["MEMBER"].split("-").first
-			@account ||= Ecstore::Account.find_by_account_id(account_id)
+			@account ||= Account.find_by_account_id(account_id)
 		end
 	end
 
@@ -106,7 +106,7 @@ module SessionsHelper
 	  	# return true if  Rails.env == "development"
 	  	if cookies["MEMBER"]
 		  	account_id = cookies["MEMBER"].split("-").first
-		  	account = Ecstore::Account.find_by_account_id(account_id)
+		  	account = Account.find_by_account_id(account_id)
 		  	if account
 		  		secret_string = account.gen_secret_string_for_cookie
 		  		# sign_in(account) if secret_string.split("-")[0..-2] == cookies["MEMBER"].split("-")[0..-2]
@@ -139,7 +139,7 @@ module SessionsHelper
 	  def simple_authorize_user!
 	  	return  true if  current_account
 	  	if cookies["loginName"]
-		  	account = Ecstore::Account.find_by_login_name(cookies["loginName"])
+		  	account = Account.find_by_login_name(cookies["loginName"])
 		  	if  account
 		  		sign_in(account)
 		  	else

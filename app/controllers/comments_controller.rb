@@ -3,7 +3,7 @@ class CommentsController < ApplicationController
 
   def create
     return_url = params.delete(:return_url)
-    @comment = Ecstore::Comment.new params[:comment]
+    @comment = Comment.new params[:comment]
 
     respond_to do |format|
       if @comment.save
@@ -20,7 +20,7 @@ class CommentsController < ApplicationController
   def tairyo_comment
 
     if @user
-      @comment = Ecstore::Comment.new params[:comment]
+      @comment = Comment.new params[:comment]
 
 
     render layout: "tairyo_new"
@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
 
  def tairyo
    if @user
-     @comment = Ecstore::Comment.new params[:comment]
+     @comment = Comment.new params[:comment]
 
      if @comment.save
 

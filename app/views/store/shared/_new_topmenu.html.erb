@@ -27,7 +27,7 @@
             <a id="brands" data-target="<%=site_name%>/brands" href="<%=site_name%>/brands" class="dropdown-toggle" data-toggle="dropdown">基地 <span>BRANDS</span></a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="brands">
 
-              <% Ecstore::Brand.menu_brands.each do |brand|%>
+              <% Brand.menu_brands.each do |brand|%>
                 <%if brand%>
                   <li>
                     <%if  Rails.env == "production"%>
@@ -47,7 +47,7 @@
           <li class="apparel dropdown">
             <a id="apparel" data-target="<%=site_name%>/gallery/22" href="<%=site_name%>/gallery/22" class="dropdown-toggle" data-toggle="dropdown">时装 <span>APPAREL</span></a>
             <ul class="dropdown-menu" role="menu" aria-labelledby="apparel">
-              <%Ecstore::Category.apparel_menus.each do |cat|%>
+              <%Category.apparel_menus.each do |cat|%>
                 <li>
                   <a tabindex="-1" href="<%=site_name%><%=cat_path(cat)%>">
                    <%=cat.cat_name.split(/\s+/)[0]%>

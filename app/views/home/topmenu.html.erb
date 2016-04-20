@@ -12,7 +12,7 @@ $(document).ready(function(){
     $(this).removeClass('open');
   });
 
-  $(window.parent.document).find("#search_input").val('<%=Ecstore::Config.search_value%>');
+  $(window.parent.document).find("#search_input").val('<%=Config.search_value%>');
   $(window.parent.document).find("#account").css({ width: '510px' });
 
   <%if signed_in?%>

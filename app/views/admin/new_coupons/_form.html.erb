@@ -121,7 +121,7 @@
           </span>
          <ul id="selected_goods" class="goods-list">
           <%@coupon.condition_val.each do |bn|%>
-            <% good =  Ecstore::Good.find_by_bn(bn)%>
+            <% good =  Good.find_by_bn(bn)%>
             <li><%=good.name%> <%=bn%></li>
           <%end if @coupon.condition_val.is_a?(Array)%>
          </ul>

@@ -11,6 +11,6 @@ class AddBoughtAtAndUsedAtToCards < ActiveRecord::Migration
 
 
   def connection
-  	@connection =  Ecstore::Base.connection
+  	@connection =  Base.connection
   end
 end

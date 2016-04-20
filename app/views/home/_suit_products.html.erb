@@ -6,7 +6,7 @@
 		</a>
 	</li>
 	<%@home.suits.each do |suit|%>
-	<%good =  Ecstore::Good.find_by_bn(suit["bn"])%>
+	<%good =  Good.find_by_bn(suit["bn"])%>
 	<li class="suit">
 		<%if good%>
 			<a href="<%=suit["link"]%>" target="_blank">

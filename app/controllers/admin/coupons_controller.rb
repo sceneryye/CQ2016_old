@@ -6,14 +6,14 @@ module Admin
       def index
       	if params[:search]&&params[:search][:key] && params[:search][:key].present?
       		key = params[:search][:key]
-      		accounts = Ecstore::Account.where("login_name like ?","%#{key}%")
+      		accounts = Account.where("login_name like ?","%#{key}%")
             @users = accounts.collect { |a| a.user }.paginate(params[:page] || 1)
       	else
-      		@users = Ecstore::User.order("regtime DESC").paginate(:page=>params[:page],:per_page=>15)
+      		@users = User.order("regtime DESC").paginate(:page=>params[:page],:per_page=>15)
       	end
       	current_time = Time.now.to_i
-      	@coupons = Ecstore::Coupon.where(:cpns_status=>"1").select do |coupon|
-      					rule = Ecstore::Rule.find_by_rule_id(coupon.rule_id)
+      	@coupons = Coupon.where(:cpns_status=>"1").select do |coupon|
+      					rule = Rule.find_by_rule_id(coupon.rule_id)
       					if rule.from_time <= current_time && rule.to_time >= current_time
       						coupon
       					end
@@ -22,11 +22,11 @@ module Admin
 
       def create
           if params[:member_id] and params[:cpns_id]
-              @user = Ecstore::User.find_by_member_id(params[:member_id])
-              coupon = Ecstore::Coupon.find_by_cpns_id(params[:cpns_id])
+              @user = User.find_by_member_id(params[:member_id])
+              coupon = Coupon.find_by_cpns_id(params[:cpns_id])
               coupon_code = coupon.make_coupon_code
             #add coupon to user
-            @memc = ::Ecstore::MemberCoupon.new do |mc|
+            @memc = ::MemberCoupon.new do |mc|
                 mc.memc_code = coupon_code
                 mc.cpns_id =  coupon.cpns_id
                 mc.member_id = @user.member_id
@@ -49,10 +49,10 @@ module Admin
 
       def destroy
         if params[:member_id] and params[:id] and params[:memc_code]
-          user = Ecstore::User.find_by_member_id(params[:member_id])
-          coupon = Ecstore::Coupon.find_by_cpns_id(params[:id])
+          user = User.find_by_member_id(params[:member_id])
+          coupon = Coupon.find_by_cpns_id(params[:id])
           begin
-            Ecstore::MemberCoupon.where(:cpns_id=>params[:id],
+            MemberCoupon.where(:cpns_id=>params[:id],
                       :member_id=>params[:member_id],
                       :memc_code=>params[:memc_code]).destroy_all #update_all({:memc_enabled=>'false',:disabled=>'true'})
 

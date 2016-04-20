@@ -7,9 +7,9 @@ class HomeController < ApplicationController
 	def index
 
 		@title = "昌麒投资"
-		#@home = Ecstore::Home.where(:supplier_id=>nil).last
-		@goods = Ecstore::Good.where(:marketable=>'true').order("p_order ASC")
-		@categories = Ecstore::Category.where("parent_id>0 and disabled='false'")
+		#@home = Home.where(:supplier_id=>nil).last
+		@goods = Good.where(:marketable=>'true').order("p_order ASC")
+		@categories = Category.where("parent_id>0 and disabled='false'")
 		if signed_in?
 		   redirect_to params[:return_url] if params[:return_url].present?
 		end
@@ -18,9 +18,9 @@ class HomeController < ApplicationController
 	def index1
 
 		@title = "昌麒投资"
-		#@home = Ecstore::Home.where(:supplier_id=>nil).last
-		@goods = Ecstore::Good.where(:marketable=>'true').order("p_order ASC")
-		@categories = Ecstore::Category.where("parent_id>0 and disabled='false'")
+		#@home = Home.where(:supplier_id=>nil).last
+		@goods = Good.where(:marketable=>'true').order("p_order ASC")
+		@categories = Category.where("parent_id>0 and disabled='false'")
 		if signed_in?
 		   redirect_to params[:return_url] if params[:return_url].present?
 		end

@@ -7,7 +7,7 @@
 2). 商店数据库(配置文件:ecstore.yml)
  a)创建好迁移文件之后,需要添加如下一个方法:
  	def connection
-  		@connection = Ecstore::Base.connection
+  		@connection = Base.connection
   	end
   这样,'rake db:migrate' 自动会执行到商店数据库.
 

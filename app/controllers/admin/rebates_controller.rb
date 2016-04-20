@@ -9,8 +9,8 @@ class Admin::RebatesController < Admin::BaseController
 	  
 	def index
 
-	    @rebates =Ecstore::Rebate.paginate(:page=>params[:page],:per_page=>20)
-	    @rebates_total = Ecstore::Rebate.count
+	    @rebates =Rebate.paginate(:page=>params[:page],:per_page=>20)
+	    @rebates_total = Rebate.count
 
 	end
 

@@ -20,10 +20,10 @@ class Store::CartController < ApplicationController
 	   
     
     # product_id = specs.collect do |spec_value_id|
-		# 	Ecstore::GoodSpec.where(params[:product].merge(:spec_value_id=>spec_value_id)).pluck(:product_id)
+		# 	GoodSpec.where(params[:product].merge(:spec_value_id=>spec_value_id)).pluck(:product_id)
 		# end.inject(:&).first
 
-		@good = Ecstore::Good.find_by_goods_id(goods_id)
+		@good = Good.find_by_goods_id(goods_id)
 		# @product  =  @good.products.select do |p|
 		# 	p.spec_desc["spec_value_id"].values.map{ |x| x.to_s }.sort == specs.sort
 		# end.first
@@ -43,7 +43,7 @@ class Store::CartController < ApplicationController
 			member_ident = @m_id
 		end
 
-		@cart = Ecstore::Cart.where(:obj_ident=>"goods_#{goods_id}_#{@product.product_id}",
+		@cart = Cart.where(:obj_ident=>"goods_#{goods_id}_#{@product.product_id}",
 									  :member_ident=>member_ident).first_or_initialize do |cart|
 			cart.obj_type = "goods"
 			cart.quantity = quantity
@@ -54,7 +54,7 @@ class Store::CartController < ApplicationController
 		if @cart.new_record?
 			@cart.save
 		else
-			Ecstore::Cart.where(:obj_ident=>@cart.obj_ident,:member_ident=>member_ident).update_all(:quantity=>@cart.quantity+quantity)
+			Cart.where(:obj_ident=>@cart.obj_ident,:member_ident=>member_ident).update_all(:quantity=>@cart.quantity+quantity)
 			@cart.quantity = (@cart.quantity+1)
 		end
 		

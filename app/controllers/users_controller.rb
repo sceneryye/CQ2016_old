@@ -9,11 +9,11 @@ class UsersController < ApplicationController
     return_url=params[:return_url]
     @from = params[:from]
     if @user
-      @account = Ecstore::Account.find(@user.member_id)
+      @account = Account.find(@user.member_id)
       @action_url = "/users/#{@account.account_id}?return_url=#{return_url}"#users_path(@account)
       @method = :put
     else
-  	  @account = Ecstore::Account.new
+  	  @account = Account.new
       @action_url = "/users/?return_url=#{return_url}"#users_path
       @method = :post
     end
@@ -23,7 +23,7 @@ class UsersController < ApplicationController
     supplier_id = 1
   	now  = Time.now
     #params[:user].merge!(:login_name=>params[:user][:email])
-	  @account = Ecstore::Account.new(user_params) do |ac|
+	  @account = Account.new(user_params) do |ac|
   		ac.account_type ="member"
   		ac.createtime = now.to_i
   		ac.user.member_lv_id = 1
@@ -46,7 +46,7 @@ class UsersController < ApplicationController
   end
 
   def update    
-    @account = Ecstore::Account.find(@user.member_id)
+    @account = Account.find(@user.member_id)
     if @account.update_attributes(params[:user])
       sign_in(@account)
       @return_url=params[:return_url]
@@ -72,7 +72,7 @@ class UsersController < ApplicationController
           else '会员名'
       end
       if value.present?
-          @user = Ecstore::User.joins(:account).where("#{@by} = ?",value).first
+          @user = User.joins(:account).where("#{@by} = ?",value).first
           if @user
             render "find_by_#{@by}"
           else
@@ -92,7 +92,7 @@ class UsersController < ApplicationController
     @title = "找回密码"
     member_id = params[:user][:member_id]
     @by = params[:user][:by]
-    @user = Ecstore::User.where(:member_id=>member_id).first
+    @user = User.where(:member_id=>member_id).first
     @user.send_reset_password_instruction(@by)
 
     respond_to do |format|
@@ -106,7 +106,7 @@ class UsersController < ApplicationController
     @title = "重设密码"
     by = params[:by] || "email"
     
-    @user = Ecstore::User.where(:member_id=>params[:u],:reset_password_token=>params[:token]).first
+    @user = User.where(:member_id=>params[:u],:reset_password_token=>params[:token]).first
 
     respond_to do |format|
       if @user && !@user.reset_password_token_expired?
@@ -122,7 +122,7 @@ class UsersController < ApplicationController
 
   def change_password
     @title = "修改密码成功"
-    @account = Ecstore::Account.where(:account_id=>params[:account][:account_id]).first
+    @account = Account.where(:account_id=>params[:account][:account_id]).first
     if @account.change_password(params[:account][:login_password],
                                                            params[:account][:login_password_confirmation])
       @account.user.clear_reset_password_token

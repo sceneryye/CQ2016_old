@@ -3,7 +3,7 @@ class PagesController < ApplicationController
 	layout 'application'
 
 	def show
-		@page = Ecstore::Page.includes(:meta_seo).find(params[:id])
+		@page = Page.includes(:meta_seo).find(params[:id])
 
       render :layout=> @page.layout.present? ? @page.layout : nil
 

@@ -12,7 +12,7 @@ class Admin::CardsController < Admin::BaseController
   before_action :set_card, only: [:show,:allinpay,:edit, :update, :destroy,:buy,:use,:edit_user]
 
   def trading_log
-    @log = Ecstore::CardTradingLog.order("id ASC")
+    @log = CardTradingLog.order("id ASC")
     if params[:card_no]
       @log =@log.where(card_no: params[:card_no])
     end
@@ -22,12 +22,12 @@ class Admin::CardsController < Admin::BaseController
   def allinpay () end
 
   def index
-    @labels = Ecstore::Label.all
+    @labels = Label.all
 
     sale_status = params[:sold] == "0" ? false : true
     key = params[:search][:key] if params[:search]
 
-    @cards = Ecstore::Card.order("id ASC")
+    @cards = Card.order("id ASC")
 
     if params[:sold].present?
         @cards = @cards.where(:sale_status=>sale_status)
@@ -39,20 +39,20 @@ class Admin::CardsController < Admin::BaseController
 
 
     @cards = @cards.paginate(:page=>params[:page],:per_page=>20)
-    @cards_total = Ecstore::Card.count
+    @cards_total = Card.count
 
   end
 
   def show ()  end
 
   def new 
-      @card = Ecstore::Card.new
+      @card = Card.new
   end
 
   def edit () end
 
   def create
-    @card = Ecstore::Card.new(params[:card])
+    @card = Card.new(params[:card])
 
     respond_to do |format|
       if @card.save
@@ -74,7 +74,7 @@ class Admin::CardsController < Admin::BaseController
             I18n.t("card.#{key}") + "=" + value
         end.join(",")
 
-        Ecstore::CardLog.create(:member_id=>current_admin.account_id,
+        CardLog.create(:member_id=>current_admin.account_id,
                                                 :card_id=>@card.id,
                                                 :message=>"更新卡信息,#{message}")
 
@@ -109,42 +109,42 @@ class Admin::CardsController < Admin::BaseController
   end
   
   def edit_pay
-      @card = Ecstore::Card.find(params[:id])
+      @card = Card.find(params[:id])
       @user_card = @member_card = @card.member_card
   end
 
   def logs
-      @card = Ecstore::Card.find(params[:id])
+      @card = Card.find(params[:id])
       @logs = @card.card_logs
   end
 
   def tag
 
       if params[:cards] == "all"
-          @cards = Ecstore::Card.all
+          @cards = Card.all
       else
-          @cards = Ecstore::Card.find(params[:cards])
+          @cards = Card.find(params[:cards])
       end
       @cards.each do |card|
-         Ecstore::Labelable.where(:label_id=>params[:label],
+         Labelable.where(:label_id=>params[:label],
                                                    :labelable_id=>card.id,
-                                                   :labelable_type=>"Ecstore::Card").first_or_create if card
+                                                   :labelable_type=>"Card").first_or_create if card
       end
 
       render :text=>"ok"
   end
 
   def untag
-      @card = Ecstore::Card.find(params[:id])
+      @card = Card.find(params[:id])
       @card.labelables.where(:label_id=>params[:label]).delete_all
       render "untag"
   end
 
   def cancel_order
-     @card = Ecstore::Card.find(params[:id])
+     @card = Card.find(params[:id])
      @card.update_attribute :sale_status,false
      @member_card = @card.member_card
-     Ecstore::CardLog.create(:member_id=>current_admin.account_id,
+     CardLog.create(:member_id=>current_admin.account_id,
                                                 :card_id=>@card.id,
                                                 :message=>"取消卡订单,购买者=#{@member_card.buyer.login_name}")
      @member_card.destroy
@@ -156,9 +156,9 @@ class Admin::CardsController < Admin::BaseController
       @logger ||= Logger.new("log/card.log")
       
       if params[:card][:select_all].to_i > 0
-         @cards = Ecstore::Card.all
+         @cards = Card.all
       else
-        @cards = Ecstore::Card.find(params[:selected_cards])
+        @cards = Card.find(params[:selected_cards])
       end
       fields = ["卡号","面值","类型","销售状态","使用状态","卡状态","购卡人手机","用卡人手机","标签"]
       content =content_generate(fields,@cards)  #调用export方法
@@ -199,17 +199,17 @@ class Admin::CardsController < Admin::BaseController
         file = params[:card][:file].tempfile
         csv_rows = CSV.read(file,options)
         @logger ||= Logger.new("log/card.log")
-        @cols = Ecstore::CvsColumn.new
+        @cols = CvsColumn.new
         first_row = 0
         @cols.parseModel(csv_rows[first_row])
         csv_rows.shift
         errors = {}
         begin
-            Ecstore::Card.transaction do
+            Card.transaction do
                 csv_rows.each_with_index do |row,idx|
                   index = @cols.index("卡号")
                   card_no = row[index]
-                  @new_card = Ecstore::Card.find_by_no(row[index])
+                  @new_card = Card.find_by_no(row[index])
                   if !@new_card.nil? && @new_card.persisted?
                     @logger.error("[error]card no exist: ")
                     errors[idx+2] = "导入失败,卡号:#{card_no}已经存在."
@@ -217,7 +217,7 @@ class Admin::CardsController < Admin::BaseController
                     # render :text=>"【异常】卡号已经存在"
                     # return
                   else
-                    @card = Ecstore::Card.new
+                    @card = Card.new
                   end
                   @card.no = row[index]
                   index = @cols.index("面值")
@@ -372,7 +372,7 @@ class Admin::CardsController < Admin::BaseController
   private
 
   def set_card
-    @card = Ecstore::Card.find(params[:id])
+    @card = Card.find(params[:id])
   end
 
 

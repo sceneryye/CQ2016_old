@@ -5,7 +5,7 @@ class VshopController < ApplicationController
 
 
  def new
-    @account = Ecstore::Account.new
+    @account = Account.new
   end
 
   def login
@@ -21,7 +21,7 @@ class VshopController < ApplicationController
     set_locale
 
     if @user
-      @supplier =Ecstore::Supplier.find(params[:id])
+      @supplier =Supplier.find(params[:id])
       render :layout=>@supplier.layout
     else
       redirect_to "/auto_login?id=#{params[:id]}&platform=mobile&return_url=/vshop/#{params[:id]}/user?id=#{params[:id]}"
@@ -30,7 +30,7 @@ class VshopController < ApplicationController
 
   def apply
     if params[:id]
-      @supplier  =  Ecstore::Supplier.find(params[:id])
+      @supplier  =  Supplier.find(params[:id])
       @action_url =  "/admin/suppliers/#{params[:id]}?return_url=/vshop/apply"
       @method = :put
     end
@@ -41,7 +41,7 @@ class VshopController < ApplicationController
 
     if @user
 
-      @orders_nw =Ecstore::Order.where(:supplier_id=> @user.account.supplier_id).order("order_id desc")
+      @orders_nw =Order.where(:supplier_id=> @user.account.supplier_id).order("order_id desc")
 
       if params[:status].nil?
         @orders_nw = @orders_nw
@@ -74,10 +74,10 @@ class VshopController < ApplicationController
   #get /vshop/members
   def members
     if @user
-      @supplier = Ecstore::Supplier.where(:member_id=>@user.id,:status=>1).first
+      @supplier = Supplier.where(:member_id=>@user.id,:status=>1).first
       if @supplier
-        @total_member = Ecstore::Account.where(:supplier_id=>@supplier.id).count()
-        @accounts = Ecstore::Account.where(:supplier_id=>@supplier.id).paginate(:page => params[:page], :per_page => 20).order("account_id DESC")
+        @total_member = Account.where(:supplier_id=>@supplier.id).count()
+        @accounts = Account.where(:supplier_id=>@supplier.id).paginate(:page => params[:page], :per_page => 20).order("account_id DESC")
         #@column_data = YAML.load(File.open(Rails.root.to_s+"/config/columns/member.yml"))
         respond_to do |format|
           format.html # index.html.erb
@@ -94,7 +94,7 @@ class VshopController < ApplicationController
   #get /vshop/weixin
   def weixin
     if @user
-      @supplier = Ecstore::Supplier.where(:member_id=>@user.account.id).first
+      @supplier = Supplier.where(:member_id=>@user.account.id).first
       @action = "/admin/suppliers/#{@supplier.id}?return_url=/vshop/weixn"
       render  :layout=>'vshop_wechat'
     else
@@ -106,10 +106,10 @@ class VshopController < ApplicationController
    def goods
     if @user
 
-      @goods = Ecstore::Good.includes(:cat).includes(:brand)
-      @supplier =Ecstore::Supplier.find_by_member_id(@user.id)
+      @goods = Good.includes(:cat).includes(:brand)
+      @supplier =Supplier.find_by_member_id(@user.id)
       if @user.id!= 2495 #昌麒
-        @supplier =Ecstore::Supplier.find_by_member_id(@user.id)
+        @supplier =Supplier.find_by_member_id(@user.id)
         @goods = @goods.where(:supplier_id=>@supplier.id)
       end
      
@@ -125,18 +125,18 @@ class VshopController < ApplicationController
 
  
 def destory
-    @good=Ecstore::Good.find(params[:id])
+    @good=Good.find(params[:id])
     @good.destroy
     redirect_to "/vshop/goods"
 end
 
   def article
-    @article = Ecstore::Page.includes(:meta_seo).find(params[:id])
+    @article = Page.includes(:meta_seo).find(params[:id])
   end
 
   def create
     now  = Time.now
-    @account = Ecstore::Account.new(params[:user]) do |ac|
+    @account = Account.new(params[:user]) do |ac|
       ac.account_type ="member"
       ac.createtime = now.to_i
       ac.user.member_lv_id = 1
@@ -165,7 +165,7 @@ end
              else '会员名'
            end
     if value.present?
-      @user = Ecstore::User.joins(:account).where("#{@by} = ?",value).first
+      @user = User.joins(:account).where("#{@by} = ?",value).first
       if @user
         render "find_by_#{@by}"
       else
@@ -180,9 +180,9 @@ end
   def show
     set_locale
     @supplier_id=1
-    @homepage = Ecstore::Home.where(:supplier_id=>@supplier_id).last
-    @supplier = Ecstore::Supplier.find(@supplier_id)
-    @good=Ecstore::Good.where(:supplier_id=>@supplier_id)
+    @homepage = Home.where(:supplier_id=>@supplier_id).last
+    @supplier = Supplier.find(@supplier_id)
+    @good=Good.where(:supplier_id=>@supplier_id)
 
 
     render :layout=>@supplier.layout
@@ -193,8 +193,8 @@ end
 
     @supplier_id=params[:id]
     @cat = params[:cat]
-    @goods =  Ecstore::Good.where(:supplier_id=>@supplier_id,:cat_id=>@cat)
-    @supplier = Ecstore::Supplier.find(@supplier_id)
+    @goods =  Good.where(:supplier_id=>@supplier_id,:cat_id=>@cat)
+    @supplier = Supplier.find(@supplier_id)
 
     @recommend_user = session[:recommend_user]
 
@@ -207,7 +207,7 @@ end
         member_id = @user.member_id
       end
       now  = Time.now.to_i
-      Ecstore::RecommendLog.new do |rl|
+      RecommendLog.new do |rl|
         rl.wechat_id = @recommend_user
       #  rl.goods_id = @good.goods_id
         rl.member_id = member_id
@@ -226,9 +226,9 @@ end
   def payments
     supplier_id=1
 
-    @supplier = Ecstore::Supplier.find(supplier_id)
+    @supplier = Supplier.find(supplier_id)
 
-    @payment = Ecstore::Payment.find(params[:payment_id])
+    @payment = Payment.find(params[:payment_id])
     if @payment && @payment.status == 'ready'
       adapter = @payment.pay_app_id
       order_id = @payment.pay_bill.rel_id
@@ -248,7 +248,7 @@ end
     
       render :inline=>@modec_pay.html_form_wxpay, :layout=>"application"
 
-      Ecstore::PaymentLog.new do |log|
+      PaymentLog.new do |log|
         log.payment_id = @payment.payment_id
         log.order_id = order_id
         log.pay_name = adapter
@@ -264,7 +264,7 @@ end
   def paynotifyurl
     #========================
     if params[:temp]=="solution"
-      @payment = Ecstore::Payment.find(params[:payment_id])
+      @payment = Payment.find(params[:payment_id])
       return redirect_to detail_order_path(@payment.pay_bill.order) if @payment&&@payment.paid?
 
       @order = @payment.pay_bill.order
@@ -275,7 +275,7 @@ end
 
     ModecPay.logger.info "[#{Time.now}][#{request.remote_ip}] #{request.request_method} \"#{request.fullpath}\" params : #{ params.to_s }"
 
-    @payment = Ecstore::Payment.find(params.delete(:payment_id))
+    @payment = Payment.find(params.delete(:payment_id))
 
     return render :nothing=>true, :status=>:forbidden if @payment.paid?
 
@@ -296,7 +296,7 @@ end
       if result.delete(:payment_id) == @payment.payment_id.to_s && !@payment.paid?
         @payment.update_attributes(result)
         @order.update_attributes(:pay_status=>'1')
-        Ecstore::OrderLog.new do |order_log|
+        OrderLog.new do |order_log|
           order_log.rel_id = @order.order_id
           order_log.op_id = @user.member_id
           order_log.op_name = @user.login_name

@@ -4,13 +4,13 @@ class Store::BrandsController < ApplicationController
   before_filter :require_top_cats
 
   def index
-    @brands = Ecstore::Brand.order("ordernum asc,slug asc")
-    @reco =  Ecstore::Brand.where(:reco=>true).first
+    @brands = Brand.order("ordernum asc,slug asc")
+    @reco =  Brand.where(:reco=>true).first
   end
 
   def show
 
-  	@brand = Ecstore::Brand.find(params[:id])
+  	@brand = Brand.find(params[:id])
     
       return if @brand.status == 'disabled'
 
@@ -27,7 +27,7 @@ class Store::BrandsController < ApplicationController
 
        if params[:cat_id].present?
           page  = (params[:page] || 1).to_i 
-          @cat  =  Ecstore::Category.find(params[:cat_id])
+          @cat  =  Category.find(params[:cat_id])
           @all_goods = @cat.all_goods( { :brand_id=>@brand.brand_id } )
         
           if col&&sorter == 'asc'

@@ -58,7 +58,7 @@ class Memberships::ProfilesController < ApplicationController
 
   private
     def  find_user
-      # return @user = Ecstore::User.find_by_email("yxf4559@163.com")
+      # return @user = User.find_by_email("yxf4559@163.com")
       if signed_in?
         @user = current_account.user
       else

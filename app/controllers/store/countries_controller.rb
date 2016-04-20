@@ -4,7 +4,7 @@ class Store::CountriesController < ApplicationController
   	# before_filter :require_top_cats
   	
   	def show
-        country_name = Ecstore::Country.find_by_country_id(params[:id]).country_name
+        country_name = Country.find_by_country_id(params[:id]).country_name
         conditions = {:place=>country_name}
         if params[:gtype] == "1"
              conditions["sell"] = 'true' 
@@ -14,10 +14,10 @@ class Store::CountriesController < ApplicationController
              conditions["agent"] = 'true'
         end
         conditions.each do |key,val|
-          raise "Field `#{key}`  is existence" unless Ecstore::Good.attribute_names.include?(key.to_s)
+          raise "Field `#{key}`  is existence" unless Good.attribute_names.include?(key.to_s)
         end if conditions.present?
 
-        @all_goods = Ecstore::Good.where(conditions).order("d_order desc").to_a 
+        @all_goods = Good.where(conditions).order("d_order desc").to_a 
 
         order = params[:order]
 

@@ -13,11 +13,11 @@ namespace :imodec do
 		  add '/', :changefreq => 'daily', :priority => 0.9
 		  add '/pages/aboutus', :changefreq => 'weekly'
 
-		  Ecstore::Good.where(:marketable=>'true').find_each do |good|
+		  Good.where(:marketable=>'true').find_each do |good|
 		  	 add "/products/#{good.bn}", :changefreq=>'daily'
 		  end
 
-		  Ecstore::Brand.where(:disabled=>'false').find_each do |brand|
+		  Brand.where(:disabled=>'false').find_each do |brand|
 		  	if brand.slug
 		  		add "/brands/#{brand.slug}",:changefreq=>'daily'
 		  	else
@@ -25,7 +25,7 @@ namespace :imodec do
 		  	end
 		  end
 
-		  Ecstore::GoodCat.find_each do  |cat|
+		  GoodCat.find_each do  |cat|
 		  	add "/gallery/#{cat.cat_id}"
 		  end
 

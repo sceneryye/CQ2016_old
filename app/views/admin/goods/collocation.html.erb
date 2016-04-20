@@ -13,7 +13,7 @@
         <%=f.hidden_field :collocation_type,:value=>"goods"%>
 	<ul id="collocations" class="clearfix">
           <%@collocations.each do |goods_id|%>
-          <%good = Ecstore::Good.find_by_goods_id(goods_id)%>
+          <%good = Good.find_by_goods_id(goods_id)%>
           <li data-goods_id="<%=goods_id%>">
             <div>
               <img src="<%=good.list_default_pic%>">

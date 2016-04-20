@@ -9,7 +9,7 @@
 		<%=child.cat_name%>
 	</td>
 	<td><%=child.cat_path_rep%></td>
-	<td><%=Ecstore::GoodType.find(child.type_id).name if !child.type_id.nil?%></td>
+	<td><%=GoodType.find(child.type_id).name if !child.type_id.nil?%></td>
 	<td><%=child.disabled=='true' ? "是" : "否" %></td>
 	<td><%=child.p_order%></td>
 	<td>

@@ -4,7 +4,7 @@ namespace :imodec do
 	task :seo=>:environment do
 
 		# ======migrate brands seo=======
-		Ecstore::Brand.unscoped.all.each do |brand|
+		Brand.unscoped.all.each do |brand|
 			if brand.meta_seo
 				brand.meta_seo.update_attributes(:title=>"#{brand.brand_name} | TRADE-V | 跨境贸易，一键直达",
 									    :keywords =>brand.seo&&brand.seo.keywords,
@@ -20,7 +20,7 @@ namespace :imodec do
 		end
 
 		# ======migrate cats seo=======
-		Ecstore::Category.all.each do |cat|
+		Category.all.each do |cat|
 
 			if cat.meta_seo
 				cat.meta_seo.update_attributes(:title=>"#{cat.cat_name} | TRADE-V | 跨境贸易，一键直达",
@@ -39,7 +39,7 @@ namespace :imodec do
 
 
 		# ======migrate goods seo=======
-		Ecstore::Good.all.each do |good|
+		Good.all.each do |good|
 			title = []
 			title << good.name 
 			title << good.brand.brand_name if good.brand

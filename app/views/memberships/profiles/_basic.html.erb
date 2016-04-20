@@ -43,12 +43,12 @@
 		<label>收货区域:</label>
 		<%=f.hidden_field :area%>
 
-		<%=f.select :province,Ecstore::Region.provinces.collect{|p| [p.local_name,p.region_id] },{:include_blank=>"请选择"}%>
+		<%=f.select :province,Region.provinces.collect{|p| [p.local_name,p.region_id] },{:include_blank=>"请选择"}%>
 		<%if @user.city%>
-			<%=f.select :city,Ecstore::Region.cities_of(@user.province).collect{|p| [p.local_name,p.region_id] },{:include_blank=>"请选择"},{:onchange=>"selectDistrict(this);"}%>
+			<%=f.select :city,Region.cities_of(@user.province).collect{|p| [p.local_name,p.region_id] },{:include_blank=>"请选择"},{:onchange=>"selectDistrict(this);"}%>
 		<%end%>
 		<%if @user.district%>
-			<%=f.select :district,Ecstore::Region.districts_of(@user.city).collect{|p| [p.local_name,p.region_id] },{:include_blank=>"请选择"},{:onchange=>"makeAddr(this);"}%>
+			<%=f.select :district,Region.districts_of(@user.city).collect{|p| [p.local_name,p.region_id] },{:include_blank=>"请选择"},{:onchange=>"makeAddr(this);"}%>
 		<%end%>
 	</div>
 	<div class="field">

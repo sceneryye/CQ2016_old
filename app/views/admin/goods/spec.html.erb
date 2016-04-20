@@ -3,7 +3,7 @@
 	<ul class="nav nav-tabs">
 		<%@good.spec_desc.keys.each_with_index do |spec_id,index|%>
 			<li class="<%='active' if index == 0%>">
-				<%=link_to Ecstore::Spec.find(spec_id).spec_name,"#spec_#{spec_id}",:"data-toggle"=>"tab"%>
+				<%=link_to Spec.find(spec_id).spec_name,"#spec_#{spec_id}",:"data-toggle"=>"tab"%>
 			</li>
 		<%end%>
 	</ul>

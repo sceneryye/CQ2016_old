@@ -1,26 +1,26 @@
 class Admin::EmailsController < Admin::BaseController
 	def index
-		@emails = Ecstore::Email.paginate(:page=>params[:page] || 1,:per_page=>20)
+		@emails = Email.paginate(:page=>params[:page] || 1,:per_page=>20)
 	end
 
 	def new
-		@email = Ecstore::Email.new
+		@email = Email.new
 	end
 
 	def create
-		@email = Ecstore::Email.new(params[:email])
+		@email = Email.new(params[:email])
 		@email.save
 		redirect_to admin_emails_url
 	end
 
 	def destroy
-		@email = Ecstore::Email.find(params[:id])
+		@email = Email.find(params[:id])
 		@email.destroy
 		redirect_to admin_emails_url
 	end
 
 	def send_all
-		@emails = Ecstore::Email.all
+		@emails = Email.all
 		@emails.each do |email|
 			UserMailer.user_email(email.addr,"CQ").deliver
 			sleep 0.1

@@ -1,18 +1,18 @@
 class Admin::ConfigsController < Admin::BaseController
 	def index
-		@configs =  Ecstore::Config.all
+		@configs =  Config.all
 	end
 
 	def new
-		@config  =  Ecstore::Config.new
+		@config  =  Config.new
 	end
 
 	def edit
-		@config  =  Ecstore::Config.find(params[:id])
+		@config  =  Config.find(params[:id])
 	end
 
 	def create
-		@config = Ecstore::Config.new(params[:ecstore_config])
+		@config = Config.new(params[:ecstore_config])
 		if @config.save
 			redirect_to admin_configs_url
 		else
@@ -22,7 +22,7 @@ class Admin::ConfigsController < Admin::BaseController
 	end
 
 	def update
-		@config = Ecstore::Config.find(params[:id])
+		@config = Config.find(params[:id])
 		if @config.update_attributes(params[:ecstore_config])
 			redirect_to admin_configs_url
 		else

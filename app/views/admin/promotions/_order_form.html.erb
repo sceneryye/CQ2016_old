@@ -84,7 +84,7 @@
 
       <%if @promotion.action_type == "gift"%>
 
-         <%Ecstore::Good.gifts.each do |gift|%>
+         <%Good.gifts.each do |gift|%>
           <label class="checkbox">
               <%=check_box_tag "promotion[action_content][]",gift.bn,@promotion.action_content.include?(gift.bn)%><span><%="#{gift.name}(#{gift.bn})"%></span>
           </label>
@@ -122,7 +122,7 @@
 </span>
 
 <span class="gift">
-  <%Ecstore::Good.gifts.each do |gift|%>
+  <%Good.gifts.each do |gift|%>
     <label class="checkbox">
         <%=check_box_tag "promotion[action_content][]",gift.bn,(@promotion.action_content||[]).include?(gift.bn)%><span><%="#{gift.name}(#{gift.bn})"%></span>
     </label>

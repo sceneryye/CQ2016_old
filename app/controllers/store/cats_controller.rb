@@ -5,7 +5,7 @@ class Store::CatsController < ApplicationController
 
    
       def goods_list
-        @cat = Ecstore::Category.find_by_cat_id("")
+        @cat = Category.find_by_cat_id("")
 
         order = params[:order]
 
@@ -45,7 +45,7 @@ class Store::CatsController < ApplicationController
       end
 
       def show
-  	      @cat = Ecstore::Category.find_by_cat_id(params[:id])
+  	      @cat = Category.find_by_cat_id(params[:id])
           
           @all_goods = @cat.all_goods
 

@@ -28,11 +28,11 @@
           <span class="readonly-field"><%=@order.created_at%></span>
         </div>
       </div>
-     <% unless @order.supplier_id==(Ecstore::Supplier.find_by_name("万家物流").id)%>
+     <% unless @order.supplier_id==(Supplier.find_by_name("万家物流").id)%>
       <div class="control-group">
         <label class="control-label">物流公司:</label>
         <div class="controls">
-         	<%=f.select :logi_id,Ecstore::Dlycorp.order("ordernum asc").all.collect{|c| [c.name,c.corp_id]},{:include_blank=>"请选择"},{:class=>"span2"}%>
+         	<%=f.select :logi_id,Dlycorp.order("ordernum asc").all.collect{|c| [c.name,c.corp_id]},{:include_blank=>"请选择"},{:class=>"span2"}%>
             <%=f.hidden_field :logi_name%>
             <span class="help-inline error"><%=@delivery.errors[:logi_id].join(",")%></span>
         </div>
@@ -65,16 +65,16 @@
           <%=f.label :ship_area, "收货地区:".html_safe,:class=>"control-label"%>
           <div class="controls area">
 
-            <%=f.select :province,options_from_collection_for_select(Ecstore::Region.provinces,:region_id,:local_name,@order.province),{:include_blank=>"请选择省" },{ :onchange=>"selectProvince(this,'#city','#district');",:id=>"province",:class=>"span2" }%>
+            <%=f.select :province,options_from_collection_for_select(Region.provinces,:region_id,:local_name,@order.province),{:include_blank=>"请选择省" },{ :onchange=>"selectProvince(this,'#city','#district');",:id=>"province",:class=>"span2" }%>
             
             <%if @order&&@order.city%>
-                <%=f.select :city,options_from_collection_for_select(Ecstore::Region.cities_of(@order.province),:region_id,:local_name,@order.city),{:include_blank=>"请选择市"},{ :onchange=>"selectCity(this,'#district');",:id=>"city",:class=>"span2" }%>
+                <%=f.select :city,options_from_collection_for_select(Region.cities_of(@order.province),:region_id,:local_name,@order.city),{:include_blank=>"请选择市"},{ :onchange=>"selectCity(this,'#district');",:id=>"city",:class=>"span2" }%>
             <%else%>
                     <%=f.select :city, {}, { :include_blank=>"请选择市" }, { :onchange=>"selectCity(this,'#district');",:id=>"city",:class=>"span2" }%>
             <%end%>
 
             <%if @order&&@order.district%>
-              <%=f.select :district,options_from_collection_for_select(Ecstore::Region.districts_of(@order.city),:region_id,:local_name,@order.district),{:include_blank=>"请选择区/县"},{ :onchange=>"selectDistrict(this);",:id=>"district" }%>
+              <%=f.select :district,options_from_collection_for_select(Region.districts_of(@order.city),:region_id,:local_name,@order.district),{:include_blank=>"请选择区/县"},{ :onchange=>"selectDistrict(this);",:id=>"district" }%>
             <%else%>
               <%=f.select :district, {}, { :include_blank=>"请选择区/县" }, { :onchange=>"selectDistrict(this);",:id=>"district" }%>
             <%end%>
@@ -84,7 +84,7 @@
       </div>
 
 
-      <% if @order.supplier_id==(Ecstore::Supplier.find_by_name("万家物流").id)%>
+      <% if @order.supplier_id==(Supplier.find_by_name("万家物流").id)%>
         <div style="border: 1px solid#0000ee">
           <div class="control-group">
             <label class="control-label">寄货人:</label>

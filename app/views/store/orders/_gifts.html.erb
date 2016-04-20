@@ -1,7 +1,7 @@
 
 <%@order_promotions.each do |promotion|%>
 	<%(promotion.action_val||[]).each do |bn|%>
-		<% gift = Ecstore::Product.find_by_bn(bn)%>
+		<% gift = Product.find_by_bn(bn)%>
 		<%=hidden_field_tag "gifts[]",gift.product_id%>
 		<tr class="product-info">
 			<td class="product-info">

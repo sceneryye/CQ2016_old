@@ -25,7 +25,7 @@ class Memberships::MembersController < ApplicationController
     if @user.update_attributes(user_params.merge!(:apply_time=>Time.now))    
 
       addr_params.merge!(:member_id=>@user.member_id,:def_addr=>1).delete(:id_card_number)  
-      @addr = Ecstore::MemberAddr.create(addr_params)
+      @addr = MemberAddr.create(addr_params)
 
       redirect_to new_card_path
     else

@@ -9,9 +9,9 @@ class Store::GoodsController < ApplicationController
   
   def coupon_goods
     @coupon_id  = params[:coupon_id]
-    @coupon = Ecstore::NewCoupon.find_by_id(@coupon_id)
+    @coupon = NewCoupon.find_by_id(@coupon_id)
     bn =  @coupon.condition_val.to_s.gsub('[','(').gsub(']',')')
-    @goods = Ecstore::Good.where("bn in #{bn}").paginate(:page=>params[:page], :per_page=>18)
+    @goods = Good.where("bn in #{bn}").paginate(:page=>params[:page], :per_page=>18)
     render :layout=>'coupons'
   end
 
@@ -19,12 +19,12 @@ class Store::GoodsController < ApplicationController
     @coupon_id = params[:coupon_id]
     @wechat_user=params[:wechatuser]
 
-    @good = Ecstore::Good.includes(:specs,:spec_values,:cat).where(:bn=>params[:id]).first
+    @good = Good.includes(:specs,:spec_values,:cat).where(:bn=>params[:id]).first
 
     return render "not_find_good",:layout=>"new_store" unless @good
 
     tag_name = params[:tag]
-    @tag = Ecstore::TagName.find_by_tag_name(tag_name)
+    @tag = TagName.find_by_tag_name(tag_name)
 
     @cat = @good.cat
 
@@ -59,7 +59,7 @@ class Store::GoodsController < ApplicationController
 
   def index
       tag_name  = params[:tag]
-      @tag = Ecstore::Teg.find_by_tag_name(tag_name)
+      @tag = Teg.find_by_tag_name(tag_name)
        if @tag
               order = params[:order]
               order_string = "goods_id desc"
@@ -74,7 +74,7 @@ class Store::GoodsController < ApplicationController
 
   def newin
       @line_items =  @user.line_items if @user
-      @tag = Ecstore::TagName.where('tag_name rlike ?','z[0-9]{4}').last
+      @tag = TagName.where('tag_name rlike ?','z[0-9]{4}').last
       if @tag
           if params[:page].nil? || params[:page].to_i <= 1
               @goods = @tag.goods.paginate(:page=>1, :per_page=>10).order("uptime desc").to_a
@@ -109,7 +109,7 @@ class Store::GoodsController < ApplicationController
 
   def suits
       @line_items =  @user.line_items if @user
-      @goods = Ecstore::Good.suits.paginate(:page=>1, :per_page=>10).order("uptime desc")
+      @goods = Good.suits.paginate(:page=>1, :per_page=>10).order("uptime desc")
       
       respond_to do |format|
         format.html { render :layout=>"standard" }
@@ -118,21 +118,21 @@ class Store::GoodsController < ApplicationController
   end
 
   def more_suits
-      @goods = Ecstore::Good.suits.paginate(:page=>params[:page], :per_page=>10).order("uptime desc")
+      @goods = Good.suits.paginate(:page=>params[:page], :per_page=>10).order("uptime desc")
       render :layout=>nil
   end
 
 
   def more
-    @tags = Ecstore::TagName.where('tag_name rlike ?','z[0-9]{4}').order("tag_id desc").select { |t| t&&t.tag_ext&&!t.tag_ext.disabled }.paginate(params[:page]||1,9)
+    @tags = TagName.where('tag_name rlike ?','z[0-9]{4}').order("tag_id desc").select { |t| t&&t.tag_ext&&!t.tag_ext.disabled }.paginate(params[:page]||1,9)
     render :layout=>'standard'
   end
 
 
 
   def fav
-      @good = Ecstore::Good.find(params[:id])
-      @fav =  Ecstore::Favorite.new do |fav|
+      @good = Good.find(params[:id])
+      @fav =  Favorite.new do |fav|
           fav.goods_id = params[:id]
           fav.member_id = @user.member_id
           fav.status = 'ready'
@@ -146,14 +146,14 @@ class Store::GoodsController < ApplicationController
   end
 
   def unfav
-      @good = Ecstore::Good.find(params[:id])
-      Ecstore::Favorite.where(:member_id=>@user.member_id,
+      @good = Good.find(params[:id])
+      Favorite.where(:member_id=>@user.member_id,
                                              :goods_id=>params[:id]).delete_all
       render "unfav"
   end
 
   def price
-      @good = Ecstore::Good.includes(:products,:good_type_specs).find(params[:id])
+      @good = Good.includes(:products,:good_type_specs).find(params[:id])
       
       return render(:nothing=>true) unless request.xhr?
       spec_type_count = @good.good_type_specs.blank? ? @good.spec_desc.size  : @good.good_type_specs.size
@@ -171,27 +171,27 @@ class Store::GoodsController < ApplicationController
     def more_arrivals
         except_tag = ''
         except_tag = params[:tag] if params[:tag].present?
-        except_tag = Ecstore::TagName.where('tag_name rlike ?','z[0-9]{4}').last.tag_name if action_name == "newest"
+        except_tag = TagName.where('tag_name rlike ?','z[0-9]{4}').last.tag_name if action_name == "newest"
 
-        @tags ||= Ecstore::TagName.where('tag_name rlike ? and tag_name <> ?','z[0-9]{4}',except_tag).order("tag_id desc").limit(6)
+        @tags ||= TagName.where('tag_name rlike ? and tag_name <> ?','z[0-9]{4}',except_tag).order("tag_id desc").limit(6)
     
     end
 
     def more_products
         except_tag = ''
         except_tag = params[:tag] if params[:tag].present?
-        except_tag = Ecstore::TagName.where('tag_name rlike ?','z[0-9]{4}').last.tag_name if action_name == "newest"
+        except_tag = TagName.where('tag_name rlike ?','z[0-9]{4}').last.tag_name if action_name == "newest"
 
-        @tags ||= Ecstore::TagName.where('tag_name rlike ? and tag_name <> ?','z[0-9]{4}',except_tag).order("tag_id desc")
+        @tags ||= TagName.where('tag_name rlike ? and tag_name <> ?','z[0-9]{4}',except_tag).order("tag_id desc")
     end
 
     def find_search_key
-        config = Ecstore::Config.find_by_key('search_key')
+        config = Config.find_by_key('search_key')
         @search_key =  config.value  if config
     end
 
     def find_tags
-        @tags =  Ecstore::Teg.includes(:tag_ext).where('tag_name rlike ?','z[0-9]{4}').order("tag_id desc").limit(20)
+        @tags =  Teg.includes(:tag_ext).where('tag_name rlike ?','z[0-9]{4}').order("tag_id desc").limit(20)
     end
 
 

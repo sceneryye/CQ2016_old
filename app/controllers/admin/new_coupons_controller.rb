@@ -3,28 +3,28 @@ require 'csv'
 class Admin::NewCouponsController < Admin::BaseController
 
 	def index
-		@coupons = Ecstore::NewCoupon.paginate(:per_page=>10,:page=>params[:page]).order("created_at asc")
+		@coupons = NewCoupon.paginate(:per_page=>10,:page=>params[:page]).order("created_at asc")
 	end
 
 	def new
-		@coupon  = Ecstore::NewCoupon.new
+		@coupon  = NewCoupon.new
 		@action_url = admin_new_coupons_path
 		@method = :post
 	end
 
 	def show
-		@coupon  = Ecstore::NewCoupon.find(params[:id])
+		@coupon  = NewCoupon.find(params[:id])
 	end
 
 	def edit
-		@coupon  = Ecstore::NewCoupon.find(params[:id])
+		@coupon  = NewCoupon.find(params[:id])
 		@action_url = admin_new_coupon_path(@coupon)
 		@method = :put
 	end
 
 	def create
 		params[:coupon][:coupon_prefix] = params[:coupon][:coupon_type] + params[:coupon][:coupon_prefix] 
-		@coupon  = Ecstore::NewCoupon.new(params[:coupon])
+		@coupon  = NewCoupon.new(params[:coupon])
 
 		if @coupon.save
 			redirect_to admin_new_coupons_url
@@ -35,7 +35,7 @@ class Admin::NewCouponsController < Admin::BaseController
 
 	def update
 		params[:coupon][:coupon_prefix] = params[:coupon][:coupon_type] + params[:coupon][:coupon_prefix] 
-		@coupon  = Ecstore::NewCoupon.find(params[:id])
+		@coupon  = NewCoupon.find(params[:id])
 		if @coupon.update_attributes(params[:coupon])
 			redirect_to admin_new_coupons_url
 		else
@@ -44,7 +44,7 @@ class Admin::NewCouponsController < Admin::BaseController
 	end
 
 	def destroy
-		@coupon  = Ecstore::NewCoupon.find(params[:id])
+		@coupon  = NewCoupon.find(params[:id])
 		@coupon.destroy
 
 		redirect_to admin_new_coupons_url
@@ -52,7 +52,7 @@ class Admin::NewCouponsController < Admin::BaseController
 
 
 	def download
-		@coupon =  Ecstore::NewCoupon.find(params[:id])
+		@coupon =  NewCoupon.find(params[:id])
 		count = (params[:count] || 50).to_i
 
 		file_name = "coupons_#{Time.now.to_i}.csv"
@@ -69,7 +69,7 @@ class Admin::NewCouponsController < Admin::BaseController
 
 	def select_coupons
 
-		@coupons = Ecstore::NewCoupon.paginate(:per_page=>20,:page=>params[:page])
+		@coupons = NewCoupon.paginate(:per_page=>20,:page=>params[:page])
 		
 		respond_to do |format|
 	            format.html { render :layout=> "dialog" }

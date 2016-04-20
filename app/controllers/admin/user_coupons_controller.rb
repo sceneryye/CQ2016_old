@@ -1,6 +1,6 @@
 class Admin::UserCouponsController < Admin::BaseController
 	def index
-		@users  =  Ecstore::User
+		@users  =  User
 
 		order = "regtime desc"
 		if params[:order].present?
@@ -23,13 +23,13 @@ class Admin::UserCouponsController < Admin::BaseController
 
 		@users  =  @users.paginate(:page=>params[:page],:per_page=>15)
 
-		@coupons = Ecstore::NewCoupon.all
+		@coupons = NewCoupon.all
 	end
 
 	def create
-		@coupon =  Ecstore::NewCoupon.find(params[:coupon_id])
+		@coupon =  NewCoupon.find(params[:coupon_id])
 		if @coupon
-			@user_coupon = Ecstore::UserCoupon.new(:coupon_id=>params[:coupon_id],
+			@user_coupon = UserCoupon.new(:coupon_id=>params[:coupon_id],
 									                                  :member_id=>params[:member_id],
 									                                  :coupon_code=>@coupon.generate_coupon_code(true))
 			@user_coupon.save
@@ -42,7 +42,7 @@ class Admin::UserCouponsController < Admin::BaseController
 	end
 
 	def destroy
-		@user_coupon = Ecstore::UserCoupon.find(params[:id])
+		@user_coupon = UserCoupon.find(params[:id])
 		# @coupon_code = @user_coupon.coupon_code
 		@user_coupon.destroy
 

@@ -3,7 +3,7 @@ require 'pp'
 
 class Store::CartControllerTest < ActionController::TestCase
 	setup do
-		@good = Ecstore::Good.find_by_goods_id(1679)
+		@good = Good.find_by_goods_id(1679)
 		cookies[:m_id] = request.session_options[:id]
 		@m_id = cookies[:m_id]
 	end
@@ -11,7 +11,7 @@ class Store::CartControllerTest < ActionController::TestCase
 	test 'add a product to cart' do
 		
 
-		assert_difference('Ecstore::Cart.count') do
+		assert_difference('Cart.count') do
 			xhr :post, :add, :product=>{:goods_id=>@good.goods_id,:specs=>[16,80],:quantity=>1}
 		end
 		assert_response :success

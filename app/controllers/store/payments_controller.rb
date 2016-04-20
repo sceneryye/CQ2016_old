@@ -7,7 +7,7 @@ class Store::PaymentsController < ApplicationController
 
 	def index
 		rel_id = params[:order_id]
-		@order  = Ecstore::Order.find_by_order_id(rel_id)
+		@order  = Order.find_by_order_id(rel_id)
 		installment =  1
 		part_pay =  0
 
@@ -17,10 +17,10 @@ class Store::PaymentsController < ApplicationController
 		#  update order payment
 		@order.update_attributes :payment=>pay_app_id,:last_modified=>Time.now.to_i,:installment=>installment,:part_pay=>part_pay if pay_app_id.to_s != @order.payment.to_s
 
-		# payment_params.merge! Ecstore::Payment::PAYMENTS[pay_app_id.to_sym]
+		# payment_params.merge! Payment::PAYMENTS[pay_app_id.to_sym]
 
-		@payment = Ecstore::Payment.new   do |payment|
-			payment.payment_id = Ecstore::Payment.generate_payment_id
+		@payment = Payment.new   do |payment|
+			payment.payment_id = Payment.generate_payment_id
 			payment.pay_app_id = pay_app_id
 			payment.status = 'ready'
 			payment.pay_ver = '1.0'
@@ -33,7 +33,7 @@ class Store::PaymentsController < ApplicationController
 
 			payment.t_begin = payment.t_confirm = Time.now.to_i
 			
-			payment.pay_bill = Ecstore::Bill.new do |bill|
+			payment.pay_bill = Bill.new do |bill|
 				bill.rel_id  = rel_id
 				bill.bill_type = "payments"
 				bill.pay_object  = "order"
@@ -51,7 +51,7 @@ class Store::PaymentsController < ApplicationController
  
 	def create
 		rel_id = params[:order_id]
-		@order  = Ecstore::Order.find_by_order_id(rel_id)
+		@order  = Order.find_by_order_id(rel_id)
 		installment = payment_params.delete(:installment) || 1
 		part_pay = payment_params.delete(:part_pay) || 0
 
@@ -65,10 +65,10 @@ class Store::PaymentsController < ApplicationController
 		#  update order payment
 		@order.update_attributes :payment=>pay_app_id,:last_modified=>Time.now.to_i,:installment=>installment,:part_pay=>part_pay if pay_app_id.to_s != @order.payment.to_s
 
-		payment_params.merge! Ecstore::Payment::PAYMENTS[pay_app_id.to_sym]
+		payment_params.merge! Payment::PAYMENTS[pay_app_id.to_sym]
 
-		@payment = Ecstore::Payment.new payment_params  do |payment|
-			payment.payment_id = Ecstore::Payment.generate_payment_id
+		@payment = Payment.new payment_params  do |payment|
+			payment.payment_id = Payment.generate_payment_id
 
 			payment.status = 'ready'
 			payment.pay_ver = '1.0'
@@ -81,7 +81,7 @@ class Store::PaymentsController < ApplicationController
 
 			payment.t_begin = payment.t_confirm = Time.now.to_i
 			
-			payment.pay_bill = Ecstore::Bill.new do |bill|
+			payment.pay_bill = Bill.new do |bill|
 				bill.rel_id  = rel_id
 				bill.bill_type = "payments"
 				bill.pay_object  = "order"
@@ -109,10 +109,10 @@ class Store::PaymentsController < ApplicationController
 						:pay_app_id => params[:pay_app_id]
 						}
 		
-		payment_params.merge! Ecstore::Payment::PAYMENTS[payment_params[:pay_app_id].to_sym]
+		payment_params.merge! Payment::PAYMENTS[payment_params[:pay_app_id].to_sym]
 
-		@payment = Ecstore::Payment.new payment_params do |payment|
-			payment.payment_id = Ecstore::Payment.generate_payment_id
+		@payment = Payment.new payment_params do |payment|
+			payment.payment_id = Payment.generate_payment_id
 			payment.currency='CNY'
 			payment.status = 'ready'
 			payment.pay_ver = '1.0'
@@ -125,7 +125,7 @@ class Store::PaymentsController < ApplicationController
 
 			payment.t_begin = payment.t_confirm = Time.now.to_i
 			
-			payment.pay_bill = Ecstore::Bill.new do |bill|
+			payment.pay_bill = Bill.new do |bill|
 				bill.rel_id = Time.now.strftime('%Y%m%d%H%M%S')
 				bill.bill_type = "refunds"
 				bill.pay_object  = "prepaid_recharge"
@@ -143,11 +143,11 @@ class Store::PaymentsController < ApplicationController
   	end
 
 	def show
-		@payment = Ecstore::Payment.find_by_payment_id(params[:id])
+		@payment = Payment.find_by_payment_id(params[:id])
 	end
 
 	def pay
-		@payment = Ecstore::Payment.find(params[:id])
+		@payment = Payment.find(params[:id])
       	if @payment && @payment.status == 'ready'
 	        adapter = @payment.pay_app_id
 	        order_id = @payment.pay_bill.rel_id
@@ -173,14 +173,14 @@ class Store::PaymentsController < ApplicationController
 		    else
 		    	if adapter=='deposit'
 		    		advance = @user.advance
-		    		Ecstore::Member.where(:member_id=>@user.member_id).update_all(:advance=>advance-@payment.cur_money)
+		    		Member.where(:member_id=>@user.member_id).update_all(:advance=>advance-@payment.cur_money)
 			        @adv_log ||= Logger.new('log/adv.log')
 			        @adv_log.info("member id: "+@user.member_id.to_s+"--advance:"+advance.to_s+"=>"+@user.advance.to_s)
 		    	end
 				render :inline=>@modec_pay.html_form
 		    end
 
-			Ecstore::PaymentLog.new do |log|
+			PaymentLog.new do |log|
 				log.payment_id = @payment.payment_id
 				log.order_id = order_id
 				log.pay_name = adapter
@@ -195,7 +195,7 @@ class Store::PaymentsController < ApplicationController
 	end
 
 	def callback
-		@payment = Ecstore::Payment.find(params.delete(:id))
+		@payment = Payment.find(params.delete(:id))
 		order_id = @payment.pay_bill.order
 		if params[:error_message]
 			return redirect_to order_path(order_id)
@@ -205,7 +205,7 @@ class Store::PaymentsController < ApplicationController
 		ModecPay.logger.info "[#{Time.now}][#{request.remote_ip}] #{request.request_method} \"#{request.fullpath}\""
 
 		
-		#@payment = Ecstore::Payment.find(params[:payment_id])	
+		#@payment = Payment.find(params[:payment_id])	
 
 		
 		return redirect_to detail_order_path(order_id) if @payment&&@payment.paid?
@@ -229,7 +229,7 @@ class Store::PaymentsController < ApplicationController
 			if result.delete(:payment_id) == @payment.payment_id.to_s && !@payment.paid?
 				@payment.update_attributes(result)
 				@order.update_attributes(:pay_status=>'1')
-				Ecstore::OrderLog.new do |order_log|
+				OrderLog.new do |order_log|
 					order_log.rel_id = order_id #@order.order_id
 					order_log.op_id = @user.member_id
 					order_log.op_name = @user.login_name
@@ -245,7 +245,7 @@ class Store::PaymentsController < ApplicationController
 		if @payment.pay_bill.bill_type =='payments' && @payment.pay_bill.pay_object == 'order'
 			redirect_to detail_order_path(@payment.pay_bill.order)
 		else
-			@member = Ecstore::Member.find(@user.member_id)
+			@member = Member.find(@user.member_id)
 			advance = @payment.money
        
 	        @member.member_lv_id = @user.apply_type
@@ -263,7 +263,7 @@ class Store::PaymentsController < ApplicationController
 
 		return render :text=>params[:payment_id]
 
-		@payment = Ecstore::Payment.find(params.delete(:payment_id))
+		@payment = Payment.find(params.delete(:payment_id))
 
 		return render :nothing=>true, :status=>:forbidden if @payment.paid?
 
@@ -289,7 +289,7 @@ class Store::PaymentsController < ApplicationController
 			if result.delete(:payment_id) == @payment.payment_id.to_s && !@payment.paid?
 				@payment.update_attributes(result)
 				@order.update_attributes(:pay_status=>'1')
-				Ecstore::OrderLog.new do |order_log|
+				OrderLog.new do |order_log|
 					order_log.rel_id = @order.order_id
 					order_log.op_id = @user.member_id
 					order_log.op_name = @user.login_name
@@ -302,7 +302,7 @@ class Store::PaymentsController < ApplicationController
 			if @payment.pay_bill.bill_type =='payments' && @payment.pay_bill.pay_object == 'order'
 				redirect_to detail_order_path(@payment.pay_bill.order)
 			else
-				@member = Ecstore::Member.find(@user.member_id)
+				@member = Member.find(@user.member_id)
 				advance = @payment.money
 	       
 		        @member.member_lv_id = @user.apply_type
@@ -322,7 +322,7 @@ class Store::PaymentsController < ApplicationController
 
 	def test_notify		
 
-		@payment = Ecstore::Payment.find(params[:id])
+		@payment = Payment.find(params[:id])
 		if @payment #&& @payment.status == 'ready'
 			adapter = @payment.pay_app_id
 			order_id = @payment.pay_bill.rel_id

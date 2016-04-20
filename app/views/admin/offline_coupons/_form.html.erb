@@ -6,7 +6,7 @@
 <div class="control-group">
     <%=f.label :brand_id, "基地*",:class=>"control-label"%>
     <div class="controls">
-      <%=f.select :brand_id,Ecstore::Brand.all.collect {|brand| [brand.brand_name,brand.brand_id] },:include_blank=>"选择基地" %>
+      <%=f.select :brand_id,Brand.all.collect {|brand| [brand.brand_name,brand.brand_id] },:include_blank=>"选择基地" %>
       <span class="help-inline error"><%=@coupon.errors[:brand_id].join(",")%></span>
     </div>
 </div>

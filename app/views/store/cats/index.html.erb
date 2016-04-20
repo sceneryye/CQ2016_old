@@ -6,7 +6,7 @@
     <form accept-charset="UTF-8" action="/search" method="get">
       <div class="input-group">
           <input id="search_input" type="text" name="q" placeholder="请输入搜索关键字"
-              value="<%= controller_name=="search" ? params[:q] : Ecstore::Config.get(:search_key)%>" class="input-group-field">
+              value="<%= controller_name=="search" ? params[:q] : Config.get(:search_key)%>" class="input-group-field">
             <div class="input-group-button">
               <input type="submit" class="button" value="搜索">
             </div>

@@ -6,7 +6,7 @@ class Admin::CartsController < Admin::BaseController
 
   end
   def index
-     @line_items = Ecstore::Cart.paginate(:page => params[:page], :per_page => 20).order("time DESC")
+     @line_items = Cart.paginate(:page => params[:page], :per_page => 20).order("time DESC")
 
 
 

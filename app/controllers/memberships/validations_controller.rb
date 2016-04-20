@@ -76,7 +76,7 @@ class Memberships::ValidationsController < ApplicationController
 		token = params[:token]
 
 		 if member_id && token
-			user = Ecstore::User.find_by_member_id(member_id)
+			user = User.find_by_member_id(member_id)
 			if user.email_code == token
 				user.update_attribute :email_code, nil
 				user.update_attribute :email_validate, 'true'

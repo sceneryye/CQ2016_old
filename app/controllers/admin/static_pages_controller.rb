@@ -2,23 +2,23 @@ class Admin::StaticPagesController < Admin::BaseController
 
 	def index
 
-		@pages =  Ecstore::Page.paginate(:per_page=>20,:page=>params[:page]).order("updated_at desc")
+		@pages =  Page.paginate(:per_page=>20,:page=>params[:page]).order("updated_at desc")
 
       if cookies["MEMBER"]
-        @supplier = Ecstore::Supplier.where(:member_id=>cookies["MEMBER"].split("-").first,:status=>1).first
+        @supplier = Supplier.where(:member_id=>cookies["MEMBER"].split("-").first,:status=>1).first
         @pages = @pages.paginate(:per_page=>20,:page=>params[:page]).order("updated_at desc")
 
       end
   end
 
 	def new
-		@page  = Ecstore::Page.new
+		@page  = Page.new
 		@action_url =  admin_static_pages_path
 		@method = :post
 	end
 
 	def show
-		@page  = Ecstore::Page.find(params[:id])
+		@page  = Page.find(params[:id])
     @recommend_user = session[:recommend_user]
 
     if @recommend_user==nil &&  params[:wechatuser]
@@ -30,7 +30,7 @@ class Admin::StaticPagesController < Admin::BaseController
         member_id = @user.member_id
       end
       now  = Time.now.to_i
-      Ecstore::RecommendLog.new do |rl|
+      RecommendLog.new do |rl|
         rl.wechat_id = @recommend_user
         rl.goods_id = @good.goods_id
         rl.member_id = member_id
@@ -45,13 +45,13 @@ class Admin::StaticPagesController < Admin::BaseController
   end
 
 	def edit
-		@page  = Ecstore::Page.find(params[:id])
+		@page  = Page.find(params[:id])
 		@action_url =  admin_static_page_path(@page)
 		@method = :put
 	end
 
 	def create
-		@page  = Ecstore::Page.new page_params
+		@page  = Page.new page_params
 		if @page.save
 			redirect_to admin_static_pages_url
 		else
@@ -60,7 +60,7 @@ class Admin::StaticPagesController < Admin::BaseController
 	end
 
 	def update
-		@page  = Ecstore::Page.find(params[:id])
+		@page  = Page.find(params[:id])
 		if @page.update_attributes(page_params)
 			redirect_to admin_static_pages_url
 		else
@@ -69,7 +69,7 @@ class Admin::StaticPagesController < Admin::BaseController
 	end
 
 	def destroy
-		@page  = Ecstore::Page.find(params[:id])
+		@page  = Page.find(params[:id])
 		@page.destroy
 		redirect_to admin_static_pages_url
 	end

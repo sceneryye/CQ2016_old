@@ -3,12 +3,12 @@ class Admin::GoodsTypesController < Admin::BaseController
   # GET /admin/cards
   # GET /admin/cards.json
   def index
-    @types = Ecstore::GoodType.paginate(:page=>params[:page],:per_page=>20)
+    @types = GoodType.paginate(:page=>params[:page],:per_page=>20)
   end
 
   def edit
-    @goodtype = Ecstore::GoodType.find(params[:id])
-    @specs = Ecstore::GoodTypeSpec.where(:type_id=>@goodtype.type_id)
+    @goodtype = GoodType.find(params[:id])
+    @specs = GoodTypeSpec.where(:type_id=>@goodtype.type_id)
     @spec_ids = []
     @specs.each do |spec|
       @spec_ids << spec.spec_id
@@ -16,7 +16,7 @@ class Admin::GoodsTypesController < Admin::BaseController
   end
 
   def create
-      @goodtype = Ecstore::GoodType.new
+      @goodtype = GoodType.new
       @goodtype.name = params[:goods_type][:name]
       @goodtype.is_physical = 1
       @goodtype.schema_id = "custom"
@@ -38,7 +38,7 @@ class Admin::GoodsTypesController < Admin::BaseController
 
       params[:goods_type][:spec].each do |spec|
         if spec !=""
-          @GoodTypeSpec = Ecstore::GoodTypeSpec.new
+          @GoodTypeSpec = GoodTypeSpec.new
           @GoodTypeSpec.type_id = @goodtype.type_id
           @GoodTypeSpec.spec_id = spec
           @GoodTypeSpec.spec_style = "flat"
@@ -50,12 +50,12 @@ class Admin::GoodsTypesController < Admin::BaseController
   end
 
   def updateType
-    @goodtype = Ecstore::GoodType.find(params[:id])
+    @goodtype = GoodType.find(params[:id])
     @goodtype.name = params[:ecstore_good_type][:name]
-    Ecstore::GoodTypeSpec.where(:type_id=>params[:id]).delete_all
+    GoodTypeSpec.where(:type_id=>params[:id]).delete_all
     params[:ecstore_good_type][:spec].each do |spec|
         if spec !=""
-          @GoodTypeSpec = Ecstore::GoodTypeSpec.new
+          @GoodTypeSpec = GoodTypeSpec.new
           @GoodTypeSpec.type_id = @goodtype.type_id
           @GoodTypeSpec.spec_id = spec
           @GoodTypeSpec.spec_style = "flat"
@@ -67,7 +67,7 @@ class Admin::GoodsTypesController < Admin::BaseController
   end
 
   def destroy
-    @goodtype = Ecstore::GoodType.find(params[:id])
+    @goodtype = GoodType.find(params[:id])
     @goodtype.destroy
     redirect_to admin_goods_types_path
   end

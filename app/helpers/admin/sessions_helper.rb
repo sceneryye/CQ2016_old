@@ -2,7 +2,7 @@ module Admin::SessionsHelper
 
 
 	def current_admin
-		@admin ||= Ecstore::Account.find_by_account_id(session[:admin_id])
+		@admin ||= Account.find_by_account_id(session[:admin_id])
 	end
 
 	def current_admin=(admin)

@@ -77,8 +77,8 @@ class Events::SurveyController < ApplicationController
 
   		def authorize_survey!
   			@finish_survey_path = finish_survey_path
-  			# return @user = Ecstore::User.find_by_name("yangxiaofei")
-  			@coupon = Ecstore::NewCoupon.where(:coupon_prefix=>"B0001").first
+  			# return @user = User.find_by_name("yangxiaofei")
+  			@coupon = NewCoupon.where(:coupon_prefix=>"B0001").first
   			return redirect_to(finish_survey_path) if @coupon&&!@coupon.enable?
   			@user  =  current_account.user
   			return redirect_to(finish_survey_path) if @user&&@user.has_received_gift?

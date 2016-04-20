@@ -5,7 +5,7 @@ class Memberships::MemberAddrsController < ApplicationController
   layout "application"
 
   def new
-    @addr = Ecstore::MemberAddr.new
+    @addr = MemberAddr.new
   end
 
   def index
@@ -18,13 +18,13 @@ class Memberships::MemberAddrsController < ApplicationController
 
 
   def edit
-    @addr = Ecstore::MemberAddr.find(params[:id])
+    @addr = MemberAddr.find(params[:id])
     @method = :put
     @action_url = member_addr_path(@addr)
   end
 
   def create
-    @addr = Ecstore::MemberAddr.new addr_params.merge!(:member_id=>@user.member_id)
+    @addr = MemberAddr.new addr_params.merge!(:member_id=>@user.member_id)
 
     return_url= params[:return_url]
 
@@ -44,11 +44,11 @@ class Memberships::MemberAddrsController < ApplicationController
   end
 
   def new_memberaddr_add
-    @addr=Ecstore::MemberAddr.new
+    @addr=MemberAddr.new
   end
 
   def update
-    @addr = Ecstore::MemberAddr.find(params[:id])
+    @addr = MemberAddr.find(params[:id])
     if @addr.update_attributes(addr_params)
       respond_to do |format|
         format.js
@@ -61,10 +61,10 @@ class Memberships::MemberAddrsController < ApplicationController
 
   def destroy
 
-    @addr = Ecstore::MemberAddr.find(params[:id])
+    @addr = MemberAddr.find(params[:id])
     @addr.destroy
     if params[:platform]=="mobile"
-      @supplier=Ecstore::Supplier.find(params[:supplier_id])
+      @supplier=Supplier.find(params[:supplier_id])
       redirect_to "/member_addrs/mobile?platform=mobile&supplier_id=#{@supplier.id}"
      else
 

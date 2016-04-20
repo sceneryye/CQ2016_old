@@ -86,7 +86,7 @@
                <label class="checkbox inline" style="color:#333;">
                   <%=check_box_tag nil, "all_brands", false, :id=>"select_all_brands"%>全选
                 </label>
-              <%Ecstore::Brand.all.each do |brand|%>
+              <%Brand.all.each do |brand|%>
                 <label class="checkbox inline" style="color:#333;">
                   <%=check_box_tag "promotion[brand_ids][]",brand.brand_id, @promotion.brand_ids.include?(brand.brand_id.to_s)%><%=brand.brand_name%>
                 </label>
@@ -99,7 +99,7 @@
                     <%=check_box_tag nil, "all_cats", false, :id=>"select_all_cats"%>全选
                 </label>
 
-                <%Ecstore::Category.where(:parent_id => 0).all.each do |cat1|%>
+                <%Category.where(:parent_id => 0).all.each do |cat1|%>
                     <div class="divider-line"></div>
                     <label class="checkbox inline"  style="color:#333;">
                       <%=check_box_tag "promotion[cat_ids][]",cat1.cat_id, @promotion.cat_ids.include?(cat1.cat_id.to_s), :'data-parent_id'=>cat1.parent_id%><%=cat1.cat_name%>
@@ -124,7 +124,7 @@
               <ul id="specify_goods">
                   <%@promotion.bns.each do |bn|%>
                     <li>
-                    <%=Ecstore::Good.find_by_bn(bn).name%> (<%=bn%>)
+                    <%=Good.find_by_bn(bn).name%> (<%=bn%>)
                     <%=hidden_field_tag "promotion[bns][]",bn%>
                     </li>
                   <%end%>
@@ -228,7 +228,7 @@
        <ul id="selected_gifts">
             <%(@promotion.action_val || []).each do |bn|%>
              <li>
-              <%=Ecstore::Product.find_by_bn(bn).name%> (<%=bn%>)
+              <%=Product.find_by_bn(bn).name%> (<%=bn%>)
               <%=hidden_field_tag "promotion[action_val][]",bn%>
              </li>
             <%end if @promotion.action_type == 'gift'%>
@@ -237,7 +237,7 @@
        <ul id="selected_goods">
              <%(@promotion.action_val || []).each do |bn|%>
              <li>
-              <%=Ecstore::Good.find_by_bn(bn).name%> (<%=bn%>)
+              <%=Good.find_by_bn(bn).name%> (<%=bn%>)
               <%=hidden_field_tag "promotion[action_val][]",bn%>
              </li>
             <%end if @promotion.action_type == 'good'%>

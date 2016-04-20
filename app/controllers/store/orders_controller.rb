@@ -5,10 +5,10 @@ class Store::OrdersController < ApplicationController
 
   def create
 
-    addr = Ecstore::MemberAddr.find_by_addr_id(params[:member_addr])
+    addr = MemberAddr.find_by_addr_id(params[:member_addr])
 
      
-     @order = Ecstore::Order.new order_params 
+     @order = Order.new order_params 
     if addr
       ["name","area","addr","zip","tel","mobile"].each do |key,val|
           @order.send("ship_#{key}=" , addr.attributes[key])
@@ -27,7 +27,7 @@ class Store::OrdersController < ApplicationController
       product = line_item.product
       good = line_item.good
       
-      @order.order_items << Ecstore::OrderItem.new do |order_item|
+      @order.order_items << OrderItem.new do |order_item|
         order_item.product_id = product.product_id
         order_item.bn = product.bn
         order_item.name = product.name
@@ -46,7 +46,7 @@ class Store::OrdersController < ApplicationController
 
         product_attr = {}
         # product.spec_desc["spec_value"].each  do |spec_id,spec_value|
-        #   spec = Ecstore::Spec.find_by_spec_id(spec_id)
+        #   spec = Spec.find_by_spec_id(spec_id)
         #   product_attr.merge!(spec_id=>{"label"=>spec.spec_name,"value"=>spec_value})
         # end
         order_item.addon = { :product_attr => product_attr }.serialize
@@ -63,8 +63,8 @@ class Store::OrdersController < ApplicationController
     # ==== promotion gifts =====
     gifts = params[:gifts] || []
     gifts.each do |gift_id|
-      gift = Ecstore::Product.find_by_product_id(gift_id)
-      @order.order_items  << Ecstore::OrderItem.new do |order_item|
+      gift = Product.find_by_product_id(gift_id)
+      @order.order_items  << OrderItem.new do |order_item|
         order_item.product_id = gift_id
         order_item.goods_id = gift.goods_id
         order_item.type_id = gift.good.type_id if gift.good
@@ -83,11 +83,11 @@ class Store::OrdersController < ApplicationController
       # ==== coupons======
       codes = params[:coupon].present? ? params[:coupon][:codes] : []
       coupons =  codes.collect do |code|
-        Ecstore::NewCoupon.check_and_find_by_code(code)
+        NewCoupon.check_and_find_by_code(code)
       end.compact
 
       coupons.each do |coupon|
-        @order.order_pmts << Ecstore::OrderPmt.new do |order_pmt|
+        @order.order_pmts << OrderPmt.new do |order_pmt|
           order_pmt.pmt_type = 'coupon'
           order_pmt.pmt_id = coupon.id
           order_pmt.pmt_amount = coupon.pmt_amount(@line_items)
@@ -97,9 +97,9 @@ class Store::OrdersController < ApplicationController
         end
       end
       # === goods promotions =====
-      @goods_promotions = Ecstore::Promotion.matched_goods_promotions(@line_items)
+      @goods_promotions = Promotion.matched_goods_promotions(@line_items)
       @goods_promotions.each do |promotion|
-        @order.order_pmts << Ecstore::OrderPmt.new do |order_pmt|
+        @order.order_pmts << OrderPmt.new do |order_pmt|
           order_pmt.pmt_type = 'goods'
           order_pmt.pmt_id = promotion.id
           order_pmt.pmt_amount = promotion.goods_pmt_amount(@line_items)
@@ -108,9 +108,9 @@ class Store::OrdersController < ApplicationController
         end
       end
       # ==== order promotions =====
-      @order_promotions = Ecstore::Promotion.matched_promotions(@line_items)
+      @order_promotions = Promotion.matched_promotions(@line_items)
       @order_promotions.each do |promotion|
-        @order.order_pmts << Ecstore::OrderPmt.new do |order_pmt|
+        @order.order_pmts << OrderPmt.new do |order_pmt|
           order_pmt.pmt_type = 'order'
           order_pmt.pmt_id = promotion.id
           order_pmt.pmt_amount = promotion.pmt_amount(@line_items)
@@ -123,7 +123,7 @@ class Store::OrdersController < ApplicationController
     if @order.save
       @line_items.delete_all
 
-      Ecstore::OrderLog.new do |order_log|
+      OrderLog.new do |order_log|
         order_log.rel_id = @order.order_id
         order_log.op_id = @order.member_id
         order_log.op_name = @user.login_name
@@ -148,8 +148,8 @@ class Store::OrdersController < ApplicationController
   
   def share_order
     supplier_id =params[:supplier_id]
-    @supplier = Ecstore::Supplier.find(supplier_id)
-    @order =Ecstore::Order.find_by_order_id(params[:id])
+    @supplier = Supplier.find(supplier_id)
+    @order =Order.find_by_order_id(params[:id])
 
     render :layout=>@supplier.layout
   end
@@ -158,18 +158,18 @@ class Store::OrdersController < ApplicationController
     return_url =  request.env["HTTP_REFERER"]
     return_url =  member_goods_url if return_url.blank?
 
-    @inventory = Ecstore::Inventory.where(:member_id=>current_account,:product_id=>params[:id]).first
+    @inventory = Inventory.where(:member_id=>current_account,:product_id=>params[:id]).first
 
     if @inventory.blank?
     #全部出库，删除记录
     else
       #部分出库，修改数量
       quantity =  @inventory.quantity - @inventory.quantity
-      Ecstore::Inventory.where(:member_id=>current_account,:product_id=>params[:id]).update_all(:quantity=>quantity)
+      Inventory.where(:member_id=>current_account,:product_id=>params[:id]).update_all(:quantity=>quantity)
     end
 
 
-    Ecstore::InventoryLog.new do |inventory_log|
+    InventoryLog.new do |inventory_log|
       inventory_log.in_or_out =false
       inventory_log.member_id = @inventory.member_id
       inventory_log.goods_id =@inventory.goods_id
@@ -190,11 +190,11 @@ class Store::OrdersController < ApplicationController
     return_url =  request.env["HTTP_REFERER"]
     return_url =  member_goods_url if return_url.blank?
 
-    @order_item =  Ecstore::OrderItem.find(params[:id])
+    @order_item =  OrderItem.find(params[:id])
 
-    @new_inventory = Ecstore::Inventory.where(:member_id=>current_account,:product_id=>@order_item.product_id).first
+    @new_inventory = Inventory.where(:member_id=>current_account,:product_id=>@order_item.product_id).first
 
-    @inventory =  Ecstore::Inventory.new
+    @inventory =  Inventory.new
 
     if @new_inventory.blank?
       @inventory.member_id = @order_item.order.member_id
@@ -208,11 +208,11 @@ class Store::OrdersController < ApplicationController
       @inventory.save
     else
       quantity =  @new_inventory.quantity + @order_item.nums
-      Ecstore::Inventory.where(:member_id=>current_account,:product_id=>@order_item.product_id).update_all(:quantity=>quantity)
+      Inventory.where(:member_id=>current_account,:product_id=>@order_item.product_id).update_all(:quantity=>quantity)
     end
 
 
-    Ecstore::InventoryLog.new do |inventory_log|
+    InventoryLog.new do |inventory_log|
       inventory_log.in_or_out =true
       inventory_log.order_item_id=@order_item.item_id
       inventory_log.order_id = @order_item.order_id
@@ -239,7 +239,7 @@ class Store::OrdersController < ApplicationController
       if supplier_id == nil
         supplier_id=78
       end
-      @supplier = Ecstore::Supplier.find(supplier_id)
+      @supplier = Supplier.find(supplier_id)
       @orders =  @user.orders.order("createtime desc")
     else
       return_url={:return_url => "/goods?platform=#{params["platform"]}&supplier_id=#{supplier_id}"}.to_query
@@ -249,7 +249,7 @@ class Store::OrdersController < ApplicationController
 
   def show
 
-    @order = Ecstore::Order.find_by_order_id(params[:id])
+    @order = Order.find_by_order_id(params[:id])
     
   end
 
@@ -258,7 +258,7 @@ class Store::OrdersController < ApplicationController
     if @account.member.card_validate=='false'
           return redirect_to new_member_path
     end
-    # @order = Ecstore::Order.new
+    # @order = Order.new
 
     @addrs =  @user.member_addrs
     
@@ -273,7 +273,7 @@ class Store::OrdersController < ApplicationController
     if supplier_id==nil
       supplier_id=78
     end
-    @supplier = Ecstore::Supplier.find(supplier_id)
+    @supplier = Supplier.find(supplier_id)
 
     @addrs =  @user.member_addrs
     @def_addr = @addrs.where(:def_addr=>1).first || @addrs.first
@@ -285,16 +285,16 @@ class Store::OrdersController < ApplicationController
   end
 
   def addr_detail
-    @addr = Ecstore::MemberAddr.find(params[:id])
+    @addr = MemberAddr.find(params[:id])
    supplier_id=params[:supplier_id]
-    @supplier = Ecstore::Supplier.find(supplier_id)
+    @supplier = Supplier.find(supplier_id)
     @method = :put
 
     render :layout=>@supplier.layout
   end
 
  def edit_addr
-   @addr = Ecstore::MemberAddr.find(params[:id])
+   @addr = MemberAddr.find(params[:id])
    if @addr.update_attributes(params[:addr])
       respond_to do |format|
        format.js
@@ -338,11 +338,11 @@ class Store::OrdersController < ApplicationController
       @def_addr = @addrs.where(:def_addr=>1).first || @addrs.first
 
       if @pmtable
-        @order_promotions = Ecstore::Promotion.matched_promotions(@line_items)
-        @goods_promotions = Ecstore::Promotion.matched_goods_promotions(@line_items)
+        @order_promotions = Promotion.matched_promotions(@line_items)
+        @goods_promotions = Promotion.matched_goods_promotions(@line_items)
         @coupons = @user.usable_coupons
       end
-      @supplier = Ecstore::Supplier.find(supplier_id)
+      @supplier = Supplier.find(supplier_id)
       render :layout=>@supplier.layout
     end
   end
@@ -353,16 +353,16 @@ class Store::OrdersController < ApplicationController
     if @user
       wechat_user=@user.account.login_name
     end
-    @supplier = Ecstore::Supplier.find(params[:supplier_id])
+    @supplier = Supplier.find(params[:supplier_id])
     @share=0
     @sharelast = 0
     if wechat_user
-      @order_all = Ecstore::Order.where(:recommend_user=>wechat_user,:pay_status=>'1').select("sum(commission) as share").group(:recommend_user).first
+      @order_all = Order.where(:recommend_user=>wechat_user,:pay_status=>'1').select("sum(commission) as share").group(:recommend_user).first
 
       #return render :text=>@order.final_amount
       if @order_all
         @share = @order_all.share.round(2)
-        @order_last =Ecstore::Order.where(:recommend_user=>wechat_user,:pay_status=>'1').order("createtime desc").first
+        @order_last =Order.where(:recommend_user=>wechat_user,:pay_status=>'1').order("createtime desc").first
         if @order_last
           @sharelast = @order_last.commission
         end
@@ -375,7 +375,7 @@ class Store::OrdersController < ApplicationController
 
 
   def pay
-    @order  = Ecstore::Order.find_by_order_id(params[:id])
+    @order  = Order.find_by_order_id(params[:id])
     if @order &&@order.status == 'active' && @order.pay_status == '0'
       @order.update_attribute :payment, order_params[:payment]
     else
@@ -384,21 +384,21 @@ class Store::OrdersController < ApplicationController
   end
 
   def detail
-    @order  = Ecstore::Order.find_by_order_id(params[:id])
+    @order  = Order.find_by_order_id(params[:id])
   end
 
   def check_coupon
     codes = params[:codes] || []
 
     now_code = codes.delete_at(0)
-    now_coupon = Ecstore::NewCoupon.check_and_find_by_code(now_code)
+    now_coupon = NewCoupon.check_and_find_by_code(now_code)
 
     unless now_coupon
       return render :js=>"alert('该优惠券不存在')"
     end
 
     @coupons = codes.collect do |code|
-      Ecstore::NewCoupon.check_and_find_by_code(code)
+      NewCoupon.check_and_find_by_code(code)
     end.compact #.sort { |x,y| y.priority <=> x.priority }
 
     if @coupons.size > 0 && @coupons.include?(now_coupon)
@@ -437,7 +437,7 @@ class Store::OrdersController < ApplicationController
 
   def destroyaddr
 
-    @addr = Ecstore::MemberAddr.find(params[:addr_idsss])            ### 删除地址
+    @addr = MemberAddr.find(params[:addr_idsss])            ### 删除地址
     @addr.destroy
 
   end
@@ -446,17 +446,17 @@ class Store::OrdersController < ApplicationController
   def serach_order
     departure= params[:departure]
     arrival= params[:arrival]
-    @un= Ecstore::Express.serachall(departure,arrival)
+    @un= Express.serachall(departure,arrival)
   end
 
 
   def mobile_show_order
     supplier_id=params[:supplier_id]
 
-    @order =Ecstore::Order.find_by_order_id(params[:id])
-     @delivery=Ecstore::Delivery.find_by_order_id(params[:id])
+    @order =Order.find_by_order_id(params[:id])
+     @delivery=Delivery.find_by_order_id(params[:id])
 
-    @supplier  =  Ecstore::Supplier.find(supplier_id)
+    @supplier  =  Supplier.find(supplier_id)
     render :layout=>@supplier.layout
 
 

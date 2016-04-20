@@ -26,7 +26,7 @@ class CreateCoupons < ActiveRecord::Migration
   end
 
   def connection
-    @connection = Ecstore::Base.connection
+    @connection = Base.connection
   end
 
 end

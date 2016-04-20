@@ -74,7 +74,7 @@
         <ul id="specify_goods">
             <%@promotion.goods.select{ |bn| bn.present? }.each do |bn|%>
               <li>
-              <%=Ecstore::Good.find_by_bn(bn).name%> (<%=bn%>)
+              <%=Good.find_by_bn(bn).name%> (<%=bn%>)
               <%=hidden_field_tag "promotion[goods][]",bn%>
               </li>
             <%end%>
@@ -159,7 +159,7 @@
        <ul id="selected_gifts">
             <%(@promotion.action_val || []).each do |bn|%>
              <li>
-              <%=Ecstore::Product.find_by_bn(bn).name%> (<%=bn%>)
+              <%=Product.find_by_bn(bn).name%> (<%=bn%>)
               <%=hidden_field_tag "promotion[action_val][]",bn%>
              </li>
             <%end if @promotion.action_type == 'gift'%>
@@ -168,7 +168,7 @@
        <ul id="selected_goods">
              <%(@promotion.action_val || []).each do |bn|%>
              <li>
-              <%=Ecstore::Good.find_by_bn(bn).name%> (<%=bn%>)
+              <%=Good.find_by_bn(bn).name%> (<%=bn%>)
               <%=hidden_field_tag "promotion[action_val][]",bn%>
              </li>
             <%end if @promotion.action_type == 'good'%>
@@ -177,7 +177,7 @@
        <ul id="selected_coupons">
             <%(@promotion.action_val || []).each do |id|%>
              <li>
-              <%coupon  = Ecstore::NewCoupon.find_by_id(id)%>
+              <%coupon  = NewCoupon.find_by_id(id)%>
               <%=coupon ? coupon.name : "优惠券不存在或已经删除"%>(<%=id%>)
               <%=hidden_field_tag "promotion[action_val][]",id%>
              </li>

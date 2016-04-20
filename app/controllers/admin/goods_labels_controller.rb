@@ -2,19 +2,19 @@
 class Admin::GoodsLabelsController < Admin::BaseController
 
   def index
-    @labels = Ecstore::GoodLabel.paginate(:page=>params[:page],:per_page=>20)
+    @labels = GoodLabel.paginate(:page=>params[:page],:per_page=>20)
   end
 
   def edit
-    @goods_label = Ecstore::GoodLabel.find(params[:id])
+    @goods_label = GoodLabel.find(params[:id])
   end
 
   def new
-    @goods_label = Ecstore::GoodLabel.new
+    @goods_label = GoodLabel.new
   end
 
   def create
-    @goods_label = Ecstore::GoodLabel.new
+    @goods_label = GoodLabel.new
     @goods_label.tag_name = params[:ecstore_good_label][:tag_name]
     @goods_label.tag_bgcolor = params[:color]
     @goods_label.app_id = "b2c"
@@ -23,7 +23,7 @@ class Admin::GoodsLabelsController < Admin::BaseController
   end
 
   def updateLabel
-    @goods_label = Ecstore::GoodLabel.find(params[:id])
+    @goods_label = GoodLabel.find(params[:id])
     @goods_label.tag_name = params[:ecstore_good_label][:tag_name]
     @goods_label.tag_bgcolor = params[:color]
     @goods_label.save
@@ -32,7 +32,7 @@ class Admin::GoodsLabelsController < Admin::BaseController
 
 
   def destroy
-    @goodsLabel = Ecstore::GoodLabel.find(params[:id])
+    @goodsLabel = GoodLabel.find(params[:id])
     @goodsLabel.destroy
     redirect_to admin_goods_labels_path
   end

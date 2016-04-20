@@ -11,6 +11,6 @@ class CreateTableCouponDownloads < ActiveRecord::Migration
   	drop_table :sdb_imodec_coupon_downloads
   end
   def connection
-  	@connection =  Ecstore::Base.connection
+  	@connection =  Base.connection
   end
 end

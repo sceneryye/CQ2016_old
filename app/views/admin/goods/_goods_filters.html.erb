@@ -14,11 +14,11 @@
 		<%=hidden_field_tag :template,@template%>
 		
 		<div class="filter-item">
-			<%=f.select :brand, Ecstore::Brand.all.collect {|brand| [brand.brand_name, brand.brand_id] },:include_blank=>"请选择基地" %>
+			<%=f.select :brand, Brand.all.collect {|brand| [brand.brand_name, brand.brand_id] },:include_blank=>"请选择基地" %>
 		</div>
 
 		<div class="filter-item">
-			<%=f.select :cat, Ecstore::Category.all.collect {|cat| [cat.full_path_name, cat.cat_id] },{:include_blank=>"请选择分类"},{:class=>"span3"} %>
+			<%=f.select :cat, Category.all.collect {|cat| [cat.full_path_name, cat.cat_id] },{:include_blank=>"请选择分类"},{:class=>"span3"} %>
 		</div>
 
 		<div class="filter-item">

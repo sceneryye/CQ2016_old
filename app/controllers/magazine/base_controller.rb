@@ -21,10 +21,10 @@ class Magazine::BaseController < ActionController::Base
 
   def find_cart!
             if signed_in?
-              @line_items = Ecstore::Cart.where(:member_id=>current_account.account_id)
+              @line_items = Cart.where(:member_id=>current_account.account_id)
             else
               member_ident = @m_id
-              @line_items = Ecstore::Cart.where(:member_ident=>member_ident)
+              @line_items = Cart.where(:member_ident=>member_ident)
             end
             @cart_total_quantity = @line_items.inject(0){ |t,l| t+=l.quantity }.to_i || 0
 

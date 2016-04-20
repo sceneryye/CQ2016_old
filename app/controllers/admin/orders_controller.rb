@@ -5,11 +5,11 @@ class Admin::OrdersController < Admin::BaseController
 
   def destroy
     id = params[:id]
-    @order_log = Ecstore::OrderLog.where(:rel_id=>id)
+    @order_log = OrderLog.where(:rel_id=>id)
     @order_log.destroy_all
-    @order_item = Ecstore::OrderItem.where(:order_id=>id)
+    @order_item = OrderItem.where(:order_id=>id)
     @order_item.destroy_all
-    @order = Ecstore::Order.where(:order_id=>id)
+    @order = Order.where(:order_id=>id)
     @order.destroy_all
 
     respond_to do |format|
@@ -21,9 +21,9 @@ class Admin::OrdersController < Admin::BaseController
 
 	def index
 		if params[:status].nil?
-			@orders_nw = Ecstore::Order.order("createtime desc")
+			@orders_nw = Order.order("createtime desc")
 		elsif
-			@orders_nw = Ecstore::Order.where(:status=>params[:status]).order("createtime desc")
+			@orders_nw = Order.where(:status=>params[:status]).order("createtime desc")
 		end
 
 		if !params[:pay_status].nil?
@@ -60,9 +60,9 @@ class Admin::OrdersController < Admin::BaseController
 	# def export
 	# 	pp "---------------"
 	# 	if params[:member][:select_all] == "1"
- #           @orders = Ecstore::Order.all  #找出所以数据
+ #           @orders = Order.all  #找出所以数据
  #        else
- #           @orders = Ecstore::Order.find(:all,:conditions => ["order_id in (?)",params[:member][:select_val]])
+ #           @orders = Order.find(:all,:conditions => ["order_id in (?)",params[:member][:select_val]])
  #        end
  #        pp @orders
  #        content = export_order(@orders)  #调用export方法
@@ -98,7 +98,7 @@ class Admin::OrdersController < Admin::BaseController
 		if params[:s] && params[:s][:q].present?
 			key = params[:s][:q]
 
-			@orders = Ecstore::Order.includes(:user).where("order_id like ? or ship_name like ?","%#{key}%","%#{key}%").order("order_id desc")
+			@orders = Order.includes(:user).where("order_id like ? or ship_name like ?","%#{key}%","%#{key}%").order("order_id desc")
 			@order_ids = @orders.pluck(:order_id)
 			@orders = @orders.paginate(:page=>params[:page],:per_page=>30)
 			render :index
@@ -113,8 +113,8 @@ class Admin::OrdersController < Admin::BaseController
               conditions = { :order_id=>order_ids }
 
               if act == "export"
-              	orders = Ecstore::Order.where(conditions)
-	              Ecstore::Order.export(orders)
+              	orders = Order.where(conditions)
+	              Order.export(orders)
 	              return render :json=>{:csv=>"/tmp/orders.csv"}
               end
 
@@ -123,25 +123,25 @@ class Admin::OrdersController < Admin::BaseController
 
 	              tegs.values.each  do |teg|
 	                    	if teg[:technicals] == "checked"
-	                    		Ecstore::Tagable.where(:rel_id=>order_ids,:tag_type=>"orders",:tag_id=>teg[:tag_id]).delete_all if teg[:state] == "none"
+	                    		Tagable.where(:rel_id=>order_ids,:tag_type=>"orders",:tag_id=>teg[:tag_id]).delete_all if teg[:state] == "none"
 	                    	end
 
 	                    	if teg[:technicals] == "uncheck"
 	                    		order_ids.each do |order_id|
-	                    			Ecstore::Tagable.create(:rel_id=>order_id,:tag_id=>teg[:tag_id],:tag_type=>"orders",:app_id=>"b2c")
+	                    			Tagable.create(:rel_id=>order_id,:tag_id=>teg[:tag_id],:tag_type=>"orders",:app_id=>"b2c")
 	                    		end
 	                    	end
 
 	                    	if teg[:technicals] == "partcheck"
 	                    		if teg[:state] == "all"
 	                    			order_ids.each do |order_id|
-				                     tagable = Ecstore::Tagable.where(:rel_id=>order_id,:tag_id=>teg[:tag_id],:tag_type=>"orders").first_or_initialize(:app_id=>"b2c")
+				                     tagable = Tagable.where(:rel_id=>order_id,:tag_id=>teg[:tag_id],:tag_type=>"orders").first_or_initialize(:app_id=>"b2c")
 				                     tagable.save
 			                     end
 	                    		end
 
 	                    		if teg[:state] == "none"
-	                    			Ecstore::Tagable.where(:rel_id=>order_ids,:tag_type=>"orders",:tag_id=>teg[:tag_id]).delete_all
+	                    			Tagable.where(:rel_id=>order_ids,:tag_type=>"orders",:tag_id=>teg[:tag_id]).delete_all
 	                    		end
 	                    	end
 	              end
@@ -150,7 +150,7 @@ class Admin::OrdersController < Admin::BaseController
 
 		if act == "get_same_tags"
 
-			tag_ids = Ecstore::Tagable.where(:rel_id=>order_ids,:tag_type=>"orders").pluck(:tag_id)
+			tag_ids = Tagable.where(:rel_id=>order_ids,:tag_type=>"orders").pluck(:tag_id)
 
 			hash = Hash.new(0)
 			tag_ids.each do |id|
@@ -183,19 +183,19 @@ class Admin::OrdersController < Admin::BaseController
 	end
 
 	def show
-		@order =Ecstore::Order.find_by_order_id(params[:id])
+		@order =Order.find_by_order_id(params[:id])
 	end
 
 	def detail
-		@order =Ecstore::Order.find_by_order_id(params[:id])
+		@order =Order.find_by_order_id(params[:id])
 	end
 
 	def pay
-		@order =Ecstore::Order.find_by_order_id(params[:id])
+		@order =Order.find_by_order_id(params[:id])
 	end
 
 	def dopay
-		@order =Ecstore::Order.find_by_order_id(params[:id])
+		@order =Order.find_by_order_id(params[:id])
 		# return render :js=>"alert('获取订单失败');" unless @order
 
 		if @order.pay_status == '1'
@@ -205,10 +205,10 @@ class Admin::OrdersController < Admin::BaseController
 		@user = @order.user
 
 		pay_app_id = params[:payment][:pay_app_id]
-		params[:payment].merge! Ecstore::Payment::PAYMENTS[pay_app_id.to_sym]
+		params[:payment].merge! Payment::PAYMENTS[pay_app_id.to_sym]
 
-		@payment = Ecstore::Payment.new params[:payment]  do |payment|
-			payment.payment_id = Ecstore::Payment.generate_payment_id
+		@payment = Payment.new params[:payment]  do |payment|
+			payment.payment_id = Payment.generate_payment_id
 
 			payment.status = 'ready'
 			payment.pay_ver = '1.0'
@@ -223,7 +223,7 @@ class Admin::OrdersController < Admin::BaseController
 			payment.status = 'succ'
 			payment.t_payed = Time.now.to_i
 
-			payment.pay_bill = Ecstore::Bill.new do |bill|
+			payment.pay_bill = Bill.new do |bill|
 				bill.rel_id  = @order.order_id
 				bill.bill_type = "payments"
 				bill.pay_object  = "order"
@@ -235,7 +235,7 @@ class Admin::OrdersController < Admin::BaseController
 		if @payment.save
 			@order.update_attributes(:pay_status=>'1')
 
-			Ecstore::OrderLog.new do |order_log|
+			OrderLog.new do |order_log|
 				order_log.rel_id = @order.order_id
 				order_log.op_id = current_admin.account_id
 				order_log.op_name = current_admin.login_name
@@ -255,8 +255,8 @@ class Admin::OrdersController < Admin::BaseController
 
 	def delivery
 
-		@order = Ecstore::Order.find_by_order_id(params[:id])
-		@delivery = Ecstore::Delivery.new do |delivery|
+		@order = Order.find_by_order_id(params[:id])
+		@delivery = Delivery.new do |delivery|
 			delivery.ship_name = @order.ship_name
 			delivery.ship_tel = @order.ship_tel
 			delivery.ship_mobile = @order.ship_mobile
@@ -267,12 +267,12 @@ class Admin::OrdersController < Admin::BaseController
 	end
 
 	def dodelivery
-		@order = Ecstore::Order.find_by_order_id(params[:id])
+		@order = Order.find_by_order_id(params[:id])
 		if @order.ship_status == '1'
 			return render :text=>"该订单已发货 !",:layout=>"admin"
 		end
 
-		@delivery = Ecstore::Delivery.new params[:delivery] do |delivery|
+		@delivery = Delivery.new params[:delivery] do |delivery|
 			delivery.t_begin = Time.now.to_i
 			delivery.status = "succ"
 		end
@@ -292,8 +292,8 @@ class Admin::OrdersController < Admin::BaseController
 
 
 	def reship
-		@order = Ecstore::Order.find_by_order_id(params[:id])
-		@reship = Ecstore::Reship.new do |reship|
+		@order = Order.find_by_order_id(params[:id])
+		@reship = Reship.new do |reship|
 			reship.ship_name = @order.ship_name
 			reship.ship_tel = @order.ship_tel
 			reship.ship_mobile = @order.ship_mobile
@@ -304,13 +304,13 @@ class Admin::OrdersController < Admin::BaseController
 	end
 
 	def doreship
-		@order = Ecstore::Order.find_by_order_id(params[:id])
+		@order = Order.find_by_order_id(params[:id])
 
 		if ['0','4'].include?(@order.ship_status)
 			return render :text=>"该订单#{order.ship_status_text}",:layout=>"admin"
 		end
 
-		@reship = Ecstore::Reship.new params[:reship] do |reship|
+		@reship = Reship.new params[:reship] do |reship|
 			reship.t_begin = Time.now.to_i
 			reship.status = "succ"
 		end
@@ -324,18 +324,18 @@ class Admin::OrdersController < Admin::BaseController
 	end
 
 	def refund
-		@order =Ecstore::Order.find_by_order_id(params[:id])
+		@order =Order.find_by_order_id(params[:id])
 	end
 
 	def dorefund
-		@order =Ecstore::Order.find_by_order_id(params[:id])
+		@order =Order.find_by_order_id(params[:id])
 
 		if @order.pay_status == "5"
 			return render :text=>"该订单已退款 !",:layout=>"admin"
 		end
 
-		@refund = Ecstore::Refund.new params[:refund]  do |refund|
-			refund.refund_id = Ecstore::Refund.generate_refund_id
+		@refund = Refund.new params[:refund]  do |refund|
+			refund.refund_id = Refund.generate_refund_id
 			refund.pay_ver = '1.0'
 			refund.currency = "CNY"
 			refund.paycost = 0
@@ -344,7 +344,7 @@ class Admin::OrdersController < Admin::BaseController
 			refund.status = 'succ'
 			refund.t_payed = Time.now.to_i
 
-			refund.bill = Ecstore::Bill.new do |bill|
+			refund.bill = Bill.new do |bill|
 				bill.rel_id  = @order.order_id
 				bill.bill_type = "refunds"
 				bill.pay_object  = "order"
@@ -363,7 +363,7 @@ class Admin::OrdersController < Admin::BaseController
 				txt_key = "订单已退款 ! "
 			end
 
-			Ecstore::OrderLog.new do |order_log|
+			OrderLog.new do |order_log|
 				order_log.rel_id = @order.order_id
 				order_log.op_id = current_admin.account_id
 				order_log.op_name = current_admin.login_name
@@ -381,11 +381,11 @@ class Admin::OrdersController < Admin::BaseController
 	end
 
 	def update
-		@order =Ecstore::Order.find_by_order_id(params[:id])
+		@order =Order.find_by_order_id(params[:id])
 		@order.update_attributes(params[:order])
 
 		if @order.status == 'finish'
-			order_log = Ecstore::OrderLog.new do |order_log|
+			order_log = OrderLog.new do |order_log|
 	                order_log.rel_id = @order.order_id
 	                order_log.op_id = current_admin.account_id
 	                order_log.op_name = current_admin.login_name
@@ -397,7 +397,7 @@ class Admin::OrdersController < Admin::BaseController
 	      end
 
 	      if @order.status == 'dead'
-			order_log = Ecstore::OrderLog.new do |order_log|
+			order_log = OrderLog.new do |order_log|
 	                order_log.rel_id = @order.order_id
 	                order_log.op_id = current_admin.account_id
 	                order_log.op_name = current_admin.login_name
@@ -415,14 +415,14 @@ class Admin::OrdersController < Admin::BaseController
 	end
 
 	def comment
-        @order = Ecstore::Order.find(params[:id])
+        @order = Order.find(params[:id])
     end
 
     def update_memo
-    	@order = Ecstore::Order.find(params[:id])
+    	@order = Order.find(params[:id])
     	@order.memo = params[:ecstore_order][:memo]
     	@order.save
-    	order_log = Ecstore::OrderLog.new do |order_log|
+    	order_log = OrderLog.new do |order_log|
 	                order_log.rel_id = @order.order_id
 	                order_log.op_id = current_admin.account_id
 	                order_log.op_name = current_admin.login_name
@@ -438,14 +438,14 @@ class Admin::OrdersController < Admin::BaseController
 	# 购物单
 	def print_order
 		@title = "购物单"
-		@order = Ecstore::Order.includes(:order_items).find_by_order_id(params[:id])
+		@order = Order.includes(:order_items).find_by_order_id(params[:id])
 		render :layout=>"print"
 	end
 
 	# 配货单
 	def print_preparer
 		@title = "配货单"
-		@order = Ecstore::Order.includes(:order_items).find_by_order_id(params[:id])
+		@order = Order.includes(:order_items).find_by_order_id(params[:id])
 		render :layout=>"print"
 	end
 

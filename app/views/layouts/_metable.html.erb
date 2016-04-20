@@ -7,7 +7,7 @@
 	<%=content_for :keywords do @meta_seo.keywords end %>
 	<%=content_for :description do @meta_seo.description end %>
 <%else%>
-	<%=content_for :title do Ecstore::Config.get(:page_title) end %>
-	<%=content_for :keywords do Ecstore::Config.get(:keywords) end %>
-	<%=content_for :description do Ecstore::Config.get(:keywords) end %>
+	<%=content_for :title do Config.get(:page_title) end %>
+	<%=content_for :keywords do Config.get(:keywords) end %>
+	<%=content_for :description do Config.get(:keywords) end %>
 <%end%>

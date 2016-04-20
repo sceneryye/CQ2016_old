@@ -2,17 +2,17 @@ class Admin::PromotionsController < Admin::BaseController
   
   def index
       promotion_type = params[:type] || "order"
-  	@promotions = Ecstore::Promotion.where(:promotion_type=>promotion_type).paginate(:page=>params[:page],:per_page=>20).order("priority desc")
+  	@promotions = Promotion.where(:promotion_type=>promotion_type).paginate(:page=>params[:page],:per_page=>20).order("priority desc")
   end
 
   def new
-  	@promotion = Ecstore::Promotion.new
+  	@promotion = Promotion.new
   	@method = :post
   	@action_url = admin_promotions_path
   end
 
   def edit
-  	@promotion = Ecstore::Promotion.find(params[:id])
+  	@promotion = Promotion.find(params[:id])
   	@method = :put
   	@action_url = admin_promotion_path(@promotion)
   end
@@ -33,7 +33,7 @@ class Admin::PromotionsController < Admin::BaseController
            params[:promotion].delete(:field_name)
       end
 
-  	@promotion = Ecstore::Promotion.new params[:promotion]
+  	@promotion = Promotion.new params[:promotion]
   	if @promotion.save
   		redirect_to admin_promotions_path(:type=>@promotion.promotion_type)
   	else
@@ -43,7 +43,7 @@ class Admin::PromotionsController < Admin::BaseController
   end
 
   def update
-  	@promotion = Ecstore::Promotion.find(params[:id])
+  	@promotion = Promotion.find(params[:id])
       field_name  =  params[:promotion][:field_name]
       case field_name
          when 'brand_id'
@@ -69,7 +69,7 @@ class Admin::PromotionsController < Admin::BaseController
   end
 
   def destroy
-     @promotion = Ecstore::Promotion.find(params[:id])
+     @promotion = Promotion.find(params[:id])
      type = @promotion.promotion_type
      @promotion.destroy
      redirect_to admin_promotions_path(:type=>type)

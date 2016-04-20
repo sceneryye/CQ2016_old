@@ -34,7 +34,7 @@
     <div class="control-group">
       <%= f.label :spec, "规格", :class => "control-label" %>
       <div class="controls">
-        <%=f.select :spec,options_from_collection_for_select(Ecstore::Spec.all,:spec_id,:memo_name,params[:spec_id].to_i),{:include_blank=>"请选择"},{:multiple => true, :size => 8} %>
+        <%=f.select :spec,options_from_collection_for_select(Spec.all,:spec_id,:memo_name,params[:spec_id].to_i),{:include_blank=>"请选择"},{:multiple => true, :size => 8} %>
       </div>
     </div>
     

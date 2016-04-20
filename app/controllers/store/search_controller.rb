@@ -19,7 +19,7 @@ class Store::SearchController < ApplicationController
 	             order = "uptime desc"
 	       end
 
-		@goods = Ecstore::Good.selling.order(order)
+		@goods = Good.selling.order(order)
 
 		@splits.each do |key|
 			@goods = @goods.joins(:brand).where("name like :key or brand_name like :key",:key=>"%#{key}%")

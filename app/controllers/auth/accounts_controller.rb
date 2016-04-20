@@ -3,7 +3,7 @@ class Auth::AccountsController < ApplicationController
 
   def new
        return redirect_to(after_user_sign_in_path)  if signed_in? 
-  	@account =  Ecstore::Account.new
+  	@account =  Account.new
       # render "auth/accounts/new", :locals=>{ :provider=>"weibo" }
   end
 
@@ -12,7 +12,7 @@ class Auth::AccountsController < ApplicationController
   	auth_ext = session[:_auth_ext]
 
   	now = Time.now
-  	@account = Ecstore::Account.new(params[:ecstore_account]) do |ac|
+  	@account = Account.new(params[:ecstore_account]) do |ac|
   		ac.account_type ="member"
   		ac.createtime = now.to_i
   		ac.auth_ext = auth_ext

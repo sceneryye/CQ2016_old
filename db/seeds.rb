@@ -7,7 +7,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-Ecstore::Card.create({
+Card.create({
 		:no=>"12309878992",
 		:value=>2000,
 		:card_type=>"A",
@@ -16,7 +16,7 @@ Ecstore::Card.create({
 		:status=>"正常"
 	})
 
-Ecstore::Card.create({
+Card.create({
 		:no=>"12309875491",
 		:value=>9000,
 		:card_type=>"B",
@@ -25,7 +25,7 @@ Ecstore::Card.create({
 		:status=>"正常"
 	})
 
-Ecstore::Card.create({
+Card.create({
 		:no=>"1230312175491",
 		:value=>3000,
 		:card_type=>"B",

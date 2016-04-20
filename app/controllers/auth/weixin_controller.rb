@@ -5,7 +5,7 @@ class Auth::WeixinController < ApplicationController
 	skip_before_filter :authorize_user!
 
 	def index 
-		auth_ext = Ecstore::AuthExt.find_by_id(cookies.signed[:_auth_ext].to_i) if cookies.signed[:_auth_ext]
+		auth_ext = AuthExt.find_by_id(cookies.signed[:_auth_ext].to_i) if cookies.signed[:_auth_ext]
 		session[:from] = "external_auth"
 		
 		if auth_ext&&!auth_ext.expired?&&auth_ext.provider == 'weixin'
@@ -32,7 +32,7 @@ class Auth::WeixinController < ApplicationController
 		token = Weixin.request_token(params[:code])
 	   #return  render :text=>token.to_json
 
-		auth_ext = Ecstore::AuthExt.where(:provider=>"weixin",
+		auth_ext = AuthExt.where(:provider=>"weixin",
 									:uid=>token.openid).first_or_initialize(
 									:access_token=>token.access_token,
   #                :refresh_token=>token.refresh_token,
@@ -52,11 +52,11 @@ class Auth::WeixinController < ApplicationController
 			#logger.info auth_user.inspect
 	    	login_name = token.openid
     		#  return render :text=>login_name
-			check_user = Ecstore::Account.find_by_login_name(login_name)
+			check_user = Account.find_by_login_name(login_name)
 
 			if check_user.nil?
 				now = Time.now
-				@account = Ecstore::Account.new  do |ac|
+				@account = Account.new  do |ac|
 					#account
 					ac.login_name = login_name
 					ac.login_password = login_name[0,6]#'123456'
@@ -67,9 +67,9 @@ class Auth::WeixinController < ApplicationController
 
 	        		ac.supplier_id = supplier_id        		
 		  		end
-		  		Ecstore::Account.transaction do
+		  		Account.transaction do
 	  				if @account.save!(:validate => false)
-			  			@user = Ecstore::User.new do |u|
+			  			@user = User.new do |u|
 				  			u.member_id = @account.account_id
 				  			u.email = "weixin_user#{rand(9999)}@anonymous.com"
 				  			#u.sex = case auth_user.gender when 'f'; '0'; when 'm'; '1'; else '2'; end if auth_user

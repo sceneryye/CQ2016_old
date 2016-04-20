@@ -7,7 +7,7 @@ module Admin
       if id ==nil
         return render :text=>"参数错误"
       end
-      @supplier = Ecstore::Supplier.find(id)
+      @supplier = Supplier.find(id)
 
       @@appid = @supplier.weixin_appid
       @@appsecret = @supplier.weixin_appsecret
@@ -27,18 +27,18 @@ module Admin
     end
 
     def followers
-      # @order_all = Ecstore::Order.where(:recommend_user=>wechat_user).select("sum(commission) as share").group(:recommend_user).first
+      # @order_all = Order.where(:recommend_user=>wechat_user).select("sum(commission) as share").group(:recommend_user).first
      #sql ='SELECT openid,user_info,(select sum(commission) from mdk.sdb_b2c_orders where recommend_user= mdk.sdb_wechat_followers.openid group by recommend_user)  as commission FROM mdk.sdb_wechat_followers'
       if cookies["MEMBER"]
-        @supplier = Ecstore::Supplier.where(:member_id=>cookies["MEMBER"].split("-").first).first
+        @supplier = Supplier.where(:member_id=>cookies["MEMBER"].split("-").first).first
         if @supplier == nil
           return render :text=>'您还没有关注者',:layout=>'vshop'
         else
-          @followers = Ecstore::WechatFollower.where(:supplier_id=>@supplier.id).paginate(:page => params[:page], :per_page => 20).order("commission DESC")
+          @followers = WechatFollower.where(:supplier_id=>@supplier.id).paginate(:page => params[:page], :per_page => 20).order("commission DESC")
         end
         layout = 'vshop'
       elsif current_admin
-        @followers = Ecstore::WechatFollower.all.paginate(:page => params[:page], :per_page => 20).order("commission DESC")
+        @followers = WechatFollower.all.paginate(:page => params[:page], :per_page => 20).order("commission DESC")
         layout = "admin"
       else
         redirect_to  '/vshop/login'
@@ -49,7 +49,7 @@ module Admin
         sql ="update mdk.sdb_wechat_followers set commission= (select sum(commission) from mdk.sdb_b2c_orders where recommend_user= '#{follower.openid}' group by recommend_user) where openid='#{follower.openid}'"
         ActiveRecord::Base.connection.execute(sql)
       end
-      #@order_all = Ecstore::Order.where(:recommend_user=>wechat_user).select("sum(commission) as share").group(:recommend_user).first
+      #@order_all = Order.where(:recommend_user=>wechat_user).select("sum(commission) as share").group(:recommend_user).first
 
        render :layout=>layout
 
@@ -57,9 +57,9 @@ module Admin
 
     def follower_renew
       openid = params[:openid]
-      @follower =  Ecstore::WechatFollower.where(:openid=>openid).first
+      @follower =  WechatFollower.where(:openid=>openid).first
 
-      supplier = Ecstore::Supplier.find(@follower.supplier_id)
+      supplier = Supplier.find(@follower.supplier_id)
       appid = supplier.weixin_appid
       appsecret =  supplier.weixin_appsecret
       $client ||= WeixinAuthorize::Client.new(appid,appsecret)
@@ -75,7 +75,7 @@ module Admin
 
     def followers_import
       id = 1
-      @supplier = Ecstore::Supplier.find(id)
+      @supplier = Supplier.find(id)
       appid = @supplier.weixin_appid
       appsecret =  @supplier.weixin_appsecret
 
@@ -86,9 +86,9 @@ module Admin
        @followers = $client.followers.result
        @openids = @followers["data"]["openid"]
        @openids.each do |openid|
-         @follower = Ecstore::WechatFollower.find_by_openid(openid)
+         @follower = WechatFollower.find_by_openid(openid)
          if ! @follower
-           Ecstore::WechatFollower.new do |f|
+           WechatFollower.new do |f|
              f.openid = openid
              f.supplier_id = @supplier.id
              f.user_info = $client.user(openid).result.to_s
@@ -111,7 +111,7 @@ module Admin
 
     def menu
       id = 1
-      @supplier = Ecstore::Supplier.find(id)
+      @supplier = Supplier.find(id)
      
 
       if @supplier

@@ -10,7 +10,7 @@
     <div class="control-group">
       <%= f.label :addr, "商品类型", :class => "control-label" %>
       <div class="controls">
-        <%=f.select :brand, Ecstore::GoodType.all.collect {|type| [type.name, type.type_id] },:include_blank=>"请选择" %>
+        <%=f.select :brand, GoodType.all.collect {|type| [type.name, type.type_id] },:include_blank=>"请选择" %>
       </div>
     </div>
     

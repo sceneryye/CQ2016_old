@@ -7,17 +7,17 @@ class Admin::UsersController < Admin::BaseController
 		key = params[:search][:key]
 		@member_type = params[:search][:member_type]
 
-		@card = Ecstore::Card.find(params[:card_id])
+		@card = Card.find(params[:card_id])
 
 		if type == 'login_name'
-			account = Ecstore::Account.find_by_login_name(key)
+			account = Account.find_by_login_name(key)
 			@user = account.user  if account
 
 		else
-			# @users = Ecstore::MemberCard.where("user_tel = ? and user_id is not null",key).collect do |mc|
+			# @users = MemberCard.where("user_tel = ? and user_id is not null",key).collect do |mc|
 			# 	mc.user
 			# end.uniq
-			@users = Ecstore::User.where(:mobile=>key)
+			@users = User.where(:mobile=>key)
 			if @users.size <= 1
 				@user = @users.first
 				@users = nil
@@ -31,7 +31,7 @@ class Admin::UsersController < Admin::BaseController
 	end
 
 	def newuser
-		account = Ecstore::Account.new
+		account = Account.new
 		account.account_type = "shopadmin"
 		account.login_name = params[:manager][:name]
 		account.login_password = params[:manager][:password]
@@ -41,7 +41,7 @@ class Admin::UsersController < Admin::BaseController
 		account.mobile = params[:manager][:mobile]
 		account.license = true
 		account.save!
-		manager = Ecstore::Manager.new
+		manager = Manager.new
 		manager.user_id = account.account_id
 		manager.status = 1
 		manager.name = params[:manager][:desc]
@@ -52,7 +52,7 @@ class Admin::UsersController < Admin::BaseController
 
 	def send_sms_code
 
-		@user = Ecstore::User.find(params[:id])
+		@user = User.find(params[:id])
 
 		sms_code = rand(1000000).to_s(16)
 		tel = params[:tel]
@@ -74,7 +74,7 @@ class Admin::UsersController < Admin::BaseController
 	end
 
 	def validate_mobile
-		@user = Ecstore::User.find(params[:id])
+		@user = User.find(params[:id])
 		mobile = params[:mobile]
 
 		@user.update_attributes({:mobile=>mobile,:sms_validate=>'true'})
@@ -83,8 +83,8 @@ class Admin::UsersController < Admin::BaseController
 	end
 
 	def select
-		@user = Ecstore::User.find(params[:id])
-		@card = Ecstore::Card.find(params[:card])
+		@user = User.find(params[:id])
+		@card = Card.find(params[:card])
 		@member_type = params[:member_type]
 		render "select"
 	end
@@ -92,9 +92,9 @@ class Admin::UsersController < Admin::BaseController
 
 	def buy_card
 
-		@buyer = Ecstore::User.find(params[:id])
+		@buyer = User.find(params[:id])
 
-		@card = Ecstore::Card.find(member_card_params[:card_id])
+		@card = Card.find(member_card_params[:card_id])
 
 		return render(:js=>"alert('不能购买,请检查卡状态!')") unless  @card.can_buy?
 
@@ -123,7 +123,7 @@ class Admin::UsersController < Admin::BaseController
 			member_card_params.delete :bank_name
 			member_card_params.delete :bank_card_no
 		end
-		@buyer_card = Ecstore::MemberCard.new(member_card_params)
+		@buyer_card = MemberCard.new(member_card_params)
 
 		messages =  member_card_params.dup
 
@@ -152,7 +152,7 @@ class Admin::UsersController < Admin::BaseController
 			log = messages.collect do |key,value|
 
 				if %w(user_id buyer_id).include?(key)
-					u = Ecstore::User.find(value)
+					u = User.find(value)
 					value = u.account.login_name if u&&u.account
 				end
 
@@ -163,7 +163,7 @@ class Admin::UsersController < Admin::BaseController
 
 			end.join(",")
 
-			Ecstore::CardLog.create(:member_id=>current_admin.account_id,
+			CardLog.create(:member_id=>current_admin.account_id,
                                                 :card_id=>@card.id,
                                                 :message=>"购买: #{log}")
 		end
@@ -172,8 +172,8 @@ class Admin::UsersController < Admin::BaseController
 	end
 
 	def use_card
-		@user = Ecstore::User.find(member_card_params[:user_id])
-		@card = Ecstore::Card.find(member_card_params[:card_id])
+		@user = User.find(member_card_params[:user_id])
+		@card = Card.find(member_card_params[:card_id])
 
 		return render(:js=>"alert('不能使用该卡,请检查卡状态!')") unless  @card.can_use?
 
@@ -202,7 +202,7 @@ class Admin::UsersController < Admin::BaseController
 				shop_advance = @user.advance
 			end
 			shop_advance += @card.value
-			Ecstore::MemberAdvance.create(:member_id=>@user.member_id,
+			MemberAdvance.create(:member_id=>@user.member_id,
 											  :money=>@card.value,
 											  :message=>"会员卡激活,卡号:#{@card.no}",
 											  :mtime=>Time.now.to_i,
@@ -220,7 +220,7 @@ class Admin::UsersController < Admin::BaseController
 			member_card_params.delete :card_id
 			log = member_card_params.collect do |key,value|
 				if %w(user_id buyer_id).include?(key)
-					u = Ecstore::User.find(value)
+					u = User.find(value)
 					value = u.account.login_name if u&&u.account
 				end
 				value = "是" if value.is_a?(TrueClass)
@@ -228,7 +228,7 @@ class Admin::UsersController < Admin::BaseController
 				I18n.t("card.#{key}") + "=" + value.to_s
 			end.join(",")
 
-			Ecstore::CardLog.create(:member_id=>current_admin.account_id,
+			CardLog.create(:member_id=>current_admin.account_id,
 			                                         :card_id=>@card.id,
 			                                         :message=>"充值: #{log}, 金额=#{@card.value}")
 		end

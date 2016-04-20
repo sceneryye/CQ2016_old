@@ -17,14 +17,14 @@ class Admin::ImagesController < Admin::BaseController
   		@start_time = Time.now.strftime("%Y-%m-%d") + " 00:00:00"
   		@end_time = Time.now.to_s(:db)
   	end
-  	@goods = Ecstore::Good.where("uptime >= ? and uptime < ?",Time.parse(@start_time).to_i,Time.parse(@end_time).to_i).order("last_modify DESC")
+  	@goods = Good.where("uptime >= ? and uptime < ?",Time.parse(@start_time).to_i,Time.parse(@end_time).to_i).order("last_modify DESC")
   end
 
   def mark
   	if params[:mark]
   		@start_time = params[:mark][:start]
   		@end_time = params[:mark][:end]
-  		@goods = ::Ecstore::Good.where("uptime >= ? and uptime < ?",Time.parse(@start_time).to_i,Time.parse(@end_time).to_i)
+  		@goods = ::Good.where("uptime >= ? and uptime < ?",Time.parse(@start_time).to_i,Time.parse(@end_time).to_i)
   	end
 
   	water_logger.debug("[begin][#{Time.now}] **********begin***********")
@@ -74,7 +74,7 @@ class Admin::ImagesController < Admin::BaseController
       @start_time = Time.now.strftime("%Y-%m-%d") + " 00:00:00"
       @end_time = Time.now.to_s(:db)
     end
-    @goods = Ecstore::Good.where("uptime >= ? and uptime < ?",Time.parse(@start_time).to_i,Time.parse(@end_time).to_i)
+    @goods = Good.where("uptime >= ? and uptime < ?",Time.parse(@start_time).to_i,Time.parse(@end_time).to_i)
     water_logger.debug("[begin][#{Time.now}] **********begin rollbacking***********")
     @goods.each do |good|
         good.images.each do |image|
@@ -103,7 +103,7 @@ class Admin::ImagesController < Admin::BaseController
   end
 
   def refresh
-      Ecstore::Category.refresh_goods_cat_count
+      Category.refresh_goods_cat_count
       render :js=>"alert('更新完成!');"
   end
 end

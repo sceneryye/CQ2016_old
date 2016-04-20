@@ -20,11 +20,11 @@ class ApplicationController < ActionController::Base
   private 
 
     def menu_brands
-      @menu_brands = Ecstore::Brand.all
+      @menu_brands = Brand.all
     end
 
      def menu_categories
-      @menu_categories = Ecstore::Category.where(disabled:'false').order('p_order DESC')
+      @menu_categories = Category.where(disabled:'false').order('p_order DESC')
     end
 
 
@@ -40,11 +40,11 @@ class ApplicationController < ActionController::Base
     def find_cart!
         
         if signed_in?
-          @line_items = Ecstore::Cart.where(:member_id=>current_account.account_id)
+          @line_items = Cart.where(:member_id=>current_account.account_id)
 
         else
           member_ident = @m_id
-          @line_items = Ecstore::Cart.where(:member_ident=>member_ident)
+          @line_items = Cart.where(:member_ident=>member_ident)
         end
 
         if  @line_items.size>0
@@ -59,7 +59,7 @@ class ApplicationController < ActionController::Base
 
     def find_user
       # if Rails.env == "development"
-      #   return  @user = Ecstore::User.find_by_member_id(217)
+      #   return  @user = User.find_by_member_id(217)
       # end
 
       unless signed_in?
@@ -79,7 +79,7 @@ class ApplicationController < ActionController::Base
 
     # find categories
     def require_top_cats
-      @top_cats = Ecstore::Category.where(:parent_id=>0).where('sell=true or future=true or agent=true').where("cat_name not in (?)",['时装周预售','会员卡']).order("p_order asc")
+      @top_cats = Category.where(:parent_id=>0).where('sell=true or future=true or agent=true').where("cat_name not in (?)",['时装周预售','会员卡']).order("p_order asc")
     end
 
     def find_path_seo
@@ -88,7 +88,7 @@ class ApplicationController < ActionController::Base
 
       path  = request.env["PATH_INFO"]
 
-      metas = Ecstore::MetaSeo.path_metas.where(:path=>path).select do |meta|
+      metas = MetaSeo.path_metas.where(:path=>path).select do |meta|
           if meta.params.blank?
               true
           else

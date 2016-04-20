@@ -26,12 +26,12 @@ class Memberships::AftersalesController < ApplicationController
 		if @order.aftersale
 			return render(:inline=>"<p>无法申请售后服务<p>", :layout=>"application",:status=>:forbidden)
 		end
-		@aftersale = Ecstore::Aftersale.new
+		@aftersale = Aftersale.new
 	end
 
 
 	def show
-		@aftersale = Ecstore::Aftersale.find(params[:id])
+		@aftersale = Aftersale.find(params[:id])
 
 		add_breadcrumb("查看售后服务申请")
 	end
@@ -39,11 +39,11 @@ class Memberships::AftersalesController < ApplicationController
 	def create
 		params[:aftersale].merge!(:member_id=>@user.member_id)
 		params[:aftersale].merge!(:add_time=>Time.now.to_i)
-		@aftersale = Ecstore::Aftersale.new(params[:aftersale])
+		@aftersale = Aftersale.new(params[:aftersale])
 		if @aftersale.save
 			render :text=>"售后服务申请已发送！",  :layout=>"application"
 		else
-			@order =  Ecstore::Order.find_by_order_id(@aftersale.order_id)
+			@order =  Order.find_by_order_id(@aftersale.order_id)
 			render :new
 		end
 	end

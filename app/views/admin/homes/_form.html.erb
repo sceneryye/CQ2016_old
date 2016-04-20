@@ -1,6 +1,6 @@
 <%=form_for :home,:url=>@action_url,:method=>@method,:html=>{:class=>"form-horizontal"} do |f|%>
     供应商:
-    <%=f.select :supplier_id, Ecstore::Supplier.all.collect {|supplier| [supplier.name, supplier.id] },{:include_blank=>"请选择"},{:class=>"span3"} %>
+    <%=f.select :supplier_id, Supplier.all.collect {|supplier| [supplier.name, supplier.id] },{:include_blank=>"请选择"},{:class=>"span3"} %>
     <br/>
     <fieldset id="bags">
       <legend>其他</legend>

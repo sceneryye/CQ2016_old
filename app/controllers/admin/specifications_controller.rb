@@ -1,22 +1,22 @@
 class Admin::SpecificationsController < Admin::BaseController
 
 	def index
-		@specs =  Ecstore::Spec.paginate(:per_page=>20,:page=>params[:page]).order("p_order desc")
+		@specs =  Spec.paginate(:per_page=>20,:page=>params[:page]).order("p_order desc")
 	end
 
 	def new
-		@spec  = Ecstore::Spec.new
+		@spec  = Spec.new
 
 		@action_url =  admin_specifications_path
 		@method = :post
 	end
 
 	def show
-		@spec  = Ecstore::Spec.find(params[:id])
+		@spec  = Spec.find(params[:id])
 	end
 
 	def edit
-		@spec  = Ecstore::Spec.includes(:spec_values).find(params[:id])
+		@spec  = Spec.includes(:spec_values).find(params[:id])
 
 
 		@action_url =  admin_specification_path(@spec)
@@ -24,7 +24,7 @@ class Admin::SpecificationsController < Admin::BaseController
 	end
 
 	def create
-		@spec  = Ecstore::Spec.new params[:spec]
+		@spec  = Spec.new params[:spec]
 		if @spec.save
 			redirect_to admin_specifications_url
 		else
@@ -33,7 +33,7 @@ class Admin::SpecificationsController < Admin::BaseController
 	end
 
 	def update
-		@spec  = Ecstore::Spec.find(params[:id])
+		@spec  = Spec.find(params[:id])
 		if @spec.update_attributes(params[:spec])
 			redirect_to admin_specifications_url
 		else
@@ -42,7 +42,7 @@ class Admin::SpecificationsController < Admin::BaseController
 	end
 
 	def destroy
-		@spec  = Ecstore::Spec.find(params[:id])
+		@spec  = Spec.find(params[:id])
 		@spec.destroy
 		redirect_to admin_specifications_url
 	end

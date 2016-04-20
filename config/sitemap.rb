@@ -24,7 +24,7 @@ SitemapGenerator::Sitemap.create do
   #
   # Add all articles:
   #
-  Ecstore::Good.all do |good|
+  Good.all do |good|
       add good_path(good)
   end
   SitemapGenerator::Sitemap.ping_search_engines

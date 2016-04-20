@@ -3,7 +3,7 @@ class Admin::SuppliersController < ApplicationController
 	layout 'admin'
 
 	def index
-		@suppliers = Ecstore::Supplier.paginate(:page => params[:page], :per_page => 20).order("status DESC,created_at DESC")
+		@suppliers = Supplier.paginate(:page => params[:page], :per_page => 20).order("status DESC,created_at DESC")
 	end
 
 
@@ -12,13 +12,13 @@ class Admin::SuppliersController < ApplicationController
 	end
 
 	def new
-		@supplier  =  Ecstore::Supplier.new
+		@supplier  =  Supplier.new
 		@action_url =  admin_suppliers_path
     	@method = :post
 	end
 
 	def edit
-		@supplier  =  Ecstore::Supplier.find(params[:id])
+		@supplier  =  Supplier.find(params[:id])
 		@action_url = admin_supplier_path(@supplier)
 		@method = :put
 	end
@@ -37,7 +37,7 @@ class Admin::SuppliersController < ApplicationController
 
 
     #params[:supplier].merge!(:member_id=>@user.id)
-		@supplier = Ecstore::Supplier.new(params[:supplier])
+		@supplier = Supplier.new(params[:supplier])
 		if @supplier.save
       return_url= params[:return_url]
       if (return_url.blank?)
@@ -53,7 +53,7 @@ class Admin::SuppliersController < ApplicationController
 
 	def update
     #return render :text=>params[:supplier][:layout]
-		@supplier = Ecstore::Supplier.find(params[:id])
+		@supplier = Supplier.find(params[:id])
 		
 		if @supplier.update_attributes(params[:supplier])
       return_url= params[:return_url]
@@ -73,27 +73,27 @@ class Admin::SuppliersController < ApplicationController
 
 
 	def destroy
-		@supplier = Ecstore::Supplier.find(params[:id])
+		@supplier = Supplier.find(params[:id])
 		@supplier.destroy
 
 		redirect_to admin_suppliers_url
   end
 
   def update_state
-    @supplier = Ecstore::Supplier.find(params[:supplier_id])
+    @supplier = Supplier.find(params[:supplier_id])
       unless @supplier.status=="1"
-        Ecstore::Supplier.where(:id=>params[:supplier_id]).update(params[:supplier_id],{:status=>1})
+        Supplier.where(:id=>params[:supplier_id]).update(params[:supplier_id],{:status=>1})
        end
 
-    @account=Ecstore::Account.find(params[:user_id])
+    @account=Account.find(params[:user_id])
     @account.update_attribute(:supplier_id,params[:supplier_id])
     if @account.account_type=="shopadmin"
        @account.update_attribute(:account_type,"member")
 
     end
-    @manager=Ecstore::Manager.find_by_user_id(params[:user_id])
+    @manager=Manager.find_by_user_id(params[:user_id])
     unless @manager
-     Ecstore::Manager.new do |sv|
+     Manager.new do |sv|
         sv.user_id = @account.account_id
         sv.status = "1"
         sv.name = @supplier.name

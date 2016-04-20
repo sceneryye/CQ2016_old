@@ -6,9 +6,9 @@ module Admin
     class MembersController < Admin::BaseController
 
       def index
-        @total_member = Ecstore::Member.count()
+        @total_member = Member.count()
         
-        @members = Ecstore::Member.paginate(:page => params[:page], :per_page => 20).order("member_id DESC")
+        @members = Member.paginate(:page => params[:page], :per_page => 20).order("member_id DESC")
         
 
         @column_data = YAML.load(File.open(Rails.root.to_s+"/config/columns/member.yml"))
@@ -23,11 +23,11 @@ module Admin
       end
 
       def edit
-        @member = Ecstore::Member.find(params[:id])
+        @member = Member.find(params[:id])
       end
 
       def updateInfo
-        @member = Ecstore::Member.find(params[:id])
+        @member = Member.find(params[:id])
         @member.update_attributes(params[:ecstore_member])
         
         # @member.mobile = params[:ecstore_member][:mobile]
@@ -43,12 +43,12 @@ module Admin
       end
 
       def info
-        @member = Ecstore::Member.find(params[:id])
+        @member = Member.find(params[:id])
       end
 
       def send_sms
           if  params[:send_all] == "1"
-              tels =  Ecstore::Member.all.select { |u| u.mobile.present?&&(/^[1-9][0-9]{10}$/ =~ u.mobile) }.collect{|x| x.mobile}
+              tels =  Member.all.select { |u| u.mobile.present?&&(/^[1-9][0-9]{10}$/ =~ u.mobile) }.collect{|x| x.mobile}
           else
               tels = params[:tels]
           end
@@ -124,11 +124,11 @@ module Admin
       def export
         fields =  params[:fields]
         if params[:member][:select_all].to_i > 0
-           members = Ecstore::Member.all  #找出所有数据
+           members = Member.all  #找出所有数据
         else
-           members = Ecstore::Member.find(:all,:conditions => ["member_id in (?)",params[:ids]])
+           members = Member.find(:all,:conditions => ["member_id in (?)",params[:ids]])
         end
-        content = Ecstore::Member.export(fields,members)  #调用export方法
+        content = Member.export(fields,members)  #调用export方法
         send_data(content, :type => 'text/csv',:filename => "member_#{Time.now.strftime('%Y%m%d%H%M%S')}.csv")
       end
 

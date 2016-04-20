@@ -3,9 +3,9 @@ class Admin::BrandAdmsController < Admin::BaseController
 
   def index
     if params[:scope] == 'unscoped'
-        @brands =  Ecstore::Brand.unscoped.order("ordernum asc,slug asc")
+        @brands =  Brand.unscoped.order("ordernum asc,slug asc")
     else
-        @brands =  Ecstore::Brand.order("ordernum asc,slug asc")
+        @brands =  Brand.order("ordernum asc,slug asc")
     end
     
     if params[:search]
@@ -17,19 +17,19 @@ class Admin::BrandAdmsController < Admin::BaseController
   end
 
   def new
-    @brand  = Ecstore::Brand.new
+    @brand  = Brand.new
     @action_url =  admin_brand_adms_path
     @method = :post
   end
 
   def edit
-    @brand = Ecstore::Brand.find(params[:id])
+    @brand = Brand.find(params[:id])
     @action_url =  admin_brand_adm_path(@brand)
     @method = :put
   end
 
   def create
-    @brand  = Ecstore::Brand.new brand_params
+    @brand  = Brand.new brand_params
     if @brand.save
       redirect_to admin_brand_adms_url
     else
@@ -40,7 +40,7 @@ class Admin::BrandAdmsController < Admin::BaseController
   end
 
   def update
-    @brand  = Ecstore::Brand.find(params[:id])
+    @brand  = Brand.find(params[:id])
     if @brand.update_attributes(brand_params)
       redirect_to admin_brand_adms_url
     else
@@ -51,7 +51,7 @@ class Admin::BrandAdmsController < Admin::BaseController
   end
 
   def destroy
-    @brand  = Ecstore::Footer.find(params[:id])
+    @brand  = Footer.find(params[:id])
     @brand.destroy
     redirect_to admin_brand_adms_url
   end
@@ -60,14 +60,14 @@ class Admin::BrandAdmsController < Admin::BaseController
     return_url =  request.env["HTTP_REFERER"]
     return_url =  admin_brand_pages_url if return_url.blank?
 
-    @brand = Ecstore::Brand.unscoped.find(params[:id])
+    @brand = Brand.unscoped.find(params[:id])
     val = @brand.disabled == 'false' ? 'true' : 'false'
     @brand.update_attribute :disabled, val
     redirect_to return_url
   end
 
   def order
-    @brand = Ecstore::Brand.find(params[:id])
+    @brand = Brand.find(params[:id])
     @brand.update_attribute :ordernum,params[:ordernum].to_i
     render :nothing=>true
   end
@@ -76,8 +76,8 @@ class Admin::BrandAdmsController < Admin::BaseController
     return_url =  request.env["HTTP_REFERER"]
     return_url =  admin_brand_pages_url if return_url.blank?
     
-    @brand = Ecstore::Brand.find(params[:id])
-    Ecstore::Brand.where(:reco=>true).update_all :reco=>false
+    @brand = Brand.find(params[:id])
+    Brand.where(:reco=>true).update_all :reco=>false
     @brand.update_attribute :reco, true
     redirect_to return_url
   end

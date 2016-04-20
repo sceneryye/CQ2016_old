@@ -1,7 +1,7 @@
 #encoding:utf-8
 class Admin::PermissionsController < Admin::BaseController
   def index
-    @managers = Ecstore::Manager.all
+    @managers = Manager.all
   end
 
   def new
@@ -22,7 +22,7 @@ class Admin::PermissionsController < Admin::BaseController
   end
 
   def edit
-    @manager = Ecstore::Manager.find(params[:id])
+    @manager = Manager.find(params[:id])
     @resources = Imodec::Resource.where(:parent_id=>nil)
   end
 end

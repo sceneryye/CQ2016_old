@@ -28,7 +28,7 @@
 						</label>
 					<%end%>
 					</div>
-					<%=render :partial=>"memberships/member_addrs/form",:locals=>{ :display=>( @addrs.size == 0 ), :@addr=>Ecstore::MemberAddr.new }%>
+					<%=render :partial=>"memberships/member_addrs/form",:locals=>{ :display=>( @addrs.size == 0 ), :@addr=>MemberAddr.new }%>
 			    </div>
 
 				<%=form_for :order,:url=>orders_path,:html=>{ :class=>"form-horizontal",:id=>"order_form" } do |f|%>

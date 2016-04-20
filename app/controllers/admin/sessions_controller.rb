@@ -10,7 +10,7 @@ class Admin::SessionsController < Admin::BaseController
   	name  = params[:session][:login_name]
   	password = params[:session][:login_password]
     
-      admin =  Ecstore::Account.admin_authenticate(name,password)
+      admin =  Account.admin_authenticate(name,password)
       if admin
             admin_sign_in admin
   		redirect_to after_admin_sign_in_path

@@ -8,7 +8,7 @@
 		<li class="cho_item <%if params[:gtype]=="3"%>sell_item<%end%>"><a href="?gtype=3">代购</a></li>
 	</ul>
 	<ul class="unstyled">
-		<%Ecstore::Country.all.each do |country|%>
+		<%Country.all.each do |country|%>
 		<li class="country_item">
 			<%if country.country_id.to_s == params[:id]%>
 				<%=link_to country.country_name,country_path(country,:gtype=>params[:gtype]),:class=>"selected_item"%>
