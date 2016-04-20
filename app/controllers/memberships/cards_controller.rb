@@ -131,7 +131,8 @@ class Memberships::CardsController < ApplicationController
 	    card_info = card_info('修改密码',old_pwd)
 
 	    if card_info[:error]
-			return render text: '原密码不正确'
+	    	flash[:error] = "原密码不正确" 
+	    	render 'edit'
 		else
 			# reset_password
 		    order_id = get_order_id
