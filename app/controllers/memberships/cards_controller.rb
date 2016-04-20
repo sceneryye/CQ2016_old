@@ -76,9 +76,8 @@ class Memberships::CardsController < ApplicationController
 	    from = params[:from]
 
 	    card_info = card_info(from,password)
-
-		if card_info["error"]
-			redirect_to card_path(id),notice:"密码错误"
+		if card_info[:error]
+			redirect_to card_path(id),notice: card_info[:error]
 		else
 			redirect_to card_path(id)
 		end

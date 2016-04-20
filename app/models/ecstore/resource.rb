@@ -1,9 +1,9 @@
-class Imodec::Resource < ActiveRecord::Base
+class Ecstore::Resource < ActiveRecord::Base
   
   
-  has_many :actions, :class_name=>"Imodec::Resource",:foreign_key=>"parent_id"
+  has_many :actions,:foreign_key=>"parent_id"
 
-  belongs_to :controller,:class_name=>"Imodec::Resource"
+  belongs_to :controller
 
   class << self
 
