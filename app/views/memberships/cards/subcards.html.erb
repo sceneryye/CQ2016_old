@@ -1,5 +1,5 @@
 <% provide :title, '昌麒生态园-如意卡信息' %>
-<%=render partial: 'breadcrembs' , locals:{current:'会员卡交易记录'}%>
+<%=render partial: 'breadcrembs' , locals:{current:'如意卡信息'}%>
 <!-- <%= form_for :subcards, data: {abide: ''} do|f| %>
     <%#= render 'layouts/form_errors', object: @subcards%>
       <table class="table">
@@ -29,8 +29,9 @@
   <%@subcards.each  do |subcard|%>
       <tr>
         <td><%=subcard.no%></td>
-        <td><%=subcard.status%></td>
-        <td>¥<%=subcard.tradings.collect{ |trading| trading.amount }.inject(:+)%></td>   
+        <td><%=subcard.use_status ?  "已激活" : "未激活"%></td>
+        <td>¥<%=subcard.card_trading_logs.select{ |trading| trading.parent_rebate_id}.collect{ |trading| trading.amount }.inject(:+)%></td>  
+        <td>¥<%=subcard.card_trading_logs.select{ |trading| trading.parent_rebate_id.nil? }.collect{ |trading| trading.amount }.inject(:+)%></td>  
       </tr>
   <%end if @subcards%>
   <%if @subcards.blank?%>
