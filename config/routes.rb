@@ -23,6 +23,8 @@ Modengke::Application.routes.draw do
 
         post 'login'
         post 'pay'
+
+        get 'subcards'
       end
     end
 

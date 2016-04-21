@@ -3,6 +3,7 @@
 	<div class="medium-5 large-3 columns">
 		<div class="callout secondary">
 			<%=form_for :card,:url=>login_cards_path do |f|%>
+			<input type="hidden" name="return_url" value='<%=@return_url%>'%>
 			<div class="row">
 				<div class="small-12 columns">
 					<label>您的会员卡号

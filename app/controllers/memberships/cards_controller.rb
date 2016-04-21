@@ -8,6 +8,10 @@ class Memberships::CardsController < ApplicationController
 
   	include Allinpay
 
+  	def subcards
+  		@subcards =nil
+  	end
+
   	def new () end
 
   	def create
@@ -48,8 +52,8 @@ class Memberships::CardsController < ApplicationController
 	                                                :message=>"会员卡激活,会员本人操作")
 				@password = session[:card_pwd]
 				@return_url = bank_cards_path
-
-				return render 'edit', notice: '为了账号安全,请您立刻修改初始密码！'#bank_cards_path
+				flash[:error] = "为了账号安全,请您立刻修改初始密码！" 
+				return render 'edit'
 
 			end
 		else
@@ -70,6 +74,7 @@ class Memberships::CardsController < ApplicationController
 	end
 
   	def login
+  		@return_url = params[:return_url]
   		id = params[:id]
 
   		if id.blank?
@@ -150,8 +155,13 @@ class Memberships::CardsController < ApplicationController
 		    res_data = ActiveSupport::JSON.decode card_reset_password(order_id, card_id, new_pwd)
 
 		    card_info = card_info('修改密码后查询',new_pwd)
-		    session[:card_pwd] = nil
-		   	redirect_to member_path, notice: '密码修改成功'
+		    if @return_url == bank_cards_path
+		    	return redirect_to @return_url, notice: '密码修改成功！请绑定您的银行卡。'
+		    else
+
+			    session[:card_pwd] = nil
+			   	redirect_to member_path, notice: '密码修改成功'
+		   end
 		end	
 	end
 

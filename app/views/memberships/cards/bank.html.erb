@@ -1,12 +1,6 @@
 <% provide :title, '会员卡激活-银行卡信息' %>
   <h4>最后一步：请填写绑定银行卡信息</h4>
-
-<div class="row">       
-    <div class="columns small-12 medium-6">     
-      <%=link_to '暂不激活', root_path, class:'button hollow alert float-center'%>
-    </div>  
     
-</div>              
 <%= form_for :member_card,:url => member_card_cards_path,:method=>:post,:html=>{:role=>"form",data: {type: "script"}} do |f|%>  
   <%= render 'layouts/form_errors', object: @member_card if @member_card%>  
     <div class="row">
@@ -36,7 +30,8 @@
      <div class="row">
         <div class="columns small-12">  
             <div class="help-block" style="color:red">*打星号的为必填项*</div>                                 
-            <div class="form-group">
+            <div class="expanded button-group">
+                 <%=link_to '暂不绑定', root_path, class:'button hollow alert expanded'%>                 
                  <%=f.submit "提 交",:class=>"button alert expanded"%>  
             </div>
         </div>
