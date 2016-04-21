@@ -23,4 +23,8 @@ class MemberCard < ActiveRecord::Base
 	def sell_card!
 		self.card.update_attribute :sale_status, true if self.card
 	end
+
+	def subcards
+		Card.where(parent_id: self.card_id)
+	end
 end

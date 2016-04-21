@@ -9,9 +9,9 @@ class Memberships::CardsController < ApplicationController
   	include Allinpay
 
   	def subcards
-  		@subcards = nil
+  		@subcards = @user.member_card.subcards
 
-  		
+
   	end
 
   	def new () end
