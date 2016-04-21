@@ -32,7 +32,7 @@
         <td><%=subcard.status%></td>
         <td>¥<%=subcard.rebate%></td>   
       </tr>
-  <%end%>
+  <%end if @subcards%>
   <%if @subcards.blank?%>
   <tr><td colspan='4'>暂无如意卡记录</td></tr>
   <%end%>

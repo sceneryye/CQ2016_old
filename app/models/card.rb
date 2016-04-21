@@ -10,6 +10,9 @@ class Card < ActiveRecord::Base
   	has_many :labelables,->{where(labelable_type:"Card" )},:foreign_key=>"labelable_id"
   	
   	has_many :labels,:through=>:labelables
+
+    has_many :card,->{where(card_type:"A" )}, :foreign_key=>"parent_id"
+    belongs_to :card,->{where(card_type:"B" )}, :foreign_key=>"parent_id"
   	
   	def sold!
   		return if self.new_record?
