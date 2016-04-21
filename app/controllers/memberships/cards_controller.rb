@@ -212,6 +212,7 @@ class Memberships::CardsController < ApplicationController
 
 	    	@log = CardTradingLog.new do |log|
 	    		log.card_no = card_id
+	    		log.card_id = @user.member_card.card_id
 	    		log.amount = pay_params[:amount]
 	    		log.trading_time = Time.now
 	    		log.order_id = pay_params[:order_id]

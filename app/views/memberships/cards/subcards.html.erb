@@ -30,7 +30,7 @@
       <tr>
         <td><%=subcard.no%></td>
         <td><%=subcard.status%></td>
-        <td>¥<%=subcard.rebate%></td>   
+        <td>¥<%=subcard.tradings.collect{ |trading| trading.amount }.inject(:+)%></td>   
       </tr>
   <%end if @subcards%>
   <%if @subcards.blank?%>
