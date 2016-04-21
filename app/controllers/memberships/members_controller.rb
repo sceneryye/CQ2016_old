@@ -18,11 +18,11 @@ class Memberships::MembersController < ApplicationController
 
 
   def update
-    user_params = user_params
+    member_params = user_params
     addr_params = user_params
    
 
-    if @user.update_attributes(user_params.merge!(:apply_time=>Time.now))    
+    if @user.update_attributes(member_params.merge!(:apply_time=>Time.now))    
 
       addr_params.merge!(:member_id=>@user.member_id,:def_addr=>1).delete(:id_card_number)  
       @addr = MemberAddr.create(addr_params)

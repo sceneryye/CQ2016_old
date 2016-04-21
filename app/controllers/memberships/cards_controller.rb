@@ -46,11 +46,15 @@ class Memberships::CardsController < ApplicationController
 				CardLog.create(:member_id=>@user.member_id,
 	                                                :card_id=>@card.id,
 	                                                :message=>"会员卡激活,会员本人操作")
-				redirect_to bank_cards_path
+				@password = session[:card_pwd]
+				@return_url = bank_cards_path
+
+				return render 'edit', notice: '为了账号安全,请您立刻修改初始密码！'#bank_cards_path
 
 			end
 		else
-			return render text: '会员卡无法激活'
+			flash[:error] = "会员卡无法激活" 
+			return render 'create'
 		end
 	end
 
@@ -124,15 +128,23 @@ class Memberships::CardsController < ApplicationController
 
   	def update
 	    card_id = @user.card_num
+	    @return_url = params[:return_url]
 	    old_pwd = params[:card][:old_pwd]
 	    new_pwd = params[:card][:new_pwd]
+	    new_pwd_repeat = params[:card][:new_pwd_repeat]
+
+	    if new_pwd != new_pwd_repeat
+	    	flash[:error] = "两次输入的新密码不同" 
+	    	return render 'edit'
+	    end
 
 	    card_info = card_info('修改密码',old_pwd)
 
 	    if card_info[:error]
 	    	flash[:error] = "原密码不正确" 
-	    	render 'edit'
+	    	return render 'edit'
 		else
+			
 			# reset_password
 		    order_id = get_order_id
 		    res_data = ActiveSupport::JSON.decode card_reset_password(order_id, card_id, new_pwd)

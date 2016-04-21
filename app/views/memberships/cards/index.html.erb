@@ -1,4 +1,4 @@
-<% provide :title, '昌麒生态园-会员卡交易记录' %>
+<% provide :title, '昌麒生态园-会员卡消费记录' %>
 <%=render partial: 'breadcrembs' , locals:{current:'会员卡交易记录'}%>
 <!-- <%= form_for :tradings, data: {abide: ''} do|f| %>
     <%#= render 'layouts/form_errors', object: @tradings%>
@@ -20,18 +20,16 @@
 
 <table class="table table-striped" id="trading_list">
   <tr>
-    <th>交易号</th>
-    <th>交易时间</th>
-    <th>交易金额</th>
-    <th>提现金额</th>
+    <th>流水号</th>
+    <th>消费时间</th>
+    <th>消费金额</th>
   </tr>
 
   <%@tradings.each  do |trading|%>
       <tr>
         <td><%=trading.order_id%></td>
         <td><%=trading.created_at%></td>
-        <td>¥<%=trading.final_amount%></td>
-        <td>¥<%=trading.final_amount*0.1%></td>      
+        <td>¥<%=trading.final_amount%></td>   
       </tr>
   <%end%>
   <%if @tradings.blank?%>

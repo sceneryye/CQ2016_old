@@ -1,6 +1,6 @@
 <% provide :title, '昌麒生态园-会员卡信息' %>
 <%=render partial: 'breadcrembs' , locals:{current:@current}%>
-<%if session[:card_pwd].blank?%>
+<%if session[:card_pwd].blank? &&  params[:id]=='2'%>
 	<%=render :partial=>"login"%>
 <%else%>
 	<div class="row">
@@ -35,7 +35,7 @@
 					  <td><%=@card_info.member_advance%></td>
 					</tr>
 					<tr>
-					  <th>最后查询时间：</th>
+					  <th>最近查询时间：</th>
 					  <td><%=l Time.at(@card_info.mtime)%></td>
 					</tr>
 					<tr>

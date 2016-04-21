@@ -21,7 +21,7 @@
       <%if @user.card_validate=='true'%>
         <li><%=link_to "账户信息",card_path(0),class:@class%></li>        
         <li><%=link_to "余额查询",card_path(1),class:@class%></li>        
-        <li><%=link_to "成交明细",cards_path,class:@class%></li>        
+        <li><%=link_to "消费记录",cards_path,class:@class%></li>        
         <li><%=link_to "更改密码",edit_card_path(0),class:@class%></li>
         <li><%=link_to "账面充值",recharge_cards_path,class:@class%></li>
       <%else%>
