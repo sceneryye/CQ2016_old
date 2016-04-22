@@ -4,11 +4,6 @@ class Admin::StaticPagesController < Admin::BaseController
 
 		@pages =  Page.paginate(:per_page=>20,:page=>params[:page]).order("updated_at desc")
 
-      if cookies["MEMBER"]
-        @supplier = Supplier.where(:member_id=>cookies["MEMBER"].split("-").first,:status=>1).first
-        @pages = @pages.paginate(:per_page=>20,:page=>params[:page]).order("updated_at desc")
-
-      end
   end
 
 	def new

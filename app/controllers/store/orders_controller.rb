@@ -256,7 +256,7 @@ class Store::OrdersController < ApplicationController
 
   def new
     if @account.member.card_validate=='false'
-          return redirect_to new_member_path
+      return redirect_to page_path('active_card') #new_member_path
     end
     # @order = Order.new
 

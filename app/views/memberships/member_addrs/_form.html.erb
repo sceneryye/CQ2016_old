@@ -49,34 +49,19 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-             <div class="columns small-12">
-                <div class="form-group tel">
-                    <%=f.text_field :tel, :placeholder=>"固定电话",:class=>"form-control"%>
-                    <span class="help-inline error"></span>
-                </div>
-            </div>
-        </div>
-        <div class="row">
-             <div class="columns small-12">
-                <div class="form-group zip">
-                    <%=f.text_field :zip, :placeholder=>"邮编",:class=>"form-control"%>
-                    <span class="help-inline error"></span>
-                </div>
-            </div>
-        </div>
+        
         <div class="row">
              <div class="columns small-3">
                     <%=f.label :def_addr, "设为默认地址："%>
                 </div>
                 <div class="columns small-9">
-                    <%=f.check_box :def_addr, {}, 1, 0 %><span><%=I18n.t "default"%></span>
+                    <%=f.check_box :def_addr, {}, 1, 0 %><span>默认</span>
                 </div>
             </div>
         </div>
         <div class="row">
             <div class="columns small-12"> 
-                    <button type="submit" class="button button-success button-lg">确定</button>
+                    <button type="submit" class="button expanded">确定</button>
             </div>
         </div>
     <%end%> 

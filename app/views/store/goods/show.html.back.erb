@@ -23,7 +23,7 @@
                             <li><%=render :partial=>"store/goods/product/new_spec",:locals=>{ :good=>@good }%></li>
                             <li><%=raw @good.desc%></li> 
                             <li>规格:<%=raw @good.spec_info%></li>
-                            <li class="plan-action"><%=f.submit "加入购物车",:class=>"button button-success button-lg"%></li>
+                            <li class="plan-action"><%=f.submit "加入购物车",:class=>"button button-success expanded"%></li>
                             <li style="display:none"><%if signed_in?%>
 						      <%=link_to "已收藏",unfav_good_path(@good,:rel=>"good_#{@good.goods_id}"),:class=>"add_to_favorites",:remote=>true,:method=>:put,:confirm=>"是否取消收藏?" if @good.favorited_by?(@user)%>
 						      <%=link_to "加入我的收藏夹",fav_good_path(@good,:rel=>"good_#{@good.goods_id}"),:class=>"add_to_favorites",:remote=>true,:method=>:put unless @good.favorited_by?(@user)%>

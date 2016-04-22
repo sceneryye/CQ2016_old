@@ -187,16 +187,9 @@ class Memberships::CardsController < ApplicationController
 			@no='disabled'
 		else
 			@yes = 'disabled'
-		end
+		end	
 
-		return render text: @user.member_card.tradings_log(@status).to_json
-
-		condition = "status=#{@status} and card_no='#{@user.card_num}'"
-		if @user.member_card.subcards
-			return render @user.member_card.tradings_log.to_json
-		end
-
-		@tradings = CardTradingLog.where("card_no='#{@user.card_num}' and status=#{@status}").paginate(:page=>params[:page],:per_page=>20)
+		@tradings =  @user.member_card.tradings_log(@status).paginate(:page=>params[:page],:per_page=>20)
 
 	end
 
@@ -235,7 +228,7 @@ class Memberships::CardsController < ApplicationController
 
 	def withdrawl
 		rate = 0.1
-		@tradings = CardTradingLog.where(status:0)
+		@tradings = @user.member_card.tradings_log(0)
 		amount = @tradings.collect { |trading| trading.amount }.inject(:+).to_f
 		tradding_ids = @tradings.collect { |trading| trading.id.to_s }.join(',')
 
