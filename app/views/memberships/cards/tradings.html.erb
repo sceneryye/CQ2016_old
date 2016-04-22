@@ -24,7 +24,7 @@
     <%=link_to '申请提现', withdrawl_cards_path ,class:'button expaned'%>
   <%end%>
 </div>
-<table class="table table-striped" id="rebate_list">
+<table class="table table-striped">
   <tr>
     <th>交易号</th>
     <th>交易时间</th>
@@ -35,7 +35,7 @@
   <%@tradings.each  do |trading|%>
       <tr>
         <td><%=trading.order_id%></td>
-        <td><%=trading.created_at%></td>
+        <td><%=l trading.created_at%></td>
         <td>¥<%=trading.amount%></td>
         <td>¥<%=trading.amount*0.1%></td>      
       </tr>

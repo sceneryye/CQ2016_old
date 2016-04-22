@@ -21,7 +21,7 @@
 					  <th>会员姓名</th>
 					  <td><%=@user.name%></td>
 					</tr>
-					<%if @user.member_card%>
+					<%if @user.member_card && @user.member_card.bank_name.present?%>
 					<tr>
 					  <th>绑定银行</th>
 					  <td><%=@user.member_card.bank_name%></td>
@@ -33,7 +33,7 @@
 					<%else%>
 					<tr>
 					  <th>未绑定银行卡</th>
-					  <td><%=link_to '去绑定' bank_cards_path%></td>
+					  <td><%=link_to '去绑定', bank_cards_path, class:'button'%></td>
 					</tr>
 					<%end%>
 				<%when '1','2'%>				

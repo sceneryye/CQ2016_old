@@ -27,4 +27,11 @@ class MemberCard < ActiveRecord::Base
 	def subcards
 		Card.where(parent_id: self.card_id)
 	end
+
+	def tradings_log (status)
+
+		# all_cards = Card.where("id=#{self.card} and parent_id =#{self.card_id}")
+		all_cards_ids = Card.select{|card| card.id==self.card_id, parent_id == self.card_id}.collect{ |card|card.id }.join(',')
+
+		CardTradingLog.where("status=#{@status} and card_id in (#{all_cards_ids})")
 end

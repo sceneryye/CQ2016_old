@@ -188,6 +188,12 @@ class Memberships::CardsController < ApplicationController
 		else
 			@yes = 'disabled'
 		end
+
+		condition = "status=#{@status} and card_no='#{@user.card_num}'"
+		if @user.member_card.subcards
+			return render @user.member_card.tradings_log.to_json
+		end
+
 		@tradings = CardTradingLog.where("card_no='#{@user.card_num}' and status=#{@status}").paginate(:page=>params[:page],:per_page=>20)
 
 	end
