@@ -26,6 +26,9 @@
 </div>
 <table class="table table-striped">
   <tr>
+  <%if @user.member_card.card.card_type=='A'%>
+    <th>卡号</th>
+  <%end%>
     <th>交易号</th>
     <th>交易时间</th>
     <th>交易金额</th>
@@ -34,6 +37,9 @@
 
   <%@tradings.each  do |trading|%>
       <tr>
+        <%if @user.member_card.card.card_type=='A'%>
+          <th><%=trading.card_no%></th>
+        <%end%>
         <td><%=trading.order_id%></td>
         <td><%=l trading.created_at%></td>
         <td>¥<%=trading.amount%></td>

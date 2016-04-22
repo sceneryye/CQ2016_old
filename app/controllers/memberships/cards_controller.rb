@@ -189,6 +189,8 @@ class Memberships::CardsController < ApplicationController
 			@yes = 'disabled'
 		end
 
+		return render text: @user.member_card.tradings_log(@status).to_json
+
 		condition = "status=#{@status} and card_no='#{@user.card_num}'"
 		if @user.member_card.subcards
 			return render @user.member_card.tradings_log.to_json
