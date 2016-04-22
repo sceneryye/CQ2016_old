@@ -52,13 +52,19 @@
 		</div>
 	</div>
  -->
-	<%=f.submit "加入购物车",:class=>"button large expanded"%>
+ 	<div class="expanded button-group">
+ 		<%if signed_in?%>
+	      <%=link_to "已收藏",unfav_good_path(@good,:rel=>"good_#{@good.goods_id}"),:class=>"add_to_favorites  button hollow",:remote=>true,:method=>:put,:confirm=>"是否取消收藏?" if @good.favorited_by?(@user)%>
+	      <%=link_to "加入我的收藏夹",fav_good_path(@good,:rel=>"good_#{@good.goods_id}"),:class=>"add_to_favorites button hollow",:remote=>true,:method=>:put unless @good.favorited_by?(@user)%>
+      	<%else%>
+	        <a href="javascript:void(0);" class="add_to_favorites login button hollow">加入收藏夹</a>
+	     <%end%>
+
+		<%=f.submit "加入购物车",:class=>"button large expanded"%>
+	</div>
+	
 	<%end%>
-	<!-- <div class="small secondary expanded button-group">
-		<a class="button">收藏</a>
-		<a class="button">分享</a>
-		<a class="button">Yo</a>
-	</div> -->
+	
 </div>
 </div>
 <div class="column row">
