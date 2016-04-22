@@ -59,9 +59,11 @@
                 </div>
             </div>
         </div>
-        <div class="row">
-            <div class="columns small-12"> 
-                    <button type="submit" class="button expanded">确定</button>
+        <div class="button-group expanded"> 
+        <% if @addr.id%>
+                 <%=link_to "删除",member_addr_path(@addr.id),:method=>:delete,:confirm=>"确定要删除吗？",class:'button hollow'%>
+        <%end%>
+                <button type="submit" class="button">确定</button>
             </div>
         </div>
     <%end%> 

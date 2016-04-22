@@ -24,7 +24,8 @@
     <%=link_to '申请提现', withdrawl_cards_path ,class:'button expaned'%>
   <%end%>
 </div>
-<table class="table table-striped">
+<table class="table hover stack">
+  <thead>
   <tr>
   <%if @user.member_card.card.card_type=='A'%>
     <th>卡号</th>
@@ -34,14 +35,15 @@
     <th>交易金额</th>
     <th>提现金额</th>
   </tr>
-
+  </thead>
+  <tbody>
   <%@tradings.each  do |trading|%>
       <tr>
         <%if @user.member_card.card.card_type=='A'%>
-          <th><%=trading.card_no%></th>
+        <td><i class="fa fa-credit-card"></i><%=trading.card_no%></td>
         <%end%>
-        <td><%=trading.order_id%></td>
-        <td><%=l trading.created_at%></td>
+        <td><i class="fa fa-opencart"></i><%=trading.order_id%></td>
+        <td><i class="fa fa-clock-o"></i><%=l trading.created_at%></td>
         <td>¥<%=trading.amount%></td>
         <td>¥<%=trading.amount*0.1%></td>      
       </tr>
@@ -49,5 +51,5 @@
   <%if @tradings.blank?%>
   <tr><td colspan='4'>暂无交易记录</td></tr>
   <%end%>
-
+  </tbody>
 </table>

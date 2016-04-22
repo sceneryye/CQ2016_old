@@ -209,7 +209,7 @@ class Memberships::CardsController < ApplicationController
 	    res_info = save_log res_data
 
 	    if res_info[:error]
-	    	return render text: res_info[:error]
+	    	redirect_to order_path(pay_params[:order_id]), notice: res_info[:error]
 	    else
 
 	    	@log = CardTradingLog.new do |log|

@@ -21,7 +21,7 @@
 <table class="table table-striped" id="subcard_list">
   <tr>
     <th>如意卡号</th>
-    <th>状态</th>
+    <th>激活状态</th>
     <th>已提现</th>
     <th>未提现</th>
   </tr>
@@ -29,9 +29,9 @@
   <%@subcards.each  do |subcard|%>
       <tr>
         <td><%=subcard.no%></td>
-        <td><%=subcard.use_status ?  "<i class='fa fa-times'></i>".html_safe : <i class='fa fa-check'></i>".html_safe%></td>
-        <td>¥<%=subcard.card_trading_logs.select{ |trading| trading.parent_rebate_id}.collect{ |trading| trading.amount*0.1 }.inject(:+)%></td>  
-        <td>¥<%=subcard.card_trading_logs.select{ |trading| trading.parent_rebate_id.nil? }.collect{ |trading| trading.amount*0.1 }.inject(:+)%></td>  
+        <td><%=subcard.use_status ?  "<i class='fa fa-check'></i>".html_safe : "<i class='fa fa-times'></i>".html_safe%></td>
+        <td>¥<%=subcard.card_trading_logs.select{ |trading| trading.parent_rebate_id}.collect{ |trading| trading.amount}.inject(:+).to_i*0.1%></td>  
+        <td>¥<%=subcard.card_trading_logs.select{ |trading| trading.parent_rebate_id.nil? }.collect{ |trading| trading.amount}.inject(:+).to_i*0.1%></td>  
       </tr>
   <%end if @subcards%>
   <%if @subcards.blank?%>
