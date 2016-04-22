@@ -18,17 +18,18 @@ class Memberships::CardsController < ApplicationController
 
   	def create
   		
-		@card = Card.find_by_no(card_params[:card_num])
+		@card = Card.find_by_no(card_params[:no])
 		if @card && @card.can_use? && !@card.used?
-  			card_id = card_params[:card_num]
-			password = card_params[:card_pwd]
+  			card_no = card_params[:no]
+			password = card_params[:password]
 
-			card_info = card_info('会员卡激活', password, card_id)
+			card_info = card_info('会员卡激活', password, card_no)
 
 	        if card_info[:error]
-	        	return render text:card_info[:error]
+	        	flash[:error] = card_info[:error] 
+				return render 'new'
 	        else				
-	        	@user.update_attribute :card_num ,card_id
+	        	@user.update_attribute :card_num ,card_no
 				@user.update_attribute :card_validate,'true'
 				@card.update_attribute :use_status,true
 				@card.update_attribute :used_at,Time.now
@@ -60,7 +61,7 @@ class Memberships::CardsController < ApplicationController
 			end
 		else
 			flash[:error] = "会员卡无法激活" 
-			return render 'create'
+			return render 'new'
 		end
 	end
 
@@ -267,7 +268,7 @@ class Memberships::CardsController < ApplicationController
 
 	private
 	def card_params
-	    params.require(:card).permit(:card_num,:card_pwd)
+	    params.require(:card).permit(:no,:password)
 	end
 
 	def member_card_params

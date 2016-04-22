@@ -17,18 +17,25 @@
 				</tr>
 				<%case params[:id]
 					when '0'%>
-				<tr>
-				  <th>会员姓名</th>
-				  <td><%=@user.name%></td>
-				</tr>
-				<tr>
-				  <th>绑定银行</th>
-				  <td><%=@user.member_card.bank_name if @user.member_card%></td>
-				</tr>
-				<tr>
-				  <th>绑定银行卡号</th>
-				  <td><%=@user.member_card.bank_card_no if @user.member_card%></td>
-				</tr>
+					<tr>
+					  <th>会员姓名</th>
+					  <td><%=@user.name%></td>
+					</tr>
+					<%if @user.member_card%>
+					<tr>
+					  <th>绑定银行</th>
+					  <td><%=@user.member_card.bank_name%></td>
+					</tr>
+					<tr>
+					  <th>绑定银行卡号</th>
+					  <td><%=@user.member_card.bank_card_no%></td>
+					</tr>
+					<%else%>
+					<tr>
+					  <th>未绑定银行卡</th>
+					  <td><%=link_to '去绑定' bank_cards_path%></td>
+					</tr>
+					<%end%>
 				<%when '1','2'%>				
 					<tr>
 					  <th>卡内余额：</th>
@@ -39,7 +46,7 @@
 					  <td><%=l Time.at(@card_info.mtime)%></td>
 					</tr>
 					<tr>
-					  <th colspan='2'><%=link_to "刷新余额信息",card_path(2),:class=>"button expanded"%></th>
+					  <th colspan='2'><%=link_to "查询当前余额信息",card_path(2),:class=>"button expanded"%></th>
 					</tr>
 				<%end%>
 			</table>

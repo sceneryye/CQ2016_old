@@ -14,13 +14,13 @@
 					</div>
 					<div class="small-12 columns">
 					<label>
-						<%=f.password_field :old_pwd,value: @password, placeholder:'旧密码',:required=>"required"%>
+						<%=f.password_field :old_pwd,value: @password, placeholder:'原密码',:required=>"required"%>
 					</label>
 					<label>
-						<%=f.password_field :new_pwd,placeholder:'新密码',:required=>"required"%>
+						<%=f.password_field :new_pwd,placeholder:'新密码(必须为六位数字)',:required=>"required"%>
 					</label>
 					<label>
-						<%=f.password_field :new_pwd_repeat,placeholder:'重复新密码',:required=>"required"%>
+						<%=f.password_field :new_pwd_repeat,placeholder:'重复新密码(必须为六位数字)',:required=>"required"%>
 					</label>
 					<%=f.submit "提 交",:class=>"button expanded"%>
 				</div>

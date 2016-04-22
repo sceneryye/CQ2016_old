@@ -29,9 +29,9 @@
   <%@subcards.each  do |subcard|%>
       <tr>
         <td><%=subcard.no%></td>
-        <td><%=subcard.use_status ?  "已激活" : "未激活"%></td>
-        <td>¥<%=subcard.card_trading_logs.select{ |trading| trading.parent_rebate_id}.collect{ |trading| trading.amount }.inject(:+)%></td>  
-        <td>¥<%=subcard.card_trading_logs.select{ |trading| trading.parent_rebate_id.nil? }.collect{ |trading| trading.amount }.inject(:+)%></td>  
+        <td><%=subcard.use_status ?  "<i class='fa fa-times'></i>".html_safe : <i class='fa fa-check'></i>".html_safe%></td>
+        <td>¥<%=subcard.card_trading_logs.select{ |trading| trading.parent_rebate_id}.collect{ |trading| trading.amount*0.1 }.inject(:+)%></td>  
+        <td>¥<%=subcard.card_trading_logs.select{ |trading| trading.parent_rebate_id.nil? }.collect{ |trading| trading.amount*0.1 }.inject(:+)%></td>  
       </tr>
   <%end if @subcards%>
   <%if @subcards.blank?%>
