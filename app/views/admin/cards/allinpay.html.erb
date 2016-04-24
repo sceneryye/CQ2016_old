@@ -281,7 +281,7 @@
   $('.pay-for-another').on('click', function(){
     var BANK_CODE = '0102';
     var ACCOUNT_NO = 622588121251757643;
-    var ACCOUNT_NAME = '测试试';
+    var ACCOUNT_NAME = '测试';
     var ACCOUNT_PROP = '0';
     var AMOUNT = 200;
 
@@ -289,7 +289,7 @@
     $.post(url, {pay_to_client: {BANK_CODE: BANK_CODE, ACCOUNT_NO: ACCOUNT_NO, ACCOUNT_NAME: ACCOUNT_NAME, ACCOUNT_PROP: ACCOUNT_PROP, AMOUNT: AMOUNT}}, function(e){
       if(e.info) {
         console.log(e.data.info);
-        alert('该卡已成功解挂！');
+        alert('该卡已成功返现！');
       }
       else {
         console.log(e.data.info)

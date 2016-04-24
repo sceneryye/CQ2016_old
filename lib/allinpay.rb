@@ -13,7 +13,7 @@ module Allinpay
   IV = 'abcdefgh'
   PSD = '111111'
   CARD_ID = '8668083660000001017'
-  PAY_URL = 'https://113.108.182.3/aipg/ProcessServlet'
+  PAY_URL = 'https://113.108.182.3/aipg/ProcessServlet:443'
 
   def timestamps
     Time.now.strftime('%Y%m%d%H%M%S')
