@@ -4,7 +4,8 @@ require 'base64'
 require 'rest-client'
 module Allinpay
   URL = 'http://116.236.192.117:8080/aop/rest'
-  MER_ID = '999990053990001'
+  MER_ID = '999331054990016'#'999990053990001'
+  #821330153990232
   PAY_CUR = 'CNY'
   APPSECRET = 'test'
   APP_KEY = 'test'
@@ -12,8 +13,11 @@ module Allinpay
   KEY = 'abcdefgh'
   IV = 'abcdefgh'
   PSD = '111111'
-  CARD_ID = '8668083660000001017'
-  PAY_URL = 'https://113.108.182.3/aipg/ProcessServlet:443'
+  #PAY_URL = 'https://113.108.182.3:443/aipg/ProcessServlet'
+  PAY_URL = 'https://tlt.allinpay.com:443/aipg/ProcessServlet'
+  USER_NAME '20033100001566604' #'20060400000044502'
+  USER_PASS = '111111'
+  CER_FILE = '20033100001566604.p12'#'20060400000044502.p12'
 
   def timestamps
     Time.now.strftime('%Y%m%d%H%M%S')
@@ -141,7 +145,7 @@ module Allinpay
     def pay_for_another options
       mer_tm = timestamps
       sn = MER_ID + mer_tm + rand(1000).to_s.ljust(4, '0')
-      data_hash = {TRX_CODE: '100014', VERSION: '03', DATA_TYPE: 2, LEVEL: 9, USER_NAME: '20060400000044502', USER_PASS: '111111', REQ_SN: sn, BUSINESS_CODE: '10800', MERCHANT_ID: '200604000000445', SUBMIT_TIME: mer_tm}.merge! options
+      data_hash = {TRX_CODE: '100014', VERSION: '03', DATA_TYPE: 2, LEVEL: 9, USER_NAME: USER_NAME, USER_PASS: USER_PASS, REQ_SN: sn, BUSINESS_CODE: '10800', MERCHANT_ID: '200604000000445', SUBMIT_TIME: mer_tm}.merge! options
       data_xml = data_hash.to_xml.sub('UTF-8', 'GBK')
       sign = create_sign_for_another data_xml
       data_hash.merge! sign: sign
@@ -152,7 +156,7 @@ module Allinpay
     end
 
     def create_sign_for_another xml
-      p12 = OpenSSL::PKCS12.new(File.read(File.expand_path('../20060400000044502.p12', __FILE__)), '111111')
+      p12 = OpenSSL::PKCS12.new(File.read(File.expand_path("../#{CER_FILE}", __FILE__)), USER_PASS)
       key = p12.key
       pri = OpenSSL::PKey::RSA.new key.to_s
       sign = pri.sign("sha1", xml)

@@ -42,10 +42,10 @@
   </li>
     <%if @user.member_card.card.card_type=='A'%>
       <li class="accordion-item" data-accordion-item>
-       <%=link_to '我的如意卡', '#',class:"accordion-title"%>
+       <%=link_to '我的亲情卡', '#',class:"accordion-title"%>
       <div class="accordion-content" data-tab-content>
         <ul class="menu vertical">
-          <li><%=link_to "如意卡信息",subcards_cards_path,class:@class%></li>
+          <li><%=link_to "亲情卡信息",subcards_cards_path,class:@class%></li>
         </ul>
       </div>
     </li>

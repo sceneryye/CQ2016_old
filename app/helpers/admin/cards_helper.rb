@@ -27,8 +27,8 @@ module Admin::CardsHelper
 
 	def level(val)
 		case val
-			when 'A'; "贵族至尊卡"
-			else 'B'; "万事如意卡"
+			when 'A'; "至尊卡"
+			else 'B'; "亲情卡"
 		end
 	end
 

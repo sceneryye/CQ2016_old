@@ -16,7 +16,8 @@ class Payment < ActiveRecord::Base
 		:offline => { :pay_name=>'线下支付', :bank=> '货到付款', :pay_type=>"offline" },
 		:alipay => { :pay_name=>'支付宝', :bank=> '支付宝', :pay_type=>"online" },
 	    :alipaywap => { :pay_name=>'支付宝手机版', :bank=> '支付宝手机版', :pay_type=>"online" },
-	    :wxpay => { :pay_name=>'微信支付', :bank=>'微信支付', :pay_type=>"online"}
+	    :wxpay => { :pay_name=>'微信支付', :bank=>'微信支付', :pay_type=>"online"},
+	    :allinpaywap => { :pay_name=>'通联移动支付', :bank=>'通联移动支付', :pay_type=>"online"}
 	}
 
 	#  status => enum('succ','failed','cancel','error','invalid','progress','timeout','ready')

@@ -1,6 +1,7 @@
 require 'modec_pay/payment'
 require 'modec_pay/alipay'
 require 'modec_pay/alipaywap'
+require 'modec_pay/allinpaywap'
 require 'modec_pay/offline'
 require 'modec_pay/deposit'
 require 'modec_pay/wxpay'
@@ -40,6 +41,7 @@ module ModecPay
 			 'offline'=> ModecPay::Offline,
 			 'deposit'=> ModecPay::Deposit,
 	         'wxpay' => ModecPay::Wxpay
+	         'allinpayweb' => ModecPay::Allinpaywap
 			}
 		end
 	end

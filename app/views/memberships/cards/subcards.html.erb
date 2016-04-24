@@ -1,5 +1,5 @@
-<% provide :title, '昌麒生态园-如意卡信息' %>
-<%=render partial: 'breadcrembs' , locals:{current:'如意卡信息'}%>
+<% provide :title, '昌麒生态园-亲情卡信息' %>
+<%=render partial: 'breadcrembs' , locals:{current:'亲情卡信息'}%>
 <!-- <%= form_for :subcards, data: {abide: ''} do|f| %>
     <%#= render 'layouts/form_errors', object: @subcards%>
       <table class="table">
@@ -20,7 +20,7 @@
 
 <table class="table table-striped" id="subcard_list">
   <tr>
-    <th>如意卡号</th>
+    <th>亲情卡号</th>
     <th>激活状态</th>
     <th>已提现</th>
     <th>未提现</th>
@@ -35,7 +35,7 @@
       </tr>
   <%end if @subcards%>
   <%if @subcards.blank?%>
-  <tr><td colspan='4'>暂无如意卡记录</td></tr>
+  <tr><td colspan='4'>暂无亲情卡记录</td></tr>
   <%end%>
 
 </table>
