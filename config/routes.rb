@@ -8,6 +8,12 @@ Modengke::Application.routes.draw do
   get 'blank'=>"home#blank"
   get 'home'=>"home#index1"
 
+  resource :weixin do 
+    member do
+        get 'callback'
+    end
+  end
+
   scope :module => "memberships" do
     resources  :cards do
       collection do

@@ -4,6 +4,7 @@ require 'base64'
 require 'rest-client'
 module Allinpay
   URL = 'http://116.236.192.117:8080/aop/rest'
+  
   MER_ID = '999331054990016'#'999990053990001'
   MERCHANT_ID = '999331054990016'#'200604000000445'
   #821330153990232
