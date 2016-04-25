@@ -86,12 +86,11 @@
         <label for="select_all" class="inline">全选</label>  
     </th>
     <th>卡号</th>
-    <th>面值</th>
+    <th>母卡</th>
     <th>类型</th>
     <th>销售状态</th>
     <th>激活时间</th>
     <th>使用状态</th>
-    <th>付款状态</th>
     <th>卡状态</th>
     <th>使用者手机</th>
     <th>标签</th>
@@ -100,7 +99,7 @@
   </tr>
   <% @cards.each do |card| %>
   <tr id="card_<%=card.id%>">
-    <td><%=check_box_tag "selected_cards[]", card.id,false,:class =>'operate_ids'%></td>
+    <td><%=check_box_tag "selected_cards[]", card.id,false,:class =>'operate_ids'%><%=card.id%></td>
     
     <!-- <td >
         <%=link_to admin_card_path(card),:class=>"editable",:remote=>"true" do%>
@@ -109,12 +108,11 @@
     </td> -->
 
     <td><%=link_to  card.no,admin_card_path(card) %></td>
-    <td>¥<%= card.value %></td>
+    <td><%= card.parent_id%></td>
     <td><%="[#{level(card.card_type)}]" if level(card.card_type)%></td>
     <td><%= card.sale_status ? "已出售" : "未出售" %></td>
     <td><%= card.member_card.created_at.strftime("%Y-%m-%d %H:%S:%M") if card.member_card %></td>
     <td><%= card.use_status ?  "已使用" : "未使用"%></td>
-    <td><%= card.pay_status ?  "付款" : "未付款"%></td>
     <td><%= card.status %></td>   
     <td><%= card.member_card&&card.member_card.user_tel.present? ? card.member_card.user_tel : "未登记" %></td>
     <td>

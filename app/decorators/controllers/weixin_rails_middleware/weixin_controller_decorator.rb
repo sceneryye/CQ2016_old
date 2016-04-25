@@ -7,7 +7,9 @@ WeixinRailsMiddleware::WeixinController.class_eval do
   def reply
     case @keyword
       when '地址'
-        render xml: send("response_location_message", {})   
+        render xml: send("response_location_message", {})  
+      when 'TESTCOMPONENT_MSG_TYPE_TEXT' 
+        render xml: send("response_text_message", {})
       else
         render xml: send("response_news_message", {})    
        #render xml: send("response_#{@weixin_message.MsgType}_message", {})
@@ -43,11 +45,18 @@ WeixinRailsMiddleware::WeixinController.class_eval do
   end
 
   def response_text_message(options={})
+    case @keyword
+    when 'TESTCOMPONENT_MSG_TYPE_TEXT'
+        message = 'TESTCOMPONENT_MSG_TYPE_TEXT_callback'
+    else
+      message="您好！#{@weixin_public_account.name},欢迎您！"
+    end
+
     #reply_text_message("Your Message: #{@keyword}")
 
    # message="您好！#{@weixin_public_account.name}欢迎您！"
 
-    message="您好！昌麒生态园欢迎家人的到来！"
+    # message="您好！昌麒生态园欢迎家人的到来！"
     reply_text_message(message)
   end
 

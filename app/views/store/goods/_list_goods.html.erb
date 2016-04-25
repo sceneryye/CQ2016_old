@@ -43,11 +43,10 @@
             <%=goods.name%>[<%=goods.spec_info%>]
         <%end%>        
         </h6>
-        <p class='text-center'>
-            <span class='price'><%=number_to_currency goods.price,:unit=>"¥",:precision=>2%></span>
-            <span class='mktprice'><%=number_to_currency goods.mktprice,:unit=>"¥",:precision=>2%></span>
-        </p>
-        <a href="#" class="button expanded" style="display:none">Buy</a>
+        	<div class="row text-center">
+            <div class='columns small-6 price'><%=number_to_currency goods.price,:unit=>"¥",:precision=>2%></div>
+            <div class='columns small-6 mktprice'><%=number_to_currency goods.mktprice,:unit=>"¥",:precision=>2%></div>
+        </div>
     </div>
     <%end if @goods%>
 </div>

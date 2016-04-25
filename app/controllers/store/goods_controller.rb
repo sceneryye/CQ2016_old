@@ -37,7 +37,7 @@ class Store::GoodsController < ApplicationController
       @recommend_goods.compact!
       if @cat.parent_cat && @recommend_goods.size < 4
         count = @recommend_goods.size
-        @recommend_goods += @cat.parent_cat.parent_cat.all_goods.select{|good| good.goods_id != @good.goods_id }[0,4-count]
+        @recommend_goods += @cat.parent_cat.all_goods.select{|good| good.goods_id != @good.goods_id }[0,4-count]
       end
     end
     if @coupon_id
