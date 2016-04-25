@@ -5,6 +5,7 @@ require 'rest-client'
 module Allinpay
   URL = 'http://116.236.192.117:8080/aop/rest'
   MER_ID = '999331054990016'#'999990053990001'
+  MERCHANT_ID = '999331054990016'#'200604000000445'
   #821330153990232
   PAY_CUR = 'CNY'
   APPSECRET = 'test'
@@ -15,7 +16,7 @@ module Allinpay
   PSD = '111111'
   #PAY_URL = 'https://113.108.182.3:443/aipg/ProcessServlet'
   PAY_URL = 'https://tlt.allinpay.com:443/aipg/ProcessServlet'
-  USER_NAME '20033100001566604' #'20060400000044502'
+  USER_NAME = '20033100001566604' #'20060400000044502'
   USER_PASS = '111111'
   CER_FILE = '20033100001566604.p12'#'20060400000044502.p12'
 
@@ -73,7 +74,7 @@ module Allinpay
       def pay_with_password order_id,  mer_order_id, payment_id, amount, card_id, password, pay_cur = PAY_CUR, type = '01', options = {}
         mer_tm = timestamps
       # mer_tm = '20160325161914'
-      data_hash = (public_params 'allinpay.card.paywithpassword.add', mer_tm).merge({pay_cur: pay_cur, type: type, mer_id: MER_ID, mer_tm: mer_tm, order_id: order_id, mer_order_id: mer_order_id, payment_id: payment_id, amount: amount}).merge options
+      data_hash = (public_params 'allinpay.card.paywithpassword.add', mer_tm).merge({pay_cur: pay_cur, type: type, mer_id: MERCHANT_ID, mer_tm: mer_tm, order_id: order_id, mer_order_id: mer_order_id, payment_id: payment_id, amount: amount}).merge options
       encrypt_card_id = des_encrypt card_id, mer_tm
       encrypt_password = des_encrypt password, mer_tm
       Rails.logger.info encrypt_card_id
@@ -142,10 +143,37 @@ module Allinpay
       res_data_json = RestClient.post URL, send_data
     end
 
+    def id_card_verify name, id_no
+       mer_tm = timestamps
+      req_sn = MERCHANT_ID + mer_tm + rand(1000).to_s.ljust(4, '0')
+      data_hash = {TRX_CODE: '220001', VERSION: '03', DATA_TYPE: 2, LEVEL: 9, USER_NAME: USER_NAME, USER_PASS: USER_PASS, REQ_SN: req_sn, BUSINESS_CODE: '10800', MERCHANT_ID: MERCHANT_ID, SUBMIT_TIME: mer_tm}.merge! options
+      data_xml = data_hash.to_xml.sub('UTF-8', 'GBK')
+      sign = create_sign_for_another data_xml
+      data_hash.merge! sign: sign
+      data_xml = data_hash.to_xml.sub('UTF-8', 'GBK')
+      Rails.logger.info data_xml
+      res_data_xml = RestClient.post PAY_URL, data_xml, content_type: :xml
+
+#       INFO  TRX_CODE  交易代码  C(1, 20)  220001  否
+#   VERSION 版本  C(2)  03  否
+#   DATA_TYPE 数据格式  N(1)  2：xml格式 否
+#   LEVEL 处理级别  N(1)  0-9  0优先级最低，默认为5  否
+#   MERCHANT_ID 商户号 C(15)   否
+#   USER_NAME 用户名 C(1,20)   否
+#   USER_PASS 用户密码      否
+#   REQ_SN  交易批次号 C(40) 商户号+时间+自定义流水  否
+#   SIGNED_MSG  签名信息  C   否
+# IDVER NAME  姓名  C(100)    非空
+#   IDNO  身份证号  C (1,22)    非空
+#   VALIDATE  有效期 C(8)  YYYYMMDD  可空
+#   REMARK  备注  C (1,50)  预留  可空
+
+    end
+
     def pay_for_another options
       mer_tm = timestamps
-      sn = MER_ID + mer_tm + rand(1000).to_s.ljust(4, '0')
-      data_hash = {TRX_CODE: '100014', VERSION: '03', DATA_TYPE: 2, LEVEL: 9, USER_NAME: USER_NAME, USER_PASS: USER_PASS, REQ_SN: sn, BUSINESS_CODE: '10800', MERCHANT_ID: '200604000000445', SUBMIT_TIME: mer_tm}.merge! options
+      req_sn = MERCHANT_ID + mer_tm + rand(1000).to_s.ljust(4, '0')
+      data_hash = {TRX_CODE: '100014', VERSION: '03', DATA_TYPE: 2, LEVEL: 9, USER_NAME: USER_NAME, USER_PASS: USER_PASS, REQ_SN: req_sn, BUSINESS_CODE: '10800', MERCHANT_ID: MERCHANT_ID, SUBMIT_TIME: mer_tm}.merge! options
       data_xml = data_hash.to_xml.sub('UTF-8', 'GBK')
       sign = create_sign_for_another data_xml
       data_hash.merge! sign: sign

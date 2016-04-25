@@ -24,7 +24,7 @@ class Admin::SpecificationsController < Admin::BaseController
 	end
 
 	def create
-		@spec  = Spec.new params[:spec]
+		@spec  = Spec.new spec_params
 		if @spec.save
 			redirect_to admin_specifications_url
 		else
@@ -34,7 +34,7 @@ class Admin::SpecificationsController < Admin::BaseController
 
 	def update
 		@spec  = Spec.find(params[:id])
-		if @spec.update_attributes(params[:spec])
+		if @spec.update_attributes(spec_params)
 			redirect_to admin_specifications_url
 		else
 			render :edit
@@ -45,5 +45,10 @@ class Admin::SpecificationsController < Admin::BaseController
 		@spec  = Spec.find(params[:id])
 		@spec.destroy
 		redirect_to admin_specifications_url
+	end
+
+	private
+	def spec_params
+		params.require(:spec).permit(:spec_name,:spec_memo,:alias,:spec_type,:spec_show_type,:spec_values_attributes)
 	end
 end
