@@ -33,7 +33,7 @@ WeixinRailsMiddleware::WeixinController.class_eval do
       else
         desc =""
         title="您好！昌麒生态园欢迎家人的到来！"
-        pic_url="http://www.cq2016.cc/img/logo300.gif"
+        pic_url="http://www.cq2016.cc/images/show/welcome.jpg"
         link_url="http://www.cq2016.cc/?from=weixin_menu"
         articles = [generate_article(title, desc, pic_url, link_url)]
     end

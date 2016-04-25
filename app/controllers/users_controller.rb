@@ -3,7 +3,7 @@ class UsersController < ApplicationController
   skip_before_filter :find_cart!
   skip_before_filter :find_path_seo
   
-  layout "simple"
+  layout "application"
 
   def new
     return_url=params[:return_url]
