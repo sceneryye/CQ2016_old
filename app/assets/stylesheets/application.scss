@@ -17,8 +17,8 @@
  .small-pic{width:50px;}
  .prefix-i{margin-right:5px;color:red;font-size:12pt;}
 
- .price {color:red;font-size:1.2em;}
- .mktprice {text-decoration:line-through;}
+ .price {color:red;font-size:1.2em; white-space:nowrap; }
+ .mktprice {margin-left:1em;text-decoration:line-through; white-space:nowrap; }
 
 
  #bottomNav {z-index:9999; position:fixed; bottom:0; left:0; width:100%;
