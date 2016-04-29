@@ -26,7 +26,7 @@ class Memberships::CardsController < ApplicationController
 			card_info = card_info('会员卡激活', password, card_no)
 
 	        if card_info[:error]
-	        	flash[:error] = card_info[:error] 
+	        	flash[:error] = '亲爱的昌麒家人，系统还在开发阶段，我们会尽快通知您激活会员卡的时间。'#card_info[:error] 
 				return render 'new'
 	        else				
 	        	@user.update_attribute :card_num ,card_no
@@ -60,7 +60,8 @@ class Memberships::CardsController < ApplicationController
 
 			end
 		else
-			flash[:error] = "会员卡无法激活" 
+			
+			flash[:error] = '亲爱的昌麒家人，系统还在开发阶段，我们会尽快通知您激活会员卡的时间。'#"会员卡无法激活" 
 			return render 'new'
 		end
 	end

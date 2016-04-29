@@ -40,7 +40,7 @@ module ModecPay
 	         'alipaywap' => ModecPay::Alipaywap,
 			 'offline'=> ModecPay::Offline,
 			 'deposit'=> ModecPay::Deposit,
-	         'wxpay' => ModecPay::Wxpay
+	         'wxpay' => ModecPay::Wxpay,
 	         'allinpayweb' => ModecPay::Allinpaywap
 			}
 		end

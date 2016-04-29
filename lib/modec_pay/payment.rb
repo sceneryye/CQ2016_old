@@ -73,7 +73,7 @@ module ModecPay
 					<title>Redirecting...</title>
 				</head>
 				<body>
-				<div>Redirecting...</div>
+				<div style='display:none'>Redirecting...</div>
 				<form accept-charset="#{self.charset}" action="#{self.action}" method="#{self.method}" id="pay_form">
 					#{form_inputs}
 				</form>
