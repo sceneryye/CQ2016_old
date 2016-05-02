@@ -58,7 +58,7 @@
 				<div class="section payment" id="payments">
 					<h5>支付方式</h5>   
 
-					<%=f.radio_button :payment, "deposit", :checked=>true%> <b>会员卡</b>		
+					<%=f.radio_button :payment, "deposit", :checked=>true%> <b>会员卡积分</b>		
 					
 				</div>
 
@@ -147,16 +147,16 @@
 							</div>
 							<%end%>
 							
-							
+							<!-- 
 							<div class="item">
 								<span class="text">支付金额：</span>
 								<span class="rmb-symbol">¥</span>
 								<span class="money final" id="pay_amount"></span>
-							</div>
+							</div> -->
 
 						</div>
 						<div class="actions clearfix">
-							<%=f.submit "去 结 算",:class=>"button expanded"%>
+							<%=f.submit "安 全 结 算",:class=>"button button-success button-lg  "%>
 						</div>
 					</div>
 				</div>
