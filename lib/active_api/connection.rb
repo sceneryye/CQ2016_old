@@ -30,11 +30,21 @@ module ActiveApi
 			end
 
 
-			def request_token(code)
+			def request_token(code,id)
+				if id ==2
+					app_id = 'wxb7327c6acc9be1be'
+					app_secret = '485afb44c91a29d050662f6c6b68154e'
+				else
+					app_id =  config.client_id
+	         		app_secret= config.client_secret
+	         	end
 				params = {
-	          	:appid=> config.client_id,
-	         	:secret=>config.client_secret,
-				#:redirect_uri => config.redirect_uri,
+				if id == 1
+				:appid=> app_id,
+	         	:secret=>app_secret,
+	          # 	:appid=> config.client_id,
+	         	# :secret=>config.client_secret,
+				:redirect_uri => config.redirect_uri,
           		:code=>code,
 				:grant_type=>'authorization_code'
 				}

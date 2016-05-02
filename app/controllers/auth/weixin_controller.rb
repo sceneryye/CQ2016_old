@@ -22,14 +22,13 @@ class Auth::WeixinController < ApplicationController
 	end
 
 	def callback
-		 supplier_id = 1
+		supplier_id = params[:id]
+
 
 		return redirect_to(site_path) if params[:error].present?
 	    return_url= session[:return_url]
 	    session[:return_url]=''
-
-	
-		token = Weixin.request_token(params[:code])
+		token = Weixin.request_token(params[:code],supplier_id)
 	   #return  render :text=>token.to_json
 
 		auth_ext = AuthExt.where(:provider=>"weixin",
