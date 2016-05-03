@@ -39,7 +39,6 @@ module ActiveApi
 	         		app_secret= config.client_secret
 	         	end
 				params = {
-				if id == 1
 				:appid=> app_id,
 	         	:secret=>app_secret,
 	          # 	:appid=> config.client_id,
