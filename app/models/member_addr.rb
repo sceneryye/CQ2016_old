@@ -7,7 +7,7 @@ class MemberAddr < ActiveRecord::Base
 	def addr_line
 		result = ""
 		result += self.area.to_s.split(":")[1].gsub("/","-") if self.area.present?
-		"#{result} #{self.addr} (收货人 : #{self.name}, 手机 : #{self.mobile}, 邮编 : #{self.zip})"
+		"#{result} #{self.addr} (收货人 : #{self.name}, 手机 : #{self.mobile})"
 	end
 
 	def display_area

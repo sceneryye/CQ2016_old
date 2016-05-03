@@ -31,7 +31,7 @@ module ActiveApi
 
 
 			def request_token(code,id)
-				if id ==2
+				if id == 2
 					app_id = 'wxb7327c6acc9be1be'
 					app_secret = '485afb44c91a29d050662f6c6b68154e'
 				else
