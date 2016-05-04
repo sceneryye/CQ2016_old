@@ -56,6 +56,42 @@ class Admin::OrdersController < Admin::BaseController
 			format.html
 		end
 	end
+    def downorder
+  orders = Order.all
+   
+          package = Axlsx::Package.new
+          workbook = package.workbook
+
+            workbook.styles do |s|
+
+
+          workbook.add_worksheet(:name => "ordersinfo") do |sheet|
+
+          sheet.add_row [" 订单号","会员","收货人","下单时间","订单状态","付款状态","发货状态","订单金额","店铺id","收货地址","运单号"]
+                     
+
+            row_count=0
+
+            orders.each do |order| 
+              orderid=order.order_id.to_s + " "
+              memberid=order.member_id
+              shipname=order.ship_name
+              createdat=order.created_at
+              statustext=order.status_text
+              paystatustext=order.pay_status_text
+              shipstatustext=order.ship_status_text
+              finalamount=order.final_amount
+           
+             shipaddrs=order.ship_addr
+          
+              sheet.add_row [orderid,memberid,shipname,createdat,statustext,paystatustext,shipstatustext,finalamount,nil,shipaddrs]
+              row_count +=1
+            end
+           end
+          send_data package.to_stream.read,:filename=>"weihuoorder_#{Time.zone.now.strftime('%Y%m%d%H%M%S')}.xlsx"
+          end
+      end
+
 =begin
 	# def export
 	# 	pp "---------------"

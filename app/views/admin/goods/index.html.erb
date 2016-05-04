@@ -19,9 +19,14 @@
 			<a href="/admin/tags?tag_type=goods" target="_blank" class='button alert'>标签设置</a>
 		</div>
 </div>
-
+<style>
+ .checkbox-verticle {
+ 	list-style-type:none;
+ 	float:right;
+ }
+</style>
 <div class="columns small-12">
-  <%=form_for :member,:url=>export_admin_goods_path,:method=>:post do |f|%>
+   <%=form_for :member,:url=>export_admin_goods_path,:method=>:post do |f|%>
       <%= f.hidden_field :select_all,:class=>"sel_operation", :value => 0 %>
       <input type="hidden" name="all_goods_ids" value="<%=@goods_ids%>" />
 	<div id="selection">已选择了<b id="count">0</b>条记录!
@@ -30,8 +35,24 @@
 		&nbsp;
 		<%=link_to "取消选择","#",:id=>"cancel_all"%>
         &nbsp;&nbsp;&nbsp;&nbsp;
+      <%if current_admin.has_right_of("goods","export") %>
         <%= f.submit '导出商品', :class => "button" %>
-	</div>
+      <div style="float:right;">
+        <ul class="clearfix unstyled">
+          <li class="checkbox-verticle"><%= check_box_tag "fields[]","进货价",true%>进货价</li>
+          &nbsp; &nbsp; &nbsp;
+          <li class="checkbox-verticle"><%= check_box_tag "fields[]","渠道价",true%>渠道价</li>
+           &nbsp; &nbsp; &nbsp;
+          <li class="checkbox-verticle"><%= check_box_tag "fields[]","渠道零售价",true%>渠道零售价</li>
+           &nbsp; &nbsp; &nbsp;
+          <li class="checkbox-verticle"><%= check_box_tag "fields[]","批发价",true%>批发价</li>
+           &nbsp; &nbsp; &nbsp;
+          <li class="checkbox-verticle"><%= check_box_tag "fields[]","会员价",true%>会员价</li>
+           &nbsp; &nbsp; &nbsp;
+          <li class="checkbox-verticle"><%= check_box_tag "fields[]","市场价",true%>市场价</li>
+        </ul>
+      </div>
+           <%end%>
 	<table class="table table-bordered table-striped" id="goods" data-url="<%=request.fullpath.html_safe%>" count="<%=@count%>" goods_ids="<%=@goods_ids%>" >
 		<%=render "index_goods"%>
 	</table>

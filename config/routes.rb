@@ -312,7 +312,7 @@ Modengke::Application.routes.draw do
     resources :orders do
       collection do
         get 'search'
-        post :export
+        post 'downorder'
         put 'batch'
       end
 
