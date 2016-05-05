@@ -36,7 +36,7 @@
    <%=form_for :member,:url=>downorder_admin_orders_path,:method=>:post do |f|%>
         &nbsp;&nbsp;&nbsp;&nbsp;
       <%if current_admin.has_right_of("orders","downorder") %>
-        <%= f.submit '导出商品', :class => "btn btn-primary"%>
+        <%= f.submit '导出商品', :class => "button batch"%>
        <%end%>
                     <%end%>
 
