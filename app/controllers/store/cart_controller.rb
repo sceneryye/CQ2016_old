@@ -54,7 +54,7 @@ class Store::CartController < ApplicationController
 		if @cart.new_record?
 			@cart.save
 		else
-			Cart.where(:obj_ident=>@cart.obj_ident,:member_ident=>member_ident).update_all(:quantity=>@cart.quantity+quantity)
+			Cart.where(:obj_ident=>@cart.obj_ident,:member_ident=>member_ident).update_all(:quantity=>@cart.quantity+quantity.to_i)
 			@cart.quantity = (@cart.quantity+1)
 		end
 		
