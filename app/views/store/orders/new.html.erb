@@ -3,8 +3,7 @@
           	<%if @line_items.size > 0%>
 				<div class="section addr">
 					<h4>
-						<!--<a href="../member_addrs"></a>-->收货地址 
-						<span class="required">*</span>
+						收货地址<span class="required">*</span>
 					</h4>
 			      <div class="checkcon clearfix addr-list">
 					<%if @addrs.size>0%>
@@ -35,29 +34,29 @@
 			</td></tr>
 			<tr><td>
 				<%=form_for :order,:url=>orders_path,:html=>{ :class=>"form-horizontal",:id=>"order_form" } do |f|%>
-					<%=hidden_field_tag "member_addr",@def_addr&&@def_addr.addr_id%>
-
-				<div class="section shipment">
-					<h5>配送方式</h5>
-			      <label class="radio active ">
-			        <%=f.radio_button :shipping_id, 0%><span class="addr-line">自提</span>
-			      </label>
-					<label class="radio">
-						<%=f.radio_button :shipping_id, 1, :checked=>true%> 快递
-						<span class="extra-info">+ ¥0</span>
-					</label>
-					<div class="control-group">
-					    <h5>
-						收货时间 
-						<span class="required">*</span>
-					</h5>
-					    <div class="form-group">
-					      <%=f.select :ship_day,ship_day_options,:class=>"form-control"%>
-					      <%=f.text_field :ship_special,:class=>"input-small hide datetime"%>
-					      <%=f.select :ship_time2,ship_time_options,:class=>"form-control"%>
-					    </div>
+				<%=hidden_field_tag "member_addr",@def_addr&&@def_addr.addr_id%>
+				<div class="row">
+				  <fieldset class="large-6 columns">
+				    <legend>配送方式</legend>
+				     <%=f.radio_button :shipping_id, 0,id:'self'%><label for="self">自提</label>
+				     <%=f.radio_button :shipping_id, 1,id:'express'%><label for="express">快递</label>
+				  </fieldset>
+				  <fieldset class="large-6 columns">
+				    <legend>收货时间</legend>
+				    <div class='row'>
+				    <div class='columns small-6'>
+				    <%=f.select :ship_day,ship_day_options,:class=>"form-control"%>
 					</div>
-				</div>	
+				     <div class='columns small-6'>
+						<%=f.select :ship_time2,ship_time_options,:class=>"form-control"%>
+					</div>
+
+					</div>	
+					<div class='row columns small-12'>	
+					<%=f.text_field :ship_special,:class=>"input-small hide datetime"%>
+					</div>
+				  </fieldset>
+				</div>
 			</td></tr>
 			<tr><td>	
 				<div class="section payment" id="payments">
@@ -162,7 +161,7 @@
 
 						</div>
 						<div class="actions clearfix">
-							<%=f.submit "安 全 结 算",:class=>"button button-success button-lg  "%>
+							<%=f.submit "安 全 结 算",:class=>"button expanded "%>
 						</div>
 					</div>
 				</div>
