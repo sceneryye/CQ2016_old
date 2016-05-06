@@ -150,8 +150,47 @@ class Admin::CardsController < Admin::BaseController
      @member_card.destroy
      redirect_to admin_cards_url
   end
+  def export
+
+      cards = Card.all
+      package = Axlsx::Package.new
+          workbook = package.workbook
+
+            workbook.styles do |s|
 
 
+          workbook.add_worksheet(:name => "ordersinfo") do |sheet|
+
+          sheet.add_row ["卡号","面值","类型","销售状态","使用状态","卡状态","使用人手机","银行","银行卡号"]
+                     
+
+            row_count=0
+
+            cards.each do |card| 
+              nober=card.no + " "
+              cardvalue=card.value
+              cardtype="[#{level(card.card_type)}]" if level(card.card_type)
+              salestatus=card.sale_status ? "已出售" : "未出售"
+              usestatus=card.use_status ?  "已使用" : "未使用"
+              cardstatus=card.status 
+              usephoto = card.member_card&&card.member_card.user_tel.present? ? card.member_card.user_tel : "未登记"
+              bankname = card.member_card.bank_name if !card.member_card.nil?
+              cbankmenber = card.member_card.bank_card_no if !card.member_card.nil?
+                     
+
+            
+
+              sheet.add_row [nober,cardvalue,cardtype,salestatus,usestatus,cardstatus,usephoto,bankname,cbankmenber]
+              row_count +=1
+            end
+           end
+          send_data package.to_stream.read,:filename=>"card_#{Time.zone.now.strftime('%Y%m%d%H%M%S')}.xlsx"
+          end
+    
+end
+
+
+=begin
   def export
       @logger ||= Logger.new("log/card.log")
       
@@ -191,7 +230,7 @@ class Admin::CardsController < Admin::BaseController
         end
       end
   end
-
+=end
   def import(options={:encoding=>"GB18030:UTF-8"})
 
         return redirect_to(admin_cards_url) unless params[:card]&&params[:card][:file] 
