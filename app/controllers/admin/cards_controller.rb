@@ -395,6 +395,6 @@ class Admin::CardsController < Admin::BaseController
                   :card_no=>card_no,
                   :card_id=>card_id,
                   :message=>"#{res_data.to_json}")
-  end
+  end 
 
 end
