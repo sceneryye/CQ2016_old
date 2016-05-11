@@ -46,9 +46,11 @@
 
 <div class="medium-2 columns">
   <%=form_for :card,:url=>export_admin_cards_path,:method=>:post do |f|%>
-    <%= f.hidden_field :select_all,:class=>"sel_operation", :value => 0 %>
+  <!--  <%= f.hidden_field :select_all,:class=>"sel_operation", :value => 0 %>-->  <%if current_admin.has_right_of("card","export") %>
+       <%=f.submit "导出",:class=>"export_button button" %>
+       <%end%>
 
-      <%=f.submit "导出",:class=>"export_button button" %>
+     
   <%end%> 
 </div> 
 
