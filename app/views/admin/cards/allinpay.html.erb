@@ -259,13 +259,14 @@
     var card_id = '<%=@card.no%>';
     var password = '111111';
     // var begin_date = "<%= (Time.now - 3600 * 24 * 89).strftime('%Y%m%d') %>";
-    var begin_date = "20160103";
+    var begin_date = "20160303";
     // var end_date = "<%= (Time.now - 3600 * 24 * 88).strftime('%Y%m%d') %>";
-    var end_date = "20160112";
+    var end_date = "20160512";
     var page_no = '1';
     var page_size = '20';
     var url = "<%= get_trade_log_admin_cards_path %>";
     $.post(url, {order_id: order_id, card_id: card_id, password: password, begin_date: begin_date, end_date: end_date, page_no: page_no, page_size: page_size}, function(e){
+
       if(e.data.ppcs_txnlog_search_response) {
         console.log(e.data.ppcs_txnlog_search_response);
         alert('交易记录查询成功！');

@@ -100,7 +100,6 @@ class Admin::CardsController < Admin::BaseController
 
   def buy () end
 
-
   def use () end
 
   def edit_user 
@@ -127,8 +126,8 @@ class Admin::CardsController < Admin::BaseController
       end
       @cards.each do |card|
          Labelable.where(:label_id=>params[:label],
-                                                   :labelable_id=>card.id,
-                                                   :labelable_type=>"Card").first_or_create if card
+                         :labelable_id=>card.id,
+                         :labelable_type=>"Card").first_or_create if card
       end
 
       render :text=>"ok"
@@ -145,12 +144,11 @@ class Admin::CardsController < Admin::BaseController
      @card.update_attribute :sale_status,false
      @member_card = @card.member_card
      CardLog.create(:member_id=>current_admin.account_id,
-                                                :card_id=>@card.id,
-                                                :message=>"取消卡订单,购买者=#{@member_card.buyer.login_name}")
+                    :card_id=>@card.id,
+                    :message=>"取消卡订单,购买者=#{@member_card.buyer.login_name}")
      @member_card.destroy
      redirect_to admin_cards_url
   end
-
 
   def export
       @logger ||= Logger.new("log/card.log")
@@ -261,6 +259,7 @@ class Admin::CardsController < Admin::BaseController
     card_id = params[:card_id]
     type = params[:type]
     res_data = ActiveSupport::JSON.decode card_active(order_id, card_id, type)
+    save_log res_data,card_id,'active'
     Rails.logger.info res_data
     render json: {data: res_data}
   end
@@ -275,6 +274,7 @@ class Admin::CardsController < Admin::BaseController
     opr_id = params[:opr_id]
     desn = params[:desn]
     res_data = ActiveSupport::JSON.decode topup_single_card(order_id, card_id, prdt_no, amount, top_up_way, opr_id, desn)
+    save_log res_data,card_id,'topup'
     Rails.logger.info res_data
     render json: {data: res_data}
   end
@@ -287,6 +287,7 @@ class Admin::CardsController < Admin::BaseController
     card_id = params[:card_id]
     password = params[:password]
     res_data = ActiveSupport::JSON.decode pay_with_password(order_id,  mer_order_id, payment_id, amount, card_id, password)
+    save_log res_data,card_id,'pay_with_pwd'
     Rails.logger.info res_data
     render json: {data: res_data}
   end
@@ -296,6 +297,7 @@ class Admin::CardsController < Admin::BaseController
     card_id = params[:card_id]
     password = params[:password]
     res_data = ActiveSupport::JSON.decode card_reset_password(order_id, card_id, password)
+    save_log res_data,card_id,'reset_password'
     Rails.logger.info res_data
     render json: {data: res_data}
   end
@@ -306,6 +308,7 @@ class Admin::CardsController < Admin::BaseController
     prdt_id = params[:prdt_id]
     reason = params[:reason]
     res_data = ActiveSupport::JSON.decode card_freeze(order_id, card_id, prdt_id, reason)
+    save_log res_data,card_id,'freeze'
     Rails.logger.info res_data
     render json: {data: res_data}
   end
@@ -316,6 +319,7 @@ class Admin::CardsController < Admin::BaseController
     prdt_id = params[:prdt_id]
     reason = params[:reason]
     res_data = ActiveSupport::JSON.decode card_unfreeze(order_id, card_id, prdt_id, reason)
+    save_log res_data,card_id,'unfreeze'
     Rails.logger.info res_data
     render json: {data: res_data}
   end
@@ -327,6 +331,7 @@ class Admin::CardsController < Admin::BaseController
     id_no = params[:id_no]
     reason = params[:reason]
     res_data = ActiveSupport::JSON.decode card_report_loss(order_id, card_id, id_no, id_type, reason)
+    save_log res_data,card_id,'report_loss'
     Rails.logger.info res_data
     render json: {data: res_data}
   end
@@ -338,6 +343,7 @@ class Admin::CardsController < Admin::BaseController
     id_no = params[:id_no]
     reason = params[:reason]
     res_data = ActiveSupport::JSON.decode card_cancel_loss(order_id, card_id, id_no, id_type, reason)
+    save_log res_data,card_id,'cancel_loss'
     Rails.logger.info res_data
     render json: {data: res_data}
   end
@@ -346,6 +352,7 @@ class Admin::CardsController < Admin::BaseController
     card_id = params[:card_id]
     password = params[:password]
     res_data = ActiveSupport::JSON.decode card_get_info(card_id, password)
+    save_log res_data,card_id,'get_info'
     Rails.logger.info res_data
     render json: {data: res_data}
   end
@@ -357,8 +364,9 @@ class Admin::CardsController < Admin::BaseController
     password = params[:password]
     page_no = params[:page_no]
     page_size = params[:page_size]
-    return render json: {data: {error_message: '不能查询90天之前的记录！'}} if Time.parse(begin_date) < (Time.now - 3600 * 24 * 90)
+    # return render json: {data: {error_message: '不能查询90天之前的记录！'}} if Time.parse(begin_date) < (Time.now - 3600 * 24 * 90)
     res_data = ActiveSupport::JSON.decode card_get_trade_log(begin_date, end_date, card_id, password, page_no, page_size)
+    save_log res_data,card_id,'get_trade_log'
     Rails.logger.info res_data
     render json: {data: res_data}
   end
@@ -375,5 +383,18 @@ class Admin::CardsController < Admin::BaseController
     @card = Card.find(params[:id])
   end
 
+  def save_log (res_data,card_no,from='')
+
+    card_id = Card.find_by_no(card_no)[:id]
+
+    @cards_log ||= Logger.new('log/cards.log')
+
+    @cards_log.info("[admin][#{Time.now}]#{res_data}")
+
+    @card_log = CardLog.create(:member_id=>1,
+                  :card_no=>card_no,
+                  :card_id=>card_id,
+                  :message=>"#{res_data.to_json}")
+  end
 
 end
