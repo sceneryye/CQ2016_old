@@ -149,48 +149,86 @@ class Admin::CardsController < Admin::BaseController
      @member_card.destroy
      redirect_to admin_cards_url
   end
+   def export
 
-  def export
-      @logger ||= Logger.new("log/card.log")
-      
-      if params[:card][:select_all].to_i > 0
-         @cards = Card.all
-      else
-        @cards = Card.find(params[:selected_cards])
-      end
-      fields = ["卡号","面值","类型","销售状态","使用状态","卡状态","购卡人手机","用卡人手机","标签"]
-      content =content_generate(fields,@cards)  #调用export方法
-      send_data(content, :type => 'text/csv',:filename => "card_#{Time.now.strftime('%Y%m%d%H%M%S')}.csv")
-  end
+      cards = Card.all
+      package = Axlsx::Package.new
+          workbook = package.workbook
 
-  def content_generate(fields,cards)
-      output = CSV.generate do |csv|
-        csv << fields
-        cards.each do |card|
-          content = []
-          content.push card.no
-          content.push card.value
-          content.push card.card_type
-          content.push card.status
-          content.push card_sale_status_options[card.sale_status]
-          content.push card_use_status_options[card.use_status]
-          content.push sold_card_status_options[card.status]
-          if card.member_card.nil?
-              content.push ""
-          else
-              content.push card.member_card.buyer_tel
+            workbook.styles do |s|
+
+
+          workbook.add_worksheet(:name => "ordersinfo") do |sheet|
+
+          sheet.add_row ["卡号","面值","类型","销售状态","使用状态","卡状态","使用人手机","银行","银行卡号"]
+                     
+
+            row_count=0
+
+            cards.each do |card| 
+              nober=card.no + " "
+              cardvalue=card.value
+              cardtype="[#{level(card.card_type)}]" if level(card.card_type)
+              salestatus=card.sale_status ? "已出售" : "未出售"
+              usestatus=card.use_status ?  "已使用" : "未使用"
+              cardstatus=card.status 
+              usephoto = card.member_card&&card.member_card.user_tel.present? ? card.member_card.user_tel : "未登记"
+              bankname = card.member_card.bank_name if !card.member_card.nil?
+              cbankmenber = card.member_card.bank_card_no if !card.member_card.nil?
+                     
+
+            
+
+              sheet.add_row [nober,cardvalue,cardtype,salestatus,usestatus,cardstatus,usephoto,bankname,cbankmenber]
+              row_count +=1
+            end
+           end
+          send_data package.to_stream.read,:filename=>"card_#{Time.zone.now.strftime('%Y%m%d%H%M%S')}.xlsx"
           end
-          if card.member_card.nil?
-              content.push ""
-          else
-              content.push card.member_card.user_tel
-          end
-          csv << content   # 将数据插入数组中
+    
+end
+ =begin
+  # def export
+ #     @logger ||= Logger.new("log/card.log")
+  #    
+   #   if params[:card][:select_all].to_i > 0
+    #     @cards = Card.all
+    #  else
+    #    @cards = Card.find(params[:selected_cards])
+     # end
+    #  fields = ["卡号","面值","类型","销售状态","使用状态","卡状态","购卡人手机","用卡人手机","标签"]
+  #    content =content_generate(fields,@cards)  #调用export方法
+#      send_data(content, :type => 'text/csv',:filename => "card_#{Time.now.strftime('%Y%m%d%H%M%S')}.csv")
+#  end
+#
+#  def content_generate(fields,cards)
+  #    output = CSV.generate do |csv|
+ #       csv << fields
+ #       cards.each do |card|
+  #        content = []
+     #     content.push card.no
+       #   content.push card.value
+     #     content.push card.card_type
+     #     content.push card.status
+     #     content.push card_sale_status_options[card.sale_status]
+    #      content.push card_use_status_options[card.use_status]
+      #    content.push sold_card_status_options[card.status]
+          #if card.member_card.nil?
+         #     content.push ""
+        #  else
+       #       content.push card.member_card.buyer_tel
+      #    end
+     #     if card.member_card.nil?
+    #          content.push ""
+   #       else
+  #            content.push card.member_card.user_tel
+  #        end
+  #        csv << content   # 将数据插入数组中
         end
-      end
-  end
-
-  def import(options={:encoding=>"GB18030:UTF-8"})
+   #   end
+ # end
+=end
+ def import(options={:encoding=>"GB18030:UTF-8"})
 
         return redirect_to(admin_cards_url) unless params[:card]&&params[:card][:file] 
 
