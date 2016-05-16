@@ -18,13 +18,13 @@ class Admin::SpecificationsController < Admin::BaseController
 	def edit
 		@spec  = Spec.includes(:spec_values).find(params[:id])
 
-
+         @spec.save
 		@action_url =  admin_specification_path(@spec)
 		@method = :put
 	end
 
 	def create
-		@spec  = Spec.new spec_params
+		@spec  = Spec.new(spec_params)
 		if @spec.save
 			redirect_to admin_specifications_url
 		else

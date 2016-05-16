@@ -56,7 +56,9 @@ class Admin::OrdersController < Admin::BaseController
 			format.html
 		end
 	end
+	
     def downorder
+    	
   orders = Order.all
    
           package = Axlsx::Package.new
@@ -88,7 +90,7 @@ class Admin::OrdersController < Admin::BaseController
               row_count +=1
             end
            end
-          send_data package.to_stream.read,:filename=>"weihuoorder_#{Time.zone.now.strftime('%Y%m%d%H%M%S')}.xlsx"
+          send_data package.to_stream.read,:filename=>"order_#{Time.zone.now.strftime('%Y%m%d%H%M%S')}.xlsx"
           end
       end
 

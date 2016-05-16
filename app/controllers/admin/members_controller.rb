@@ -122,14 +122,71 @@ module Admin
       end
 
       def export
-        fields =  params[:fields]
-        if params[:member][:select_all].to_i > 0
-           members = Member.all  #找出所有数据
-        else
-           members = Member.find(:all,:conditions => ["member_id in (?)",params[:ids]])
-        end
-        content = Member.export(fields,members)  #调用export方法
-        send_data(content, :type => 'text/csv',:filename => "member_#{Time.now.strftime('%Y%m%d%H%M%S')}.csv")
+
+          #orders = Order.all
+   
+      #    package = Axlsx::Package.new
+        #  workbook = package.workbook
+
+    #        workbook.styles do |s|
+
+
+         # workbook.add_worksheet(:name => "ordersinfo") do |sheet|
+
+     #     sheet.add_row [" 订单号","会员","收货人","下单时间","订单状态","付款状态","发货状态","订单金额","店铺id","收货地址","运单号"]
+        #             
+
+         #   row_count=0
+
+        #    orders.each do |order| 
+          #    orderid=order.order_id.to_s + " "
+            #  memberid=order.member_id
+           #   shipname=order.ship_name
+            #  createdat=order.created_at
+            #  statustext=order.status_text
+          #    paystatustext=order.pay_status_text
+           #   shipstatustext=order.ship_status_text
+          #    finalamount=order.final_amount
+           
+           #  shipaddrs=order.ship_addr
+          
+        #      sheet.add_row [orderid,memberid,shipname,createdat,statustext,paystatustext,shipstatustext,finalamount,nil,shipaddrs]
+       #       row_count +=1
+        #    end
+        #   end
+        #  send_data package.to_stream.read,:filename=>"  order_#{Time.zone.now.strftime('%Y%m%d%H%M%S')}.xlsx"
+       #   end
+  # end
+
+
+       members = Member.all
+       package = Axlsx::Package.new
+          workbook = package.workbook
+
+           workbook.styles do |s|
+
+
+         workbook.add_worksheet(:name => "members") do |sheet|
+
+          sheet.add_row ["会员ID ","会员名","姓名","会员等级","手机","身份证"," 会员卡积分"]
+                     
+
+            row_count=0
+
+            members.each do |member|
+              nober=member.member_id.to_s + " "
+              cardvalue=member.account.login_name
+              cardtype=member.name
+              salestatus=member.member_lv_id
+              usestatus=member.mobile
+              cardstatus=member.id_card_number
+             usephoto =member.point
+              sheet.add_row [nober,cardvalue,cardtype,salestatus,usestatus,cardstatus,usephoto]
+              row_count +=1
+            end
+           end
+          send_data package.to_stream.read,:filename=>"member_#{Time.zone.now.strftime('%Y%m%d%H%M%S')}.xlsx"
+          end
       end
 
       def column_reload

@@ -1,11 +1,17 @@
-<div class='row columns'>
+<!--<div class='row columns'>
 <%=form_for :member,:url=>export_admin_members_path,:method=>:post do |f|%>
+
+     <%if current_admin.has_right_of("members"," memberexport") %>
+        <%= f.submit '导出商品', :class => "button batch"%>
+       <%end%>
+                   
+
 <%= f.hidden_field :select_all,:class=>"sel_operation", :value => 0 %>
 <%if current_admin.login_name=="admin" %>
 <div class="page-header">
   <h2>所有会员</h2>
   <div class="button-group">
-    <%= f.submit '导出会员', :class => "button" %>
+    <%= f.submit '导出会员', :class => "button batch" %>
   </div>
   <%=link_to "短信群发","#sms_editor",:class=>"button",:'data-toggle'=>"modal"%>
   <%=link_to "短信自定义发送","#sms_define",:class=>"button",:'data-toggle'=>"modal"%>
@@ -24,12 +30,17 @@
 </div>
 <%end if 1==2%>
 </div>
-
+-->
 
 <div class='sel_banner row columns'>
   您当前选定了<a class='sel_nums'>0</a>条记录！  <a href='' class='cancel_all'>取消选定</a> <a href='' class='sel_all'>选定全部</a>
   <p class="total_member hidden"><%=@total_member%></p>
 </div>
+<%=form_for :member,:url=>export_admin_members_path,:method=>:post do |f|%>
+
+     <%if current_admin.has_right_of("members","export") %>
+        <%= f.submit '导出商品', :class => "button batch"%>
+       <%end%> <%end%>
 <table class="table table-bordered table-hover">
   <tr>
     <td>全选
