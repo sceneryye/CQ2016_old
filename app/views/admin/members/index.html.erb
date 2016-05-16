@@ -39,7 +39,7 @@
 <%=form_for :member,:url=>export_admin_members_path,:method=>:post do |f|%>
 
      <%if current_admin.has_right_of("members","export") %>
-        <%= f.submit '导出商品', :class => "button batch"%>
+        <%= f.submit '导出会员', :class => "button batch"%>
        <%end%> <%end%>
 <table class="table table-bordered table-hover">
   <tr>
