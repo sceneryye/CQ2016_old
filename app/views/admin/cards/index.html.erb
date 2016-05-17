@@ -7,13 +7,17 @@
 <div class='columns medium-3'>
   <%=form_for :card,:url=>import_admin_cards_path,:html => {:multipart => true} ,:method=>:post do |f|%>
 
+
+
      <div class="input-group">
-        <%=link_to "下载csv模板","/pic/card_模板.csv" , :class => "button input-group-button" %>
-        <%= file_field :card, :file, :id=>'csvfile',:accept => "text/csv",class:'input-group-field' %> 
-         <div class="input-group-button">
-          <%= f.submit '导入', :class => "button" %>            
-          </div>
+   <%=form_for :card,:url=>import_admin_cards_path,:html => {:multipart => true} ,:method=>:post do |f|%>
+      <%= file_field :card, :file, :id=>'csvfile',:accept => "application/msexcel",:class=>"batch" %>
+      <%= f.submit 'EXCEL批量导入商品', :class => "button" %>
+  <%end%>
       </div>
+
+
+
   <%end%>  
 </div>
 

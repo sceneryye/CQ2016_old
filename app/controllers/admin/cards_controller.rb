@@ -1,7 +1,11 @@
 #encoding:utf-8
+require "iconv"
+require 'axlsx'
 require 'csv'
 require 'allinpay'
 class Admin::CardsController < Admin::BaseController
+      skip_before_filter :require_permission!
+      skip_before_filter :verify_authenticity_token,:only=>[:batch]
   include Admin::CardsHelper
   # GET /admin/cards
   # GET /admin/cards.json
@@ -149,6 +153,7 @@ class Admin::CardsController < Admin::BaseController
      @member_card.destroy
      redirect_to admin_cards_url
   end
+
    def export
 
       cards = Card.all
@@ -186,8 +191,9 @@ class Admin::CardsController < Admin::BaseController
           send_data package.to_stream.read,:filename=>"card_#{Time.zone.now.strftime('%Y%m%d%H%M%S')}.xlsx"
           end
     
-end
- =begin
+       end
+
+
   # def export
  #     @logger ||= Logger.new("log/card.log")
   #    
@@ -207,11 +213,11 @@ end
  #       cards.each do |card|
   #        content = []
      #     content.push card.no
-       #   content.push card.value
-     #     content.push card.card_type
-     #     content.push card.status
-     #     content.push card_sale_status_options[card.sale_status]
-    #      content.push card_use_status_options[card.use_status]
+         # content.push card.value
+       #   content.push card.card_type
+       #   content.push card.status
+      #    content.push card_sale_status_options[card.sale_status]
+      #    content.push card_use_status_options[card.use_status]
       #    content.push sold_card_status_options[card.status]
           #if card.member_card.nil?
          #     content.push ""
@@ -224,74 +230,33 @@ end
   #            content.push card.member_card.user_tel
   #        end
   #        csv << content   # 将数据插入数组中
-        end
+    #    end
    #   end
  # end
-=end
- def import(options={:encoding=>"GB18030:UTF-8"})
 
-        return redirect_to(admin_cards_url) unless params[:card]&&params[:card][:file] 
-
+  def import(options={:encoding=>"GB18030:UTF-8"})
         file = params[:card][:file].tempfile
-        csv_rows = CSV.read(file,options)
-        @logger ||= Logger.new("log/card.log")
-        @cols = CvsColumn.new
-        first_row = 0
-        @cols.parseModel(csv_rows[first_row])
-        csv_rows.shift
-        errors = {}
-        begin
-            Card.transaction do
-                csv_rows.each_with_index do |row,idx|
-                  index = @cols.index("卡号")
-                  card_no = row[index]
-                  @new_card = Card.find_by_no(row[index])
-                  if !@new_card.nil? && @new_card.persisted?
-                    @logger.error("[error]card no exist: ")
-                    errors[idx+2] = "导入失败,卡号:#{card_no}已经存在."
-                    next
-                    # render :text=>"【异常】卡号已经存在"
-                    # return
-                  else
+        book = Spreadsheet.open(file)
+        pp "starting import ..."
+        sheet = book.worksheet(0)
+
+        @card = Card.new
+    
+        sheet.each_with_index do |row,i|
+           
+            if i >= 0
+
+                   
                     @card = Card.new
-                  end
-                  @card.no = row[index]
-                  index = @cols.index("面值")
-                  @card.value = row[index]
-                  t_index = @cols.index("类型")
-                  @card.card_type = row[t_index]
-                  @card.status = "正常"
-                  @card.sale_status = 0
-                  @card.use_status = 0
+                    @card.no= row[0]
 
-                  if %(A B).include?(row[t_index])
-                      if row[t_index] == "B"
-                        index = @cols.index("激活码")
-                        @card.password = row[index]
-                        if row[index].blank?
-                          errors[idx+2] = "导入失败,卡[#{card_no}]密码不能为空."
-                          next
-                        end
-                      end
-                  else
-                        @logger.error("[error]card_type  can not be #{row[t_index]}")
-                        errors[idx+2] = "导入失败,卡[#{card_no}]类型只能是A或者B,不能为其他值."
-                        next
-                  end
-                  @card.save!
-                  errors[idx+2] = "导入成功,卡号[#{card_no}]"
-                end
-            end
-        rescue Exception => e
-            @logger.error("[error]import card cvs error: "+e.to_s)
-            errors[-9999] = "导入失败，请检查导入文件格式."
-            # raise e
-        end
-
-        flash[:notice] = errors unless errors.empty?
+                     @card.save!
+             
+               
+             end
+         end
         redirect_to admin_cards_path
-  end
-
+      end
   def active
     order_id = params[:order_id]
     card_id = params[:card_id]
