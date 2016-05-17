@@ -58,6 +58,7 @@ Modengke::Application.routes.draw do
         post 'export_inventory'
         post 'coupon_check'
       end
+      get 'idcard'
     end
 
     

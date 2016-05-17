@@ -22,6 +22,7 @@ gem 'spreadsheet'
 # open-ssl
 gem 'r509'
 gem 'certified'
+gem 'typhoeus'
 
 #gem 'weibo_2' #,:git=>"https://github.com/simsicon/weibo_2.git"
 # Gems used only for assets and not required
