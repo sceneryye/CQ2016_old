@@ -6,6 +6,12 @@
   </div>
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
+     <input id='password' value=''>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
       <button class="button active-card">激活卡片</button>
     </div>
   </div>
@@ -74,6 +80,7 @@
 <script>
   $(document).ready(function(){
     var order_id = '999990053990001_' + "<%= Time.now.to_i %>" + "<%= rand(100).to_s %>";
+
     
   // 激活卡片
   $('.active-card').on('click', function(){
@@ -227,7 +234,6 @@
   $('.get-card-info').on('click', function(){
     var card_id = '<%=@card.no%>';
     var password = $('#password').val();
-    alert(password);
     var url = "<%= get_info_admin_cards_path %>";
     $.post(url, {card_id: card_id, password: password}, function(e){
       if(e.data.card_cardinfo_get_response) {
