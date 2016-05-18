@@ -4,45 +4,43 @@ require 'base64'
 require 'rest-client'
 
 module Allinpay
-  ALG = 'DES-CBC'
   PAY_CUR = 'CNY'
   PUBLIC_FILE = 'allinpay-pds.cer'
   SIGN_V = '1'
-  # test
-    URL = 'http://116.236.192.117:8080/aop/rest'
-    MER_ID = '999990053990001'
-    #821330153990232
-    APPSECRET = 'test'
-    APP_KEY = 'test'
-    KEY = 'abcdefgh'
-    IV = 'abcdefgh'
-    PSD = '111111'
+  # # test
+  #   URL = 'http://116.236.192.117:8080/aop/rest'
+  #   MER_ID = '999990053990001'
+  #   #821330153990232
+  #   APPSECRET = 'test'
+  #   APP_KEY = 'test'
+  #   KEY = 'abcdefgh'
+  #   IV = 'abcdefgh'
 
-    PAY_URL = 'https://113.108.182.3:443/aipg/ProcessServlet'
-    USER_NAME = '20060400000044502'
-    USER_PASS = '111111'
-    PRIVATE_FILE ='20060400000044502.p12'    
-    MERCHANT_ID = '999990053990001' #'200604000000445'
-  #----
+  #   PAY_URL = 'https://113.108.182.3:443/aipg/ProcessServlet'
+  #   USER_NAME = '20060400000044502'
+  #   USER_PASS = '111111'
+  #   PRIVATE_FILE ='20060400000044502.p12'    
+  #   MERCHANT_ID = '999990053990001' #'200604000000445'
+  # #----
 
-  # # product
-  #     URL = 'http://116.228.223.212:7001/aop/rest'
-  #     MER_ID = '999331054990016'
-  #     APPSECRET = '800001671aopreq20160505174758rygZwewN'
-  #     APP_KEY = '80000167'     
-  #     KEY = '6223e3c4'
-  #     IV = '6223e3c4'
-  #     PSD = '111111'      
+  # product
+      URL = 'http://116.228.223.212:7001/aop/rest'
+      MER_ID = '999331054990016'
+      APPSECRET = '800001671aopreq20160505174758rygZwewN'
+      APP_KEY = '80000167' 
+    
+      KEY = '6223e3c4'
+      IV = '6223e3c4'    
       
-  #     MERCHANT_ID = '200604000000445'
-  #     PAY_URL = 'https://tlt.allinpay.com:443/aipg/ProcessServlet'
-  #     USER_NAME = '20033100001566604'
-  #     USER_PASS = '111111'
-  #     PRIVATE_FILE ='20033100001566604.p12'
-  #     #验签版本号:1
-  #     #请求密钥:800001671aopreq20160505174758rygZwewN
-  #     #响应密钥:800001671aopres201605051747582BW2M3L6
-  # #----      
+      MERCHANT_ID = '200604000000445'
+      PAY_URL = 'https://tlt.allinpay.com:443/aipg/ProcessServlet'
+      USER_NAME = '20033100001566604'
+      USER_PASS = '111111'
+      PRIVATE_FILE ='20033100001566604.p12'
+      #验签版本号:1
+      #请求密钥:800001671aopreq20160505174758rygZwewN
+      #响应密钥:800001671aopres201605051747582BW2M3L6
+  #----      
 
   def timestamps
     Time.now.strftime('%Y%m%d%H%M%S')
@@ -63,7 +61,7 @@ module Allinpay
   def des_encrypt message, timestamp
     str = timestamp + 'aop' + message
     # str = "20160325161914aop8668083660000001017"
-    des = OpenSSL::Cipher.new(ALG)
+    des = OpenSSL::Cipher.new('DES-CBC')
     des.encrypt
     des.key = KEY
     des.iv = IV

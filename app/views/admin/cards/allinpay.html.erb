@@ -1,6 +1,11 @@
   <h4><%=@card.no%></h4>
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
+     <input id='password' value='111111'>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-md-6 col-md-offset-3">
       <button class="button active-card">激活卡片</button>
     </div>
   </div>
@@ -69,6 +74,7 @@
 <script>
   $(document).ready(function(){
     var order_id = '999990053990001_' + "<%= Time.now.to_i %>" + "<%= rand(100).to_s %>";
+    
   // 激活卡片
   $('.active-card').on('click', function(){
     var card_id = '<%=@card.no%>';
@@ -112,7 +118,7 @@
     var mer_order_id = order_id;
     var payment_id = "0000000001";
     var amount = '100';
-    var password = '111111';
+    var password = $('#password').val();
     var url = "<%= pay_with_pwd_admin_cards_path %>";
     $.post(url, {order_id: order_id, card_id: card_id, mer_order_id: mer_order_id, amount: amount, payment_id: payment_id, password: password}, function(e){
       if(e.data.card_paywithpassword_add_response) {
@@ -220,7 +226,8 @@
   // 查询卡片信息
   $('.get-card-info').on('click', function(){
     var card_id = '<%=@card.no%>';
-    var password = '111111'
+    var password = $('#password').val();
+    alert(password);
     var url = "<%= get_info_admin_cards_path %>";
     $.post(url, {card_id: card_id, password: password}, function(e){
       if(e.data.card_cardinfo_get_response) {
@@ -257,7 +264,7 @@
   // 交易记录查询
   $('.get-card-trade-log').on('click', function(){
     var card_id = '<%=@card.no%>';
-    var password = '111111';
+    var password = $('#password').val();
     // var begin_date = "<%= (Time.now - 3600 * 24 * 89).strftime('%Y%m%d') %>";
     var begin_date = "20160303";
     // var end_date = "<%= (Time.now - 3600 * 24 * 88).strftime('%Y%m%d') %>";
