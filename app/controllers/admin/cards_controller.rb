@@ -162,7 +162,6 @@ class Admin::CardsController < Admin::BaseController
 
             workbook.styles do |s|
 
-
           workbook.add_worksheet(:name => "ordersinfo") do |sheet|
 
           sheet.add_row ["卡号","面值","类型","销售状态","使用状态","卡状态","使用人手机","银行","银行卡号"]
@@ -171,6 +170,7 @@ class Admin::CardsController < Admin::BaseController
             row_count=0
 
             cards.each do |card| 
+
               nober=card.no + " "
               cardvalue=card.value
               cardtype="[#{level(card.card_type)}]" if level(card.card_type)
@@ -180,9 +180,6 @@ class Admin::CardsController < Admin::BaseController
               usephoto = card.member_card&&card.member_card.user_tel.present? ? card.member_card.user_tel : "未登记"
               bankname = card.member_card.bank_name if !card.member_card.nil?
               cbankmenber = card.member_card.bank_card_no if !card.member_card.nil?
-                     
-
-            
 
               sheet.add_row [nober,cardvalue,cardtype,salestatus,usestatus,cardstatus,usephoto,bankname,cbankmenber]
               row_count +=1
@@ -245,14 +242,20 @@ class Admin::CardsController < Admin::BaseController
         sheet.each_with_index do |row,i|
            
             if i >= 0
+              @card_no = Card.find_by_no(row[0].strip)
 
-                   
-                    @card = Card.new
-                    @card.no= row[0]
+                   if @card_no&&@card_no.persisted?
+                        @card = @card_no
+                    else
+                        @card = Card.new
+                        @card.no = row[0]
+                    end
 
-                     @card.save!
-             
+                    @Card.card_type=row[1]
                
+                     @card.save!
+           
+               Card.where(:no=>@Card.no).delete_all
              end
          end
         redirect_to admin_cards_path
