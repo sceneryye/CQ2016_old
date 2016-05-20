@@ -4,11 +4,8 @@ require 'axlsx'
 require 'csv'
 require 'allinpay'
 class Admin::CardsController < Admin::BaseController
-      skip_before_filter :require_permission!
-      skip_before_filter :verify_authenticity_token,:only=>[:batch]
-  include Admin::CardsHelper
-  # GET /admin/cards
-  # GET /admin/cards.json
+  skip_before_filter :verify_authenticity_token,:only=>[:batch]
+  include Admin::CardsHelper  
   include Allinpay
 
   before_filter :require_permission!
@@ -26,19 +23,26 @@ class Admin::CardsController < Admin::BaseController
   def allinpay () end
 
   def index
+
+    if params[:type]=='B'
+      @card_type = 'B'
+    else
+      @card_type='A'
+    end
+
     @labels = Label.all
 
     sale_status = params[:sold] == "0" ? false : true
-    key = params[:search][:key] if params[:search]
+    @key = params[:search][:key] if params[:search]
 
-    @cards = Card.order("id ASC")
+    @cards = Card.where(card_type: @card_type).order("no ASC")
 
-    if params[:sold].present?
-        @cards = @cards.where(:sale_status=>sale_status)
+    if params[:status].present?
+        @cards = @cards.where(status: params[:status])
     end
 
-    if key.present?
-        @cards = @cards.where("no like :key",:key=>"%#{key}%")
+    if @key.present?
+        @cards = @cards.where("no like :key",:key=>"%#{@key}%")
     end
 
 

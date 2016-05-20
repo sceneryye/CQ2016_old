@@ -20,6 +20,11 @@ class Card < ActiveRecord::Base
   		self.update_attribute :sale_status, true
   	end
 
+    def type_text
+      return '至尊卡'  if card_type =='A'
+      return '亲情卡'  if status =='B'
+    end
+
        def locked?
           self.status == '锁定'
        end
@@ -44,6 +49,8 @@ class Card < ActiveRecord::Base
        def normal?
           self.status == "正常"
        end
+
+
 
        scope :sold_cards_of, lambda { |buyer_id| joins(:member_card).where("sdb_imodec_member_cards.buyer_id = ? and sale_status = ?",buyer_id,true) }
 
