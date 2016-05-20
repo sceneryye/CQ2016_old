@@ -249,11 +249,11 @@ class Admin::CardsController < Admin::BaseController
                     else
                         @card = Card.new
                         @card.no = row[0]
-                    end
-
-                    @Card.card_type=row[1]
-               
+                    end 
+                   
+                     @Card.card_type=row[1]
                      @card.save!
+                     
            
                Card.where(:no=>@Card.no).delete_all
              end
