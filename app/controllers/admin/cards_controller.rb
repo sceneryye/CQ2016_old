@@ -241,7 +241,7 @@ class Admin::CardsController < Admin::BaseController
     
         sheet.each_with_index do |row,i|
            
-            if i > 0
+            if i >= 0
               @card = Card.new
               @card_no = Card.find_by_no(row[0].strip)
          
@@ -250,15 +250,15 @@ class Admin::CardsController < Admin::BaseController
                     else
                       
                         @card.no = row[0]
-                    end 
-                     @Card.password=row[1]
-                     @Card.card_type=row[2]
+                   end 
+                     @card.password=row[1]
+                     @card.card_type=row[2]
                      @card.save!
 
              end
          end
         redirect_to admin_cards_path
-      end
+  end
   def active
     order_id = params[:order_id]
     card_id = params[:card_id]
