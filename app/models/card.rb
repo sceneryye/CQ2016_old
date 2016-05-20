@@ -5,6 +5,9 @@ class Card < ActiveRecord::Base
   	
   	has_one :member_card, :foreign_key=>"card_id"
 
+    has_many :cards, foreign_key: parent_id
+    belongs_to :card, foreign_key: parent_id
+
   	has_many :card_logs,:foreign_key=>"card_id"
 
   	has_many :labelables,->{where(labelable_type:"Card" )},:foreign_key=>"labelable_id"

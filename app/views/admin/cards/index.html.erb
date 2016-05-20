@@ -94,9 +94,6 @@
       <label for="select_all" class="inline">全选</label>  
     </th>
     <th>卡号</th>
-    <% if @card_type=='B'%>
-    <th>母卡</th>
-    <%end%>
     <th>类型</th>
     <th>激活时间</th>
     <th>卡状态</th>
@@ -117,10 +114,12 @@
         <%end%> 
     </td> -->
 
-    <td><%=link_to  card.no,admin_card_path(card) %></td>
-    <% if @card_type=='B'%>
-    <td><%= card.parent_id%></td>
+    <td><%=link_to  card.no,admin_card_path(card) %>
+    <% if card.card_type=='B'%>
+    母卡：<%= card.card.no%>
     <%end%>
+
+    </td>    
     <td><%=card.type_text%></td>
     <td><%= card.member_card.created_at.strftime("%Y-%m-%d %H:%S:%M") if card.member_card %></td>
     <td><%= card.status %></td>   
@@ -137,15 +136,13 @@
       <%= card.member_card.bank_card_no if !card.member_card.nil?%>
     </td>
     <td>
-      <%=link_to "领用",active_admin_card_path(card)%>
-    </td>
-    <td>
-
-        <% if @card_type=='B'%>
+      <% if card.status=='未使用'%>
+        <%=link_to "领用",active_admin_card_path(card)%>
+      <%elsif card.card_type=='B'%>
           <%=link_to "设置母卡",edit_admin_card_path(card)%>
-        <%else%>
+      <%else%>
           <%=link_to "显示子卡",admin_cards_path(parent_id: card)%>
-        <%end%>
+      <%end%>
 
         <%=link_to "日志",logs_admin_card_path(card)%>
        <!--  <%=link_to "取消订单",cancel_order_admin_card_path(card),:method=>:put,:confirm=>"确定取消订单？" if card.sale_status && !card.pay_status && card.normal?%>

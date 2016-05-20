@@ -42,7 +42,7 @@ class Admin::CardsController < Admin::BaseController
     end
 
     if @key.present?
-        @cards = @cards.where("no like :key",:key=>"%#{@key}%")
+        @cards = Card.where("no like :key",:key=>"%#{@key}%")
     end
 
 
@@ -80,7 +80,7 @@ class Admin::CardsController < Admin::BaseController
   def update
 
     respond_to do |format|
-      if @card.update_attributes(params[:card])
+      if @card.update_attributes(card_params)
 
         message = params[:card].collect  do |key,value|
             I18n.t("card.#{key}") + "=" + value
@@ -272,7 +272,7 @@ class Admin::CardsController < Admin::BaseController
     order_id = get_order_id
     type = '1'
     res_data = ActiveSupport::JSON.decode card_active(order_id, @card.no, type)
-    save_log res_data,card_id,'active'
+    save_log res_data,@card.no,'active'
     @card.update_attributes(status: '未激活')
     Rails.logger.info res_data
     render json: {data: res_data}
@@ -392,6 +392,10 @@ class Admin::CardsController < Admin::BaseController
   end
 
   private
+
+  def card_params
+      params.require(:card).permit(:parent_id)
+  end
 
   def set_card
     @card = Card.find(params[:id])
