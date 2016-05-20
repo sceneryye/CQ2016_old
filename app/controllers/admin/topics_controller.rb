@@ -1,7 +1,7 @@
 class Admin::TopicsController < Admin::BaseController
   before_filter :require_permission!
   def index
-    @topics = Imodec::Topic.paginate(:page => params[:page], :per_page => 20).order("created_at DESC")
+    @topics = Topic.paginate(:page => params[:page], :per_page => 20).order("created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,7 +10,7 @@ class Admin::TopicsController < Admin::BaseController
   end
 
   def new
-    @topic = Imodec::Topic.new
+    @topic = Topic.new
     @create_or_update_path = admin_topics_path
 
     respond_to do |format|
@@ -21,12 +21,12 @@ class Admin::TopicsController < Admin::BaseController
 
   def edit
 
-    @topic = Imodec::Topic.find(params[:id])
+    @topic = Topic.find(params[:id])
     @create_or_update_path = admin_topic_path(@topic)
   end
 
   def create
-    @topic = Imodec::Topic.new(params[:imodec_topic])
+    @topic = Topic.new(params[:imodec_topic])
 
     if @topic.published
       @topic.published_at = Time.now
@@ -44,7 +44,7 @@ class Admin::TopicsController < Admin::BaseController
   end
 
   def update
-    @topic = Imodec::Topic.find(params[:id])
+    @topic = Topic.find(params[:id])
     if params[:imodec_topic] && params[:imodec_topic][:published] && @topic.published_at == nil
       @topic.published_at = Time.now
     end
@@ -61,7 +61,7 @@ class Admin::TopicsController < Admin::BaseController
   end
 
   def destroy
-    @topic = Imodec::Topic.find(params[:id])
+    @topic = Topic.find(params[:id])
     @topic.destroy
 
     respond_to do |format|
@@ -71,8 +71,8 @@ class Admin::TopicsController < Admin::BaseController
   end
 
   def set_position
-    @topic = ::Imodec::Topic.find(params[:id])
-    @topic_prev = ::Imodec::Topic.find_by_position_id(params[:position_id])
+    @topic = ::Topic.find(params[:id])
+    @topic_prev = ::Topic.find_by_position_id(params[:position_id])
     if @topic_prev
       @topic_prev.position_id = nil
     end
@@ -92,7 +92,7 @@ class Admin::TopicsController < Admin::BaseController
   end
 
   def published_at
-      @topic = ::Imodec::Topic.find(params[:id])
+      @topic = ::Topic.find(params[:id])
       @topic.update_attribute :published_at,params[:published_at]
       render :nothing=>true
   end

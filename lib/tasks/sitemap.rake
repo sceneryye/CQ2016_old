@@ -30,7 +30,7 @@ namespace :imodec do
 		  end
 
 		  add "/topics", :host=>"http://blog.CQ2016.com"
-		  Imodec::Topic.where(:published=>true).each do |topic|
+		  Topic.where(:published=>true).each do |topic|
 		  	if topic.slug
 		  		add "/topic/#{topic.slug}", :host=>"http://blog.CQ2016.com"
 		  	else

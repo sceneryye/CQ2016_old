@@ -1,6 +1,5 @@
 class Manager < ActiveRecord::Base
 	self.table_name = "sdb_desktop_users"
-  attr_accessor :user_id, :status, :name
 
   belongs_to :user,:foreign_key=>"user_id"
 	has_one :account,:foreign_key=>"account_id"
@@ -9,7 +8,7 @@ class Manager < ActiveRecord::Base
   has_many :hasrole, :foreign_key=>"user_id"
 
 
-  has_one :permission,:foreign_key=>"manager_id",:class_name=>"Imodec::Permission"
+  has_one :permission,:foreign_key=>"manager_id",:class_name=>"Permission"
 	def super?
 		self.super=="1"
 	end

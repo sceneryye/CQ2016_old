@@ -28,7 +28,7 @@
     <div class="control-group">
       <%= f.label :title, "分类", :class => "control-label" %>
       <div class="controls">
-        <%= f.select :category_id,Imodec::Category.all.collect{|c| [c.name,c.id]},{:include_blank=>"请选择"}%>
+        <%= f.select :category_id,Category.all.collect{|c| [c.name,c.id]},{:include_blank=>"请选择"}%>
         <%=link_to "添加分类","javascript:void(0);",:"data-url"=>admin_categories_path,:class=>"dialog"%>
       </div>
     </div>
@@ -93,7 +93,7 @@
     <div class="control-group">
        <%= f.label :cover, "封面", :class => "control-label" %>
        <div class="controls">
-          <%= f.select :cover_size, Imodec::Topic::COVER_SIZES, {}, :class => "span2" %>
+          <%= f.select :cover_size, Topic::COVER_SIZES, {}, :class => "span2" %>
           <%= f.file_field :cover %><br/><br/>
           <% if @topic.cover.file? %>
           <%= image_tag @topic.cover.url(@topic.cover_size) %><br/><br/>
