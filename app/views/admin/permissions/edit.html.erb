@@ -18,7 +18,7 @@
     
     <% %w(goods order user article system).each do |pcat|%>
         <ul>
-        <%Imodec::Resource.send("#{pcat}_resources").each do |controller|%>
+        <%Resource.send("#{pcat}_resources").each do |controller|%>
             <li class="controller">
                     <%if @manager.has_right_of(controller.name)%>
                         <%=check_box_tag "#{controller.name}","",:checked%>

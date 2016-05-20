@@ -1,7 +1,7 @@
 class Admin::PagesController < Admin::BaseController
   before_filter :require_permission!
   def index
-    @pages = Imodec::Page.paginate(:page => params[:page], :per_page => 20).order("created_at DESC")
+    @pages = Page.paginate(:page => params[:page], :per_page => 20).order("created_at DESC")
 
     respond_to do |format|
       format.html # index.html.erb
@@ -10,7 +10,7 @@ class Admin::PagesController < Admin::BaseController
   end
 
   def new
-    @page = Imodec::Page.new
+    @page = Page.new
 
     respond_to do |format|
       format.html # new.html.erb
@@ -19,11 +19,11 @@ class Admin::PagesController < Admin::BaseController
   end
 
   def edit
-    @page = Imodec::Page.find(params[:id])
+    @page = Page.find(params[:id])
   end
 
   def create
-    @page = Imodec::Page.new(page_params)
+    @page = Page.new(page_params)
     
     respond_to do |format|
       if @page.save
@@ -37,7 +37,7 @@ class Admin::PagesController < Admin::BaseController
   end
 
   def update
-    @page = Imodec::Page.find(params[:id])
+    @page = Page.find(params[:id])
 
     respond_to do |format|
       if @page.update_attributes(page_params)
@@ -51,7 +51,7 @@ class Admin::PagesController < Admin::BaseController
   end
 
   def destroy
-    @page = Imodec::Page.find(params[:id])
+    @page = Page.find(params[:id])
     @page.destroy
 
     respond_to do |format|
@@ -62,8 +62,8 @@ class Admin::PagesController < Admin::BaseController
   end
 
   def set_position
-    @page = ::Imodec::Page.find(params[:id])
-    @page_prev = ::Imodec::Page.find_by_position_id(params[:position_id])
+    @page = ::Page.find(params[:id])
+    @page_prev = ::Page.find_by_position_id(params[:position_id])
     if @page_prev
       @page_prev.position_id = nil
     end

@@ -3,6 +3,6 @@ class EventsController < ApplicationController
 	layout 'magazine'
 
 	def show
-		@event =  Imodec::Event.find(params[:id])
+		@event =  Event.find(params[:id])
 	end
 end

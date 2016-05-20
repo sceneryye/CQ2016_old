@@ -1,7 +1,7 @@
 class Events::ApplicantsController < ApplicationController
   layout  nil
   def create
-  	@applicant = Imodec::Applicant.new(params[:applicant])
+  	@applicant = Applicant.new(params[:applicant])
   	
   	if @applicant.save
   		render "create"

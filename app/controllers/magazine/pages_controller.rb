@@ -5,12 +5,12 @@ class Magazine::PagesController < Magazine::BaseController
   skip_before_filter :authorize_user!
 
   def show
-    @page = Imodec::Page.find(params[:id])
+    @page = Page.find(params[:id])
   end
 
   def index
-    @topic = Imodec::Topic.find(params[:topic_id])
-    @pages = Imodec::Page.where(:topic_id => @topic.id)
+    @topic = Topic.find(params[:topic_id])
+    @pages = Page.where(:topic_id => @topic.id)
   end
 
 
