@@ -81,7 +81,6 @@ Modengke::Application.routes.draw do
    
   end
 
-
   resources :pages, :only=>[:show]
 
   namespace :auth do
@@ -251,7 +250,7 @@ Modengke::Application.routes.draw do
 
       collection do        
         get "trading_log"
-        post 'active'
+        get 'active'
         post 'topup'
         post 'pay_with_pwd'
         post 'reset_password'

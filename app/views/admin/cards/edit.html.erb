@@ -10,7 +10,7 @@
     </div>
 
     <div class="control-group">
-      <%= f.label :value, "面值 :", :class => "control-label" %>
+      <%= f.label :value, "余额:", :class => "control-label" %>
      <div class="controls">
         <span class="plain-text">¥<%=@card.value%></span>
       </div>
@@ -19,43 +19,26 @@
     <div class="control-group">
       <%= f.label :card_type, "类型 :", :class => "control-label" %>
       <div class="controls">
-        <span class="plain-text"><%=@card.card_type%></span>
+        <span class="plain-text"><%=@card.type_text%></span>
       </div>
     </div>
     
     <div class="control-group">
       <%= f.label :status, "状态 :", :class => "control-label" %>
       <div class="controls">
-        <%unless @card.sale_status%>
-          <%= f.select :status, unsold_card_status_options,{},{:class=>"span1"}%>
-        <%else%>
-          <%= f.select :status, sold_card_status_options,{},{:class=>"span1"}%>
-        <%end%>
+        <span class="plain-text"><%=@card.status%></span>
       </div>
     </div>
 
     <div class="control-group">
-      <%= f.label :pay_status, "付款状态 :", :class => "control-label" %>
+      <%= f.label :status, "母卡 :", :class => "control-label" %>
       <div class="controls">
-          <%unless @card.pay_status%>
-          <%= f.select :pay_status, sold_card_pay_status_options,{},{:class=>"span1"} %>
-          <%= f.text_field :sold_at,:class=>"datetime span2 hide",:placeholder=>"付款时间"%>
-          <span class="help"></span>
-          <%else%>
-          <span class="plain-text "><%=@card.pay_status ? "已付款" : "未付款"%></span>
-          <%end%>
+       
+          <%= f.select :parent_id, @parents.collect {|b| [b.no,b.id]},{:include_blank=>"请选择母卡"}%>
+       
       </div>
     </div>
-    
 
-    <%if @card.card_type == "B"%>
-    <div class="control-group">
-      <%= f.label :password, "密码 :", :class => "control-label" %>
-      <div class="controls">
-        <%= f.text_field :password,:placehoder=>"密码"%>
-      </div>
-    </div>
-    <%end%>
 
     <div class="control-group">
       <div class="controls">

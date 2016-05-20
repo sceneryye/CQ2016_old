@@ -22,7 +22,7 @@ class Card < ActiveRecord::Base
 
     def type_text
       return '至尊卡'  if card_type =='A'
-      return '亲情卡'  if status =='B'
+      return '亲情卡'  if card_type =='B'
     end
 
        def locked?

@@ -24,7 +24,7 @@ class Admin::CardsController < Admin::BaseController
 
   def index
 
-    if params[:type]=='B'
+    if params[:card_type]=='B'
       @card_type = 'B'
     else
       @card_type='A'
@@ -57,7 +57,11 @@ class Admin::CardsController < Admin::BaseController
       @card = Card.new
   end
 
-  def edit () end
+  def edit 
+
+    @parents = Card.where('card_type=? and status<>? ','A','未使用' )
+
+  end
 
   def create
     @card = Card.new(params[:card])
@@ -263,10 +267,11 @@ class Admin::CardsController < Admin::BaseController
          end
         redirect_to admin_cards_path
   end
+
   def active
-    order_id = params[:order_id]
+    order_id = get_order_id
     card_id = params[:card_id]
-    type = params[:type]
+    type = '1'
     res_data = ActiveSupport::JSON.decode card_active(order_id, card_id, type)
     save_log res_data,card_id,'active'
     Rails.logger.info res_data
@@ -275,8 +280,8 @@ class Admin::CardsController < Admin::BaseController
 
   def topup
     #data = params.permit(:order_id, :card_id, :prdt_no, :amount, :top_up_way, :opr_id, :desn)
-    order_id = params[:order_id]
-    card_id = params[:card_id]
+    order_id = get_order_id
+    card_id = params[:id]
     prdt_no = params[:prdt_no]
     amount = params[:amount]
     top_up_way = params[:top_up_way]
@@ -289,7 +294,7 @@ class Admin::CardsController < Admin::BaseController
   end
 
   def pay_with_pwd
-    order_id = params[:order_id]
+    order_id = get_order_id
     mer_order_id = params[:mer_order_id]
     payment_id = params[:payment_id]
     amount = params[:amount]
@@ -302,7 +307,7 @@ class Admin::CardsController < Admin::BaseController
   end
 
   def reset_password
-    order_id = params[:order_id]
+    order_id = get_order_id
     card_id = params[:card_id]
     password = params[:password]
     res_data = ActiveSupport::JSON.decode card_reset_password(order_id, card_id, password)
@@ -312,7 +317,7 @@ class Admin::CardsController < Admin::BaseController
   end
 
   def freeze
-    order_id = params[:order_id]
+    order_id = get_order_id
     card_id = params[:card_id]
     prdt_id = params[:prdt_id]
     reason = params[:reason]
@@ -323,7 +328,7 @@ class Admin::CardsController < Admin::BaseController
   end
 
   def unfreeze
-    order_id = params[:order_id]
+    order_id = get_order_id
     card_id = params[:card_id]
     prdt_id = params[:prdt_id]
     reason = params[:reason]
@@ -334,7 +339,7 @@ class Admin::CardsController < Admin::BaseController
   end
 
   def report_loss
-    order_id = params[:order_id]
+    order_id = get_order_id
     card_id = params[:card_id]
     id_type = params[:id_type]
     id_no = params[:id_no]
@@ -346,7 +351,7 @@ class Admin::CardsController < Admin::BaseController
   end
 
   def cancel_loss
-    order_id = params[:order_id]
+    order_id = get_order_id
     card_id = params[:card_id]
     id_type = params[:id_type]
     id_no = params[:id_no]
@@ -405,5 +410,10 @@ class Admin::CardsController < Admin::BaseController
                   :card_id=>card_id,
                   :message=>"#{res_data.to_json}")
   end 
+
+  def get_order_id
+      order_id = "999990053990001_#{Time.now.to_i}#{rand(100).to_s}"
+  end
+ 
 
 end

@@ -86,11 +86,12 @@
   <p class="total_card hidden"><%=@cards_total%></p>
 </div>
 
-<table class="table table-bordered table-hover" id="cards_list">
+<table  id="cards_list">
   <tr>
+    <thead>
     <th>
-        <%=check_box_tag "select_all","all"%>
-        <label for="select_all" class="inline">全选</label>  
+      <%=check_box_tag "select_all","all"%>
+      <label for="select_all" class="inline">全选</label>  
     </th>
     <th>卡号</th>
     <% if @card_type=='B'%>
@@ -103,9 +104,11 @@
     <!-- <th>标签</th> -->
     <th>绑定银行</th>
     <th>操作</th>
+    </thead>
   </tr>
   <% @cards.each do |card| %>
   <tr id="card_<%=card.id%>">
+    <tbody>
     <td><%=check_box_tag "selected_cards[]", card.id,false,:class =>'operate_ids'%><%=card.id%></td>
     
     <!-- <td >
@@ -122,7 +125,7 @@
     <td><%= card.member_card.created_at.strftime("%Y-%m-%d %H:%S:%M") if card.member_card %></td>
     <td><%= card.status %></td>   
     <td><%= card.member_card&&card.member_card.user_tel.present? ? card.member_card.user_tel : "未登记" %></td>
-  <!--   <td>
+    <!--   <td>
       <%card.labels.each do |label|%>
         <span class="tag" label="<%=label.id%>">
           <%=label.name%><%=link_to "x",untag_admin_card_path(card,:label=>label.id),:remote=>true,:method=>:put,:class=>"delete"%>
@@ -134,8 +137,18 @@
       <%= card.member_card.bank_card_no if !card.member_card.nil?%>
     </td>
     <td>
+      <%=link_to "领用",active_admin_card_path(card.no)%>
+    </td>
+    <td>
+
+        <% if @card_type=='B'%>
+          <%=link_to "设置母卡",edit_admin_card_path(card)%>
+        <%else%>
+          <%=link_to "显示子卡",admin_cards_path(parent_id: card)%>
+        <%end%>
+
         <%=link_to "日志",logs_admin_card_path(card)%>
-        <%=link_to "取消订单",cancel_order_admin_card_path(card),:method=>:put,:confirm=>"确定取消订单？" if card.sale_status && !card.pay_status && card.normal?%>
+       <!--  <%=link_to "取消订单",cancel_order_admin_card_path(card),:method=>:put,:confirm=>"确定取消订单？" if card.sale_status && !card.pay_status && card.normal?%>
 
         <%unless card.use_status%>
           <%=link_to "修改",edit_admin_card_path(card)%>
@@ -143,9 +156,10 @@
           <%=link_to "修改用卡人",edit_user_admin_card_path(card) if card.sale_status && card.card_type=="A" && card.status!="作废"&&card.status!="锁定"%>
           <%=link_to "购卡",buy_admin_card_path(card)  if card.can_buy?%>
           <%=link_to "使用",use_admin_card_path(card)  if card.can_use?%>
-        <%end%>
+        <%end%> -->
         <%=link_to "通联",allinpay_admin_card_path(card)%>
     </td>
+  </tbody>
   </tr>
   <% end %>
 </table>
