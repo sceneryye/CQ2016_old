@@ -45,6 +45,10 @@ class Admin::CardsController < Admin::BaseController
         @cards = Card.where("no like :key",:key=>"%#{@key}%")
     end
 
+    if params[:parent_id].present?
+        @cards = Card.where(parent_id: params[:parent_id])
+    end
+
 
     @cards = @cards.paginate(:page=>params[:page],:per_page=>20)
     @cards_total = Card.count

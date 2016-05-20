@@ -5,8 +5,8 @@ class Card < ActiveRecord::Base
   	
   	has_one :member_card, :foreign_key=>"card_id"
 
-    has_many :cards, foreign_key: parent_id
-    belongs_to :card, foreign_key: parent_id
+    has_many :cards, :foreign_key=>'parent_id'
+    belongs_to :parent_card, :foreign_key=>'parent_id',:class_name=>'Card'
 
   	has_many :card_logs,:foreign_key=>"card_id"
 

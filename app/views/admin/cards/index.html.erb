@@ -116,7 +116,7 @@
 
     <td><%=link_to  card.no,admin_card_path(card) %>
     <% if card.card_type=='B'%>
-    母卡：<%= card.card.no%>
+    (<%= card.parent_card.no if card.parent_id%>)
     <%end%>
 
     </td>    
