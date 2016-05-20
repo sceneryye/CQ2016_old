@@ -242,20 +242,19 @@ class Admin::CardsController < Admin::BaseController
         sheet.each_with_index do |row,i|
            
             if i >= 0
+              @card = Card.new
               @card_no = Card.find_by_no(row[0].strip)
-
+         
                    if @card_no&&@card_no.persisted?
                         @card = @card_no
                     else
-                        @card = Card.new
+                      
                         @card.no = row[0]
                     end 
-                   
-                     @Card.card_type=row[1]
+                     @Card.password=row[1]
+                     @Card.card_type=row[2]
                      @card.save!
-                     
-           
-               Card.where(:no=>@Card.no).delete_all
+
              end
          end
         redirect_to admin_cards_path

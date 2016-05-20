@@ -62,14 +62,12 @@
     <th>付款状态</th>
     <th>卡状态</th>
     <th>使用者手机</th>
-
     <th>绑定银行</th>
     <th>操作</th>-->
   </tr>
   <% @rebates.each do |rebate| %>
   <tr id="rebate_<%=rebate.id%>">
-    <td><%=check_box_tag "selected_rebates[]", rebate.id,false,:class =>'operate_ids'%></td>
-    
+    <td><%=check_box_tag "selected_rebates[]", rebate.id,false,:class =>'operate_ids'%></td>    
     <!-- <td >
         <%=link_to admin_rebate_path(rebate),:class=>"editable",:remote=>"true" do%>
             <%=image_tag "finder_drop_arrow.gif"%>
