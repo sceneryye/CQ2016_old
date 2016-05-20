@@ -241,7 +241,7 @@ class Admin::CardsController < Admin::BaseController
     
         sheet.each_with_index do |row,i|
            
-            if i >= 0
+            if i > 0
               @card = Card.new
               @card_no = Card.find_by_no(row[0].strip)
          
