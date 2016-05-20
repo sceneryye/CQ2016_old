@@ -10,7 +10,7 @@ class Admin::CardsController < Admin::BaseController
 
   before_filter :require_permission!
 
-  before_action :set_card, only: [:show,:allinpay,:edit, :update, :destroy,:buy,:use,:edit_user]
+  before_action :set_card, only: [:show,:allinpay,:edit, :update, :destroy,:buy,:use,:edit_user,:active]
 
   def trading_log
     @log = CardTradingLog.order("id ASC")
@@ -270,10 +270,10 @@ class Admin::CardsController < Admin::BaseController
 
   def active
     order_id = get_order_id
-    card_id = params[:card_id]
     type = '1'
-    res_data = ActiveSupport::JSON.decode card_active(order_id, card_id, type)
+    res_data = ActiveSupport::JSON.decode card_active(order_id, @card.no, type)
     save_log res_data,card_id,'active'
+    @card.update_attributes(status: '未激活')
     Rails.logger.info res_data
     render json: {data: res_data}
   end

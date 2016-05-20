@@ -246,11 +246,12 @@ Modengke::Application.routes.draw do
         put "untag"
         put "cancel_order"
         get "allinpay"
+        get 'active'
       end
 
       collection do        
         get "trading_log"
-        get 'active'
+       
         post 'topup'
         post 'pay_with_pwd'
         post 'reset_password'
