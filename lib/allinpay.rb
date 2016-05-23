@@ -142,8 +142,9 @@ module Allinpay
     res_data_json = RestClient.get URL, {params: send_data}
   end
 
-  def topup_single_card order_id, card_id, amount, top_up_way, opr_id, desn = 'topup card'
-    data_hash = (public_params 'allinpay.ppcs.cardsingletopup.add', timestamps).merge({order_id: order_id, card_id: card_id,
+  def topup_single_card card_id, amount, opr_id, desn = 'topup card'
+    top_up_way = '1'
+    data_hash = (public_params 'allinpay.ppcs.cardsingletopup.add', timestamps).merge({order_id: get_order_id, card_id: card_id,
       prdt_no: PRDT_NO, amount: amount, top_up_way: top_up_way, opr_id: opr_id, desn: desn})
     sign = create_sign_for_allin data_hash
     send_data = data_hash.merge({sign: sign})

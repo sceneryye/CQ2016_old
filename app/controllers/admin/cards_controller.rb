@@ -256,10 +256,9 @@ class Admin::CardsController < Admin::BaseController
   def topup
     card_id = params[:card_id]
     amount = params[:amount]
-    top_up_way = params[:top_up_way]
     opr_id = params[:opr_id]
     desn = params[:desn]
-    res_data = ActiveSupport::JSON.decode topup_single_card(card_id, amount, top_up_way, opr_id, desn)
+    res_data = ActiveSupport::JSON.decode topup_single_card(card_id, amount,opr_id, desn)
     save_log res_data,card_id,'topup'
     Rails.logger.info res_data
     render json: {data: res_data}

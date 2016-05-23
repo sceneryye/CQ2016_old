@@ -116,12 +116,11 @@ class Memberships::CardsController < ApplicationController
 
   	def topup
   		card_id = @user.card_num;
-    	amount =  params[:card][:amount].to_i*100;
-    	top_up_way = '1';
-    	opr_id = '0229000040';
+    	amount =  params[:card][:amount].to_i*100
+    	opr_id = '0229000040'
 	    
 	    desn = params[:desn]
-	    res_data = ActiveSupport::JSON.decode topup_single_card(card_id, amount, top_up_way, opr_id, desn)
+	    res_data = ActiveSupport::JSON.decode topup_single_card(card_id, amount, opr_id, desn)
 
 	    res_info = save_log res_data
 
