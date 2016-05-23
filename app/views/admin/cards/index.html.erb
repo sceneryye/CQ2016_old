@@ -5,7 +5,7 @@
         <%=link_to "亲情卡",admin_cards_path(card_type:'B'),:class=>"button"%>
     </div>
   </div>
-  <div class='columns medium-2'>
+  <div class='columns medium-3'>
     <div class="button-group">
         <%=link_to "未使用",admin_cards_path(status: '未使用', card_type:params[:card_type]),:class=>"button"%>
         <%=link_to "未激活",admin_cards_path(status: '未激活', card_type:params[:card_type]),:class=>"button"%>
@@ -98,11 +98,11 @@
     <th>类型</th>
     <th>卡状态</th>
     <!-- <th>标签</th> -->
-    <%if params[:status]=='已使用'%>
+    <%#if params[:status]=='已使用'%>
       <th>激活时间</th>
       <th>姓名&手机</th>
       <th>绑定银行</th>
-    <%end%>
+    <%#end%>
     <th>操作</th>
     </thead>
   </tr>
@@ -137,6 +137,8 @@
       <td><%=card.member_card.created_at.strftime("%Y-%m-%d %H:%S:%M")%></td>  
       <td><%=card.member_card.user_name%><br><%=card.member_card.user_tel%></td>
       <td><%="#{card.member_card.bank_name}(#{card.member_card.bank_branch})"%><br><%= card.member_card.bank_card_no%></td>
+    <%else%>
+    <td colspan="3">&nbsp</td>
     <%end%>
     <td>
       <% if card.status=='未使用'%>

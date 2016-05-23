@@ -7,12 +7,6 @@
 
   <div class="row">
     <div class="col-md-6 col-md-offset-3">
-      <button class="button active-card">激活卡片</button>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-6 col-md-offset-3">
       <button class="button topup-card">单卡充值</button>
     </div>
   </div>
@@ -76,23 +70,6 @@
   $(document).ready(function(){
     var order_id = '999990053990001_' + "<%= Time.now.to_i %>" + "<%= rand(100).to_s %>";
 
-    
-  // 激活卡片
-  $('.active-card').on('click', function(){
-    var card_id = '<%=@card.no%>';
-    var type = '1'
-    var url = "<%= active_admin_card_path %>";
-    $.get(url, {id: card_id}, function(e){
-      if(e.data.ppcs_cardsingleactive_add_response) {
-        console.log(e.data.ppcs_cardsingleactive_add_response);
-        alert('卡片激活成功！');
-      }
-      else {
-        console.log(e.data.error_response)
-        alert('操作失败！' + e.data.error_response.sub_msg);
-      }
-    });
-  });
 
   // 单卡充值
   $('.topup-card').on('click', function(){

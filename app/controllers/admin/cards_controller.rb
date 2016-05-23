@@ -10,7 +10,7 @@ class Admin::CardsController < Admin::BaseController
 
   before_filter :require_permission!
 
-  before_action :set_card, only: [:show,:allinpay,:edit, :update, :destroy,:buy,:use,:edit_user,:active]
+  before_action :set_card, only: [:show,:allinpay,:edit, :update, :buy,:use,:edit_user,:active]
 
   def trading_log
     @log = CardTradingLog.order("id ASC")
@@ -57,62 +57,34 @@ class Admin::CardsController < Admin::BaseController
 
   def show ()  end
 
-  def new 
-      @card = Card.new
-  end
-
+ 
   def edit 
 
     @parents = Card.where('card_type=? and status<>? ','A','未使用' )
 
   end
 
-  def create
-    @card = Card.new(params[:card])
-
-    respond_to do |format|
-      if @card.save
-        format.html { redirect_to @card, notice: 'Card was successfully created.' }
-        format.json { render json: @card, status: :created, location: @card }
-      else
-        format.html { render action: "new" }
-        format.json { render json: @card.errors, status: :unprocessable_entity }
-      end
-    end
-  end
 
   def update
 
-    respond_to do |format|
-      if @card.update_attributes(card_params)
+    if @card.update_attributes(card_params)
 
-        message = params[:card].collect  do |key,value|
-            I18n.t("card.#{key}") + "=" + value
-        end.join(",")
+      message = params[:card].collect  do |key,value|
+          I18n.t("card.#{key}") + "=" + value
+      end.join(",")
 
-        CardLog.create(:member_id=>current_admin.account_id,
-                                                :card_id=>@card.id,
-                                                :message=>"更新卡信息,#{message}")
+      CardLog.create(:member_id=>current_admin.account_id,
+                                              :card_id=>@card.id,
+                                              :message=>"更新卡信息,#{message}")
+      redirect_to admin_cards_path(card_type:@card.card_type), notice: 'Card was successfully updated.'
 
-        format.html { redirect_to admin_cards_url, notice: 'Card was successfully updated.' }
-        format.json { head :no_content }
-        format.js
-      
-      else
-        format.html { render action: "edit" }
-        format.json { render json: @card.errors, status: :unprocessable_entity }
-      end
+     
+    
+    else
+      render action: "edit" 
     end
   end
 
-  def destroy
-    @card.destroy
-
-    respond_to do |format|
-      format.html { redirect_to cards_url }
-      format.json { head :no_content }
-    end
-  end
 
   def buy () end
 
@@ -203,45 +175,45 @@ class Admin::CardsController < Admin::BaseController
        end
 
 
-  # def export
- #     @logger ||= Logger.new("log/card.log")
-  #    
-   #   if params[:card][:select_all].to_i > 0
-    #     @cards = Card.all
-    #  else
-    #    @cards = Card.find(params[:selected_cards])
-     # end
-    #  fields = ["卡号","面值","类型","销售状态","使用状态","卡状态","购卡人手机","用卡人手机","标签"]
-  #    content =content_generate(fields,@cards)  #调用export方法
-#      send_data(content, :type => 'text/csv',:filename => "card_#{Time.now.strftime('%Y%m%d%H%M%S')}.csv")
-#  end
-#
-#  def content_generate(fields,cards)
-  #    output = CSV.generate do |csv|
- #       csv << fields
- #       cards.each do |card|
-  #        content = []
-     #     content.push card.no
-         # content.push card.value
-       #   content.push card.card_type
-       #   content.push card.status
-      #    content.push card_sale_status_options[card.sale_status]
-      #    content.push card_use_status_options[card.use_status]
-      #    content.push sold_card_status_options[card.status]
-          #if card.member_card.nil?
-         #     content.push ""
-        #  else
-       #       content.push card.member_card.buyer_tel
-      #    end
-     #     if card.member_card.nil?
-    #          content.push ""
-   #       else
-  #            content.push card.member_card.user_tel
-  #        end
-  #        csv << content   # 将数据插入数组中
-    #    end
-   #   end
- # end
+   #  def export
+   #     @logger ||= Logger.new("log/card.log")
+       
+   #     if params[:card][:select_all].to_i > 0
+   #        @cards = Card.all
+   #     else
+   #       @cards = Card.find(params[:selected_cards])
+   #     end
+   #     fields = ["卡号","面值","类型","销售状态","使用状态","卡状态","购卡人手机","用卡人手机","标签"]
+   #     content =content_generate(fields,@cards)  #调用export方法
+   #     send_data(content, :type => 'text/csv',:filename => "card_#{Time.now.strftime('%Y%m%d%H%M%S')}.csv")
+   # end
+
+   # def content_generate(fields,cards)
+   #     output = CSV.generate do |csv|
+   #       csv << fields
+   #       cards.each do |card|
+   #         content = []
+   #         content.push card.no
+   #         content.push card.value
+   #         content.push card.card_type
+   #         content.push card.status
+   #         content.push card_sale_status_options[card.sale_status]
+   #         content.push card_use_status_options[card.use_status]
+   #         content.push sold_card_status_options[card.status]
+   #          if card.member_card.nil?
+   #             content.push ""
+   #         else
+   #             content.push card.member_card.buyer_tel
+   #         end
+   #         if card.member_card.nil?
+   #             content.push ""
+   #         else
+   #             content.push card.member_card.user_tel
+   #         end
+   #         csv << content   # 将数据插入数组中
+   #       end
+   #     end
+   # end
 
   def import(options={:encoding=>"GB18030:UTF-8"})
         file = params[:card][:file].tempfile
@@ -273,9 +245,8 @@ class Admin::CardsController < Admin::BaseController
   end
 
   def active
-    order_id = get_order_id
     type = '1'
-    res_data = ActiveSupport::JSON.decode card_active(order_id, @card.no, type)
+    res_data = ActiveSupport::JSON.decode card_active(@card.no, type)
     save_log res_data,@card.no,'active'
     @card.update_attributes(status: '未激活')
     # render json: {data: res_data}
@@ -283,79 +254,71 @@ class Admin::CardsController < Admin::BaseController
   end
 
   def topup
-    order_id = get_order_id
     card_id = params[:card_id]
     amount = params[:amount]
     top_up_way = params[:top_up_way]
     opr_id = params[:opr_id]
     desn = params[:desn]
-    res_data = ActiveSupport::JSON.decode topup_single_card(order_id, card_id, amount, top_up_way, opr_id, desn)
+    res_data = ActiveSupport::JSON.decode topup_single_card(card_id, amount, top_up_way, opr_id, desn)
     save_log res_data,card_id,'topup'
     Rails.logger.info res_data
     render json: {data: res_data}
   end
 
   def pay_with_pwd
-    order_id = get_order_id
-    mer_order_id = order_id
     amount = params[:amount]
     card_id = params[:card_id]
     password = params[:password]
-    res_data = ActiveSupport::JSON.decode pay_with_password(order_id,  mer_order_id, amount, card_id, password)
+    res_data = ActiveSupport::JSON.decode pay_with_password(amount, card_id, password)
     save_log res_data,card_id,'pay_with_pwd'
     Rails.logger.info res_data
     render json: {data: res_data}
   end
 
   def reset_password
-    order_id = get_order_id
     card_id = params[:card_id]
     password = params[:password]
-    res_data = ActiveSupport::JSON.decode card_reset_password(order_id, card_id, password)
+    res_data = ActiveSupport::JSON.decode card_reset_password(card_id, password)
     save_log res_data,card_id,'reset_password'
     Rails.logger.info res_data
     render json: {data: res_data}
   end
 
   def freeze
-    order_id = get_order_id
     card_id = params[:card_id]
     reason = params[:reason]
-    res_data = ActiveSupport::JSON.decode card_freeze(order_id, card_id, reason)
+    res_data = ActiveSupport::JSON.decode card_freeze(card_id, reason)
     save_log res_data,card_id,'freeze'
     Rails.logger.info res_data
     render json: {data: res_data}
   end
 
   def unfreeze
-    order_id = get_order_id
     card_id = params[:card_id]
     reason = params[:reason]
-    res_data = ActiveSupport::JSON.decode card_unfreeze(order_id, card_id, reason)
+    res_data = ActiveSupport::JSON.decode card_unfreeze(card_id, reason)
     save_log res_data,card_id,'unfreeze'
     Rails.logger.info res_data
     render json: {data: res_data}
   end
 
   def report_loss
-    order_id = get_order_id
     card_id = params[:card_id]
     id_type = params[:id_type]
     id_no = params[:id_no]
     reason = params[:reason]
-    res_data = ActiveSupport::JSON.decode card_report_loss(order_id, card_id, id_no, id_type, reason)
+    res_data = ActiveSupport::JSON.decode card_report_loss(card_id, id_no, id_type, reason)
     save_log res_data,card_id,'report_loss'
     Rails.logger.info res_data
     render json: {data: res_data}
   end
 
   def cancel_loss
-    order_id = get_order_id
     card_id = params[:card_id]
     id_type = params[:id_type]
     id_no = params[:id_no]
     reason = params[:reason]
-    res_data = ActiveSupport::JSON.decode card_cancel_loss(order_id, card_id, id_no, id_type, reason)
+    res_data = ActiveSupport::JSON.decode card_cancel_loss(card_id, id_no, id_type, reason)
     save_log res_data,card_id,'cancel_loss'
     Rails.logger.info res_data
     render json: {data: res_data}
@@ -392,31 +355,30 @@ class Admin::CardsController < Admin::BaseController
 
   private
 
-  def card_params
-      params.require(:card).permit(:parent_id)
-  end
+    def card_params
+        params.require(:card).permit(:parent_id)
+    end
 
-  def set_card
-    @card = Card.find(params[:id])
-  end
+    def set_card
+      @card = Card.find(params[:id])
+    end
 
-  def save_log (res_data,card_no,from='')
+    def save_log (res_data,card_no,from='')
 
-    card_id = Card.find_by_no(card_no)[:id]
+      card_id = Card.find_by_no(card_no)[:id]
 
-    @cards_log ||= Logger.new('log/cards.log')
+      @cards_log ||= Logger.new('log/cards.log')
 
-    @cards_log.info("[admin][#{Time.now}]#{res_data}")
+      @cards_log.info("[admin][#{Time.now}]#{res_data}")
 
-    @card_log = CardLog.create(:member_id=>1,
-                  :card_no=>card_no,
-                  :card_id=>card_id,
-                  :message=>"#{res_data.to_json}")
-  end 
+      @card_log = CardLog.create(:member_id=>1,
+                    :card_no=>card_no,
+                    :card_id=>card_id,
+                    :message=>"#{res_data.to_json}")
+    end 
 
-  def get_order_id
-      order_id = "999990053990001_#{Time.now.to_i}#{rand(100).to_s}"
-  end
- 
+    def get_order_id
+        order_id = "999990053990001_#{Time.now.to_i}#{rand(100).to_s}"
+    end 
 
 end

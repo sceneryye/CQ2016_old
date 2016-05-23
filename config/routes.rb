@@ -58,7 +58,6 @@ Modengke::Application.routes.draw do
         post 'export_inventory'
         post 'coupon_check'
       end
-      get 'idcard'
     end
 
     
@@ -250,8 +249,7 @@ Modengke::Application.routes.draw do
       end
 
       collection do        
-        get "trading_log"
-       
+        get "trading_log"       
         post 'topup'
         post 'pay_with_pwd'
         post 'reset_password'
