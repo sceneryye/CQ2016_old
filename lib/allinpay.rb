@@ -7,6 +7,7 @@ module Allinpay
   PAY_CUR = 'CNY'
   PUBLIC_FILE = 'allinpay-pds.cer'
   SIGN_V = '1'
+
   # # test
   #   URL = 'http://116.236.192.117:8080/aop/rest'
   #   MER_ID = '999990053990001'
@@ -15,6 +16,7 @@ module Allinpay
   #   APP_KEY = 'test'
   #   KEY = 'abcdefgh'
   #   IV = 'abcdefgh'
+  #   PRDT_NO = "0001"
 
   #   PAY_URL = 'https://113.108.182.3:443/aipg/ProcessServlet'
   #   USER_NAME = '20060400000044502'
@@ -28,6 +30,7 @@ module Allinpay
       MER_ID = '999331054990016'
       APPSECRET = '800001671aopreq20160505174758rygZwewN'
       APP_KEY = '80000167' 
+      PRDT_NO = "0002"
     
       KEY = '6223e3c4'
       IV = '6223e3c4'    
@@ -88,9 +91,9 @@ module Allinpay
     res_data_json = RestClient.get URL, {params: send_data}
     end
 
-  def topup_single_card order_id, card_id, prdt_no, amount, top_up_way, opr_id, desn = 'topup card'
+  def topup_single_card order_id, card_id, amount, top_up_way, opr_id, desn = 'topup card'
     data_hash = (public_params 'allinpay.ppcs.cardsingletopup.add', timestamps).merge({order_id: order_id, card_id: card_id,
-      prdt_no: prdt_no, amount: amount, top_up_way: top_up_way, opr_id: opr_id, desn: desn})
+      prdt_no: PRDT_NO, amount: amount, top_up_way: top_up_way, opr_id: opr_id, desn: desn})
     Rails.logger.info "--------desn = #{desn}"
     sign = create_sign_for_allin data_hash
     send_data = data_hash.merge({sign: sign})
@@ -119,15 +122,15 @@ module Allinpay
     res_data_json = RestClient.get URL, {params: send_data}
   end
 
-  def card_freeze order_id, card_id, prdt_id, reason
-    data_hash = (public_params 'allinpay.ppcs.cardproductfreeze.add', timestamps).merge({order_id: order_id, card_id: card_id, prdt_id: prdt_id, reason: reason})
+  def card_freeze order_id, card_id, reason
+    data_hash = (public_params 'allinpay.ppcs.cardproductfreeze.add', timestamps).merge({order_id: order_id, card_id: card_id, prdt_id: PRDT_NO, reason: reason})
     sign = create_sign_for_allin data_hash
     send_data = data_hash.merge({sign: sign})
     res_data_json = RestClient.get URL, {params: send_data}
   end
 
-  def card_unfreeze order_id, card_id, prdt_id, reason
-    data_hash = (public_params 'allinpay.ppcs.cardproductunfreeze.add', timestamps).merge({order_id: order_id, card_id: card_id, prdt_id: prdt_id, reason: reason})
+  def card_unfreeze order_id, card_id, reason
+    data_hash = (public_params 'allinpay.ppcs.cardproductunfreeze.add', timestamps).merge({order_id: order_id, card_id: card_id, prdt_id: PRDT_NO, reason: reason})
     sign = create_sign_for_allin data_hash
     send_data = data_hash.merge({sign: sign})
     res_data_json = RestClient.get URL, {params: send_data}

@@ -19,20 +19,21 @@ class Memberships::CardsController < ApplicationController
   	def create
   		
 		@card = Card.find_by_no(card_params[:no])
-		if @card && @card.can_use? && !@card.used?
+		if @card && @card.status=='未激活'#@card.can_use? && !@card.used?
   			card_no = card_params[:no]
 			password = card_params[:password]
 
 			card_info = card_info('会员卡激活', password, card_no)
 
 	        if card_info[:error]
-	        	flash[:error] = '亲爱的昌麒家人，系统还在开发阶段，我们会尽快通知您激活会员卡的时间。'#card_info[:error] 
+	        	flash[:error] = card_info[:error] 
 				return render 'new'
 	        else				
 	        	@user.update_attribute :card_num ,card_no
 				@user.update_attribute :card_validate,'true'
 				@card.update_attribute :use_status,true
 				@card.update_attribute :used_at,Time.now
+				@card.update_attribute :status,'已使用'
 				
 				if @card.member_card.nil?
 					@member_card = MemberCard.new do |member_card|
@@ -61,7 +62,7 @@ class Memberships::CardsController < ApplicationController
 			end
 		else
 			
-			flash[:error] = '亲爱的昌麒家人，系统还在开发阶段，我们会尽快通知您激活会员卡的时间。'#"会员卡无法激活" 
+			flash[:error] = "会员卡无法激活" 
 			return render 'new'
 		end
 	end
@@ -114,14 +115,13 @@ class Memberships::CardsController < ApplicationController
   	def topup
   		order_id = get_order_id
   		card_id = @user.card_num;
-    	prdt_no = "0001";
     	amount =  params[:card][:amount].to_i*100;
     	top_up_way = '1';
     	opr_id = '0229000040';
 	    #data = params.permit(:order_id, :card_id, :prdt_no, :amount, :top_up_way, :opr_id, :desn)
 	    
 	    desn = params[:desn]
-	    res_data = ActiveSupport::JSON.decode topup_single_card(order_id, card_id, prdt_no, amount, top_up_way, opr_id, desn)
+	    res_data = ActiveSupport::JSON.decode topup_single_card(order_id, card_id, amount, top_up_way, opr_id, desn)
 
 	    res_info = save_log res_data
 

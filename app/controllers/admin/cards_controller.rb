@@ -278,8 +278,8 @@ class Admin::CardsController < Admin::BaseController
     res_data = ActiveSupport::JSON.decode card_active(order_id, @card.no, type)
     save_log res_data,@card.no,'active'
     @card.update_attributes(status: '未激活')
-    Rails.logger.info res_data
-    render json: {data: res_data}
+    # render json: {data: res_data}
+    redirect_to admin_cards_path(card_type:@card.card_type,status:'未激活')
   end
 
   def topup
@@ -323,9 +323,8 @@ class Admin::CardsController < Admin::BaseController
   def freeze
     order_id = get_order_id
     card_id = params[:card_id]
-    prdt_id = params[:prdt_id]
     reason = params[:reason]
-    res_data = ActiveSupport::JSON.decode card_freeze(order_id, card_id, prdt_id, reason)
+    res_data = ActiveSupport::JSON.decode card_freeze(order_id, card_id, reason)
     save_log res_data,card_id,'freeze'
     Rails.logger.info res_data
     render json: {data: res_data}
@@ -334,9 +333,8 @@ class Admin::CardsController < Admin::BaseController
   def unfreeze
     order_id = get_order_id
     card_id = params[:card_id]
-    prdt_id = params[:prdt_id]
     reason = params[:reason]
-    res_data = ActiveSupport::JSON.decode card_unfreeze(order_id, card_id, prdt_id, reason)
+    res_data = ActiveSupport::JSON.decode card_unfreeze(order_id, card_id, reason)
     save_log res_data,card_id,'unfreeze'
     Rails.logger.info res_data
     render json: {data: res_data}

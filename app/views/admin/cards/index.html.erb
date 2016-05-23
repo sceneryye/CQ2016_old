@@ -1,50 +1,51 @@
-<div class='columns medium-2'>
-  <div class="button-group">
-      <%=link_to "至尊卡",admin_cards_path(card_type:'A'),:class=>"button"%>
-      <%=link_to "亲情卡",admin_cards_path(card_type:'B'),:class=>"button"%>
-  </div>
-</div>
-<div class='columns medium-2'>
-  <div class="button-group">
-      <%=link_to "未使用",admin_cards_path(status: '未使用', card_type:params[:card_type]),:class=>"button"%>
-      <%=link_to "未激活",admin_cards_path(status: '未激活', card_type:params[:card_type]),:class=>"button"%>
-      <%=link_to "已使用",admin_cards_path(status: '已使用', card_type:params[:card_type]),:class=>"button"%>
-  </div>
-</div>
-
-<div class='columns medium-3'>
-  <%=form_for :search,:url=>admin_cards_path,:html=>{:class=>"form-search"},:method=>:get do |f|%>
-    <div class="input-group">
-      <%=f.text_field :key,:placeholder=>"卡号",:value=>params[:search]&&params[:search][:key],class:'input-group-field'%>
-      <div class="input-group-button">
-      <%=f.submit "搜索",:class=>"button"%>
-      </div>
-    </div>
-  <%end%>
-</div>
-
-<div class="medium-1 columns">  
+<div class='row'>
+  <div class='columns medium-2'>
     <div class="button-group">
-      <a class="button dropdown-toggle" data-toggle="dropdown" href="#">
-        标签
-        <span class="caret"></span>
-      </a>
-      <ul class="dropdown-menu">
-        <li>
-          <%=link_to "javascript:void(0);",:'data-url'=>admin_labels_path,:class=>"dialog" do %>
-            添加标签
-          <%end%>
-        </li>
-        <li class="divider"></li>
-        <%@labels.each do |label|%>
-        <li>
-          <%=link_to label.name,"javascript:void(0);",:'data-url'=>tag_admin_cards_path(:label=>label.id),:class=>"tagd"%>
-        </li>
-        <%end%>
-      </ul>
+        <%=link_to "至尊卡",admin_cards_path(card_type:'A'),:class=>"button"%>
+        <%=link_to "亲情卡",admin_cards_path(card_type:'B'),:class=>"button"%>
     </div>
-</div>
+  </div>
+  <div class='columns medium-2'>
+    <div class="button-group">
+        <%=link_to "未使用",admin_cards_path(status: '未使用', card_type:params[:card_type]),:class=>"button"%>
+        <%=link_to "未激活",admin_cards_path(status: '未激活', card_type:params[:card_type]),:class=>"button"%>
+        <%=link_to "已使用",admin_cards_path(status: '已使用', card_type:params[:card_type]),:class=>"button"%>
+    </div>
+  </div>
 
+  <div class='columns medium-3'>
+    <%=form_for :search,:url=>admin_cards_path,:html=>{:class=>"form-search"},:method=>:get do |f|%>
+      <div class="input-group">
+        <%=f.text_field :key,:placeholder=>"卡号",:value=>params[:search]&&params[:search][:key],class:'input-group-field'%>
+        <div class="input-group-button">
+        <%=f.submit "搜索",:class=>"button"%>
+        </div>
+      </div>
+    <%end%>
+  </div>
+
+  <div class="medium-1 columns">  
+      <div class="button-group">
+        <a class="button dropdown-toggle" data-toggle="dropdown" href="#">
+          标签
+          <span class="caret"></span>
+        </a>
+        <ul class="dropdown-menu">
+          <li>
+            <%=link_to "javascript:void(0);",:'data-url'=>admin_labels_path,:class=>"dialog" do %>
+              添加标签
+            <%end%>
+          </li>
+          <li class="divider"></li>
+          <%@labels.each do |label|%>
+          <li>
+            <%=link_to label.name,"javascript:void(0);",:'data-url'=>tag_admin_cards_path(:label=>label.id),:class=>"tagd"%>
+          </li>
+          <%end%>
+        </ul>
+      </div>
+  </div>
+</div>
 <div class="row" style="display:none">
   <div class='columns medium-3'>
     <%=form_for :card,:url=>import_admin_cards_path,:html => {:multipart => true} ,:method=>:post do |f|%>
@@ -81,7 +82,7 @@
   </div> 
 </div>
 
-<div class='sel_banner columns small-12' style="display:none">
+<div class='row sel_banner columns small-12' style="display:none">
   您当前选定了<a class='sel_nums'>0</a>条记录！  <a href='#' class='cancel_all'>取消选定</a> <a href='#' class='sel_all'>选定全部</a>
   <p class="total_card hidden"><%=@cards_total%></p>
 </div>
@@ -160,6 +161,8 @@
   </tr>
   <% end %>
 </table>
-<div class="pagination">
-<%= will_paginate @cards,renderer: FoundationPagination::Rails%>
+<div class="row columns small-12">
+  <div class="pagination">
+  <%= will_paginate @cards,renderer: FoundationPagination::Rails%>
+  </div>
 </div>

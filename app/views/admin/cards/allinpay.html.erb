@@ -81,8 +81,8 @@
   $('.active-card').on('click', function(){
     var card_id = '<%=@card.no%>';
     var type = '1'
-    var url = "<%= active_admin_cards_path %>";
-    $.post(url, {order_id: order_id, card_id: card_id, type: type}, function(e){
+    var url = "<%= active_admin_card_path %>";
+    $.get(url, {id: card_id}, function(e){
       if(e.data.ppcs_cardsingleactive_add_response) {
         console.log(e.data.ppcs_cardsingleactive_add_response);
         alert('卡片激活成功！');
@@ -97,12 +97,11 @@
   // 单卡充值
   $('.topup-card').on('click', function(){
     var card_id = '<%=@card.no%>';
-    var prdt_no = "0001";
     var amount = '10000';
     var top_up_way = '1';
     var opr_id = '0229000040';
     var url = "<%= topup_admin_cards_path %>";
-    $.post(url, {order_id: order_id, card_id: card_id, prdt_no: prdt_no, amount: amount, top_up_way: top_up_way, opr_id: opr_id}, function(e){
+    $.post(url, {order_id: order_id, card_id: card_id, amount: amount, top_up_way: top_up_way, opr_id: opr_id}, function(e){
       if(e.data.ppcs_cardsingletopup_add_response) {
         console.log(e.data.ppcs_cardsingletopup_add_response);
         alert('成功充值' + parseFloat(amount/100) + '元！');
@@ -154,10 +153,9 @@
   // 卡冻结
   $('.freeze-card').on('click', function(){
     var card_id = '<%=@card.no%>';
-    var prdt_id = "0001";
     var reason = 'lost my card';
     var url = "<%= freeze_admin_cards_path %>";
-    $.post(url, {order_id: order_id, card_id: card_id, prdt_id: prdt_id, reason: reason}, function(e){
+    $.post(url, {order_id: order_id, card_id: card_id, reason: reason}, function(e){
       if(e.data.ppcs_cardproductfreeze_add_response) {
         console.log(e.data.ppcs_cardproductfreeze_add_response);
         alert('该卡已成功冻结！');
@@ -172,10 +170,9 @@
   // 取消卡冻结
   $('.unfreeze-card').on('click', function(){
     var card_id = '<%=@card.no%>';
-    var prdt_id = "0001";
     var reason = 'find my card';
     var url = "<%= unfreeze_admin_cards_path %>";
-    $.post(url, {order_id: order_id, card_id: card_id, prdt_id: prdt_id, reason: reason}, function(e){
+    $.post(url, {order_id: order_id, card_id: card_id, reason: reason}, function(e){
       if(e.data.ppcs_cardproductunfreeze_add_response) {
         console.log(e.data.ppcs_cardproductunfreeze_add_response);
         alert('该卡已成功解冻！');
