@@ -117,11 +117,10 @@
   $('.pay-with-password').on('click', function(){
     var card_id = '<%=@card.no%>';
     var mer_order_id = order_id;
-    var payment_id = "0000000001";
     var amount = '100';
     var password = $('#password').val();
     var url = "<%= pay_with_pwd_admin_cards_path %>";
-    $.post(url, {order_id: order_id, card_id: card_id, mer_order_id: mer_order_id, amount: amount, payment_id: payment_id, password: password}, function(e){
+    $.post(url, {order_id: order_id, card_id: card_id, mer_order_id: mer_order_id, amount: amount, password: password}, function(e){
       if(e.data.card_paywithpassword_add_response) {
         console.log(e.data.card_paywithpassword_add_response);
         alert('成功支付' + parseFloat(amount/100) + '元！');
@@ -263,10 +262,8 @@
   $('.get-card-trade-log').on('click', function(){
     var card_id = '<%=@card.no%>';
     var password = $('#password').val();
-    // var begin_date = "<%= (Time.now - 3600 * 24 * 89).strftime('%Y%m%d') %>";
-    var begin_date = "20160303";
-    // var end_date = "<%= (Time.now - 3600 * 24 * 88).strftime('%Y%m%d') %>";
-    var end_date = "20160512";
+    var begin_date = "<%= (Time.now - 3600 * 24 * 28).strftime('%Y%m%d') %>";
+    var end_date = "<%= (Time.now + 3600 * 24 ).strftime('%Y%m%d') %>";
     var page_no = '1';
     var page_size = '20';
     var url = "<%= get_trade_log_admin_cards_path %>";
@@ -286,7 +283,7 @@
   // 代付
   $('.pay-for-another').on('click', function(){
     var BANK_CODE = '0102';
-    var ACCOUNT_NO = 622588121251757643;
+    var ACCOUNT_NO = '622588121251757643';
     var ACCOUNT_NAME = '测试';
     var ACCOUNT_PROP = '0';
     var AMOUNT = 200;

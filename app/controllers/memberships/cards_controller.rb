@@ -202,10 +202,9 @@ class Memberships::CardsController < ApplicationController
 	    order_id = get_order_id 
 	    mer_order_id = "#{pay_params[:order_id]}_#{rand(100).to_s}"
   		card_id = @user.card_num;
-	    payment_id = "0000000001"
 	    amount = pay_params[:amount].to_i*100
 	    password = pay_params[:password]
-	    res_data = ActiveSupport::JSON.decode pay_with_password(order_id,  mer_order_id, payment_id, amount, card_id, password)
+	    res_data = ActiveSupport::JSON.decode pay_with_password(order_id,  mer_order_id, amount, card_id, password)
 	    res_info = save_log res_data
 
 	    if res_info[:error]

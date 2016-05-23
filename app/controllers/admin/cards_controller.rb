@@ -284,7 +284,7 @@ class Admin::CardsController < Admin::BaseController
 
   def topup
     order_id = get_order_id
-    card_id = params[:id]
+    card_id = params[:card_id]
     amount = params[:amount]
     top_up_way = params[:top_up_way]
     opr_id = params[:opr_id]
@@ -297,12 +297,11 @@ class Admin::CardsController < Admin::BaseController
 
   def pay_with_pwd
     order_id = get_order_id
-    mer_order_id = params[:mer_order_id]
-    payment_id = params[:payment_id]
+    mer_order_id = order_id
     amount = params[:amount]
     card_id = params[:card_id]
     password = params[:password]
-    res_data = ActiveSupport::JSON.decode pay_with_password(order_id,  mer_order_id, payment_id, amount, card_id, password)
+    res_data = ActiveSupport::JSON.decode pay_with_password(order_id,  mer_order_id, amount, card_id, password)
     save_log res_data,card_id,'pay_with_pwd'
     Rails.logger.info res_data
     render json: {data: res_data}

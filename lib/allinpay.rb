@@ -100,8 +100,9 @@ module Allinpay
     res_data_json = RestClient.get URL, {params: send_data}
   end
 
-  def pay_with_password order_id,  mer_order_id, payment_id, amount, card_id, password, pay_cur = PAY_CUR, type = '01', options = {}
+  def pay_with_password order_id,  mer_order_id, amount, card_id, password, pay_cur = PAY_CUR, type = '01', options = {}
     mer_tm = timestamps
+    payment_id = "000000#{PRDT_NO}"
     encrypt_card_id = des_encrypt card_id, mer_tm
     encrypt_password = des_encrypt password, mer_tm
     data_hash = (public_params 'allinpay.card.paywithpassword.add', mer_tm).merge({pay_cur: pay_cur, type: type, mer_id: MER_ID, mer_tm: mer_tm, order_id: order_id, mer_order_id: mer_order_id, payment_id: payment_id, amount: amount}).merge options
@@ -109,6 +110,7 @@ module Allinpay
     data_hash.merge!({card_id: encrypt_card_id, password: encrypt_password})
     sign = create_sign_for_allin data_hash
     send_data = data_hash.merge({sign: sign})
+    return render text send_data
     res_data_json = RestClient.get URL, {params: send_data}
   end
 
@@ -130,7 +132,7 @@ module Allinpay
   end
 
   def card_unfreeze order_id, card_id, reason
-    data_hash = (public_params 'allinpay.ppcs.cardproductunfreeze.add', timestamps).merge({order_id: order_id, card_id: card_id, prdt_id: PRDT_NO, reason: reason})
+    data_hash = (public_params 'allinpay.ppcs.cardproductunfreeze.add', timestamps).merge({order_id: order_id, card_id: card_id, prdt_id:c, reason: reason})
     sign = create_sign_for_allin data_hash
     send_data = data_hash.merge({sign: sign})
     res_data_json = RestClient.get URL, {params: send_data}
