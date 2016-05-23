@@ -118,7 +118,6 @@ class Memberships::CardsController < ApplicationController
     	amount =  params[:card][:amount].to_i*100;
     	top_up_way = '1';
     	opr_id = '0229000040';
-	    #data = params.permit(:order_id, :card_id, :prdt_no, :amount, :top_up_way, :opr_id, :desn)
 	    
 	    desn = params[:desn]
 	    res_data = ActiveSupport::JSON.decode topup_single_card(order_id, card_id, amount, top_up_way, opr_id, desn)
