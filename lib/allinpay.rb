@@ -43,36 +43,88 @@ module Allinpay
       #验签版本号:1
       #请求密钥:800001671aopreq20160505174758rygZwewN
       #响应密钥:800001671aopres201605051747582BW2M3L6
-  #----      
+  #----   
 
-  def timestamps
-    Time.now.strftime('%Y%m%d%H%M%S')
+  def pay_for_another options
+    mer_tm = timestamps
+    req_sn = MERCHANT_ID + mer_tm + rand(1000).to_s.ljust(4, '0')
+    data_hash = {TRX_CODE: '100014', VERSION: '03', DATA_TYPE: 2, LEVEL: 9, USER_NAME: USER_NAME, USER_PASS: USER_PASS, REQ_SN: req_sn, BUSINESS_CODE: '10800', MERCHANT_ID: MERCHANT_ID, SUBMIT_TIME: mer_tm}.merge! options
+    data_xml = data_hash.to_xml.sub('UTF-8', 'GBK')
+    sign = create_sign_for_another data_xml
+    data_hash.merge! sign: sign
+    data_xml = data_hash.to_xml.sub('UTF-8', 'GBK')
+    Rails.logger.info data_xml
+    res_data_xml = RestClient.post PAY_URL, data_xml, content_type: :xml
+    # res_data_xml = RestClient::Request.execute(method: post, ) PAY_URL, data_xml, content_type: :xml
   end
 
-  def public_params method, timestamp
-    data = {app_key: APP_KEY, method: method, timestamp: timestamp, v: '1.0', sign_v: SIGN_V, format: 'json'}
+  def create_sign_for_another xml
+    p12 = OpenSSL::PKCS12.new(File.read(File.expand_path("../#{CER_FILE}", __FILE__)), USER_PASS)
+    key = p12.key
+    pri = OpenSSL::PKey::RSA.new key.to_s
+    sign = pri.sign("sha1", xml)
   end
 
-  def create_sign_for_allin hash
-    str = hash.select{|key, val| val.present?}.sort_by{ |key,val| key }.collect{|key,val| "#{key}#{val}" }.join('')
-    
-    unencrypt_str = APPSECRET + str + APPSECRET
-    Rails.logger.info "----------------unencrypt_str = #{unencrypt_str}"
-    sign = (Digest::MD5.hexdigest unencrypt_str).upcase
+  def idcard_verify name, id_no
+    ###############_not_finished
+      timestamps = Time.now.strftime('%Y%m%d%H%M%S')
+      mer_tm = timestamps
+      req_sn = MERCHANT_ID + mer_tm + rand(1000).to_s.ljust(4, '0')
+
+      options = {IDVER:{NAME: '刘龙英', IDNO: '332522195812245684',VALIDATA: '', REMARK: '单笔实时身份验证'}}
+
+
+      data_hash = {INFO:{TRX_CODE: '220001', VERSION: '03', DATA_TYPE: 2, LEVEL: 5, MERCHANT_ID: MERCHANT_ID,
+                    USER_NAME: USER_NAME, USER_PASS: USER_PASS, REQ_SN: req_sn, BUSINESS_CODE: '10800',
+                    MERCHANT_ID: MERCHANT_ID, SUBMIT_TIME: mer_tm}}.merge! options
+
+      data_xml = data_hash.to_xml.sub('UTF-8', 'GBK').gsub('hash','AIPG').gsub('-','_')
+     
+      p12 = OpenSSL::PKCS12.new(File.read(File.expand_path("../../../../lib/#{PRIVATE_FILE}", __FILE__)), USER_PASS)
+      # return render text: p12.certificate.to_pem 
+
+      # 证书 # puts p12.certificate.to_pem 
+      # 私钥  # puts p12.key.export
+      key = p12.key
+
+      pri = OpenSSL::PKey::RSA.new key.export
+      #Base64.encode64(OpenSSL::PKey::RSA.new(PRIVATEKEY).sign('sha1', data.force_encoding("utf-8"))).gsub("\n", "")
+      sign = pri.sign("sha1", data_xml.force_encoding("GBK"))
+
+      # return render text: "#{sign.unpack('H*').first}"
+      # pub = OpenSSL::X509::Certificate.new (File.read(File.expand_path("../../../../lib/#{PUBLIC_FILE}", __FILE__)))
+      pub_key = pri.public_key
+      result = pub_key.verify('sha1', sign, data_xml.force_encoding("GBK"))
+      # return render text: "verify #{result ? 'successful!' : 'failed!'}"
+
+      data_xml = data_xml.sub('</SUBMIT_TIME>',"</SUBMIT_TIME><SIGNED_MSG>#{sign.unpack('H*').first}</SIGNED_MSG>")
+      # return render text: data_xml
+      # request = Typhoeus::Request.new(PAY_URL, method: :post, params: data_xml, ssl_verifypeer: false, headers: {'Content-Type' =>'application/x-www-form-urlencoded'} )
+      # request.run
+      # return render text: request.response.to_json
+      # if request.response.success?
+      #   res_data_xml = Hash[*request.response.body.split("&").map{|a| a.gsub("==", "@@").split("=")}.flatten]['tn']
+      # else
+      #   res_data_xml = ""
+      # end
+      uri = URI.parse(PAY_URL)
+      http = Net::HTTP.new(uri.host, uri.port)
+      http.use_ssl = true
+      http.verify_mode = OpenSSL::SSL::VERIFY_NONE
+      request = Net::HTTP::Post.new("/aipg/ProcessServlet")
+      request.add_field('Content-Type', 'text/xml')
+      #request.body = post_data.to_json
+      response = http.request(request)
+      res_data_xml = response.body
+
+     #res_data_xml = RestClient.post PAY_URL, data_xml, content_type: "text/xml"
+
+      return render text: res_data_xml
   end
 
-  def des_encrypt message, timestamp
-    str = timestamp + 'aop' + message
-    # str = "20160325161914aop8668083660000001017"
-    des = OpenSSL::Cipher.new('DES-CBC')
-    des.encrypt
-    des.key = KEY
-    des.iv = IV
-    cipher = des.update(str)
-    cipher << des.final
-    Rails.logger.info "------------------en_pwd = #{Base64.encode64(cipher)}"
-    Base64.encode64(cipher)
+  def bank_card_verify bank_name, bank_branch, bank_no
   end
+
 
   def card_get_info card_id, password
     mer_tm = timestamps
@@ -110,7 +162,6 @@ module Allinpay
     data_hash.merge!({card_id: encrypt_card_id, password: encrypt_password})
     sign = create_sign_for_allin data_hash
     send_data = data_hash.merge({sign: sign})
-    return render text send_data
     res_data_json = RestClient.get URL, {params: send_data}
   end
 
@@ -162,39 +213,38 @@ module Allinpay
     res_data_json = RestClient.post URL, send_data
   end
 
-  def id_card_verify name, id_no
-    mer_tm = timestamps
-    req_sn = MERCHANT_ID + mer_tm + rand(1000).to_s.ljust(4, '0')
-    data_hash = {TRX_CODE: '220001', VERSION: '03', DATA_TYPE: 2, LEVEL: 5, MERCHANT_ID: MERCHANT_ID,
-                  USER_NAME: USER_NAME, USER_PASS: USER_PASS, REQ_SN: req_sn, BUSINESS_CODE: '10800',
-                  MERCHANT_ID: MERCHANT_ID, SUBMIT_TIME: mer_tm}.merge! options
-    data_xml = data_hash.to_xml.sub('UTF-8', 'GBK')
-    sign = create_sign_for_another data_xml
-    data_hash.merge! sign: sign
-    data_xml = data_hash.to_xml.sub('UTF-8', 'GBK')
-    Rails.logger.info data_xml
-    res_data_xml = RestClient.post PAY_URL, data_xml, content_type: :xml
+  
+  private
+
+  def timestamps
+    Time.now.strftime('%Y%m%d%H%M%S')
   end
 
-  def pay_for_another options
-    mer_tm = timestamps
-    req_sn = MERCHANT_ID + mer_tm + rand(1000).to_s.ljust(4, '0')
-    data_hash = {TRX_CODE: '100014', VERSION: '03', DATA_TYPE: 2, LEVEL: 9, USER_NAME: USER_NAME, USER_PASS: USER_PASS, REQ_SN: req_sn, BUSINESS_CODE: '10800', MERCHANT_ID: MERCHANT_ID, SUBMIT_TIME: mer_tm}.merge! options
-    data_xml = data_hash.to_xml.sub('UTF-8', 'GBK')
-    sign = create_sign_for_another data_xml
-    data_hash.merge! sign: sign
-    data_xml = data_hash.to_xml.sub('UTF-8', 'GBK')
-    Rails.logger.info data_xml
-    res_data_xml = RestClient.post PAY_URL, data_xml, content_type: :xml
-    # res_data_xml = RestClient::Request.execute(method: post, ) PAY_URL, data_xml, content_type: :xml
+  def public_params method, timestamp
+    data = {app_key: APP_KEY, method: method, timestamp: timestamp, v: '1.0', sign_v: SIGN_V, format: 'json'}
   end
 
-  def create_sign_for_another xml
-    p12 = OpenSSL::PKCS12.new(File.read(File.expand_path("../#{CER_FILE}", __FILE__)), USER_PASS)
-    key = p12.key
-    pri = OpenSSL::PKey::RSA.new key.to_s
-    sign = pri.sign("sha1", xml)
+  def create_sign_for_allin hash
+    str = hash.select{|key, val| val.present?}.sort_by{ |key,val| key }.collect{|key,val| "#{key}#{val}" }.join('')
+    
+    unencrypt_str = APPSECRET + str + APPSECRET
+    Rails.logger.info "----------------unencrypt_str = #{unencrypt_str}"
+    sign = (Digest::MD5.hexdigest unencrypt_str).upcase
   end
+
+  def des_encrypt message, timestamp
+    str = timestamp + 'aop' + message
+    # str = "20160325161914aop8668083660000001017"
+    des = OpenSSL::Cipher.new('DES-CBC')
+    des.encrypt
+    des.key = KEY
+    des.iv = IV
+    cipher = des.update(str)
+    cipher << des.final
+    Rails.logger.info "------------------en_pwd = #{Base64.encode64(cipher)}"
+    Base64.encode64(cipher)
+  end
+
 end
 
 

@@ -96,11 +96,13 @@
     </th>
     <th>卡号</th>
     <th>类型</th>
-    <th>激活时间</th>
     <th>卡状态</th>
-    <th>使用者手机</th>
     <!-- <th>标签</th> -->
-    <th>绑定银行</th>
+    <%if params[:status]=='已使用'%>
+      <th>激活时间</th>
+      <th>姓名&手机</th>
+      <th>绑定银行</th>
+    <%end%>
     <th>操作</th>
     </thead>
   </tr>
@@ -122,9 +124,6 @@
 
     </td>    
     <td><%=card.type_text%></td>
-    <td><%= card.member_card.created_at.strftime("%Y-%m-%d %H:%S:%M") if card.member_card %></td>
-    <td><%= card.status %></td>   
-    <td><%= card.member_card&&card.member_card.user_tel.present? ? card.member_card.user_tel : "未登记" %></td>
     <!--   <td>
       <%card.labels.each do |label|%>
         <span class="tag" label="<%=label.id%>">
@@ -132,10 +131,13 @@
         </span>
       <%end%>
     </td> -->
-    <td>
-      <%= card.member_card.bank_name if !card.member_card.nil?%><br>
-      <%= card.member_card.bank_card_no if !card.member_card.nil?%>
-    </td>
+
+    <td><%= card.status %></td>  
+    <%if card.member_card%>
+      <td><%=card.member_card.created_at.strftime("%Y-%m-%d %H:%S:%M")%></td>  
+      <td><%=card.member_card.user_name%><br><%=card.member_card.user_tel%></td>
+      <td><%="#{card.member_card.bank_name}(#{card.member_card.bank_branch})"%><br><%= card.member_card.bank_card_no%></td>
+    <%end%>
     <td>
       <% if card.status=='未使用'%>
         <%=link_to "领用",active_admin_card_path(card)%>

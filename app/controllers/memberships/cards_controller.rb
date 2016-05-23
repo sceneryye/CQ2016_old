@@ -40,6 +40,8 @@ class Memberships::CardsController < ApplicationController
 						member_card.user_id = @user.member_id
 						member_card.member_id = @user.member_id
 						member_card.card_id = @card.id
+						member_card.user_name = @user.name
+						member_card.user_tel = @user.mobile
 					end
 					@member_card.save!
 				else
@@ -159,7 +161,7 @@ class Memberships::CardsController < ApplicationController
 
 		    card_info = card_info('修改密码后查询',new_pwd)
 		    if @return_url == bank_cards_path
-		    	return redirect_to @return_url, notice: '密码修改成功！请绑定您的银行卡。'
+		    	return redirect_to @return_url, notice: '密码修改成功！请绑定您的银行卡，用于以后提现收款，谢谢。'
 		    else
 
 			    session[:card_pwd] = nil

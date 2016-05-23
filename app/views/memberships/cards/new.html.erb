@@ -1,12 +1,13 @@
 <% provide :title, '会员卡激活-会员卡信息' %>
 	<h4>还没有激活您的会员卡，请按以下提示操作，激活您的会员卡 </h4>
-	<h4>第二步：请填写会员卡卡号密码</h4>
+	<h4>第二步：请填写18位会员卡号及6位初始密码
+</h4>
        
 <%=form_for :card, :url=>cards_path,:method=>:post,:html=>{:role=>"form",data: {type: "script"}} do |f|%>    
     <div class="row">
         <div class="columns small-12">
             <div class="form-group">
-                <%=f.text_field :no,:placeholder=>"*卡号",:required=>"required"%>
+                <%=f.text_field :no,:placeholder=>"*卡号-18位数字",:required=>"required"%>
             </div>
             <div class="help-block" rel="user_name"></div>
         </div>                           
@@ -14,7 +15,7 @@
     <div class="row">
         <div class="columns small-12">
             <div class="form-group">
-                <%=f.password_field :password,value:"",:placeholder=>"*卡密码",:required=>"required"%>
+                <%=f.password_field :password,value:"",:placeholder=>"*卡密码-6位数字",:required=>"required"%>
             </div>
             <div class="help-block" rel="user_name"></div>
         </div>                           
