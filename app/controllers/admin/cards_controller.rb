@@ -364,7 +364,7 @@ class Admin::CardsController < Admin::BaseController
 
     def save_log (res_data,card_no,from='')
 
-      card_id = Card.find_by_no(card_no)[:id]
+      @card = Card.find_by_no(card_no)
 
       @cards_log ||= Logger.new('log/cards.log')
 
@@ -372,8 +372,20 @@ class Admin::CardsController < Admin::BaseController
 
       @card_log = CardLog.create(:member_id=>1,
                     :card_no=>card_no,
-                    :card_id=>card_id,
+                    :card_id=>@card.id,
                     :message=>"#{res_data.to_json}")
+      if res_data["error_response"].blank?
+        case from
+        when 'report_loss'
+          @card.update_attribute :status, '挂失'
+        when 'cancel_loss'
+          @card.update_attribute :status, '已使用'
+        when 'freeze'
+          @card.update_attribute :status, '冻结'
+        when 'unfreeze'
+          @card.update_attribute :status, '已使用'
+        end
+      end
     end 
 
     def get_order_id
