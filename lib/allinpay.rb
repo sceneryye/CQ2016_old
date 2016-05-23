@@ -150,13 +150,17 @@ module Allinpay
     res_data_json = RestClient.get URL, {params: send_data}
   end
 
-  def pay_with_password amount, card_id, password, pay_cur = PAY_CUR, type = '01', options = {}
-    mer_order_id = order_id = get_order_id
+  def pay_with_password amount, card_id, password,mer_order_id='' , options = {}
+    type = '01'
+    order_id = get_order_id
+    if mer_order_id.blank?
+      mer_order_id = order_id
+    end
     mer_tm = timestamps
     payment_id = "000000#{PRDT_NO}"
     encrypt_card_id = des_encrypt card_id, mer_tm
     encrypt_password = des_encrypt password, mer_tm
-    data_hash = (public_params 'allinpay.card.paywithpassword.add', mer_tm).merge({pay_cur: pay_cur, type: type, 
+    data_hash = (public_params 'allinpay.card.paywithpassword.add', mer_tm).merge({pay_cur: PAY_CUR, type: type, 
           mer_id: MER_ID, mer_tm: mer_tm, order_id: order_id, 
           mer_order_id: mer_order_id, payment_id: payment_id, amount: amount}).merge options
     

@@ -115,14 +115,13 @@ class Memberships::CardsController < ApplicationController
   	def recharge () end
 
   	def topup
-  		order_id = get_order_id
   		card_id = @user.card_num;
     	amount =  params[:card][:amount].to_i*100;
     	top_up_way = '1';
     	opr_id = '0229000040';
 	    
 	    desn = params[:desn]
-	    res_data = ActiveSupport::JSON.decode topup_single_card(order_id, card_id, amount, top_up_way, opr_id, desn)
+	    res_data = ActiveSupport::JSON.decode topup_single_card(card_id, amount, top_up_way, opr_id, desn)
 
 	    res_info = save_log res_data
 
@@ -156,9 +155,7 @@ class Memberships::CardsController < ApplicationController
 		else
 			
 			# reset_password
-		    order_id = get_order_id
-		    res_data = ActiveSupport::JSON.decode card_reset_password(order_id, card_id, new_pwd)
-
+		    res_data = ActiveSupport::JSON.decode card_reset_password(card_id, new_pwd)
 		    card_info = card_info('修改密码后查询',new_pwd)
 		    if @return_url == bank_cards_path
 		    	return redirect_to @return_url, notice: '密码修改成功！请绑定您的银行卡，用于以后提现收款，谢谢。'
@@ -201,12 +198,11 @@ class Memberships::CardsController < ApplicationController
 
 	def pay
 		pay_params = params[:card]
-	    order_id = get_order_id 
 	    mer_order_id = "#{pay_params[:order_id]}_#{rand(100).to_s}"
   		card_id = @user.card_num;
 	    amount = pay_params[:amount].to_i*100
 	    password = pay_params[:password]
-	    res_data = ActiveSupport::JSON.decode pay_with_password(order_id,  mer_order_id, amount, card_id, password)
+	    res_data = ActiveSupport::JSON.decode pay_with_password(amount, card_id, password,mer_order_id)
 	    res_info = save_log res_data
 
 	    if res_info[:error]
@@ -334,9 +330,6 @@ class Memberships::CardsController < ApplicationController
 	    return {status: status, balance: balance}
 	end
 
-	def get_order_id
-	  	order_id = "999990053990001_#{Time.now.to_i}#{rand(100).to_s}"
-	end
 
 	def save_log (res_data,from='')
 		card_no = @user.card_num
