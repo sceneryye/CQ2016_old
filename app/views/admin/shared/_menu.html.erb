@@ -31,11 +31,6 @@
             <%=link_to "基地管理",admin_brand_adms_path%>
           </li>
     <%end%>
-    <%if current_admin.has_right_of("suppliers","index")%>
-    <li class="<%='active' if controller_name=='suppliers'%>">
-      <%=link_to "供应商管理",admin_suppliers_path%>
-    </li>
-    <%end%>
     
     <%if current_admin.has_right_of("tags","index") || 
       current_admin.has_right_of("tag_exts","index") %>
@@ -111,6 +106,12 @@
         </ul>
     </li>
     <%end%>
+    <%if current_admin.has_right_of("inventory_logs","index")%>
+    <li class="<%='active' if controller_name=='inventory_logs'%>">
+      <%=link_to "库存管理",admin_inventtory_logs_path%>
+    </li>
+    <%end%>
+
 
     <%if current_admin.has_right_of("members","index")%>
     <li class="<%='active' if controller_name=='members'%>">
@@ -150,6 +151,12 @@
       <%=link_to "权限管理",admin_permissions_path%>
     </li>
 
+    <%end%>
+
+    <%if current_admin.has_right_of("suppliers","index")%>
+    <li class="<%='active' if controller_name=='suppliers'%>">
+      <%=link_to "供应商管理",admin_suppliers_path%>
+    </li>
     <%end%>
     <%if current_admin.has_right_of("vshop","index")%>
     <li class="<%='active' if controller_name=='vshop'%>">

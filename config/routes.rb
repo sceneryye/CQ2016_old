@@ -225,6 +225,7 @@ Modengke::Application.routes.draw do
       post 'published_at',:on=>:member
     end
     resources :pages
+    resources :inventory_logs
 
     resources :members do
       post "export",:on=>:collection
