@@ -10,8 +10,6 @@ class Memberships::CardsController < ApplicationController
 
   	def subcards
   		@subcards = @user.member_card.subcards
-
-
   	end
 
   	def new () end
@@ -77,7 +75,6 @@ class Memberships::CardsController < ApplicationController
 	    	flash[:error] = "银行卡验证失败" 
 	    	render 'bank'
 	    end
-
 	end
 
   	def login
@@ -192,7 +189,8 @@ class Memberships::CardsController < ApplicationController
 	end
 
 	def rebates
-		@rebates = Rebate.where(member_id: @user.member_id).paginate(:page=>params[:page],:per_page=>20)
+		@rebate_histories = Rebate.where(member_id: @user.member_id).limit(4)
+		@tradings =  @user.member_card.tradings_log(0)
 	end  
 
 	def rebate_logs

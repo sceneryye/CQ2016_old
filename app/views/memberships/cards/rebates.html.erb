@@ -1,25 +1,30 @@
 <% provide :title, '昌麒生态园-提现管理' %>
-<%=render partial: 'breadcrembs' , locals:{current:'提现记录'}%>
+<%=render partial: 'breadcrembs' , locals:{current:'提现管理'}%>
 
-  <h1>累积提现</h1>
-  <span class="alert label"><i class="fi-x-circle"></i> Alert Label</span>
-  <span class="alert label"><i class="fi-x-circle"></i> Alert Label</span>
-  <span class="alert label"><i class="fi-x-circle"></i> Alert Label</span>
-  <span class="alert label"><i class="fi-x-circle"></i> Alert Label</span>
-
+  <div class='row columns align-center'><h1>累积提现</h1></div>
+  <div class='row columns align-center'><h1>
+    <span class="alert label"><h3>0.00</h3></span>
+    <span class="alert label"><h3>0.00</h3></span>
+    <span class="alert label"><h3>0.00</h3></span>
+    <span class="alert label"><h3>0.00</h3></span>
+  </h1>
+  </div>
   <div class='row'>
     <div class='columns small-6'>
-      <dt>本周提现</dt>
-      <dl>$0.00</dl>
+      <%=link_to rebate_logs_cards_path, class:'button expanded hollow alert' do%>
+      <h2>本周提现</h2>
+      <h1>+0.00</h1>
+      <%end%>
     </div>
      <div class='columns small-6'>
-      <dt><%=link_to '当前可用提现', tradings_cards_path ,class:'button'%></dt>
-      <dl>$0.00</dl>
-    </div>
-    <div class='columns small-6'>
+      <%=link_to tradings_cards_path , class:'button expanded hollow alert' do%>
+      <h2>当前可用提现<h2>
+      <h1>+0.00</h1>
+      <%end%>
     </div>
   </div>
-  <h1><%=link_to '申请提现', withdrawl_cards_path ,class:'button'%></h1>
-  <h1><%=link_to "提现记录",rebate_logs_cards_path ,class:'button'%></h1>
 
-</table>
+  <div class='row columns'>
+    <%=link_to "查看明细",rebate_logs_cards_path ,class:'button float-left'%>
+    <%=link_to '申请提现', withdrawl_cards_path ,class:'button  float-right'%>
+  </div>
