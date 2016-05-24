@@ -1,0 +1,38 @@
+<% provide :title, '昌麒生态园-提现记录' %>
+<%=render partial: 'breadcrembs' , locals:{current:'提现记录'}%>
+<!-- <%= form_for :rebates, data: {abide: ''} do|f| %>
+    <%#= render 'layouts/form_errors', object: @rebates%>
+      <table class="table">
+        <thead>
+          <tr>
+            <th> <%#= f.label :start_time %>
+              <%= f.text_field :start_time, :value => '', required: true,:class=>"fdatepicker",:id=>"dpd2",placeholder:'开始时间'%>
+            </th>
+            <th><%#= f.label :end_time %>
+             <%= f.text_field :end_time, :value =>'',  required: true,:class=>"fdatepicker",:id=>"dpd1",placeholder:'结束时间'%>
+           </th>
+         </tr>
+       </thead>
+     </table>
+      <%=f.submit '查询', class: 'button expanded'%>
+<%end%> -->
+
+<table class="table table-striped" id="rebate_list">
+  <tr>
+    <th>流水号</th>
+    <th>提现时间</th>
+    <th>提现金额</th>
+  </tr>
+
+  <%@rebates.each  do |rebate|%>
+      <tr>
+        <td><%=rebate.id%></td>
+        <td><%=l rebate.created_at%></td>
+        <td>¥<%=rebate.amount%></td>    
+      </tr>
+  <%end if @rebates%>
+  <%if @rebates.blank?%>
+  <tr><td colspan='3'>暂无提现记录</td></tr>
+  <%end%>
+
+</table>

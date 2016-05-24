@@ -193,6 +193,10 @@ class Memberships::CardsController < ApplicationController
 
 	def rebates
 		@rebates = Rebate.where(member_id: @user.member_id).paginate(:page=>params[:page],:per_page=>20)
+	end  
+
+	def rebate_logs
+		@rebates = Rebate.where(member_id: @user.member_id).paginate(:page=>params[:page],:per_page=>20)
 	end  	
 
 	def pay

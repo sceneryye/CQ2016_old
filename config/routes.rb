@@ -24,6 +24,7 @@ Modengke::Application.routes.draw do
         post 'member_card'
 
         get 'rebates'
+        get 'rebate_logs'
         get 'withdrawl'
         get 'tradings'
 

@@ -31,12 +31,13 @@
     </div>
   </li>
   <%if @user.card_validate=='true'%>
-  <li class="accordion-item" data-accordion-item>
-     <%=link_to '提现管理', '#',class:"accordion-title"%>
+  <li>
+     <%=link_to '提现管理', rebates_cards_path,class:"accordion-title"%>
     <div class="accordion-content" data-tab-content>
       <ul class="menu vertical">
+        <li><%=link_to '提现管理', rebates_cards_path,class:@class%></li>
         <li><%=link_to "提现明细",tradings_cards_path,class:@class%></li>
-        <li><%=link_to "提现记录",rebates_cards_path,class:@class%></li>
+        <li><%=link_to "提现记录",rebate_logs_cards_path,class:@class%></li>
       </ul>
     </div>
   </li>
