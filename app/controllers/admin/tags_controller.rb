@@ -19,7 +19,7 @@ class Admin::TagsController < Admin::BaseController
 	end
 
 	def create
-		@tag = Teg.new params[:tag]
+		@tag = Teg.new(tags_params)
 		
 		if @tag.save
 			redirect_to admin_tags_url
@@ -49,4 +49,8 @@ class Admin::TagsController < Admin::BaseController
 
 		redirect_to admin_tags_url
 	end
+	private 
+	def tags_params
+      params.require(:tag).permit(:tag_name,:tag_abbr,:tag_type)
+    end
 end
