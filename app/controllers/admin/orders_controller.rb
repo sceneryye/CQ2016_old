@@ -221,6 +221,7 @@ class Admin::OrdersController < Admin::BaseController
 	end
 
 	def show
+
 		@order =Order.find_by_order_id(params[:id])
 	end
 

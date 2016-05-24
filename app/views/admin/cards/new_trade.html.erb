@@ -1,0 +1,21 @@
+<h5>添加线下消费记录</h5>
+<hr />
+<%= form_for(@trade) do |f| %>
+
+  <div class="field">
+    <%= f.label :card_no %><br />
+    <%= f.text_field :card_no %>
+  </div>
+  <div class="field">
+    <%= f.label :card_id %><br />
+    <%= f.text_field :card_id %>
+  </div>
+
+  <div class="field">
+    <%= f.label :amount %><br />
+    <%= f.number_field :amount %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

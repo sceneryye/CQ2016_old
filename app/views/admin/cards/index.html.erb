@@ -148,6 +148,7 @@
       <%else%>
           <%=link_to "显示子卡",admin_cards_path(parent_id: card)%>
       <%end%>
+        <%=link_to "增加消费记录",new_trade_admin_card_path(card)%>
 
         <%=link_to "日志",logs_admin_card_path(card)%>
        <!--  <%=link_to "取消订单",cancel_order_admin_card_path(card),:method=>:put,:confirm=>"确定取消订单？" if card.sale_status && !card.pay_status && card.normal?%>
