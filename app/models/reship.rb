@@ -24,7 +24,7 @@ class Reship < ActiveRecord::Base
 	validates_presence_of :ship_addr,:message=>"必须填写收货地址"
 
 	validates :ship_mobile, presence: { presence: true, message: "必须填写手机号码" },
-	                                      format: { with: /^\d{11}$/, message: "手机号码必须是11位数字" }
+	                                      format: { with: /^\d{11}$/, message: "手机号码必须是11位数字",multiline:true }
 	validate :check_area
       def check_area
       		if province.blank? || city.blank?

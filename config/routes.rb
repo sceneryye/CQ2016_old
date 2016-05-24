@@ -248,6 +248,7 @@ Modengke::Application.routes.draw do
         put "cancel_order"
         get "allinpay"
         get 'active'
+        get 'new_trade'
       end
 
       collection do        
