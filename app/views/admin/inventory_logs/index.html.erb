@@ -1,5 +1,5 @@
 <div class="inventory_log-header">
-  <h2>所库存信息<%= link_to '新建出库入库信息', new_admin_inventory_log_path, :class => "pull-right button" %></h2>
+  <h2>库存信息<%= link_to '新建出库入库信息', new_admin_inventory_log_path, :class => "pull-right button" %></h2>
 
 </div>
 
@@ -21,7 +21,7 @@
     <td><%= link_to '编辑', edit_admin_inventory_log_path(inventory_log) %></td>
     <td><%= link_to '删除', admin_inventory_log_path(inventory_log), method: :delete, data: { confirm: 'Are you sure?' } %></td>
   </tr>
-<% end %>
+<% end if @inventory_logs%>
 </table>
 
 <div class="pagination">

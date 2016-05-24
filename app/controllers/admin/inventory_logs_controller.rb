@@ -26,8 +26,8 @@ class Admin::InventoryLogsController < Admin::BaseController
     @inventory_log = InventoryLog.new(inventory_log_params)
     
     respond_to do |format|
-      if @InventoryLog.save
-        format.html { redirect_to admin_pages_path, notice: 'Inventory Log was successfully created.' }
+      if @inventory_log.save
+        format.html { redirect_to admin_inventory_logs_path, notice: 'Inventory Log was successfully created.' }
         format.json { render json: @inventory_log, status: :created, location: @inventory_log }
       else
         format.html { render action: "new" }
@@ -41,7 +41,7 @@ class Admin::InventoryLogsController < Admin::BaseController
 
     respond_to do |format|
       if @InventoryLog.update_attributes(inventory_log_params)
-        format.html { redirect_to admin_pages_url, notice: 'Page was successfully updated.' }
+        format.html { redirect_to admin_inventory_logs_url, notice: 'Page was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
@@ -55,7 +55,7 @@ class Admin::InventoryLogsController < Admin::BaseController
     @InventoryLog.destroy
 
     respond_to do |format|
-      format.html { redirect_to admin_pages_url }
+      format.html { redirect_to admin_inventory_logs_url }
       format.json { head :no_content }
       format.js
     end
