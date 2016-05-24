@@ -260,7 +260,7 @@ Modengke::Application.routes.draw do
         post 'report_loss'
         post 'cancel_loss'
         post 'get_info'
-        post 'get_trade_log'
+        get 'get_trade_log'
         post 'pay_to_client'
       end
       

@@ -339,6 +339,13 @@ class Admin::CardsController < Admin::BaseController
     password = params[:password]
     page_no = params[:page_no]
     page_size = params[:page_size]
+    card_id = '8661089811000000016'
+    password = '123456'
+    begin_date = "20160426"
+    end_date = "20160525"
+    page_no = '1'
+    page_size = '20'
+
     # return render json: {data: {error_message: '不能查询90天之前的记录！'}} if Time.parse(begin_date) < (Time.now - 3600 * 24 * 90)
     res_data = ActiveSupport::JSON.decode card_get_trade_log(begin_date, end_date, card_id, password, page_no, page_size)
     save_log res_data,card_id,'get_trade_log'
@@ -358,19 +365,19 @@ class Admin::CardsController < Admin::BaseController
     #     "access_ref_seq_id":"20160524144191_50","avail_bal_at":90100,"card_id":8661089810000000042,
     #     "int_txn_tm":142824,"txn_sta_cd":2,"txn_fee_at":0,
     # "accept_brh_id":"昌麒投资有限公司","open_brh_id":"0233103005","int_txn_seq_id":"0111444850","txn_at":9900}]}}}
-    if res_data["ppcs_txnlog_search_response"].present?
-      txn = res_data["ppcs_txnlog_search_response"]["txn_log_arrays"]["txn_log"]
-      txn.each do |txn|
-        @txnlog = CardAllinpayTxnlog.find(txn[:int_txn_seq_id].to_i)
+    # if res_data["ppcs_txnlog_search_response"]
+    #   txn = res_data["ppcs_txnlog_search_response"]["txn_log_arrays"]["txn_log"]
+    #   txn.each do |txn|
+    #     @txnlog = CardAllinpayTxnlog.find(txn[:int_txn_seq_id].to_i)
 
-        if @txnlog.new_record?
-          @txnlog = CardAllinpayTxnlog.new txn
-          @txnlog.save!
-        end
-      end
-      
-    end  
-    render json: {data: res_data}
+    #     if @txnlog.new_record?
+    #       @txnlog = CardAllinpayTxnlog.new txn
+    #       @txnlog.save!
+    #     end
+    #   end      
+    # end  
+    # txn = res_data["ppcs_txnlog_search_response"]["txn_log_arrays"]["txn_log"]
+    render json: res_data["ppcs_txnlog_search_response"]# json: {data: res_data["ppcs_txnlog_search_response"]}
   end
 
   def pay_to_client
