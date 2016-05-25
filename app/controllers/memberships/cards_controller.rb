@@ -164,7 +164,7 @@ class Memberships::CardsController < ApplicationController
 	end
 
 	def index
-		#@tradings = CardTradingLog.paginate(:page=>params[:page],:per_page=>20)
+		#@tradings = CardTrading.paginate(:page=>params[:page],:per_page=>20)
 
 	    if  @user
 	      @tradings =  @user.orders.where(pay_status:'1').order("createtime desc")
@@ -184,13 +184,13 @@ class Memberships::CardsController < ApplicationController
 			@yes = 'disabled'
 		end	
 
-		@tradings =  @user.member_card.tradings_log(@status).paginate(:page=>params[:page],:per_page=>20)
+		@tradings =  @user.member_card.trading(@status).paginate(:page=>params[:page],:per_page=>20)
 
 	end
 
 	def rebates
 		@rebate_histories = Rebate.where(member_id: @user.member_id).limit(4)
-		@tradings =  @user.member_card.tradings_log(0)
+		@tradings =  @user.member_card.trading(0)
 	end  
 
 	def rebate_logs
@@ -210,14 +210,34 @@ class Memberships::CardsController < ApplicationController
 	    	redirect_to order_path(pay_params[:order_id]), notice: res_info[:error]
 	    else
 
-	    	@log = CardTradingLog.new do |log|
-	    		log.card_no = card_id
-	    		log.card_id = @user.member_card.card_id
-	    		log.amount = pay_params[:amount]
-	    		log.trading_time = Time.now
-	    		log.order_id = pay_params[:order_id]
+	    	@Trading = CardTrading.new do |trading|
+	    		trading.card_no = card_id
+	    		trading.card_id = @user.member_card.card_id
+	    		trading.amount = pay_params[:amount]
+	    		trading.trading_time = Time.now
+	    		trading.order_id = pay_params[:order_id]
 	    	end
-	    	@log.save!
+	    	if @trading.save
+	    		rate =0.1
+	    		@rebate = Rebate.new do |rebate|
+		    		rebate.member_id = @user.member_id
+		    		rebate.card_id = @trading.card_id
+		    		rebate.rate = rate
+		    		rebate.amount = @trading.amount * rate 
+		    		rebate.type = '0'
+		    	end
+		    	if @rebate.save && @rebate.card.type=='B'
+			    	rate = 0.1
+		    		@rebate = Rebate.new do |rebate|
+			    		rebate.member_id = @trading.card.parent_card.member_card.user.member_id
+			    		rebate.card_id = @trading.card_id
+			    		rebate.rate = rate
+			    		rebate.amount = @trading.amount * rate 
+			    		rebate.type = '1'
+			    	end
+			    	@rebate.save!
+			    end
+	    	end
 
 	    	card_info = card_info('支付')
 	    	redirect_to payments_path(order_id: pay_params[:order_id])

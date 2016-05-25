@@ -5,18 +5,16 @@ class Card < ActiveRecord::Base
   	
   	has_one :member_card, :foreign_key=>"card_id"
 
-    has_many :cards, :foreign_key=>'parent_id'
-    belongs_to :parent_card, :foreign_key=>'parent_id',:class_name=>'Card'
+    has_many :cards, ->{where(card_type:"A" )},:foreign_key=>'parent_id'
+    belongs_to :parent_card, ->{where(card_type:"B" )},:foreign_key=>'parent_id',:class_name=>'Card'
 
   	has_many :card_logs,:foreign_key=>"card_id"
 
   	has_many :labelables,->{where(labelable_type:"Card" )},:foreign_key=>"labelable_id"
   	
   	has_many :labels,:through=>:labelables
-    has_many :card_trading_logs
+    has_many :card_tradings
 
-    has_many :card,->{where(card_type:"A" )}, :foreign_key=>"parent_id"
-    belongs_to :card,->{where(card_type:"B" )}, :foreign_key=>"parent_id"
   	
   	def sold!
   		return if self.new_record?

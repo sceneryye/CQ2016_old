@@ -249,6 +249,7 @@ Modengke::Application.routes.draw do
         get "allinpay"
         get 'active'
         get 'new_trade'
+        post 'create_trade'
       end
 
       collection do        
