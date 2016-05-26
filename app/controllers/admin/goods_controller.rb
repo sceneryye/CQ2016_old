@@ -410,6 +410,7 @@ module Admin
         pp "starting import ..."
         sheet = book.worksheet(0)
         spec_id = ""
+
         supplier =sheet[0,1]
         #supplierT = Supplier.unscoped.find_by_name(supplier)
         supplierT = Supplier.where(:name=>supplier).first
@@ -525,7 +526,13 @@ module Admin
                     @product.save!
                     GoodSpec.where(:product_id=>@product.product_id).delete_all
                     sp_val_id = SpecValue.where(:spec_value=>row[7],:spec_id=>spec_id).first.spec_value_id
-              
+                    GoodSpec.new do |gs|
+                        gs.type_id =  @good.type_id
+                        gs.spec_id = spec_id
+                        gs.spec_value_id = sp_val_id
+                        gs.goods_id = @good.goods_id
+                        gs.product_id = @product.product_id
+                    end.save
                 end
             end
         end
