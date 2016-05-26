@@ -57,7 +57,7 @@ zh:
     formats:
       default: "%Y年%b%d日 %H:%M"  
       short: "%b%d日 %H:%M"
-      long: "%Y年%b%d日 %A %H:%M:%S"
+      long: "%Y年%b%d日 %H:%M:%S"
       normal: "%Y年%b%d日"
     am: "上午"
     pm: "下午"

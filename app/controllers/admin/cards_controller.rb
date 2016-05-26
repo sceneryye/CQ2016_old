@@ -13,7 +13,7 @@ class Admin::CardsController < Admin::BaseController
   before_action :set_card, only: [:show,:allinpay,:edit, :update, :buy,:use,:edit_user,:active]
 
   def trading_log
-    @log = CardTradingLog.order("id ASC")
+    @log = CardTrading.order("id ASC")
     if params[:card_no]
       @log =@log.where(card_no: params[:card_no])
     end
@@ -381,6 +381,13 @@ class Admin::CardsController < Admin::BaseController
     # end
 
     render json: {data: res_data["ppcs_txnlog_search_response"]}
+  end
+
+  def new_trade
+    
+  end
+
+  def create_trade
   end
 
   def pay_to_client

@@ -30,8 +30,8 @@
       <tr>
         <td><%=subcard.no%></td>
         <td><%=subcard.use_status ?  "<i class='fa fa-check'></i>".html_safe : "<i class='fa fa-times'></i>".html_safe%></td>
-        <td>¥<%=subcard.card_trading_logs.select{ |trading| trading.parent_rebate_id}.collect{ |trading| trading.amount}.inject(:+).to_i*0.1%></td>  
-        <td>¥<%=subcard.card_trading_logs.select{ |trading| trading.parent_rebate_id.nil? }.collect{ |trading| trading.amount}.inject(:+).to_i*0.1%></td>  
+        <td>¥<%=subcard.card_tradings.select{ |trading| trading.parent_rebate_id}.collect{ |trading| trading.amount}.inject(:+).to_i*0.1%></td>  
+        <td>¥<%=subcard.card_tradings.select{ |trading| trading.parent_rebate_id.nil? }.collect{ |trading| trading.amount}.inject(:+).to_i*0.1%></td>  
       </tr>
   <%end if @subcards%>
   <%if @subcards.blank?%>

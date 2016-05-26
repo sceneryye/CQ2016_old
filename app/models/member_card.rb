@@ -33,6 +33,6 @@ class MemberCard < ActiveRecord::Base
 		# all_cards = Card.where("id=#{self.card} and parent_id =#{self.card_id}")
 		all_cards_ids = Card.select{|card| card.id==self.card_id || card.parent_id == self.card_id}.collect{ |card|card.id }.join(',')
 
-		CardTradingLog.where("status=#{status} and card_id in (#{all_cards_ids})")
+		CardTrading.where("status=#{status} and card_id in (#{all_cards_ids})")
 	end
 end
