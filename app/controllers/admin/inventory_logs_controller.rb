@@ -40,12 +40,12 @@ class Admin::InventoryLogsController < Admin::BaseController
     @inventory_log = InventoryLog.find(params[:id])
 
     respond_to do |format|
-      if @InventoryLog.update_attributes(inventory_log_params)
+      if @Inventory_log.update_attributes(inventory_log_params)
         format.html { redirect_to admin_inventory_logs_url, notice: 'Page was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: "edit" }
-        format.json { render json: @InventoryLog.errors, status: :unprocessable_entity }
+        format.json { render json: @Inventory_log.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -65,6 +65,7 @@ class Admin::InventoryLogsController < Admin::BaseController
 
   private
   def inventory_log_params
-      params.require(:inventory_log).permit(:product_id,:quantity,:in_out)
+      params.require(:inventory_log).permit(:product_id,:quantity,:in_out,
+      inventory_log_attributes: [:product_id,:quantity,:in_out])
   end
 end

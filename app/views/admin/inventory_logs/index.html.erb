@@ -13,13 +13,13 @@
 
 <% @inventory_logs.each do |inventory_log| %>
   <tr>
-    <td><%= inventory_log.product.name if inventory_log.product %></td>
-    <td><%= inventory_log.quantity %></td>
-    <td><%= inventory_log.in_out %></td>
-    <td>
+    <th><%= inventory_log.product.name if inventory_log.product %></th>
+    <th><%= inventory_log.quantity %></th>
+    <th><%= inventory_log.in_out %></th>
+    <th>
       <%= link_to '查看', admin_inventory_log_path(inventory_log) %>
-    <td><%= link_to '编辑', edit_admin_inventory_log_path(inventory_log) %></td>
-    <td><%= link_to '删除', admin_inventory_log_path(inventory_log), method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <th><%= link_to '编辑', edit_admin_inventory_log_path(inventory_log) %></th>
+    <th><%= link_to '删除', admin_inventory_log_path(inventory_log), method: :delete, data: { confirm: 'Are you sure?' } %></th>
   </tr>
 <% end if @inventory_logs%>
 </table>

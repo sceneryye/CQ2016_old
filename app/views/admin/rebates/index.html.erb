@@ -55,35 +55,37 @@
     </th>
     <th>卡号</th>
     <th>面值</th>
-    <th>类型</th>
+   <!--<th>类型</th>-->
     <!-- <th>销售状态</th>
     <th>激活时间</th>
     <th>使用状态</th>
     <th>付款状态</th>
     <th>卡状态</th>
-    <th>使用者手机</th>
-    <th>绑定银行</th>
-    <th>操作</th>-->
+    <th>使用者手机</th>-->
+
+    <!-- <th>绑定银行</th>-->
+    <th>操作</th>
   </tr>
   <% @rebates.each do |rebate| %>
   <tr id="rebate_<%=rebate.id%>">
-    <td><%=check_box_tag "selected_rebates[]", rebate.id,false,:class =>'operate_ids'%></td>    
+    <th><%=check_box_tag "selected_rebates[]", rebate.id,false,:class =>'operate_ids'%></th>
+    
     <!-- <td >
         <%=link_to admin_rebate_path(rebate),:class=>"editable",:remote=>"true" do%>
             <%=image_tag "finder_drop_arrow.gif"%>
         <%end%> 
     </td> -->
 
-    <td><%=link_to  rebate.id,admin_rebate_path(rebate) %></td>
-    <td>¥<%= rebate.amount %></td>
+    <th><%=link_to  rebate.id,admin_rebate_path(rebate) %></th>
+    <th>¥<%= rebate.amount %></th>
 
-    <td><%= rebate.status %></td>   
+    <th><%= rebate.status %></th>   
    
-    <td>
+   <!-- <td>
       <%#= rebate.member_rebate.bank_name if !rebate.member_rebate.nil?%><br>
       <%#= rebate.member_rebate.bank_rebate_no if !rebate.member_rebate.nil?%>
-    </td>
-    <td>
+    </td>-->
+    <th>
         <%#=link_to "日志",logs_admin_rebate_path(rebate)%>
         <%#=link_to "取消订单",cancel_order_admin_rebate_path(rebate),:method=>:put,:confirm=>"确定取消订单？" if rebate.sale_status && !rebate.pay_status && rebate.normal?%>
 
@@ -91,7 +93,7 @@
           
         <%end%>
         <%=link_to "通联",allinpay_admin_rebate_path(rebate)%>
-    </td>
+    </th>
   </tr>
   <% end %>
 </table>
